@@ -199,7 +199,7 @@ main {
 
 .marquee-content {
     display: flex;
-    animation: marquee 40s linear infinite;
+    animation: marquee 80s linear infinite;
 }
 
 .marquee-row.reverse .marquee-content {
@@ -644,7 +644,77 @@ footer {
     }
 
     .instagram-grid {
-        gap: 0.5rem;
-        /* Tighter on mobile */
+        grid-template-columns: 1fr;
+        /* Stack to 1 column */
+        gap: 1.5rem;
+    }
+
+    .video-section,
+    .instagram-section {
+        padding: 4rem 1rem;
+        /* Reduced padding for mobile */
+    }
+
+    h1 {
+        font-size: 3rem;
+        /* Better scaling */
+    }
+}
+
+/* Artist Statement Section */
+.artist-statement {
+    padding: 8rem 2rem;
+    background: var(--bg-color);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #111;
+}
+
+.statement-container {
+    max-width: 900px;
+    text-align: center;
+}
+
+.artist-statement h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-shadow: 0 0 20px rgba(0, 51, 255, 0.2);
+}
+
+.statement-text p {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.statement-text .highlight-text {
+    font-size: 1.5rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 3rem 0;
+    font-family: var(--font-heading);
+    text-shadow: 0 0 10px rgba(0, 51, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+    .artist-statement {
+        padding: 4rem 1.5rem;
+    }
+
+    .artist-statement h2 {
+        font-size: 2rem;
+    }
+
+    .statement-text p {
+        font-size: 1.1rem;
     }
 }
