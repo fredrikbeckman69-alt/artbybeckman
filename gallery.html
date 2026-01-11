@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galleri - Art by Beckman</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jura:wght@300;500;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="js/background.js" defer></script>
+    <script src="js/data.js" defer></script>
+    <script src="js/gallery.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <div class="logo">Art by Beckman</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html" class="active">Gallery</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 style="text-align: center; margin-bottom: 2rem;">Galleri</h1>
+
+        <!-- Search/Filter - Styled as Glass Panel -->
+        <div class="glass-panel"
+            style="margin-bottom: 2rem; padding: 1.5rem; display: flex; gap: 1rem; align-items: center; justify-content: center;">
+            <input type="text" id="gallery-search" placeholder="Sök verk..."
+                style="background: rgba(0,0,0,0.5); border: 1px solid var(--accent-cyan); color: white; padding: 0.8rem; border-radius: 4px; width: 300px;">
+        </div>
+
+        <div id="gallery-grid" class="gallery-grid">
+            <!-- Gallery items will be injected here by js/gallery.js -->
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size">
+    </div>
+
+    <footer>
+        &copy; 2026 Art by Beckman. All rights reserved.
+    </footer>
+</body>
+
+</html>
