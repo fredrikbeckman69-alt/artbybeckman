@@ -43,6 +43,30 @@ body {
     /* Ensure it blends well on dark */
 }
 
+/* Touch-Friendly Interactions */
+* {
+    -webkit-tap-highlight-color: rgba(0, 51, 255, 0.2);
+    /* Blue tap highlight */
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Prevent font scaling in landscape */
+}
+
+/* Ensure minimum touch target size (44x44px) */
+a,
+button,
+.cta-button,
+.gallery-item,
+.video-item,
+.instagram-item,
+.menu-toggle {
+    min-height: 44px;
+    min-width: 44px;
+}
+
 /* Typography */
 h1,
 h2,
@@ -110,6 +134,12 @@ header {
     color: #fff;
     letter-spacing: 2px;
     text-transform: uppercase;
+    z-index: 1001;
+}
+
+nav {
+    display: flex;
+    align-items: center;
 }
 
 nav a {
@@ -129,6 +159,22 @@ nav a.active {
     text-shadow: 0 0 8px var(--accent-cyan);
     border-bottom: none;
     /* Remove border, rely on glow */
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    margin: 3px 0;
+    transition: all 0.3s ease;
 }
 
 /* Layout */
@@ -199,7 +245,7 @@ main {
 
 .marquee-content {
     display: flex;
-    animation: marquee 80s linear infinite;
+    animation: marquee 120s linear infinite;
 }
 
 .marquee-row.reverse .marquee-content {
@@ -374,23 +420,320 @@ footer {
     background: #000;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE & TABLET
+   ======================================== */
+
+/* Tablet Landscape (1024px and below) */
+@media (max-width: 1024px) {
     h1 {
-        font-size: 2.5rem;
+        font-size: 5vw;
     }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
+    h2 {
+        font-size: 2rem;
     }
 
     header {
-        flex-direction: column;
+        padding: 1rem 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
+        padding: 3rem 1.5rem;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* Tablet Portrait (768px and below) */
+@media (max-width: 768px) {
+
+    /* Typography */
+    h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    /* Header & Navigation */
+    header {
+        padding: 1rem 1.5rem;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav.active {
+        right: 0;
     }
 
     nav a {
-        margin: 0 1rem;
+        margin: 1.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    /* Hero Section */
+    .hero-showcase {
+        height: 70vh;
+        min-height: 500px;
+    }
+
+    .hero-content {
+        max-width: 95vw;
+        padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+    }
+
+    /* Marquee Animation - Slower on Mobile */
+    .marquee-content {
+        animation-duration: 180s;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 2rem 1rem;
+    }
+
+    .gallery-item {
+        min-height: 300px;
+    }
+
+    /* Make overlay always visible on mobile */
+    .gallery-overlay {
+        transform: translateY(0);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    }
+
+    /* Video Grid */
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .shorts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    /* Instagram */
+    .instagram-profile {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-info h1 {
+        font-size: 2rem;
+    }
+
+    .instagram-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    /* Featured Section */
+    .featured-section {
+        padding: 3rem 1rem;
+    }
+
+    .featured-caption h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Artist Statement */
+    .artist-statement {
+        padding: 4rem 1.5rem;
+    }
+
+    .artist-statement h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .statement-text p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .statement-text .highlight-text {
+        font-size: 1.2rem;
+        margin: 2rem 0;
+    }
+
+    /* Sections */
+    .video-section,
+    .instagram-section {
+        padding: 4rem 1rem;
+    }
+
+    /* Lightbox */
+    #lightbox img {
+        max-width: 98%;
+        max-height: 90vh;
+    }
+
+    .lightbox-close {
+        top: 1rem;
+        right: 1rem;
+        font-size: 3rem;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+
+    /* Typography */
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Header */
+    header {
+        padding: 0.8rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+
+    nav {
+        width: 80%;
+    }
+
+    /* Hero */
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.85rem;
+    }
+
+    .cta-button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    /* Artist Statement */
+    .artist-statement h2 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+
+    .statement-text p {
+        font-size: 1rem;
+    }
+
+    .statement-text .highlight-text {
+        font-size: 1.1rem;
+    }
+
+    /* Instagram - Single Column on Small Mobile */
+    .instagram-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shorts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Profile */
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-info h1 {
+        font-size: 1.6rem;
+    }
+
+    /* Featured Caption */
+    .featured-caption h3 {
+        font-size: 1.2rem;
+    }
+
+    .featured-caption .dimensions {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra Small Mobile (320px) */
+@media (max-width: 320px) {
+    .logo {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.4rem;
+    }
+
+    .cta-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -716,5 +1059,86 @@ footer {
 
     .statement-text p {
         font-size: 1.1rem;
+    }
+}
+
+/* Featured Section */
+.featured-section {
+    padding: 6rem 2rem;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #111;
+}
+
+.featured-content {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+.featured-image-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid #222;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.featured-image-wrapper img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    filter: grayscale(0.2) contrast(1.1);
+    transition: transform 0.8s ease, filter 0.4s ease;
+}
+
+.featured-image-wrapper:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 40px rgba(0, 51, 255, 0.15);
+}
+
+.featured-image-wrapper:hover img {
+    transform: scale(1.02);
+    filter: grayscale(0) contrast(1.1);
+}
+
+.featured-caption {
+    margin-top: 2rem;
+}
+
+.featured-caption h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+.featured-caption .highlight {
+    color: var(--accent-cyan);
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(0, 51, 255, 0.4);
+}
+
+.featured-caption .dimensions {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .featured-section {
+        padding: 4rem 1rem;
+    }
+
+    .featured-caption h3 {
+        font-size: 1.5rem;
     }
 }
