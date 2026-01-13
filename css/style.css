@@ -188,7 +188,44 @@ a:hover {
     background-clip: text;
     /* Fallback for browsers without support */
     color: var(--accent-blue);
+    animation: colorRotate 10s linear infinite;
 }
+
+/* Color Rotation Animation - Cycles through all 7 vibrant colors */
+@keyframes colorRotate {
+    0% {
+        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    }
+
+    14.28% {
+        background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    }
+
+    28.56% {
+        background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+    }
+
+    42.84% {
+        background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+    }
+
+    57.12% {
+        background: linear-gradient(135deg, var(--accent-yellow), var(--accent-green));
+    }
+
+    71.4% {
+        background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+    }
+
+    85.68% {
+        background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+    }
+
+    100% {
+        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    }
+}
+
 
 /* ===== NAVIGATION ===== */
 header {
