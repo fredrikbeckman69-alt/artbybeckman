@@ -75,6 +75,9 @@
 html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /* Smooth scrolling for Safari */
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -86,6 +89,8 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Prevent pull-to-refresh on mobile */
+    overscroll-behavior-y: contain;
 }
 
 /* Gradient Mesh Background */
@@ -181,6 +186,8 @@ a:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Fallback for browsers without support */
+    color: var(--accent-blue);
 }
 
 /* ===== NAVIGATION ===== */
@@ -194,10 +201,21 @@ header {
     justify-content: space-between;
     align-items: center;
     background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
+    /* Vendor prefixes for backdrop-filter */
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
+    -webkit-transition: all var(--transition-base);
+    -moz-transition: all var(--transition-base);
+    -o-transition: all var(--transition-base);
     transition: all var(--transition-base);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+    header {
+        background: rgba(255, 255, 255, 0.95);
+    }
 }
 
 .logo {
@@ -347,11 +365,19 @@ section {
 
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
+    /* Vendor prefixes for backdrop-filter */
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
+}
+
+/* Fallback for glass panels */
+@supports not (backdrop-filter: blur(20px)) {
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.95);
+    }
 }
 
 /* ===== HERO SECTION ===== */
@@ -415,7 +441,13 @@ section {
 
 .marquee-content {
     display: flex;
+    /* Vendor prefixes for animation */
+    -webkit-animation: marquee 120s linear infinite;
+    -moz-animation: marquee 120s linear infinite;
+    -o-animation: marquee 120s linear infinite;
     animation: marquee 120s linear infinite;
+    /* Performance optimization */
+    will-change: transform;
 }
 
 .marquee-row.reverse .marquee-content {
@@ -441,12 +473,45 @@ section {
     transform: scale(1.05);
 }
 
-@keyframes marquee {
+/* Vendor prefixes for keyframes */
+@-webkit-keyframes marquee {
     0% {
+        -webkit-transform: translateX(0);
         transform: translateX(0);
     }
 
     100% {
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+}
+
+@-moz-keyframes marquee {
+    0% {
+        -moz-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -moz-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marquee {
+    0% {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
         transform: translateX(-50%);
     }
 }
@@ -1151,11 +1216,14 @@ footer {
     }
 }
 
+/* ===== CROSS-BROWSER COMPATIBILITY ===== */
+
 /* Touch-Friendly Interactions */
 * {
     -webkit-tap-highlight-color: rgba(0, 113, 227, 0.1);
 }
 
+/* Minimum touch target sizes (WCAG 2.1 Level AAA) */
 a,
 button,
 .cta-button,
@@ -1165,4 +1233,69 @@ button,
 .menu-toggle {
     min-height: 44px;
     min-width: 44px;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+
+    /* iOS Safari specific styles */
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    input,
+    textarea,
+    select {
+        /* Prevent zoom on focus in iOS */
+        font-size: 16px;
+    }
+}
+
+/* Firefox-specific fixes */
+@-moz-document url-prefix() {
+    /* Firefox specific styles if needed */
+}
+
+/* Edge-specific fixes */
+@supports (-ms-ime-align: auto) {
+    /* Edge specific styles if needed */
+}
+
+/* Performance optimizations */
+.gallery-item,
+.video-item,
+.instagram-item,
+.card {
+    /* GPU acceleration for smoother animations */
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Improved scrolling on mobile */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Mobile-specific optimizations */
+    * {
+        -webkit-tap-highlight-color: rgba(0, 113, 227, 0.2);
+    }
+
+    /* Larger touch targets on mobile */
+    nav a {
+        padding: 12px 16px;
+    }
+
+    /* Prevent text selection on interactive elements */
+    .cta-button,
+    .btn,
+    .menu-toggle {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 }
