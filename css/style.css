@@ -137,6 +137,15 @@ h1 {
     line-height: 1.05;
     letter-spacing: -0.015em;
     margin-bottom: 1.5rem;
+    /* Colorful gradient like Apple Siri */
+    background: linear-gradient(121deg, #fe0576 24%, #ea12b6 40%, #38cbff 60%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #ea12b6;
+    /* Fallback */
+    animation: colorRotate 16s ease-in-out infinite;
 }
 
 h2 {
