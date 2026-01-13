@@ -67,8 +67,8 @@ class Particle {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        // Dark grey for white background
-        ctx.fillStyle = 'rgba(100, 100, 100, 0.5)';
+        // Vibrant blue for light background
+        ctx.fillStyle = 'rgba(0, 113, 227, 0.3)';
         ctx.fill();
     }
 }
@@ -168,8 +168,8 @@ function animate() {
 
             if (distance < CONNECT_DISTANCE) {
                 let opacity = 1 - (distance / CONNECT_DISTANCE);
-                // Gold connections
-                ctx.strokeStyle = `rgba(197, 160, 89, ${opacity * 0.4})`;
+                // Vibrant purple-blue connections
+                ctx.strokeStyle = `rgba(191, 90, 242, ${opacity * 0.3})`;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
