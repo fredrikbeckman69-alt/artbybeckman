@@ -4,13 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art by Beckman</title>
+    <title>Art by Beckman - Abstract Art & Expressionism</title>
+    <meta name="description"
+        content="Official portfolio of Fredrik Beckman - Abstract art and expressionism in vibrant colors">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@400;500;700&display=swap"
-        rel="stylesheet">
     <script src="js/data.js" defer></script>
     <script src="js/background.js" defer></script>
     <script src="js/mobile-menu.js" defer></script>
@@ -22,7 +19,12 @@
 
     <header>
         <div class="logo">Art by Beckman</div>
-        <nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
             <a href="index.html" class="active">Home</a>
             <a href="gallery.html">Gallery</a>
             <a href="videos.html">Videos</a>
@@ -31,6 +33,7 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero-showcase" id="hero-showcase">
             <!-- Animated Background -->
             <div class="hero-background-anim" id="hero-anim">
@@ -39,12 +42,13 @@
 
             <!-- Foreground Content -->
             <div class="hero-content">
-                <h1>Abstract Art &<br>expressionism</h1>
-                <p>Official portfolio of Fredrik Beckman.</p>
+                <h1>Abstract Art &<br>Expressionism</h1>
+                <p>Official portfolio of Fredrik Beckman</p>
                 <a href="gallery.html" class="cta-button">View Gallery</a>
             </div>
         </section>
 
+        <!-- Featured Section -->
         <section class="featured-section">
             <div class="featured-content">
                 <div class="featured-image-wrapper">
@@ -53,35 +57,60 @@
                 </div>
                 <div class="featured-caption">
                     <h3>Fredrik and September presenting <span class="highlight">PINK DRESS</span></h3>
-                    <p class="dimensions">100 * 120 CM</p>
+                    <p class="dimensions">100 × 120 CM</p>
+                    <p>A collaboration between artist and muse, captured in vibrant expression and bold color.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- September - The Muse Section -->
+        <section class="muse-section">
+            <div class="muse-container">
+                <h2>September - The Muse</h2>
+                <p class="lead">
+                    Behind every bold stroke and vibrant color is September,
+                    the inspiration that transforms vision into reality.
+                </p>
+
+                <div class="muse-gallery">
+                    <img src="assets/Avslappnad.png" alt="September - Relaxed moment">
+                    <img src="assets/Gemini_Generated_Image_eo8jlzeo8jlzeo8j.png" alt="September portrait">
+                    <img src="assets/Gemini_Generated_Image_gbuatigbuatigbua.png" alt="September artistic shot">
+                    <img src="assets/Regn parapkyer.png" alt="September - Rain and umbrellas">
+                </div>
+
+                <blockquote>
+                    "Art is a conversation between artist and muse,
+                    captured in color and form."
+                </blockquote>
             </div>
         </section>
 
         <!-- Artist Statement Section -->
         <section class="artist-statement">
             <div class="statement-container">
-                <h2>Art for the masses, bought by the brave</h2>
+                <h2>Art for the masses - bought by the brave</h2>
                 <div class="statement-text">
                     <p>I paint abstract, expressionistic work in loud colors.<br>
-                        Not because I’m cheerful. Because subtlety can be dishonest.</p>
+                        Not because I'm cheerful. Because subtlety can be dishonest.</p>
 
-                    <p>I don’t start with concepts, sketches, or a comforting plan. I start when something refuses to
-                        stay quiet. The canvas is not a safe space—it’s a negotiation that usually escalates. Control
+                    <p>I don't start with concepts, sketches, or a comforting plan. I start when something refuses to
+                        stay quiet. The canvas is not a safe space—it's a negotiation that usually escalates. Control
                         exists, but only after things get messy.</p>
 
-                    <p>Color is doing the heavy lifting. It carries tension, irritation, clarity, and the occasional bad
-                        mood. If a painting feels balanced, it’s probably lying. I’m not interested in harmony; I’m
+                    <p>Color is doing the heavy lifting. It carries tension, irritation, clarity, and the occasional
+                        bad
+                        mood. If a painting feels balanced, it's probably lying. I'm not interested in harmony; I'm
                         interested in pressure—what happens just before things look like they might fall apart.</p>
 
-                    <p class="highlight-text">Music is always present. It is the music that inspire me. Always.</p>
+                    <p class="highlight-text">Music is always present. It is the music that inspires me. Always.</p>
 
                     <p>I paint in periods, not habits. Long silences followed by intense bursts. Inspiration is
                         unreliable, but when it shows up, it expects full attention and leaves a mess.</p>
 
-                    <p>This isn’t art designed to calm a room.<br>
-                        It’s art that occupies it.<br>
-                        If it makes you slightly uncomfortable, that’s not a side effect—it’s quality control.</p>
+                    <p>This isn't art designed to calm a room.<br>
+                        It's art that occupies it.<br>
+                        If it makes you slightly uncomfortable, that's not a side effect—it's quality control.</p>
                 </div>
             </div>
         </section>
