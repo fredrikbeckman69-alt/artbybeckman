@@ -1,33 +1,19 @@
-# Compress large images to reduce repository size and fix deployment timeouts
-# Target: Compress images larger than 5 MB to around 2-3 MB
+# Compress large images to reduce repository size
+# Target: Compress images larger than 5 MB
 
 $imageDir = "assets\images"
 $targetSizeMB = 5
-$qualityLevel = 85  # JPEG quality (1-100, 85 is good balance)
+$qualityLevel = 85
 
-Write-Host "`n=== IMAGE COMPRESSION SCRIPT ===" -ForegroundColor Cyan
-Write-Host "Target: Compress images larger than $targetSizeMB MB" -ForegroundColor Yellow
-
-# Check if ImageMagick is available
-$magickPath = Get-Command magick -ErrorAction SilentlyContinue
-
-if (-not $magickPath) {
-    Write-Host "`nERROR: ImageMagick not found!" -ForegroundColor Red
-    Write-Host "Please install ImageMagick from: https://imagemagick.org/script/download.php" -ForegroundColor Yellow
-    Write-Host "`nAlternatively, using Windows built-in .NET image processing..." -ForegroundColor Yellow
-    $useBuiltIn = $true
-}
-else {
-    Write-Host "`nFound ImageMagick at: $($magickPath.Source)" -ForegroundColor Green
-    $useBuiltIn = $false
-}
+Write-Host "`nIMAGE COMPRESSION SCRIPT" -ForegroundColor Cyan
+Write-Host "Target: Compress images larger than $targetSizeMB MB`n" -ForegroundColor Yellow
 
 # Find large images
 $largeImages = Get-ChildItem $imageDir -File | Where-Object { 
     $_.Length -gt ($targetSizeMB * 1MB) 
 } | Sort-Object Length -Descending
 
-Write-Host "`nFound $($largeImages.Count) images larger than $targetSizeMB MB" -ForegroundColor Yellow
+Write-Host "Found $($largeImages.Count) images larger than $targetSizeMB MB`n"
 
 if ($largeImages.Count -eq 0) {
     Write-Host "No images need compression!" -ForegroundColor Green
@@ -35,89 +21,80 @@ if ($largeImages.Count -eq 0) {
 }
 
 # Show images to be compressed
-Write-Host "`nImages to compress:" -ForegroundColor Cyan
+Write-Host "Images to compress:"
 $largeImages | ForEach-Object {
     $sizeMB = [math]::Round($_.Length / 1MB, 2)
     Write-Host "  - $($_.Name): $sizeMB MB"
 }
 
 $totalSizeBefore = ($largeImages | Measure-Object -Property Length -Sum).Sum
-Write-Host "`nTotal size before: $([math]::Round($totalSizeBefore / 1MB, 2)) MB" -ForegroundColor Yellow
+Write-Host "`nTotal size before: $([math]::Round($totalSizeBefore / 1MB, 2)) MB`n" -ForegroundColor Yellow
 
-# Compress using .NET (built-in Windows)
-if ($useBuiltIn) {
-    Add-Type -AssemblyName System.Drawing
-    
-    $compressed = 0
-    foreach ($img in $largeImages) {
-        try {
-            $fullPath = $img.FullName
-            $backupPath = $fullPath + ".backup"
-            
-            # Backup original
-            Copy-Item $fullPath $backupPath -Force
-            
-            # Load image
-            $bitmap = [System.Drawing.Image]::FromFile($fullPath)
-            
-            # Calculate new dimensions (reduce by 30% if very large)
-            $newWidth = $bitmap.Width
-            $newHeight = $bitmap.Height
-            if ($img.Length -gt 10MB) {
-                $newWidth = [int]($bitmap.Width * 0.7)
-                $newHeight = [int]($bitmap.Height * 0.7)
-            }
-            
-            # Create new bitmap with reduced size
-            $newBitmap = New-Object System.Drawing.Bitmap($newWidth, $newHeight)
-            $graphics = [System.Drawing.Graphics]::FromImage($newBitmap)
-            $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-            $graphics.DrawImage($bitmap, 0, 0, $newWidth, $newHeight)
-            
-            # Save with compression
-            $encoderParams = New-Object System.Drawing.Imaging.EncoderParameters(1)
-            $encoderParams.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter(
-                [System.Drawing.Imaging.Encoder]::Quality, $qualityLevel
-            )
-            
-            $jpegCodec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | 
-            Where-Object { $_.MimeType -eq 'image/jpeg' }
-            
-            $bitmap.Dispose()
-            $newBitmap.Save($fullPath, $jpegCodec, $encoderParams)
-            $newBitmap.Dispose()
-            $graphics.Dispose()
-            
-            $newSize = (Get-Item $fullPath).Length
-            $oldSize = (Get-Item $backupPath).Length
-            $saved = $oldSize - $newSize
-            $savedMB = [math]::Round($saved / 1MB, 2)
-            
-            Write-Host "  ✓ $($img.Name): $([math]::Round($oldSize/1MB,2)) MB → $([math]::Round($newSize/1MB,2)) MB (saved $savedMB MB)" -ForegroundColor Green
-            
-            # Remove backup
-            Remove-Item $backupPath -Force
-            $compressed++
+# Compress using .NET
+Add-Type -AssemblyName System.Drawing
+
+$compressed = 0
+$totalSaved = 0
+
+foreach ($img in $largeImages) {
+    try {
+        $fullPath = $img.FullName
+        $backupPath = $fullPath + ".backup"
+        
+        # Backup original
+        Copy-Item $fullPath $backupPath -Force
+        
+        # Load image
+        $bitmap = [System.Drawing.Image]::FromFile($fullPath)
+        
+        # Calculate new dimensions (reduce by 30% if very large)
+        $newWidth = $bitmap.Width
+        $newHeight = $bitmap.Height
+        if ($img.Length -gt 10MB) {
+            $newWidth = [int]($bitmap.Width * 0.7)
+            $newHeight = [int]($bitmap.Height * 0.7)
         }
-        catch {
-            Write-Host "  ✗ Failed to compress $($img.Name): $_" -ForegroundColor Red
-            # Restore from backup if exists
-            if (Test-Path $backupPath) {
-                Move-Item $backupPath $fullPath -Force
-            }
+        
+        # Create new bitmap
+        $newBitmap = New-Object System.Drawing.Bitmap($newWidth, $newHeight)
+        $graphics = [System.Drawing.Graphics]::FromImage($newBitmap)
+        $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+        $graphics.DrawImage($bitmap, 0, 0, $newWidth, $newHeight)
+        
+        # Save with compression
+        $encoderParams = New-Object System.Drawing.Imaging.EncoderParameters(1)
+        $encoderParams.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter(
+            [System.Drawing.Imaging.Encoder]::Quality, $qualityLevel
+        )
+        
+        $jpegCodec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | 
+        Where-Object { $_.MimeType -eq 'image/jpeg' }
+        
+        $bitmap.Dispose()
+        $newBitmap.Save($fullPath, $jpegCodec, $encoderParams)
+        $newBitmap.Dispose()
+        $graphics.Dispose()
+        
+        $newSize = (Get-Item $fullPath).Length
+        $oldSize = (Get-Item $backupPath).Length
+        $saved = $oldSize - $newSize
+        $savedMB = [math]::Round($saved / 1MB, 2)
+        $totalSaved += $saved
+        
+        Write-Host "  OK $($img.Name): $([math]::Round($oldSize/1MB,2)) MB to $([math]::Round($newSize/1MB,2)) MB (saved $savedMB MB)" -ForegroundColor Green
+        
+        # Remove backup
+        Remove-Item $backupPath -Force
+        $compressed++
+    }
+    catch {
+        Write-Host "  FAILED to compress $($img.Name): $_" -ForegroundColor Red
+        if (Test-Path $backupPath) {
+            Move-Item $backupPath $fullPath -Force
         }
     }
 }
 
-Write-Host "`n=== COMPRESSION COMPLETE ===" -ForegroundColor Cyan
+Write-Host "`nCOMPRESSION COMPLETE" -ForegroundColor Cyan
 Write-Host "Compressed $compressed images" -ForegroundColor Green
-
-# Calculate total savings
-$largeImagesAfter = Get-ChildItem $imageDir -File | Where-Object { 
-    $_.Length -gt ($targetSizeMB * 1MB) 
-}
-$totalSizeAfter = ($largeImagesAfter | Measure-Object -Property Length -Sum).Sum
-$totalSaved = $totalSizeBefore - $totalSizeAfter
-
 Write-Host "Total saved: $([math]::Round($totalSaved / 1MB, 2)) MB" -ForegroundColor Green
-Write-Host "`nRemaining large images: $($largeImagesAfter.Count)" -ForegroundColor Yellow
