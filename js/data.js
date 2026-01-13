@@ -2331,8 +2331,8 @@
         "description":  ""
     },
     {
-        "filename":  "262 GRAPEFRUIT.jpg",
-        "title":  "Grapefruit",
+        "filename":  "262 LOVE IN LO-FI.jpg",
+        "title":  "Love In Lo-Fi",
         "id":  262,
         "size":  "40 * 40 cm",
         "material":  "Akrylfärg, sprayfärg, glitterspray, glitter, resin",
