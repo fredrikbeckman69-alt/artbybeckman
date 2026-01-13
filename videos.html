@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videos - Art by Beckman</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
     <script src="js/background.js" defer></script>
     <script src="js/scroll-animations.js" defer></script>
     <script src="js/mobile-menu.js" defer></script>
@@ -29,12 +34,21 @@
         </nav>
     </header>
 
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+            <iframe id="videoIframe" src="" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+
     <main>
         <section class="video-section">
             <h1>Shorts</h1>
             <p>Short artistic clips and moments.</p>
 
-            <!-- Tagline -->
             <div style="text-align: center; margin: 2rem 0 3rem 0;">
                 <p class="gradient-text" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em;">
                     ART FOR THE MASSES - BOUGHT BY THE BRAVE
@@ -92,29 +106,25 @@
                 </div>
 
                 <div class="video-item video-short" data-id="XUOrs9hbt50" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/XUOrs9hbt50/maxresdefault.jpg" alt="WHO KNEW?"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/XUOrs9hbt50/maxresdefault.jpg" alt="WHO KNEW?" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">WHO KNEW?</div>
                 </div>
 
                 <div class="video-item video-short" data-id="4h0sy6jPq34" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/4h0sy6jPq34/maxresdefault.jpg" alt="RED RAIN"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/4h0sy6jPq34/maxresdefault.jpg" alt="RED RAIN" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">RED RAIN</div>
                 </div>
 
                 <div class="video-item video-short" data-id="9sKVGpneFKg" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/9sKVGpneFKg/maxresdefault.jpg" alt="RED RAIN"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/9sKVGpneFKg/maxresdefault.jpg" alt="RED RAIN" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">RED RAIN</div>
                 </div>
 
                 <div class="video-item video-short" data-id="7s8CP5AJuDo" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/7s8CP5AJuDo/maxresdefault.jpg" alt="BLOB 1.0"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/7s8CP5AJuDo/maxresdefault.jpg" alt="BLOB 1.0" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">BLOB 1.0</div>
                 </div>
@@ -141,29 +151,25 @@
                 </div>
 
                 <div class="video-item video-short" data-id="F_9jTAfr7t4" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/F_9jTAfr7t4/maxresdefault.jpg" alt="DAYLIGHT"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/F_9jTAfr7t4/maxresdefault.jpg" alt="DAYLIGHT" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">DAYLIGHT</div>
                 </div>
 
                 <div class="video-item video-short" data-id="KnZc0v6sx70" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/KnZc0v6sx70/maxresdefault.jpg" alt="JUNIOR B"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/KnZc0v6sx70/maxresdefault.jpg" alt="JUNIOR B" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">JUNIOR B</div>
                 </div>
 
                 <div class="video-item video-short" data-id="ovydmw2mIEs" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/ovydmw2mIEs/maxresdefault.jpg" alt="UNREAL"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/ovydmw2mIEs/maxresdefault.jpg" alt="UNREAL" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">UNREAL</div>
                 </div>
 
                 <div class="video-item video-short" data-id="2WJM0PaFPHw" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/2WJM0PaFPHw/maxresdefault.jpg" alt="UNREAL"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/2WJM0PaFPHw/maxresdefault.jpg" alt="UNREAL" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">UNREAL</div>
                 </div>
@@ -176,8 +182,7 @@
                 </div>
 
                 <div class="video-item video-short" data-id="22XeJ4v4YZk" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/22XeJ4v4YZk/maxresdefault.jpg" alt="FUSION 1.0"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/22XeJ4v4YZk/maxresdefault.jpg" alt="FUSION 1.0" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">FUSION 1.0</div>
                 </div>
@@ -225,8 +230,7 @@
                 </div>
 
                 <div class="video-item video-short" data-id="l0BrfieVHZU" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/l0BrfieVHZU/maxresdefault.jpg" alt="FROZEN"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/l0BrfieVHZU/maxresdefault.jpg" alt="FROZEN" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">FROZEN</div>
                 </div>
@@ -239,8 +243,7 @@
                 </div>
 
                 <div class="video-item video-short" data-id="JlZ5jyrhswQ" onclick="loadVideo(this)">
-                    <img src="https://img.youtube.com/vi/JlZ5jyrhswQ/maxresdefault.jpg" alt="BUNGALOW"
-                        loading="lazy">
+                    <img src="https://img.youtube.com/vi/JlZ5jyrhswQ/maxresdefault.jpg" alt="BUNGALOW" loading="lazy">
                     <div class="play-button"></div>
                     <div class="video-title">BUNGALOW</div>
                 </div>
@@ -263,10 +266,49 @@
     <script>
         function loadVideo(element) {
             const videoId = element.getAttribute('data-id');
-            window.open(`https://www.youtube.com/shorts/${videoId}`, '_blank');
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+
+            // Set iframe source with autoplay
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+            // Show modal with animation
+            modal.classList.add('active');
+
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
         }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+
+            // Remove active class to trigger close animation
+            modal.classList.remove('active');
+
+            // Stop video by clearing iframe source
+            setTimeout(() => {
+                iframe.src = '';
+            }, 300); // Wait for animation to complete
+
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside the video
+        document.getElementById('videoModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
     </script>
 </body>
 
 </html>
-
