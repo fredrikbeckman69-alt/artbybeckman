@@ -791,6 +791,75 @@ section {
     background: white;
 }
 
+/* ===== VIDEO MODAL/LIGHTBOX ===== */
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transform: scale(0.8);
+    transition: transform var(--transition-smooth);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.video-modal.active .video-modal-content {
+    transform: scale(1);
+}
+
+.video-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text-primary);
+    transition: all var(--transition-base);
+    z-index: 10000;
+}
+
+.video-modal-close:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
 /* ===== INSTAGRAM SECTION ===== */
 .instagram-section {
     padding: var(--space-4xl) var(--space-md);
