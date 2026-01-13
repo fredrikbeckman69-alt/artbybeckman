@@ -2381,7 +2381,7 @@
         "id":  267,
         "size":  "100 * 120 cm",
         "material":  "Akrylfärg, resin",
-        "year":  "Deceber 2025",
+        "year":  "December 2025",
         "description":  ""
     },
     {
@@ -2394,4 +2394,3 @@
         "description":  ""
     }
 ];
-
