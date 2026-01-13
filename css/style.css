@@ -63,18 +63,6 @@
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* ===== DARK THEME (Gallery/Videos/Instagram) ===== */
-    --dark-bg-primary: #000000;
-    --dark-bg-secondary: #1d1d1f;
-    --dark-bg-tertiary: #2d2d2f;
-    --dark-text-primary: #f5f5f7;
-    --dark-text-secondary: #a1a1a6;
-    --dark-text-tertiary: #86868b;
-    --dark-glass-bg: rgba(29, 29, 31, 0.7);
-    --dark-glass-border: rgba(255, 255, 255, 0.1);
-    --dark-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --dark-card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* ===== RESET & BASE ===== */
