@@ -182,47 +182,61 @@ a:hover {
 
 /* Gradient Text */
 .gradient-text {
-    background: var(--gradient-purple-blue);
+    background: linear-gradient(121deg, #fe0576 24%, #ea12b6 40%, #38cbff 60%);
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     /* Fallback for browsers without support */
-    color: var(--accent-blue);
-    animation: colorRotate 10s linear infinite;
+    color: #ea12b6;
+    animation: colorRotate 16s ease-in-out infinite;
 }
 
-/* Color Rotation Animation - Cycles through all 7 vibrant colors */
+
+/* Color Rotation Animation - Smooth Apple Siri-style gradients */
 @keyframes colorRotate {
-    0% {
-        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    }
 
-    14.28% {
-        background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-    }
-
-    28.56% {
-        background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
-    }
-
-    42.84% {
-        background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
-    }
-
-    57.12% {
-        background: linear-gradient(135deg, var(--accent-yellow), var(--accent-green));
-    }
-
-    71.4% {
-        background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-    }
-
-    85.68% {
-        background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-    }
-
+    0%,
     100% {
-        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        background: linear-gradient(121deg, #fe0576 24%, #ea12b6 40%, #38cbff 60%);
+        background-size: 300% 300%;
+        background-position: 0% 50%;
+    }
+
+    14% {
+        background: linear-gradient(135deg, #ea12b6 0%, #bf5af2 50%, #0071e3 100%);
+        background-size: 300% 300%;
+        background-position: 25% 50%;
+    }
+
+    28% {
+        background: linear-gradient(135deg, #bf5af2 0%, #ff2d55 50%, #ff9500 100%);
+        background-size: 300% 300%;
+        background-position: 50% 50%;
+    }
+
+    42% {
+        background: linear-gradient(135deg, #ff2d55 0%, #ff9500 50%, #ffd60a 100%);
+        background-size: 300% 300%;
+        background-position: 75% 50%;
+    }
+
+    56% {
+        background: linear-gradient(135deg, #ffd60a 0%, #30d158 50%, #64d2ff 100%);
+        background-size: 300% 300%;
+        background-position: 100% 50%;
+    }
+
+    70% {
+        background: linear-gradient(135deg, #30d158 0%, #64d2ff 50%, #0071e3 100%);
+        background-size: 300% 300%;
+        background-position: 75% 50%;
+    }
+
+    84% {
+        background: linear-gradient(121deg, #64d2ff 20%, #ea12b6 50%, #fe0576 80%);
+        background-size: 300% 300%;
+        background-position: 25% 50%;
     }
 }
 
