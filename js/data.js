@@ -2365,5 +2365,32 @@
         "material":  "Akrylfärg, resin",
         "year":  "2024",
         "description":  ""
+    },
+    {
+        "filename":  "266 BLACK MIRROR.jpg",
+        "title":  "Black Mirror",
+        "id":  266,
+        "size":  "160 * 100 cm",
+        "material":  "Akrylfärg, resin",
+        "year":  "Septemner 2024",
+        "description":  ""
+    },
+    {
+        "filename":  "267 PINK DRESS.jpg",
+        "title":  "Pink Dress",
+        "id":  267,
+        "size":  "100 * 120 cm",
+        "material":  "Akrylfärg, resin",
+        "year":  "Deceber 2025",
+        "description":  ""
+    },
+    {
+        "filename":  "268 RASPBERRY BERET.jpg",
+        "title":  "Raspberry Beret",
+        "id":  268,
+        "size":  "40 * 100 cm",
+        "material":  "Akrylfärg, lim, glitter, smycken",
+        "year":  "Januari 2026",
+        "description":  ""
     }
 ];
