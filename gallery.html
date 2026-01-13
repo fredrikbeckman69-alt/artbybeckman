@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Art by Beckman</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@400;500;700&display=swap"
-        rel="stylesheet">
     <script src="js/background.js" defer></script>
     <script src="js/data.js" defer></script>
     <script src="js/mobile-menu.js" defer></script>
@@ -23,7 +18,12 @@
 
     <header>
         <div class="logo">Art by Beckman</div>
-        <nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
             <a href="index.html">Home</a>
             <a href="gallery.html" class="active">Gallery</a>
             <a href="videos.html">Videos</a>
@@ -36,15 +36,14 @@
 
         <!-- Search/Filter -->
         <div class="glass-panel"
-            style="margin-bottom: 2rem; padding: 1.5rem; display: flex; gap: 1rem; align-items: center; justify-content: center;">
-            <input type="text" id="gallery-search" placeholder="Sök verk..."
-                style="background: rgba(0,0,0,0.5); border: 1px solid var(--accent-cyan); color: white; padding: 0.8rem; border-radius: 4px; width: 300px;">
+            style="margin: 0 auto 2rem; max-width: 600px; padding: 1.5rem; display: flex; gap: 1rem; align-items: center; justify-content: center;">
+            <input type="text" id="gallery-search" placeholder="Search artworks..."
+                style="background: white; border: 2px solid var(--glass-border); color: var(--text-primary); padding: 12px 20px; border-radius: var(--radius-pill); width: 100%; font-size: 1rem; transition: all var(--transition-base);">
         </div>
 
         <!-- Tagline -->
         <div style="text-align: center; margin-bottom: 3rem;">
-            <p
-                style="font-size: 1.5rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent-cyan); text-transform: uppercase;">
+            <p class="gradient-text" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em;">
                 ART FOR THE MASSES - BOUGHT BY THE BRAVE
             </p>
         </div>
