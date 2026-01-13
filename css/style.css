@@ -191,13 +191,13 @@ a:hover {
 /* Gradient Text */
 .gradient-text {
     background: linear-gradient(121deg, #fe0576 24%, #ea12b6 40%, #38cbff 60%);
-    background-size: 300% 300%;
+
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     /* Fallback for browsers without support */
     color: #ea12b6;
-    animation: colorRotate 16s ease-in-out infinite;
+
 }
 
 
