@@ -24,7 +24,9 @@ The project currently adheres to a **High-Impact Colorful Typography** design ph
 
 ## 4. Deployment & Infrastructure
 *   **CI/CD:** The website is deployed using a custom **GitHub Actions** deployment workflow. The repository has a history of resolving persistent queuing delays by moving to this automated system.
-*   Scripts like `deploy.ps1` or `auto_sync.ps1` should be evaluated carefully in relation to the GitHub Actions flow.
+*   **FTP Upload (`deploy.ps1`):** In case manual deployment to Loopia FTP is required, use `deploy.ps1`. 
+    *   **Crucial Fix (TLS/SSL):** Loopia's Pure-FTPd requires explicit SSL for data connections. The powershell script uses `$request.EnableSsl = $true` to prevent `(425) Can't open data connection` errors.
+    *   **Remote Path:** Do NOT deploy to the FTP root (`/`). You must supply `-RemotePath "/svavel.se/public_html"` to ensure the files land in the correct mapped loopia public directory.
 
 ## 5. Repository Size Constraints
 *   **Crucial Rule:** Following the 2026 repository compression (which reduced size from ~769MB to ~200MB), the project footprint must be kept strictly minimal.

@@ -1,0 +1,18 @@
+open ftpcluster.loopia.se
+natriumftp
+6fQ3tjTrJguf
+quote site chmod 755 svavel.se
+cd svavel.se
+quote site chmod 755 public_html
+cd public_html
+quote site chmod 755 assets
+quote site chmod 755 css
+quote site chmod 755 js
+quote site chmod 644 index.html
+quote site chmod 644 gallery.html
+quote site chmod 644 videos.html
+quote site chmod 644 instagram.html
+cd assets
+quote site chmod 755 images
+quote site chmod 755 documents
+bye

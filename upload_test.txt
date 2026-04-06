@@ -1,0 +1,7 @@
+open ftpcluster.loopia.se
+natriumftp
+6fQ3tjTrJguf
+cd svavel.se
+cd public_html
+put test.html
+bye
