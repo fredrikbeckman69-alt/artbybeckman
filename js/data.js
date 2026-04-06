@@ -2392,5 +2392,32 @@
         "material":  "Akrylfärg, lim, glitter, smycken",
         "year":  "Januari 2026",
         "description":  ""
+    },
+    {
+        "filename":  "269 VERTIGO.jpg",
+        "title":  "Vertigo",
+        "id":  269,
+        "size":  "",
+        "material":  "",
+        "year":  "",
+        "description":  ""
+    },
+    {
+        "filename":  "270 ORIGAMI.jpg",
+        "title":  "Origami",
+        "id":  270,
+        "size":  "",
+        "material":  "",
+        "year":  "",
+        "description":  ""
+    },
+    {
+        "filename":  "271 GOLDEN TICKET.jpg",
+        "title":  "Golden Ticket",
+        "id":  271,
+        "size":  "",
+        "material":  "",
+        "year":  "",
+        "description":  ""
     }
 ];

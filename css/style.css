@@ -693,14 +693,10 @@ section {
     width: 100%;
     padding: var(--space-lg);
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    transform: translateY(100%);
-    transition: transform var(--transition-smooth);
     color: white;
 }
 
-.gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
-}
+/* Removed specific gallery-item:hover .gallery-overlay transform to keep text static for mobile devices */
 
 .gallery-title {
     font-size: 1.25rem;
