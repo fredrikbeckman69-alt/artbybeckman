@@ -1,6 +1,6 @@
 /**
  * Instagram Feed Engine — Art by Beckman
- * Optimized rendering with DocumentFragment, lazy loading, and modal controls
+ * Clean square grid portfolio, lightbox modal with navigation, and lazy loading
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,8 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.innerHTML = "";
 
-    function openModal(item) {
-        if (!modal || !modalBody) return;
+    let currentIndex = 0;
+
+    function renderModal(index) {
+        if (!modal || !modalBody || index < 0 || index >= INSTAGRAM_FEED.length) return;
+        currentIndex = index;
+        const item = INSTAGRAM_FEED[currentIndex];
         modalBody.innerHTML = "";
 
         if (item.is_video) {
@@ -67,14 +71,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal && modal.classList.contains("active")) {
+        if (!modal || !modal.classList.contains("active")) return;
+        if (e.key === "Escape") {
             closeModal();
+        } else if (e.key === "ArrowRight") {
+            if (currentIndex < INSTAGRAM_FEED.length - 1) {
+                renderModal(currentIndex + 1);
+            }
+        } else if (e.key === "ArrowLeft") {
+            if (currentIndex > 0) {
+                renderModal(currentIndex - 1);
+            }
         }
     });
 
     const fragment = document.createDocumentFragment();
 
-    INSTAGRAM_FEED.forEach(item => {
+    INSTAGRAM_FEED.forEach((item, index) => {
         const element = document.createElement("div");
         element.className = "instagram-item";
         element.setAttribute("title", item.is_video ? "Click to play video" : "Click to view painting");
@@ -85,29 +98,42 @@ document.addEventListener("DOMContentLoaded", () => {
         img.loading = "lazy";
         img.decoding = "async";
 
+        // Hide completely if image fails to load
         img.onerror = () => {
-            console.warn(`Could not load Instagram media: ${img.src}`);
-            element.style.opacity = '0.35';
+            element.style.display = 'none';
         };
 
         element.appendChild(img);
 
+        // Hover overlay
+        const overlay = document.createElement("div");
+        overlay.className = "instagram-item-overlay";
+        if (item.caption) {
+            const capSnippet = document.createElement("div");
+            capSnippet.className = "instagram-item-caption-snippet";
+            capSnippet.textContent = item.caption;
+            overlay.appendChild(capSnippet);
+        }
+        element.appendChild(overlay);
+
+        // Video badge
         if (item.is_video) {
             const badge = document.createElement("div");
             badge.style.cssText = `
                 position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 44px;
-                height: 44px;
-                background: linear-gradient(135deg, rgba(123, 31, 162, 0.85), rgba(216, 27, 96, 0.85));
+                top: 14px;
+                right: 14px;
+                width: 36px;
+                height: 36px;
+                background: rgba(26, 12, 30, 0.75);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 pointer-events: none;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             `;
             badge.setAttribute("aria-hidden", "true");
 
@@ -115,17 +141,17 @@ document.addEventListener("DOMContentLoaded", () => {
             triangle.style.cssText = `
                 width: 0;
                 height: 0;
-                border-top: 7px solid transparent;
-                border-bottom: 7px solid transparent;
-                border-left: 12px solid #FFFFFF;
-                margin-left: 3px;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-left: 9px solid #FFFFFF;
+                margin-left: 2px;
             `;
             badge.appendChild(triangle);
             element.appendChild(badge);
         }
 
         element.addEventListener("click", () => {
-            openModal(item);
+            renderModal(index);
         });
 
         fragment.appendChild(element);
