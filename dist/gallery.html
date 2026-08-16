@@ -8,21 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style-v2.css?v=3">
-    <script src="js/background.js?v=3" defer></script>
-    <script src="js/data.js?v=3" defer></script>
-    <script src="js/mobile-menu.js?v=3" defer></script>
-    <script src="js/scroll-animations.js?v=3" defer></script>
-    <script src="js/gallery.js?v=3" defer></script>
-    <script src="js/main.js?v=3" defer></script>
+    <link rel="stylesheet" href="css/style-v3.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/mobile-menu.js" defer></script>
+    <script src="js/gallery.js" defer></script>
 </head>
 
 <body>
-    <canvas id="bg-canvas"></canvas>
-
     <header>
         <div class="logo">Art by Beckman</div>
-        <div class="menu-toggle" id="menu-toggle" aria-label="Open navigation">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -39,7 +34,7 @@
         <div class="gallery-page-header">
             <h1>Gallery</h1>
             <div class="gallery-search-bar">
-                <input type="text" id="gallery-search" placeholder="Search artworks...">
+                <input type="text" id="gallery-search" placeholder="Search by title, year, medium..." aria-label="Search artworks">
             </div>
         </div>
 
@@ -48,10 +43,15 @@
         </div>
     </main>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="gallery-modal">
-        <button class="gallery-modal-close" id="lightbox-close">&times;</button>
-        <img id="lightbox-img" src="" alt="Full size artwork">
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="gallery-modal" aria-hidden="true" role="dialog" aria-label="Artwork lightbox">
+        <button class="gallery-modal-close" id="lightbox-close" aria-label="Close modal">&times;</button>
+        <button class="gallery-modal-btn gallery-modal-prev" id="lightbox-prev" aria-label="Previous artwork">&#10094;</button>
+        <div class="gallery-modal-content">
+            <img id="lightbox-img" src="" alt="Full size artwork">
+            <div id="lightbox-caption" class="gallery-modal-caption"></div>
+        </div>
+        <button class="gallery-modal-btn gallery-modal-next" id="lightbox-next" aria-label="Next artwork">&#10095;</button>
     </div>
 
     <footer>

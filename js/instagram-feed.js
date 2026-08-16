@@ -1,3 +1,8 @@
+/**
+ * Instagram Feed Engine — Art by Beckman
+ * Optimized rendering with DocumentFragment, lazy loading, and modal controls
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("instagram-feed-container");
     const modal = document.getElementById("insta-modal");
@@ -7,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container) return;
 
     if (typeof INSTAGRAM_FEED === "undefined" || !INSTAGRAM_FEED.length) {
-        container.innerHTML = "<p style='color:var(--ink-secondary);text-align:center;padding:2rem;'>No feed data available.</p>";
+        container.innerHTML = "<p style='color:var(--ink-secondary);text-align:center;padding:3rem 1rem;'>No feed data available.</p>";
         return;
     }
 
@@ -51,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.remove("active");
         modal.setAttribute("aria-hidden", "true");
         if (modalBody) modalBody.innerHTML = "";
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "";
     }
 
     if (modalClose) modalClose.addEventListener("click", closeModal);
@@ -67,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const fragment = document.createDocumentFragment();
+
     INSTAGRAM_FEED.forEach(item => {
         const element = document.createElement("div");
         element.className = "instagram-item";
@@ -75,6 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = document.createElement("img");
         img.src = item.is_video ? item.thumbnail : item.url;
         img.alt = item.caption || "Instagram Artwork";
+        img.loading = "lazy";
+        img.decoding = "async";
+
+        img.onerror = () => {
+            console.warn(`Could not load Instagram media: ${img.src}`);
+            element.style.opacity = '0.35';
+        };
+
         element.appendChild(img);
 
         if (item.is_video) {
@@ -95,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
             `;
             badge.setAttribute("aria-hidden", "true");
-            
+
             const triangle = document.createElement("div");
             triangle.style.cssText = `
                 width: 0;
@@ -113,6 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
             openModal(item);
         });
 
-        container.appendChild(element);
+        fragment.appendChild(element);
     });
+
+    container.appendChild(fragment);
 });

@@ -1,54 +1,43 @@
-// Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.querySelector('.menu-toggle') || document.getElementById('menu-toggle');
-    const nav = document.querySelector('nav') || document.getElementById('nav');
+/**
+ * Mobile Menu Controller — Art by Beckman
+ * Lightweight, performant, accessible navigation toggle
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle') || document.querySelector('.menu-toggle');
+    const nav = document.getElementById('nav') || document.querySelector('nav');
 
-    if (!menuToggle || !nav) {
-        console.error('Menu toggle or nav not found');
-        return;
+    if (!menuToggle || !nav) return;
+
+    function toggleMenu(open) {
+        const isOpen = open !== undefined ? open : !nav.classList.contains('active');
+        nav.classList.toggle('active', isOpen);
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
-    // Toggle menu on click
-    menuToggle.addEventListener('click', function (e) {
+    menuToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        nav.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-        console.log('Menu toggled:', nav.classList.contains('active'));
+        toggleMenu();
     });
 
     // Close menu when clicking nav links
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            nav.classList.remove('active');
-            menuToggle.classList.remove('active');
-        });
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', function (event) {
-        const isClickInsideMenu = nav.contains(event.target);
-        const isClickOnToggle = menuToggle.contains(event.target);
-
-        if (!isClickInsideMenu && !isClickOnToggle && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            menuToggle.classList.remove('active');
+    document.addEventListener('click', (e) => {
+        if (nav.classList.contains('active') && !nav.contains(e.target) && !menuToggle.contains(e.target)) {
+            toggleMenu(false);
         }
     });
 
-    // Prevent body scroll when menu is open on mobile
-    const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.attributeName === 'class') {
-                if (nav.classList.contains('active')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-            }
-        });
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('active')) {
+            toggleMenu(false);
+        }
     });
-
-    observer.observe(nav, { attributes: true });
 });

@@ -9,20 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style-v2.css?v=3">
-    <script src="js/background.js?v=3" defer></script>
-    <script src="js/scroll-animations.js?v=3" defer></script>
-    <script src="js/mobile-menu.js?v=3" defer></script>
-    <script src="js/instagram-data.js?v=3" defer></script>
-    <script src="js/instagram-feed.js?v=3" defer></script>
+    <link rel="stylesheet" href="css/style-v3.css">
+    <script src="js/scroll-animations.js" defer></script>
+    <script src="js/mobile-menu.js" defer></script>
+    <script src="js/instagram-data.js" defer></script>
+    <script src="js/instagram-feed.js" defer></script>
 </head>
 
 <body>
-    <canvas id="bg-canvas"></canvas>
-
     <header>
         <div class="logo">Art by Beckman</div>
-        <div class="menu-toggle" id="menu-toggle">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -67,6 +64,14 @@
             </div>
         </section>
     </main>
+
+    <!-- Instagram Lightbox & Video Modal -->
+    <div id="insta-modal" class="insta-modal" aria-hidden="true">
+        <div class="insta-modal-content">
+            <button class="insta-modal-close" id="insta-modal-close" aria-label="Close modal">&times;</button>
+            <div id="insta-modal-body"></div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-logo">Art by Beckman</div>

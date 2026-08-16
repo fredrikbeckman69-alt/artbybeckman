@@ -1,7 +1,0 @@
-open ftpcluster.loopia.se
-natriumftp
-6fQ3tjTrJguf
-mkdir public_html
-cd public_html
-put test.html
-bye

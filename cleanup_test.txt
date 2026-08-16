@@ -1,9 +1,0 @@
-open ftpcluster.loopia.se
-natriumftp
-6fQ3tjTrJguf
-del public_html/test.html
-rmdir public_html
-cd svavel.se
-cd public_html
-del test.html
-bye
