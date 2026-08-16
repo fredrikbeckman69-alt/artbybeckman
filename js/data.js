@@ -1,28 +1,31 @@
+// Gallery Data — Art by Beckman
+// Authoritative dataset generated from 'Tavlor dokumentation Fredrik Beckman.xlsx'
+
 const GALLERY_IMAGES = [
     {
         "filename": "1 BLOOD 1.0.jpg",
         "title": "Blood 1.0",
         "id": 1,
         "size": "52,5 * 52,5 cm",
-        "material": "SprayfÃ¤rg, kopparrÃ¶r, glas, kork, vatten",
+        "material": "Sprayfärg, kopparrör, glas, kork, vatten",
         "year": "2020",
         "description": ""
+    },
+    {
+        "filename": "2. WE HEAR YOU(1).jpg",
+        "title": "We Hear You (1)",
+        "id": 2,
+        "size": "15 * 20 cm * 3",
+        "material": "Sprayfärg, headsets",
+        "year": "2020",
+        "description": "Innefattar 2.1, 2.2 samt 2.3 tre tavlor i ett verk/triptyk"
     },
     {
         "filename": "2. WE HEAR YOU.jpg",
         "title": "We Hear You",
         "id": 2,
         "size": "15 * 20 cm * 3",
-        "material": "SprayfÃ¤rg, headsets",
-        "year": "2020",
-        "description": "Innefattar 2.1, 2.2 samt 2.3 tre tavlor i ett verk/triptyk"
-    },
-    {
-        "filename": "2. WE HEAR YOU(1).jpg",
-        "title": "We Hear You(1)",
-        "id": 2,
-        "size": "15 * 20 cm * 3",
-        "material": "SprayfÃ¤rg, headsets",
+        "material": "Sprayfärg, headsets",
         "year": "2020",
         "description": "Innefattar 2.1, 2.2 samt 2.3 tre tavlor i ett verk/triptyk"
     },
@@ -31,7 +34,7 @@ const GALLERY_IMAGES = [
         "title": "Why Does It Hurt... 1.0 Backside",
         "id": 3,
         "size": "75,5 * 150 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn, trÃ¤, glas, kork, garn (UV)",
+        "material": "Sprayfärg, akrylfärg, garn, trä, glas, kork, garn (UV)",
         "year": "2020",
         "description": ""
     },
@@ -40,7 +43,7 @@ const GALLERY_IMAGES = [
         "title": "Why Does It Hurt... 1.0 Front",
         "id": 3,
         "size": "75,5 * 150 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn, trÃ¤, glas, kork, garn (UV)",
+        "material": "Sprayfärg, akrylfärg, garn, trä, glas, kork, garn (UV)",
         "year": "2020",
         "description": ""
     },
@@ -49,25 +52,25 @@ const GALLERY_IMAGES = [
         "title": "Crushed Ny The Gears Of Industry 1.0",
         "id": 4,
         "size": "30 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "2020",
         "description": ""
     },
     {
         "filename": "5. CRUSHED NY THE GEARS OF INDUSTRY 1.1.jpg",
-        "title": "Crushed Ny The Gears Of Industry 1.1",
+        "title": "Crushed By The Gears Of Industry 1.1",
         "id": 5,
         "size": "15 * 20 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, kopparrÃ¶r, glas, kork, vatten",
+        "material": "Sprayfärg, akrylfärg, metall, kopparrör, glas, kork, vatten",
         "year": "2020",
-        "description": "SkÃ¤nkt till Linda Hermansson 2020-12-24 Tavlan inte mÃ¤rkt/signerad"
+        "description": "Skänkt till Linda Hermansson 2020-12-24 Tavlan inte märkt/signerad"
     },
     {
         "filename": "6. C-19 1.0.jpg",
         "title": "C-19 1.0",
         "id": 6,
         "size": "30 * 40 cm",
-        "material": "SpryfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Spryfärg, akrylfärg, metall",
         "year": "2020",
         "description": ""
     },
@@ -76,7 +79,7 @@ const GALLERY_IMAGES = [
         "title": "Purpleyellow 1.0",
         "id": 7,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, kopparrÃ¶r, glas, kork, vatten, garn (UV)",
+        "material": "Sprayfärg, kopparrör, glas, kork, vatten, garn (UV)",
         "year": "2020",
         "description": ""
     },
@@ -85,43 +88,43 @@ const GALLERY_IMAGES = [
         "title": "Blue Monday 1.0",
         "id": 8,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r",
+        "material": "Sprayfärg, akrylfärg, kopparrör",
         "year": "2020",
-        "description": "SkÃ¤nkt till Ellen Beckman 2021-01-11"
+        "description": "Skänkt till Ellen Beckman 2021-01-11"
     },
     {
         "filename": "9. REDGOLDWHITESILVER 1.0.jpg",
         "title": "Redgoldwhitesilver 1.0",
         "id": 9,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, gran",
+        "material": "Sprayfärg, akrylfärg, gran",
         "year": "2020",
-        "description": "Ã–vermÃ¥lad. Se 157"
+        "description": "Övermålad. Se 157"
     },
     {
         "filename": "10. SLYNKIS.jpg",
         "title": "Slynkis",
         "id": 10,
         "size": "15 * 20 cm",
-        "material": "SprayfÃ¤rg, kopparrÃ¶r",
+        "material": "Sprayfärg, kopparrör",
         "year": "2020",
-        "description": "SkÃ¤nkt till Anna StjÃ¤rnlÃ¶f 2021-04.02"
+        "description": "Skänkt till Anna Stjärnlöf 2021-04.02"
     },
     {
         "filename": "12. THE YELLOW KEY 1.0.jpg",
         "title": "The Yellow Key 1.0",
         "id": 12,
         "size": "33 * 41 cm",
-        "material": "SprayfÃ¤rg, metall, kopparrÃ¶r",
+        "material": "Sprayfärg, metall, kopparrör",
         "year": "2020",
         "description": ""
     },
     {
         "filename": "13. MMxx.jpg",
-        "title": "Mmxx",
+        "title": "MMxx",
         "id": 13,
         "size": "33 * 41 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r",
+        "material": "Sprayfärg, akrylfärg, kopparrör",
         "year": "2020",
         "description": ""
     },
@@ -130,16 +133,16 @@ const GALLERY_IMAGES = [
         "title": "Emelies Red",
         "id": 15,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r, glas, kork, vatten, metall",
+        "material": "Sprayfärg, akrylfärg, kopparrör, glas, kork, vatten, metall",
         "year": "December 2020 - Januari 2021",
-        "description": "SkÃ¤nkt till Emelie Lantz 2021-01-03"
+        "description": "Skänkt till Emelie Lantz 2021-01-03"
     },
     {
         "filename": "17. PINKGREEN 1.0.jpg",
         "title": "Pinkgreen 1.0",
         "id": 17,
         "size": "61 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn (UV)",
+        "material": "Sprayfärg, akrylfärg, garn (UV)",
         "year": "Januari 2021",
         "description": ""
     },
@@ -148,16 +151,16 @@ const GALLERY_IMAGES = [
         "title": "Blood 1.1",
         "id": 18,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, metall",
+        "material": "Sprayfärg, metall",
         "year": "Januari 2021",
-        "description": "Ã–vermÃ¥lad duk, ursprungligen kÃ¶p pÃ¥ Dollarstore"
+        "description": "Övermålad duk, ursprungligen köp på Dollarstore"
     },
     {
         "filename": "19. BLUE MONDAY 2.0.jpg",
         "title": "Blue Monday 2.0",
         "id": 19,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r",
+        "material": "Sprayfärg, akrylfärg, kopparrör",
         "year": "Januari 2021",
         "description": ""
     },
@@ -166,7 +169,7 @@ const GALLERY_IMAGES = [
         "title": "The Keys To Japan 1.0",
         "id": 20,
         "size": "41 * 33 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Januari 2021",
         "description": ""
     },
@@ -175,43 +178,43 @@ const GALLERY_IMAGES = [
         "title": "Blueoceankeysky 1.0",
         "id": 21,
         "size": "56 * 56 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, glas, kork, vatten",
+        "material": "Sprayfärg, akrylfärg, metall, glas, kork, vatten",
         "year": "Januari 2021",
-        "description": "Ã–vermÃ¥lad IKEA-duk"
+        "description": "Övermålad IKEA-duk"
+    },
+    {
+        "filename": "22. CHROMEYELLOWRED 1.0(1).jpg",
+        "title": "Chromeyellowred 1.0 (1)",
+        "id": 22,
+        "size": "56 * 56 cm",
+        "material": "Sprayfärg, akrylfärg, kopparrör, glas, kork, vatten, metall",
+        "year": "Januari 2021",
+        "description": "Övermålad IKEA-duk"
     },
     {
         "filename": "22. CHROMEYELLOWRED 1.0.JPG",
         "title": "Chromeyellowred 1.0",
         "id": 22,
         "size": "56 * 56 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r, glas, kork, vatten, metall",
+        "material": "Sprayfärg, akrylfärg, kopparrör, glas, kork, vatten, metall",
         "year": "Januari 2021",
-        "description": "Ã–vermÃ¥lad IKEA-duk"
-    },
-    {
-        "filename": "22. CHROMEYELLOWRED 1.0(1).jpg",
-        "title": "Chromeyellowred 1.0(1)",
-        "id": 22,
-        "size": "56 * 56 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r, glas, kork, vatten, metall",
-        "year": "Januari 2021",
-        "description": "Ã–vermÃ¥lad IKEA-duk"
+        "description": "Övermålad IKEA-duk"
     },
     {
         "filename": "23. NEW NATION 1.0.jpg",
         "title": "New Nation 1.0",
         "id": 23,
         "size": "90 * 30 cm",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Januari 2021",
-        "description": "Ã–vermÃ¥lad. Se 190 SPLASH 1.3"
+        "description": "Övermålad. Se 190 SPLASH 1.3"
     },
     {
         "filename": "24. WHITEGEARSREDBLACKWHITE .jpg",
         "title": "Whitegearsredblackwhite",
         "id": 24,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, metall, kopparrÃ¶r, glas, vatten",
+        "material": "Sprayfärg, metall, kopparrör, glas, vatten",
         "year": "Januari 2021",
         "description": ""
     },
@@ -220,7 +223,7 @@ const GALLERY_IMAGES = [
         "title": "Half The Red Cross 1.0",
         "id": 25,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, kopparrÃ¶r, plÃ¥ster",
+        "material": "Sprayfärg, kopparrör, plåster",
         "year": "Januari 2021",
         "description": ""
     },
@@ -229,7 +232,7 @@ const GALLERY_IMAGES = [
         "title": "Greengrasssuicide",
         "id": 26,
         "size": "90 * 30 cm",
-        "material": "SprayfÃ¤rg, akruylfÃ¤rg",
+        "material": "Sprayfärg, akruylfärg",
         "year": "Januari 2021",
         "description": ""
     },
@@ -238,7 +241,7 @@ const GALLERY_IMAGES = [
         "title": "Lever, Gears And Keyes",
         "id": 27,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Januari 2021",
         "description": ""
     },
@@ -247,16 +250,16 @@ const GALLERY_IMAGES = [
         "title": "Covid 26-31",
         "id": 28,
         "size": "40 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Januari 2021",
-        "description": "Ã–vermÃ¥lad IKEA-duk"
+        "description": "Övermålad IKEA-duk"
     },
     {
         "filename": "29. BURNING CIRCLE 1.0.jpg",
         "title": "Burning Circle 1.0",
         "id": 29,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r, glas, kork, vatten, metall",
+        "material": "Sprayfärg, akrylfärg, kopparrör, glas, kork, vatten, metall",
         "year": "Januari 2021",
         "description": ""
     },
@@ -265,7 +268,7 @@ const GALLERY_IMAGES = [
         "title": "Oeange Is The New Bluesaster 1.0",
         "id": 30,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Februari 2021",
         "description": ""
     },
@@ -274,25 +277,25 @@ const GALLERY_IMAGES = [
         "title": "Blood 1.2",
         "id": 31,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, metall, kopparrÃ¶r, glas, kork, vatten, akrylfÃ¤rg",
+        "material": "Sprayfärg, metall, kopparrör, glas, kork, vatten, akrylfärg",
         "year": "Februari 2021",
         "description": "Se HALO 1.1"
     },
     {
         "filename": "32. COLORESQUE 1.0.jpg",
-        "title": "Coloresque 1.0",
+        "title": "Coloresque 1.3",
         "id": 32,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
-        "description": "Ã–vermÃ¥lad. Se 217"
+        "description": "Övermålad. Se 217"
     },
     {
         "filename": "33. THE YELLOW KEY 1.1.jpg",
         "title": "The Yellow Key 1.1",
         "id": 33,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Februari 2021",
         "description": ""
     },
@@ -301,7 +304,7 @@ const GALLERY_IMAGES = [
         "title": "Why 1.0",
         "id": 34,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
         "description": "Se LIMELIGHT"
     },
@@ -310,16 +313,7 @@ const GALLERY_IMAGES = [
         "title": "Killed By Death 1.0",
         "id": 35,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, plast",
-        "year": "Februari 2021",
-        "description": ""
-    },
-    {
-        "filename": "36 MONEY 1.0.jpg",
-        "title": "Money 1.0",
-        "id": 36,
-        "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r, lim, sedel",
+        "material": "Sprayfärg, akrylfärg, plast",
         "year": "Februari 2021",
         "description": ""
     },
@@ -328,16 +322,25 @@ const GALLERY_IMAGES = [
         "title": "Money 1.0 (2)",
         "id": 36,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r, lim, sedel",
+        "material": "Sprayfärg, akrylfärg, kopparrör, lim, sedel",
+        "year": "Februari 2021",
+        "description": ""
+    },
+    {
+        "filename": "36 MONEY 1.0.jpg",
+        "title": "Money 1.0",
+        "id": 36,
+        "size": "50 * 50 cm",
+        "material": "Sprayfärg, akrylfärg, kopparrör, lim, sedel",
         "year": "Februari 2021",
         "description": ""
     },
     {
         "filename": "37 YARN _ STRIPES 1.0.jpg",
-        "title": "Yarn   Stripes 1.0",
+        "title": "Yarn & Stripes 1.0",
         "id": 37,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, kopparrÃ¶r, garn (UV)",
+        "material": "Sprayfärg, kopparrör, garn (UV)",
         "year": "Februari 2021",
         "description": ""
     },
@@ -346,16 +349,16 @@ const GALLERY_IMAGES = [
         "title": "Metallic Sun 1.0",
         "id": 38,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, kopparrÃ¶r",
+        "material": "Sprayfärg, kopparrör",
         "year": "Februari 2021",
-        "description": "Ã–vermÃ¥lad. Se 216"
+        "description": "Övermålad. Se 216"
     },
     {
         "filename": "39 CARRIBEAN BLUE STRIPES 1.0.jpg",
         "title": "Carribean Blue Stripes 1.0",
         "id": 39,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
         "description": ""
     },
@@ -364,16 +367,16 @@ const GALLERY_IMAGES = [
         "title": "Chromed Gift",
         "id": 40,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
-        "description": "SkÃ¤nkt till Linda Hermansson 2021-03-24"
+        "description": "Skänkt till Linda Hermansson 2021-03-24"
     },
     {
         "filename": "41 COLORESQUE 1.1.jpg",
-        "title": "Coloresque 1.1",
+        "title": "Coloresque 1.0",
         "id": 41,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
         "description": ""
     },
@@ -382,16 +385,16 @@ const GALLERY_IMAGES = [
         "title": "Bluesilverhead",
         "id": 42,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
-        "description": "Ã–vermÃ¥lad. Se 218"
+        "description": "Övermålad. Se 218"
     },
     {
         "filename": "43 LAOWA.jpg",
         "title": "Laowa",
         "id": 43,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
         "description": ""
     },
@@ -400,25 +403,25 @@ const GALLERY_IMAGES = [
         "title": "Flowers 1.0",
         "id": 44,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2021",
-        "description": "Ã–vermÃ¥lad"
+        "description": "Övermålad"
     },
     {
         "filename": "45 I HEAR YOU 1.0.jpg",
         "title": "I Hear You 1.0",
         "id": 45,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, headsets",
+        "material": "Sprayfärg, headsets",
         "year": "Februari/Mars 2021",
-        "description": "Ã–vermÃ¥lad se 242"
+        "description": "Övermålad se 242"
     },
     {
         "filename": "46 BUBBLEGUM KEY.jpg",
         "title": "Bubblegum Key",
         "id": 46,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Mars 2021",
         "description": ""
     },
@@ -427,7 +430,7 @@ const GALLERY_IMAGES = [
         "title": "Still To Be Namned 1.0",
         "id": 47,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
@@ -436,7 +439,7 @@ const GALLERY_IMAGES = [
         "title": "Purple Pink 1.0",
         "id": 48,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
@@ -445,25 +448,25 @@ const GALLERY_IMAGES = [
         "title": "The Burning Bush 1.0",
         "id": 49,
         "size": "40 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
-        "description": "Ã–vernÃ¥lad IKEA-tavla"
+        "description": "Övernålad IKEA-tavla"
     },
     {
         "filename": "50 SOVIET RED SPLATTER.jpg",
         "title": "Soviet Red Splatter",
         "id": 50,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
     {
         "filename": "51 COLORESQUE 1.2.jpg",
-        "title": "Coloresque 1.2",
+        "title": "Coloresque 1.1",
         "id": 51,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
@@ -472,16 +475,16 @@ const GALLERY_IMAGES = [
         "title": "The Running Peacock",
         "id": 53,
         "size": "",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, kopparrÃ¶r",
+        "material": "Sprayfärg, akrylfärg, kopparrör",
         "year": "Mars 2021",
-        "description": "Ã–vermÃ¥lad IKEA-yavla + ny kilram"
+        "description": "Övermålad IKEA-yavla + ny kilram"
     },
     {
         "filename": "54 PROFILED MAN, THINKING STRAIGHT.jpg",
         "title": "Profiled Man, Thinking Straight",
         "id": 54,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
@@ -490,7 +493,7 @@ const GALLERY_IMAGES = [
         "title": "The Dreams Of L",
         "id": 55,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
@@ -499,7 +502,7 @@ const GALLERY_IMAGES = [
         "title": "Still To Be Namned 1.1",
         "id": 56,
         "size": "61 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se The big chair"
     },
@@ -508,7 +511,7 @@ const GALLERY_IMAGES = [
         "title": "The Not So Shy Woods",
         "id": 57,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se 224 EXPLODING WOODS"
     },
@@ -517,7 +520,7 @@ const GALLERY_IMAGES = [
         "title": "Human 1.0",
         "id": 58,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se 225 HUMAN 1.0"
     },
@@ -526,7 +529,7 @@ const GALLERY_IMAGES = [
         "title": "Jungle 1.0",
         "id": 59,
         "size": "61 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se JUNGLE 2.0"
     },
@@ -535,16 +538,16 @@ const GALLERY_IMAGES = [
         "title": "Worlds Apart",
         "id": 60,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
-        "description": "SÃ¥ld till K-G och Birgitta Beckman 2021-05-21"
+        "description": "Såld till K-G och Birgitta Beckman 2021-05-21"
     },
     {
         "filename": "61 COLORESQUE 1.2.jpg",
         "title": "Coloresque 1.2",
         "id": 61,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": ""
     },
@@ -553,7 +556,7 @@ const GALLERY_IMAGES = [
         "title": "The Big Blue 1.0",
         "id": 62,
         "size": "61 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se 234 WIRE"
     },
@@ -562,7 +565,7 @@ const GALLERY_IMAGES = [
         "title": "10 Dissimilar Keys (2)",
         "id": 63,
         "size": "90 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Mars 2021",
         "description": ""
     },
@@ -571,25 +574,25 @@ const GALLERY_IMAGES = [
         "title": "The Burning Bush 1.1",
         "id": 64,
         "size": "46 * 55 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
-        "description": "SkÃ¤nkt till Per Beckman"
+        "description": "Skänkt till Per Beckman"
     },
     {
         "filename": "65 NEW DIRECTION 1.0.jpg",
         "title": "New Direction 1.0",
         "id": 65,
         "size": "46 * 55 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
-        "description": "SkÃ¤nkt till LinnÃ©a Beckam 2021-04-01"
+        "description": "Skänkt till Linnéa Beckam 2021-04-01"
     },
     {
         "filename": "66 NEW DIRECTION 1.1.jpg",
         "title": "New Direction 1.1",
         "id": 66,
         "size": "61 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se LIMELIGHT"
     },
@@ -598,25 +601,25 @@ const GALLERY_IMAGES = [
         "title": "Blue Void 1.0",
         "id": 67,
         "size": "139,5 * 56,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
-        "description": "Ã–vermÃ¥lad IKEA-tavla"
+        "description": "Övermålad IKEA-tavla"
     },
     {
         "filename": "68 YARN _ TULIP 1.0.jpg",
-        "title": "Yarn   Tulip 1.0",
+        "title": "Yarn & Tulip 1.0",
         "id": 68,
         "size": "150 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn",
+        "material": "Sprayfärg, akrylfärg, garn",
         "year": "Mars 2021",
-        "description": "Ã–vermÃ¥lad MIO-tavla"
+        "description": "Övermålad MIO-tavla"
     },
     {
         "filename": "69 THE EVIL EYE.jpg",
         "title": "The Evil Eye",
         "id": 69,
         "size": "46 * 55 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2021",
         "description": "Se 229 THE EVIL EYE"
     },
@@ -625,7 +628,7 @@ const GALLERY_IMAGES = [
         "title": "Artificial Love 1.0",
         "id": 70,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, plast",
+        "material": "Sprayfärg, akrylfärg, plast",
         "year": "Mars 2021",
         "description": ""
     },
@@ -634,16 +637,16 @@ const GALLERY_IMAGES = [
         "title": "Down To Earth 1.0",
         "id": 71,
         "size": "80 * 60 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Nars/April 2021",
-        "description": "SÃ¥ld till Lovisa Rydgren 2021-04-01. Duk -> loppisfynd Sned"
+        "description": "Såld till Lovisa Rydgren 2021-04-01. Duk -> loppisfynd Sned"
     },
     {
         "filename": "72 SLOWLY DYING 1.0.jpg",
         "title": "Slowly Dying 1.0",
         "id": 72,
         "size": "25,5 * 25,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn",
+        "material": "Sprayfärg, akrylfärg, garn",
         "year": "2021",
         "description": "Duk -> loppisfynd"
     },
@@ -652,7 +655,7 @@ const GALLERY_IMAGES = [
         "title": "Artificial Love 1.1",
         "id": 73,
         "size": "25,5 * 25,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, plast",
+        "material": "Sprayfärg, akrylfärg, plast",
         "year": "2021",
         "description": "Duk -> loppisfynd"
     },
@@ -661,7 +664,7 @@ const GALLERY_IMAGES = [
         "title": "Artificial Love 1.2",
         "id": 74,
         "size": "25,5 * 25,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, plast",
+        "material": "Sprayfärg, akrylfärg, plast",
         "year": "2021",
         "description": "Duk -> loppisfynd"
     },
@@ -670,16 +673,16 @@ const GALLERY_IMAGES = [
         "title": "Mephistopheles 1.0",
         "id": 75,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": "Duk -> loppisfynd Sned"
     },
     {
         "filename": "76 IT IS A _.jpg",
-        "title": "It Is A",
+        "title": "It Is A ?",
         "id": 76,
         "size": "49 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": "Duk -> loppisfynd"
     },
@@ -688,7 +691,7 @@ const GALLERY_IMAGES = [
         "title": "Purple Skull",
         "id": 77,
         "size": "25,5 * 25,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": "Duk -> loppisfynd"
     },
@@ -697,7 +700,7 @@ const GALLERY_IMAGES = [
         "title": "Mephistopheles 1.1",
         "id": 78,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
@@ -706,7 +709,7 @@ const GALLERY_IMAGES = [
         "title": "It Is Green My Dear 1.0",
         "id": 79,
         "size": "25 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
@@ -715,7 +718,7 @@ const GALLERY_IMAGES = [
         "title": "A Strong Opinion 1.0",
         "id": 80,
         "size": "30 * 30 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
@@ -724,16 +727,16 @@ const GALLERY_IMAGES = [
         "title": "Burgundy Man",
         "id": 81,
         "size": "38 * 38 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
-        "description": "Duk -> loppisfynd SkÃ¤nkt till LinnÃ«a Beckman 2021-05-13"
+        "description": "Duk -> loppisfynd Skänkt till Linnëa Beckman 2021-05-13"
     },
     {
         "filename": "82 UNNAMNED UNNUMBERED.jpg",
         "title": "Unnamned Unnumbered",
         "id": 82,
         "size": "30 * 90",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, garn",
+        "material": "Sprayfärg, akrylfärg, metall, garn",
         "year": "Januari 2021",
         "description": ""
     },
@@ -742,7 +745,7 @@ const GALLERY_IMAGES = [
         "title": "Rise",
         "id": 83,
         "size": "30 * 90",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn",
+        "material": "Sprayfärg, akrylfärg, garn",
         "year": "2021",
         "description": ""
     },
@@ -751,25 +754,25 @@ const GALLERY_IMAGES = [
         "title": "She 1.0",
         "id": 84,
         "size": "57 * 68,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
-        "description": "OBS! Ramen ommÃ¥lad till mÃ¶rkare lila"
+        "description": "OBS! Ramen ommålad till mörkare lila"
     },
     {
         "filename": "85 BLOOD 1.3.jpg",
         "title": "Blood 1.3",
         "id": 85,
         "size": "20 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, vatten, gls, kork, kopparrÃ¶r",
+        "material": "Sprayfärg, akrylfärg, vatten, gls, kork, kopparrör",
         "year": "2021",
-        "description": "GÃ¥va till Otto Johansson Duk ->Loppisfynd"
+        "description": "Gåva till Otto Johansson Duk ->Loppisfynd"
     },
     {
         "filename": "86 STILL TO BE NAMNED 1.3.jpg",
         "title": "Still To Be Namned 1.3",
         "id": 86,
         "size": "40 * 60 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": "Se 226"
     },
@@ -778,16 +781,16 @@ const GALLERY_IMAGES = [
         "title": "Beast Foundation 1.0",
         "id": 87,
         "size": "150 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
-        "year": "4/1/2021 Ã–vermÃ¥lad. Se 209",
-        "description": "Ã–vermÃ¥lad MIO-duk."
+        "material": "Sprayfärg, akrylfärg",
+        "year": "4/1/2021 Övermålad. Se 209",
+        "description": "Övermålad MIO-duk."
     },
     {
         "filename": "88 THE ENT 1.0.jpg",
         "title": "The Ent 1.0",
         "id": 88,
         "size": "46 * 55 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
@@ -796,16 +799,16 @@ const GALLERY_IMAGES = [
         "title": "The Freak 1.0",
         "id": 89,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
-        "description": "GÃ¥va till Markus SjÃ¶Ã¶"
+        "description": "Gåva till Markus Sjöö"
     },
     {
         "filename": "90 THE BURNING BUSH 1.2.jpg",
         "title": "The Burning Bush 1.2",
         "id": 90,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapennor",
+        "material": "Sprayfärg, akrylfärg, poscapennor",
         "year": "2021",
         "description": ""
     },
@@ -814,16 +817,16 @@ const GALLERY_IMAGES = [
         "title": "Before It Became The Highway To Hell 1.0",
         "id": 91,
         "size": "46 * 55 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
     {
         "filename": "92 ARE YOU REALLY_.jpg",
-        "title": "Are You Really",
+        "title": "Are You Really? 1.0",
         "id": 92,
         "size": "55 * 46 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
@@ -832,7 +835,7 @@ const GALLERY_IMAGES = [
         "title": "Artificial Love 2.0",
         "id": 93,
         "size": "100 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, plast, lim",
+        "material": "Sprayfärg, akrylfärg, plast, lim",
         "year": "2021",
         "description": ""
     },
@@ -841,52 +844,52 @@ const GALLERY_IMAGES = [
         "title": "Blue Void 1.1",
         "id": 94,
         "size": "120 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "April/Maj 2021",
         "description": "Loppisfynd"
     },
     {
         "filename": "95 YELLO_ REVISITED.jpg",
-        "title": "Yello  Revisited",
+        "title": "Yello: Revisited",
         "id": 95,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "April/Maj 2021",
         "description": ""
     },
     {
         "filename": "96 ARE YOU REALLY_ 1.1.jpg",
-        "title": "Are You Really  1.1",
+        "title": "Are You Really? 1.1",
         "id": 96,
         "size": "40 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
-        "description": "GÃ¥va till Bjarne Lott Oktober 2021"
+        "description": "Gåva till Bjarne Lott Oktober 2021"
     },
     {
         "filename": "97 ALONE.jpg",
-        "title": "Alone",
+        "title": "Alone 1.0",
         "id": 97,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
         "description": ""
+    },
+    {
+        "filename": "98 PAINTING POURED ON CHAIR. BEAST FOUNDATION 2.0(1).jpg",
+        "title": "Painting Poured On Chair. Beast Foundation 2.0 (1)",
+        "id": 98,
+        "size": "Barstol",
+        "material": "Sprayfärg, akrylfärg",
+        "year": "Maj 2021",
+        "description": "Privat"
     },
     {
         "filename": "98 PAINTING POURED ON CHAIR. BEAST FOUNDATION 2.0.jpg",
         "title": "Painting Poured On Chair. Beast Foundation 2.0",
         "id": 98,
         "size": "Barstol",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
-        "year": "Maj 2021",
-        "description": "Privat"
-    },
-    {
-        "filename": "98 PAINTING POURED ON CHAIR. BEAST FOUNDATION 2.0(1).jpg",
-        "title": "Painting Poured On Chair. Beast Foundation 2.0(1)",
-        "id": 98,
-        "size": "Barstol",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
         "description": "Privat"
     },
@@ -895,7 +898,7 @@ const GALLERY_IMAGES = [
         "title": "A Barchair For The Cat",
         "id": 99,
         "size": "Barstol",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Maj 2021",
         "description": "Privat"
     },
@@ -904,16 +907,16 @@ const GALLERY_IMAGES = [
         "title": "A Dream Come True 1.0",
         "id": 100,
         "size": "40 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapennor",
+        "material": "Sprayfärg, akrylfärg, poscapennor",
         "year": "Maj 2021",
-        "description": "GÃ¥va till Ellen Beckman 20210513"
+        "description": "Gåva till Ellen Beckman 20210513"
     },
     {
         "filename": "101 PAINTING POURED OVER RABLE_ BEAST FOUNDATION 3.0.jpg",
-        "title": "Painting Poured Over Rable  Beast Foundation 3.0",
+        "title": "Painting Poured Over Table: Beast Foundation 3.0",
         "id": 101,
-        "size": "TrÃ¤bord",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "size": "Träbord",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
         "description": "Privat"
     },
@@ -922,25 +925,34 @@ const GALLERY_IMAGES = [
         "title": "Involuntary Here 1.0",
         "id": 102,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
-        "description": "Loppisfynd SÃ¥ld till KG & Birgitta Beckman 2021-05-21"
+        "description": "Loppisfynd Såld till KG & Birgitta Beckman 2021-05-21"
     },
     {
         "filename": "103 TRAFFIC JAM.jpg",
         "title": "Traffic Jam",
         "id": 103,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2022",
-        "description": "Ã–vermÃ¥lad"
+        "description": "Övermålad"
+    },
+    {
+        "filename": "104 FLOWER 1.0.jpg",
+        "title": "Flower 1.0",
+        "id": 104,
+        "size": "70 * 50 cm",
+        "material": "Sprayfärg, akrylfärg",
+        "year": "Maj 2021",
+        "description": "Loppisfynd"
     },
     {
         "filename": "105 SHE 1.1.jpg",
         "title": "She 1.1",
         "id": 105,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, Poscapenna, metall",
+        "material": "Sprayfärg, akrylfärg, Poscapenna, metall",
         "year": "Maj 2021",
         "description": ""
     },
@@ -949,7 +961,7 @@ const GALLERY_IMAGES = [
         "title": "It 1.0",
         "id": 106,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
         "description": ""
     },
@@ -958,7 +970,7 @@ const GALLERY_IMAGES = [
         "title": "Wooloomoolookie 1.0",
         "id": 107,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Maj 2021",
         "description": ""
     },
@@ -967,7 +979,7 @@ const GALLERY_IMAGES = [
         "title": "Alone 1.1",
         "id": 108,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, Poscapennor, garn",
+        "material": "Sprayfärg, akrylfärg, Poscapennor, garn",
         "year": "Maj/juni 2021",
         "description": ""
     },
@@ -976,16 +988,16 @@ const GALLERY_IMAGES = [
         "title": "Adsum 1.0",
         "id": 109,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Juni 2021",
-        "description": "SÃ¥ld till Johan Wahn Ã¥t Carl Wahn 210807"
+        "description": "Såld till Johan Wahn åt Carl Wahn 210807"
     },
     {
         "filename": "110 HOMMAGE_ CATITIA VON ELVIS.jpg",
-        "title": "Hommage  Catitia Von Elvis",
+        "title": "Hommage: Caticia Von Elvis",
         "id": 110,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juni 2021",
         "description": ""
     },
@@ -994,7 +1006,7 @@ const GALLERY_IMAGES = [
         "title": "Silver Flowers 1.0",
         "id": 111,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juni 2021",
         "description": ""
     },
@@ -1003,25 +1015,25 @@ const GALLERY_IMAGES = [
         "title": "Albedo 0.39",
         "id": 112,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juni 2021",
-        "description": "Ã–vermÃ¥lad"
+        "description": "Övermålad"
     },
     {
         "filename": "113 OLIPOP 1.0.jpg",
         "title": "Olipop 1.0",
         "id": 113,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juni 2021",
-        "description": "OmmÃ¥lad se tavla nummer 154"
+        "description": "Ommålad se tavla nummer 154"
     },
     {
         "filename": "114 ALONE 1.2.jpg",
         "title": "Alone 1.2",
         "id": 114,
         "size": "40 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, Poscapennor",
+        "material": "Sprayfärg, akrylfärg, Poscapennor",
         "year": "Juli 2021",
         "description": "Loppisfynd IKEA-ram"
     },
@@ -1029,8 +1041,8 @@ const GALLERY_IMAGES = [
         "filename": "115 CLOCKWORK CHROME.jpg",
         "title": "Clockwork Chrome",
         "id": 115,
-        "size": "VÃ¤ggur",
-        "material": "SprayfÃ¤rg",
+        "size": "Väggur",
+        "material": "Sprayfärg",
         "year": "Maj 2020",
         "description": "Privat"
     },
@@ -1039,7 +1051,7 @@ const GALLERY_IMAGES = [
         "title": "Endless Bottles 1.0 Revisited",
         "id": 116,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
@@ -1048,124 +1060,124 @@ const GALLERY_IMAGES = [
         "title": "Endless Bottles 1.1",
         "id": 117,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "118 ENDLESS BOTTLES 1.2 (ICE BLUE).jpg",
-        "title": "Endless Bottles 1.2 (Ice Blue)",
+        "title": "Endless Bottles 1.2 (ice Blue)",
         "id": 118,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "119 ENDLESS BOTTLES 2.0 (STRAWBERRY FIELDS FOREVER).jpg",
-        "title": "Endless Bottles 2.0 (Strawberry Fields Forever)",
+        "title": "Endless Bottles 2.0 (strawberry Fields Forever)",
         "id": 119,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, AkrylfÃ¤rg",
+        "material": "Sprayfärg, Akrylfärg",
         "year": "Juli 2021",
-        "description": "SkÃ¤nkt till Runo Sundberg 20210721"
+        "description": "Skänkt till Runo Sundberg 20210721"
     },
     {
         "filename": "120 ENDLESS BOTTLES 1.3 (RUNNING RED).jpg",
-        "title": "Endless Bottles 1.3 (Running Red)",
+        "title": "Endless Bottles 1.3 (running Red)",
         "id": 120,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, AkrylfÃ¤rg",
+        "material": "Sprayfärg, Akrylfärg",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "121 ENDLESS BOTTLES 2.1 (BEAST FOUNDATION).jpg",
-        "title": "Endless Bottles 2.1 (Beast Foundation)",
+        "title": "Endless Bottles 2.1 (beast Foundation)",
         "id": 121,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
-        "description": "SÃ¥ld 20220423"
+        "description": "Såld 20220423"
     },
     {
         "filename": "122 ENDLESS BOTTLES 2.2 (YELLOW POLKA DOT).jpg",
-        "title": "Endless Bottles 2.2 (Yellow Polka Dot)",
+        "title": "Endless Bottles 2.2 (yellow Polka Dot)",
         "id": 122,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, Poscapenna",
+        "material": "Sprayfärg, Poscapenna",
         "year": "Juli 2021",
-        "description": "SkÃ¤nkt till Siv Carlsson 20211224"
+        "description": "Skänkt till Siv Carlsson 20211224"
     },
     {
         "filename": "123 EBDLESS BOTTLES 2.2 (GREEN).jpg",
-        "title": "Ebdless Bottles 2.2 (Green)",
+        "title": "Ebdless Bottles 2.3 (green)",
         "id": 123,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
-        "description": "SkÃ¤nkt till Birgitta Beckman 20210721"
+        "description": "Skänkt till Birgitta Beckman 20210721"
     },
     {
         "filename": "124 ENDLESS BOTTLES 2.4 (MAGENTA GOLD).jpg",
-        "title": "Endless Bottles 2.4 (Magenta Gold)",
+        "title": "Endless Bottles 2.4 (magenta Gold)",
         "id": 124,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, guldpenna",
+        "material": "Sprayfärg, akrylfärg, guldpenna",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "125 ENDLESS BOTTLES 1.4 (GREEN AND GOLD).jpg",
-        "title": "Endless Bottles 1.4 (Green And Gold)",
+        "title": "Endless Bottles 1.4 (green And Gold)",
         "id": 125,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, guldpenna",
+        "material": "Sprayfärg, guldpenna",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "126 ENDLESS BOTTLES 1.5 (GOLDEN PLUM).jpg",
-        "title": "Endless Bottles 1.5 (Golden Plum)",
+        "title": "Endless Bottles 1.5 (golden Plum)",
         "id": 126,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
-        "description": "SÃ¥ld 20220423"
+        "description": "Såld 20220423"
     },
     {
         "filename": "127 ENDLESS BOTTLES 2.5 (SILVER GREEN).jpg",
-        "title": "Endless Bottles 2.5 (Silver Green)",
+        "title": "Endless Bottles 2.5 (silver Green)",
         "id": 127,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "128 ENDLESS BOTTLES 2.6 (ART DECO).jpg",
-        "title": "Endless Bottles 2.6 (Art Deco)",
+        "title": "Endless Bottles 2.6 (art Deco)",
         "id": 128,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
-        "description": "SkÃ¤nkt till Linda Hermansson 20211224"
+        "description": "Skänkt till Linda Hermansson 20211224"
     },
     {
         "filename": "129 ENDLESS BOTTLES 2.7 (ORANGE).jpg",
-        "title": "Endless Bottles 2.7 (Orange)",
+        "title": "Endless Bottles 2.7 (orange)",
         "id": 129,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
-        "description": "SÃ¥ld 20220424"
+        "description": "Såld 20220424"
     },
     {
         "filename": "130 ENDLESS BOTTLES 1.6 (GREEN HEART).jpg",
-        "title": "Endless Bottles 1.6 (Green Heart)",
+        "title": "Endless Bottles 1.6 (green Heart)",
         "id": 130,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, sticker",
+        "material": "Sprayfärg, sticker",
         "year": "Juli 2021",
         "description": ""
     },
@@ -1174,43 +1186,43 @@ const GALLERY_IMAGES = [
         "title": "Roads 1.0",
         "id": 131,
         "size": "40 * 40 cm",
-        "material": "SprayfÃ¤rg, snÃ¶rslÃ¥, Poscapennor",
+        "material": "Sprayfärg, snörslå, Poscapennor",
         "year": "Juli 2021",
-        "description": "Ã–vermÃ¥lad se 233"
+        "description": "Övermålad se 233"
     },
     {
         "filename": "132 1 MINUTE BEFORE ARMAGEDDO.jpg",
-        "title": "1 Minute Before Armageddo",
+        "title": "Fireworks 1.0",
         "id": 132,
         "size": "80 * 80",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
-        "description": "Ã–vermÃ¥lad . Se 158"
+        "description": "Övermålad . Se 158"
     },
     {
         "filename": "133 WARM HARMONY 1.0.jpg",
         "title": "Warm Harmony 1.0",
         "id": 133,
         "size": "73 * 60",
-        "material": "AkrylfÃ¤rg, SprayfÃ¤rg",
+        "material": "Akrylfärg, Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
     {
-        "filename": "134 ENDLESS BOTTLES 2.8 _CAFÃˆ CREME).jpg",
-        "title": "Endless Bottles 2.8  CafÃ¨ Creme)",
+        "filename": "134 ENDLESS BOTTLES 2.8 (CAFE CREME).jpg",
+        "title": "Endless Bottles 2.8 /cafè Creme)",
         "id": 134,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
     {
         "filename": "135 ENDLESS BOTTLES 1.7 (PURE METALLIC).jpg",
-        "title": "Endless Bottles 1.7 (Pure Metallic)",
+        "title": "Endless Bottles 1.7 (pure Metallic)",
         "id": 135,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juli 2021",
         "description": ""
     },
@@ -1219,25 +1231,25 @@ const GALLERY_IMAGES = [
         "title": "Words 1.0",
         "id": 136,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akryl, poscapenna",
+        "material": "Sprayfärg, akryl, poscapenna",
         "year": "Augusti 2021",
-        "description": "Ã–vermÃ¥lad se 167"
+        "description": "Övermålad se 167"
     },
     {
         "filename": "137 SERENDIPITY 1.0.jpg",
         "title": "Serendipity 1.0",
         "id": 137,
         "size": "40 * 40 cm",
-        "material": "SprayfÃ¤rg, akryl, poscapenna",
+        "material": "Sprayfärg, akryl, poscapenna",
         "year": "Augusti 2021",
-        "description": "Ã–vermÃ¥lad"
+        "description": "Övermålad"
     },
     {
         "filename": "138 ENDLESS BOTTLES 2.9 (PINK).jpg",
-        "title": "Endless Bottles 2.9 (Pink)",
+        "title": "Endless Bottles 2.9 (pink)",
         "id": 138,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Augusti 2021",
         "description": ""
     },
@@ -1246,34 +1258,34 @@ const GALLERY_IMAGES = [
         "title": "Words 1.1",
         "id": 139,
         "size": "73 * 60",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, Poscapenna,",
+        "material": "Sprayfärg, akrylfärg, Poscapenna,",
         "year": "Augusti 2021",
-        "description": "SÃ¥ld till LinnÃ©a Johansson210805"
+        "description": "Såld till Linnéa Johansson210805"
     },
     {
         "filename": "140 GOLDEN GRASS 1.0.jpg",
         "title": "Golden Grass 1.0",
         "id": 140,
         "size": "80 * 80 cm",
-        "material": "SprÃ¤fÃ¤rg, akrylfÃ¤rg",
+        "material": "Spräfärg, akrylfärg",
         "year": "Augusti 2021",
-        "description": "GÃ¤va till Ellen Beckman 210829"
+        "description": "Gäva till Ellen Beckman 210829"
     },
     {
         "filename": "141 PINK LINES 1.0.jpg",
         "title": "Pink Lines 1.0",
         "id": 141,
         "size": "80 * 80 cm",
-        "material": "SprÃ¤fÃ¤rg, akrylfÃ¤rg",
+        "material": "Spräfärg, akrylfärg",
         "year": "Augusti 2021",
-        "description": "GÃ¥va till LinnÃ©a Beckman 210829"
+        "description": "Gåva till Linnéa Beckman 210829"
     },
     {
         "filename": "142 ENDLESS BOTTLES 3.0 (LIMEGREEN).jpg",
-        "title": "Endless Bottles 3.0 (Limegreen)",
+        "title": "Endless Bottles 3.0 (limegreen)",
         "id": 142,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2021",
         "description": ""
     },
@@ -1282,16 +1294,16 @@ const GALLERY_IMAGES = [
         "title": "Brown Sessions 1.0 Perpetual",
         "id": 143,
         "size": "56,5 * 56,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Septemper 2021",
-        "description": "Ã–vermÃ¥lad Se 213"
+        "description": "Övermålad Se 213"
     },
     {
         "filename": "144 ENDLESS BOTTLESS 3.1 (ABANDONED CRIMESCENE).jpg",
-        "title": "Endless Bottless 3.1 (Abandoned Crimescene)",
+        "title": "Endless Bottless 3.1 (abandoned Crimescene)",
         "id": 144,
         "size": "Glasflaska",
-        "material": "AkrylfÃ¤rg, metall",
+        "material": "Akrylfärg, metall",
         "year": "Septemper 2021",
         "description": ""
     },
@@ -1300,16 +1312,16 @@ const GALLERY_IMAGES = [
         "title": "Brown Sessions 1.1 Warning",
         "id": 145,
         "size": "56,5 * 56,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn, metall",
+        "material": "Sprayfärg, akrylfärg, garn, metall",
         "year": "Septemper 2021",
-        "description": "Ã–vermÃ¥lad IKEA-duk"
+        "description": "Övermålad IKEA-duk"
     },
     {
         "filename": "146 DECENT PROPOSAL.jpg",
         "title": "Decent Proposal",
         "id": 146,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapennor",
+        "material": "Sprayfärg, akrylfärg, poscapennor",
         "year": "Septemper 2021",
         "description": "SE 235 CONNECTED DOTS"
     },
@@ -1318,79 +1330,79 @@ const GALLERY_IMAGES = [
         "title": "Brown Sessions 1.2 Burn Baby Burn",
         "id": 147,
         "size": "46 * 55 CM",
-        "material": "AkrylfÃ¤rg, sprayfÃ¤rg",
+        "material": "Akrylfärg, sprayfärg",
         "year": "Septemper 2021",
         "description": ""
     },
     {
         "filename": "148 ENDLESS BOTTLES 3.2 (WILDFIRE).jpg",
-        "title": "Endless Bottles 3.2 (Wildfire)",
+        "title": "Endless Bottles 3.2 (wildfire)",
         "id": 148,
         "size": "Glasflaska",
-        "material": "AkrylfÃ¤rg, metall",
+        "material": "Akrylfärg, metall",
         "year": "Septemper 2021",
-        "description": "SÃ¥ld 20220423"
+        "description": "Såld 20220423"
     },
     {
         "filename": "149 BROWN SESSIONS 1.3 (HUMORAL PATHOLOGY).jpg",
-        "title": "Brown Sessions 1.3 (Humoral Pathology)",
+        "title": "Brown Sessions 1.3 (humoral Pathology)",
         "id": 149,
         "size": "55 * 46 CM",
-        "material": "AkrylfÃ¤rg, sprayfÃ¤rg, Glas, metall, resin",
+        "material": "Akrylfärg, sprayfärg, Glas, metall, resin",
         "year": "Septemper/Oktober 2021",
         "description": ""
     },
     {
         "filename": "150 ENDLESS BOTTLES 3.3 (PINKISH)).jpg",
-        "title": "Endless Bottles 3.3 (Pinkish))",
+        "title": "Endless Bottles 3.3 (pinkish))",
         "id": 150,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Oktober 2021",
         "description": ""
     },
     {
         "filename": "151 ENDLESS BOTTLES 3.4 (SKULLS).jpg",
-        "title": "Endless Bottles 3.4 (Skulls)",
+        "title": "Endless Bottles 3.4 (skulls)",
         "id": 151,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall",
+        "material": "Sprayfärg, akrylfärg, metall",
         "year": "Oktober 2021",
-        "description": "SkÃ¤nkt till Emelie Lantz 2021-10-15"
+        "description": "Skänkt till Emelie Lantz 2021-10-15"
     },
     {
         "filename": "152 ALONE 1.3.jpg",
         "title": "Alone 1.3",
         "id": 152,
         "size": "46 * 55 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, Poscapenna",
+        "material": "Sprayfärg, akrylfärg, Poscapenna",
         "year": "Oktober 2021",
-        "description": "SkÃ¤nkt till vÃ¤lgÃ¶renhetsauktion Rotary SkÃ¶vde till Kvinnohuset Tranan"
+        "description": "Skänkt till välgörenhetsauktion Rotary Skövde till Kvinnohuset Tranan"
     },
     {
         "filename": "153 WOOLOOMOOLOOKIE 1.1.jpg",
         "title": "Wooloomoolookie 1.1",
         "id": 153,
         "size": "56,5 * 56,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapenna",
+        "material": "Sprayfärg, akrylfärg, poscapenna",
         "year": "Oktober 2021",
-        "description": "Ã–vermÃ¥lad IKEA-duk"
+        "description": "Övermålad IKEA-duk"
     },
     {
         "filename": "154 BROWN SESSIONS 1.4 (OMNIBUS).jpg",
-        "title": "Brown Sessions 1.4 (Omnibus)",
+        "title": "Brown Sessions 1.4 (omnibus)",
         "id": 154,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, garn",
+        "material": "Sprayfärg, akrylfärg, metall, garn",
         "year": "Oktober 2021",
         "description": "PRIVAT"
     },
     {
         "filename": "156 ENDLESS BOTTLES 3.6 (SY).jpg",
-        "title": "Endless Bottles 3.6 (Sy)",
+        "title": "Endless Bottles 3.6 (sy)",
         "id": 156,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Oktober 2021",
         "description": ""
     },
@@ -1399,16 +1411,16 @@ const GALLERY_IMAGES = [
         "title": "Lavender Velvet",
         "id": 157,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, garn",
+        "material": "Sprayfärg, akrylfärg, metall, garn",
         "year": "2021",
         "description": "PRIVAT"
     },
     {
         "filename": "158 BROWN SESSIONS (COPPER).jpg",
-        "title": "Brown Sessions (Copper)",
+        "title": "Brown Sessions (copper)",
         "id": 158,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn, poscapenna, metall",
+        "material": "Sprayfärg, akrylfärg, garn, poscapenna, metall",
         "year": "2021",
         "description": ""
     },
@@ -1417,16 +1429,16 @@ const GALLERY_IMAGES = [
         "title": "Whale 1.0",
         "id": 159,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn",
+        "material": "Sprayfärg, akrylfärg, garn",
         "year": "2021",
-        "description": "SÃ¥ld till Tomas Weber"
+        "description": "Såld till Tomas Weber"
     },
     {
         "filename": "160 ENDLESS BOTTLES 3.7 (GOLDEN YARN).jpg",
-        "title": "Endless Bottles 3.7 (Golden Yarn)",
+        "title": "Endless Bottles 3.7 (golden Yarn)",
         "id": 160,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, garn",
+        "material": "Sprayfärg, akrylfärg, metall, garn",
         "year": "2021",
         "description": ""
     },
@@ -1435,7 +1447,7 @@ const GALLERY_IMAGES = [
         "title": "Wooloomoolookie 1.2",
         "id": 161,
         "size": "100 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapennor",
+        "material": "Sprayfärg, akrylfärg, poscapennor",
         "year": "2021",
         "description": ""
     },
@@ -1444,7 +1456,7 @@ const GALLERY_IMAGES = [
         "title": "Wooloomoolookie 1.3",
         "id": 162,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter, garn",
+        "material": "Sprayfärg, akrylfärg, glitter, garn",
         "year": "Decembar 2021",
         "description": ""
     },
@@ -1453,7 +1465,7 @@ const GALLERY_IMAGES = [
         "title": "Warm Harmony 1.1",
         "id": 163,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Januari 2022",
         "description": ""
     },
@@ -1462,25 +1474,25 @@ const GALLERY_IMAGES = [
         "title": "Non Grid 1.0",
         "id": 164,
         "size": "135 * 95 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Januari 2022",
-        "description": "SÃ¥ld till Philip RÃ¼diger"
+        "description": "Såld till Philip Rüdiger"
     },
     {
         "filename": "165 NON GRID 1.1.jpg",
-        "title": "Non Grid 1.1",
+        "title": "Art Wall 1.0",
         "id": 165,
-        "size": "VÃ¤ggmÃ¥lning",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "size": "Väggmålning",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Januari 2022",
         "description": ""
     },
     {
         "filename": "166 NON GRID 1.2.jpg",
-        "title": "Non Grid 1.2",
+        "title": "Non Grid 1.1",
         "id": 166,
         "size": "100 * 100 cm",
-        "material": "Sprayf'Ã¤rg, akrylfÃ¤rg",
+        "material": "Sprayf'ärg, akrylfärg",
         "year": "Februari 2022",
         "description": ""
     },
@@ -1489,25 +1501,25 @@ const GALLERY_IMAGES = [
         "title": "Fredenham 1.0",
         "id": 167,
         "size": "60 * 73 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Februari 2022",
         "description": ""
     },
     {
         "filename": "168 ENDLESS BOTTLES 3.8 (FLOUR).jpg",
-        "title": "Endless Bottles 3.8 (Flour)",
+        "title": "Endless Bottles 3.8 (flour)",
         "id": 168,
         "size": "Glasflaska",
-        "material": "SprayfÃ¤rg (Fluorocerande)",
+        "material": "Sprayfärg (Fluorocerande)",
         "year": "Februari 2022",
-        "description": "Krossad och slÃ¤ngd"
+        "description": "Krossad och slängd"
     },
     {
         "filename": "169 FLOWER 1.1.jpg",
         "title": "Flower 1.1",
         "id": 169,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, vÃ¤ggfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, väggfärg, akrylfärg, glitter",
         "year": "Mars 2022",
         "description": ""
     },
@@ -1516,25 +1528,25 @@ const GALLERY_IMAGES = [
         "title": "Ukrainian Sunflower",
         "id": 170,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, limspray, glitter",
+        "material": "Sprayfärg, limspray, glitter",
         "year": "Mars 2022",
-        "description": "SkÃ¤nkt till auktion"
+        "description": "Skänkt till auktion"
     },
     {
         "filename": "171 MONEY 1.1.jpg",
         "title": "Money 1.1",
         "id": 171,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, AkrylfÃ¤rg, glitter, sedel, spraylim",
+        "material": "Sprayfärg, Akrylfärg, glitter, sedel, spraylim",
         "year": "Mars 2022",
         "description": ""
     },
     {
         "filename": "172 NON GRID 1.2.1.jpg",
-        "title": "Non Grid 1.2.1",
+        "title": "Non Grid 1.2",
         "id": 172,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2022",
         "description": ""
     },
@@ -1543,7 +1555,7 @@ const GALLERY_IMAGES = [
         "title": "Silver Tapestry 1.0",
         "id": 173,
         "size": "80 * 80 cm",
-        "material": "Tapet, sprayfÃ¤rg, spraylim, glitter, akrylfÃ¤rg",
+        "material": "Tapet, sprayfärg, spraylim, glitter, akrylfärg",
         "year": "Mars 2022",
         "description": ""
     },
@@ -1552,16 +1564,16 @@ const GALLERY_IMAGES = [
         "title": "Non Grid 1.3",
         "id": 174,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2022",
-        "description": "Ã–vermÃ¥lad. Se 187 SPLASH 1.1"
+        "description": "Övermålad. Se 187 SPLASH 1.1"
     },
     {
         "filename": "175 NON GRID 1.4.jpg",
         "title": "Non Grid 1.4",
         "id": 175,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Mars 2022",
         "description": ""
     },
@@ -1570,16 +1582,16 @@ const GALLERY_IMAGES = [
         "title": "Whale 1.1",
         "id": 176,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter, garn",
+        "material": "Sprayfärg, akrylfärg, glitter, garn",
         "year": "Mars 2022",
         "description": ""
     },
     {
         "filename": "177 BROWN SESSIONS (CHAIR).jpg",
-        "title": "Brown Sessions (Chair)",
+        "title": "Brown Sessions (chair)",
         "id": 177,
         "size": "-",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Mars 2022",
         "description": ""
     },
@@ -1588,16 +1600,16 @@ const GALLERY_IMAGES = [
         "title": "Ukrainian Sunflower 1.1",
         "id": 178,
         "size": "72,5 * 60 cm",
-        "material": "SprayfÃ¤rg, glitter",
+        "material": "Sprayfärg, glitter",
         "year": "2022",
-        "description": "SkÃ¤nkt till auktion"
+        "description": "Skänkt till auktion"
     },
     {
         "filename": "179 NON GRID 1.5.jpg",
         "title": "Non Grid 1.5",
         "id": 179,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2022",
         "description": ""
     },
@@ -1606,16 +1618,16 @@ const GALLERY_IMAGES = [
         "title": "Wooloomoolookie 1.4",
         "id": 180,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Maj 2002",
-        "description": "Ã–vermÃ¥lad. Se 188 SPLASH 1.2"
+        "description": "Övermålad. Se 188 SPLASH 1.2"
     },
     {
         "filename": "181 SKEW 1.0.jpg",
         "title": "Skew 1.0",
         "id": 181,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg",
+        "material": "Sprayfärg",
         "year": "Juni 2002",
         "description": ""
     },
@@ -1624,7 +1636,7 @@ const GALLERY_IMAGES = [
         "title": "Halo 1.0",
         "id": 182,
         "size": "100 * 100 cm",
-        "material": "AprayfÃ¤rg, akrylfÃ¤rg, glitter, poscapenna",
+        "material": "Aprayfärg, akrylfärg, glitter, poscapenna",
         "year": "Juli 2022",
         "description": ""
     },
@@ -1633,7 +1645,7 @@ const GALLERY_IMAGES = [
         "title": "Four 1.0",
         "id": 183,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapennor, garn",
+        "material": "Sprayfärg, akrylfärg, poscapennor, garn",
         "year": "Juli 2022",
         "description": ""
     },
@@ -1642,7 +1654,7 @@ const GALLERY_IMAGES = [
         "title": "Watching 1.0",
         "id": 184,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, poscapennor",
+        "material": "Sprayfärg, akrylfärg, poscapennor",
         "year": "Augusti 2022",
         "description": ""
     },
@@ -1651,7 +1663,7 @@ const GALLERY_IMAGES = [
         "title": "Collaboration 1.0",
         "id": 185,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "September 2022",
         "description": ""
     },
@@ -1660,7 +1672,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.0",
         "id": 186,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, garn, akrylfÃ¤rg, resin",
+        "material": "Sprayfärg, garn, akrylfärg, resin",
         "year": "Oktober 2022",
         "description": "PRIVAT"
     },
@@ -1669,7 +1681,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.1",
         "id": 187,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akryl, glitter",
+        "material": "Sprayfärg, akryl, glitter",
         "year": "Oktober 2022",
         "description": ""
     },
@@ -1678,7 +1690,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.2",
         "id": 188,
         "size": "80 * 80 cm",
-        "material": "SpreayfÃ¤rg, akryl, glitter",
+        "material": "Spreayfärg, akryl, glitter",
         "year": "Oktober 2022",
         "description": ""
     },
@@ -1687,16 +1699,16 @@ const GALLERY_IMAGES = [
         "title": "The Ladder 1.0",
         "id": 189,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akryl, poscapennor, garn, glitter",
+        "material": "Sprayfärg, akryl, poscapennor, garn, glitter",
         "year": "Oktober 2022",
-        "description": "SÃ¥ld via NOA 2023-08-30"
+        "description": "Såld via NOA 2023-08-30"
     },
     {
         "filename": "190 SPLASH 1.3.jpg",
         "title": "Splash 1.3",
         "id": 190,
         "size": "90 * 30 cm",
-        "material": "SpryfÃ¤rg, akrylfÃ¤rg",
+        "material": "Spryfärg, akrylfärg",
         "year": "2022",
         "description": ""
     },
@@ -1705,7 +1717,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.4",
         "id": 191,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "2022",
         "description": ""
     },
@@ -1714,7 +1726,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.5",
         "id": 192,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "2022",
         "description": ""
     },
@@ -1723,7 +1735,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.6",
         "id": 193,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter. resin",
+        "material": "Sprayfärg, akrylfärg, glitter. resin",
         "year": "2022",
         "description": ""
     },
@@ -1732,7 +1744,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.7",
         "id": 194,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "2022",
         "description": ""
     },
@@ -1741,16 +1753,16 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.8",
         "id": 195,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "2022",
         "description": ""
     },
     {
         "filename": "196 SPLAH 1.9.jpg",
-        "title": "Splah 1.9",
+        "title": "Splash 1.9",
         "id": 196,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "2022",
         "description": ""
     },
@@ -1759,7 +1771,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.10",
         "id": 197,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "2022",
         "description": ""
     },
@@ -1768,25 +1780,25 @@ const GALLERY_IMAGES = [
         "title": "Splash 1.11",
         "id": 198,
         "size": "120 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
-        "description": "GÃ¥va till Hans-Olof Markus"
+        "description": "Gåva till Hans-Olof Markus"
     },
     {
         "filename": "199 FLOWER 1-2.jpg",
-        "title": "Flower 1-2",
+        "title": "Flower 1.2",
         "id": 199,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
     {
         "filename": "200 SPLASH 2-0.jpg",
-        "title": "Splash 2-0",
+        "title": "Splash 2.0",
         "id": 200,
         "size": "70 * 100 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
@@ -1795,7 +1807,7 @@ const GALLERY_IMAGES = [
         "title": "Splash 2.1",
         "id": 201,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
@@ -1804,16 +1816,16 @@ const GALLERY_IMAGES = [
         "title": "Splash 2.2",
         "id": 202,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
-        "description": "GÃ¥va till Emelie Lantz 20230117"
+        "description": "Gåva till Emelie Lantz 20230117"
     },
     {
         "filename": "203 SPLASH 2.3.jpg",
         "title": "Splash 2.3",
         "id": 203,
         "size": "100 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
@@ -1822,7 +1834,7 @@ const GALLERY_IMAGES = [
         "title": "Ethnicolor 1.0",
         "id": 204,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
@@ -1831,7 +1843,7 @@ const GALLERY_IMAGES = [
         "title": "Ethnicolor 1.1",
         "id": 205,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
@@ -1840,25 +1852,25 @@ const GALLERY_IMAGES = [
         "title": "Equinoxe 1.0",
         "id": 206,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
     {
         "filename": "207 ETHNICOLOR 1,2.jpg",
-        "title": "Ethnicolor 1,2",
+        "title": "Ethnicolor 1.2",
         "id": 207,
         "size": "100 * 70 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Januari 2023",
         "description": ""
     },
     {
         "filename": "208 ETNICOLOR 1.3.jpg",
-        "title": "Etnicolor 1.3",
+        "title": "Ethnicolor 1.3",
         "id": 208,
         "size": "100 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Januari 2023",
         "description": ""
     },
@@ -1867,16 +1879,16 @@ const GALLERY_IMAGES = [
         "title": "Ethnicolor 1.4",
         "id": 209,
         "size": "150 * 50 cm",
-        "material": "SoratfÃ¤rg, alrylfÃ¤rg",
+        "material": "Soratfärg, alrylfärg",
         "year": "Januari 2023",
         "description": ""
     },
     {
         "filename": "210 OUT OF NOTHING EVERYTHING.jpg",
-        "title": "Out Of Nothing Everything",
+        "title": "Out Of Nothing: Everything",
         "id": 210,
         "size": "50 * 50 cm",
-        "material": "SoratfÃ¤rg, alrylfÃ¤rg",
+        "material": "Soratfärg, alrylfärg",
         "year": "Februari 2023",
         "description": ""
     },
@@ -1885,25 +1897,25 @@ const GALLERY_IMAGES = [
         "title": "Ethnicolor 1.5",
         "id": 211,
         "size": "90 * 30 cm",
-        "material": "SoratfÃ¤rg, alrylfÃ¤rg",
+        "material": "Soratfärg, alrylfärg",
         "year": "Februari 2023",
         "description": ""
     },
     {
         "filename": "212 ETHNICOLOR 1-6.jpg",
-        "title": "Ethnicolor 1-6",
+        "title": "Ethnicolor 1.6",
         "id": 212,
         "size": "40 * 40 cm",
-        "material": "SoratfÃ¤rg, alrylfÃ¤rg",
+        "material": "Soratfärg, alrylfärg",
         "year": "Februari 2025",
         "description": ""
     },
     {
         "filename": "213 OUT OF EVERYTHING SOMETHING.jpg",
-        "title": "Out Of Everything Something",
+        "title": "Out Of Everything: Something",
         "id": 213,
         "size": "56,5 * 56,5 cm",
-        "material": "SoratfÃ¤rg, alrylfÃ¤rg, garn",
+        "material": "Soratfärg, alrylfärg, garn",
         "year": "Februari 2026",
         "description": ""
     },
@@ -1912,7 +1924,7 @@ const GALLERY_IMAGES = [
         "title": "Apocalypse 1.0",
         "id": 214,
         "size": "150 * 50 cm",
-        "material": "SoratfÃ¤rg, alrylfÃ¤rg, garn, glitter",
+        "material": "Soratfärg, alrylfärg, garn, glitter",
         "year": "Februari 2023",
         "description": ""
     },
@@ -1921,7 +1933,7 @@ const GALLERY_IMAGES = [
         "title": "Brown Sessions 1.1",
         "id": 215,
         "size": "56,5 * 56,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn, metall",
+        "material": "Sprayfärg, akrylfärg, garn, metall",
         "year": "Mars 2023",
         "description": ""
     },
@@ -1930,7 +1942,7 @@ const GALLERY_IMAGES = [
         "title": "Spiral 1.0",
         "id": 216,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitterspray, metall",
+        "material": "Sprayfärg, akrylfärg, glitterspray, metall",
         "year": "2023",
         "description": ""
     },
@@ -1939,7 +1951,7 @@ const GALLERY_IMAGES = [
         "title": "Blob 1.0",
         "id": 217,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2023",
         "description": ""
     },
@@ -1948,7 +1960,7 @@ const GALLERY_IMAGES = [
         "title": "1000 Faces",
         "id": 218,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2023",
         "description": ""
     },
@@ -1957,16 +1969,16 @@ const GALLERY_IMAGES = [
         "title": "Equinoxe 1.1",
         "id": 219,
         "size": "100 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2023",
         "description": ""
     },
     {
         "filename": "220 M;AGNETIC FIELDS 1.0.jpg",
-        "title": "M;Agnetic Fields 1.0",
+        "title": "Magnetic Fields 1.0",
         "id": 220,
         "size": "70 * 63 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2023",
         "description": ""
     },
@@ -1975,16 +1987,16 @@ const GALLERY_IMAGES = [
         "title": "Fredenham 1.1",
         "id": 221,
         "size": "70 * 63 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2023",
         "description": ""
     },
     {
         "filename": "222 EQUINOXE 1.1.jpg",
-        "title": "Equinoxe 1.1",
+        "title": "Equinoxe 1.2",
         "id": 222,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juli 2023",
         "description": ""
     },
@@ -1993,7 +2005,7 @@ const GALLERY_IMAGES = [
         "title": "Halo 1.1",
         "id": 223,
         "size": "30 * 90 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, metall, glas, kork",
+        "material": "Sprayfärg, akrylfärg, metall, glas, kork",
         "year": "Juli 2023",
         "description": ""
     },
@@ -2002,7 +2014,7 @@ const GALLERY_IMAGES = [
         "title": "Exploding Woods",
         "id": 224,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juli 2023",
         "description": ""
     },
@@ -2011,16 +2023,16 @@ const GALLERY_IMAGES = [
         "title": "Human 1.0",
         "id": 225,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juli 2023",
         "description": ""
     },
     {
         "filename": "226 MOVEMENT.jpg",
-        "title": "Movement",
+        "title": "Movement 1.0",
         "id": 226,
         "size": "40 * 60 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Juli 2023",
         "description": ""
     },
@@ -2029,7 +2041,7 @@ const GALLERY_IMAGES = [
         "title": "The Big Chair",
         "id": 227,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Juli 2023",
         "description": ""
     },
@@ -2038,7 +2050,7 @@ const GALLERY_IMAGES = [
         "title": "Limelight",
         "id": 228,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Juli 2023",
         "description": ""
     },
@@ -2047,16 +2059,16 @@ const GALLERY_IMAGES = [
         "title": "The Evil Eye",
         "id": 229,
         "size": "50 * 61 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Augusti 2023",
         "description": ""
     },
     {
         "filename": "230 PEACE.OOOO.jpg",
-        "title": "Peace.Oooo",
+        "title": "Peace.oooo",
         "id": 230,
         "size": "61 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2065,7 +2077,7 @@ const GALLERY_IMAGES = [
         "title": "Jungle 2.0",
         "id": 231,
         "size": "61* 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2074,7 +2086,7 @@ const GALLERY_IMAGES = [
         "title": "Wire",
         "id": 232,
         "size": "61 * 50 cm",
-        "material": "SpratfÃ¤rg, akrylfÃ¤rg",
+        "material": "Spratfärg, akrylfärg",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2083,7 +2095,7 @@ const GALLERY_IMAGES = [
         "title": "Chaos 1.0",
         "id": 233,
         "size": "40 * 40 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2092,7 +2104,7 @@ const GALLERY_IMAGES = [
         "title": "Signs",
         "id": 234,
         "size": "73 * 60 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2101,7 +2113,7 @@ const GALLERY_IMAGES = [
         "title": "Connected Dots 1.0",
         "id": 235,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2110,7 +2122,7 @@ const GALLERY_IMAGES = [
         "title": "The World Is My Oyster",
         "id": 236,
         "size": "139,5 * 56,5 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "Augusti 2023",
         "description": ""
     },
@@ -2119,17 +2131,8 @@ const GALLERY_IMAGES = [
         "title": "Burn Baby Burn",
         "id": 237,
         "size": "50 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg",
+        "material": "Sprayfärg, akrylfärg",
         "year": "2023",
-        "description": ""
-    },
-    {
-        "filename": "238 BOWS.jpg",
-        "title": "Bows",
-        "id": 238,
-        "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
-        "year": "Oktober 2023",
         "description": ""
     },
     {
@@ -2137,16 +2140,25 @@ const GALLERY_IMAGES = [
         "title": "Bows Side",
         "id": 238,
         "size": "80 * 80 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, glitter",
+        "material": "Sprayfärg, akrylfärg, glitter",
+        "year": "Oktober 2023",
+        "description": ""
+    },
+    {
+        "filename": "238 BOWS.jpg",
+        "title": "Bows",
+        "id": 238,
+        "size": "80 * 80 cm",
+        "material": "Sprayfärg, akrylfärg, glitter",
         "year": "Oktober 2023",
         "description": ""
     },
     {
         "filename": "239 DEATH IS EBVERYWHERE.jpg",
-        "title": "Death Is Ebverywhere",
+        "title": "Death Is Everywhere 1.0",
         "id": 239,
         "size": "150 * 50 cm",
-        "material": "SprayfÃ¤rg, akrylfÃ¤rg, garn, glitter, resin",
+        "material": "Sprayfärg, akrylfärg, garn, glitter, resin",
         "year": "2024",
         "description": ""
     },
@@ -2155,7 +2167,7 @@ const GALLERY_IMAGES = [
         "title": "Rage In Eden",
         "id": 240,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg",
+        "material": "Akrylfärg",
         "year": "2024",
         "description": ""
     },
@@ -2164,26 +2176,35 @@ const GALLERY_IMAGES = [
         "title": "Protected From The Sun 1.0",
         "id": 241,
         "size": "80 * 80 cm",
-        "material": "AkrylfÃ¤rg, poscapennor",
+        "material": "Akrylfärg, poscapennor",
         "year": "2024",
         "description": ""
     },
     {
-        "filename": "242 ATOMIC #79.jpg",
+        "filename": "242 ATOMIC 79.jpg",
         "title": "Atomic #79",
         "id": 242,
         "size": "30 * 30 cm",
-        "material": "Spackel, sprayfÃ¤rg, akrylfÃ¤rg, resin",
+        "material": "Spackel, sprayfärg, akrylfärg, resin",
         "year": "Maj 2024",
-        "description": "SkÃ¤nkt till Tina Joon"
+        "description": "Skänkt till Tina Joon"
     },
     {
-        "filename": "243 FROZEN 1.0.jpg",
-        "title": "Frozen 1.0",
+        "filename": "243 FLUTE 1.0.jpg",
+        "title": "Flute 1.0",
         "id": 243,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Maj 2024",
+        "description": ""
+    },
+    {
+        "filename": "244 FROZEN 1.0.jpg",
+        "title": "Frozen 1.0",
+        "id": 244,
+        "size": "100 * 40 sm",
+        "material": "Akrylfärg, sprayfärg, spryglitter, resin",
+        "year": "Juni 2024",
         "description": ""
     },
     {
@@ -2191,52 +2212,52 @@ const GALLERY_IMAGES = [
         "title": "Fusion 1.0",
         "id": 245,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, sprayglitter, glitter, resin",
+        "material": "Akrylfärg, sprayglitter, glitter, resin",
         "year": "Juni 2024",
         "description": ""
     },
     {
-        "filename": "246 GRAINES DÂ´Ã‰TOILES.jpg",
-        "title": "Graines DÂ´Ã‰toiles",
+        "filename": "246 GRAINES D'ETOILE.jpg",
+        "title": "Graines D´Étoiles",
         "id": 246,
         "size": "100 * 120 cm",
-        "material": "AkrulfÃ¤rg, glitter, resin",
+        "material": "Akrulfärg, glitter, resin",
         "year": "Juni 2024",
-        "description": "SÃ¥ld till Peter Bodelid"
+        "description": "Såld till Peter Bodelid"
     },
     {
-        "filename": "248 LINNÃˆAS TRILOGI 1.jpg",
-        "title": "LinnÃ¨as Trilogi 1",
+        "filename": "248 LINNEAS TRILOGI 1.jpg",
+        "title": "Linnéas Trilogi 1",
         "id": 248,
         "size": "60 * 73 cm",
-        "material": "Spackel, akrylfÃ¤rg",
+        "material": "Spackel, akrylfärg",
         "year": "Juli 2024",
-        "description": "SkÃ¤nkt till LinnÃ©a"
+        "description": "Skänkt till Linnéa"
     },
     {
-        "filename": "249 LINNÃˆAS TRILOGI 2 .jpg",
-        "title": "LinnÃ¨as Trilogi 2",
+        "filename": "249 LINNEAS TRILOGI 2.jpg",
+        "title": "Linnéas Trilogi 2",
         "id": 249,
         "size": "60 * 73 cm",
-        "material": "Spackel, akrylfÃ¤rg",
+        "material": "Spackel, akrylfärg",
         "year": "Juli 2024",
-        "description": "SkÃ¤nkt till LinnÃ©a"
+        "description": "Skänkt till Linnéa"
     },
     {
-        "filename": "250 LINNÃˆAS TRILOGI 3 .jpg",
-        "title": "LinnÃ¨as Trilogi 3",
+        "filename": "250 LINNEAS TRILOGI 3.jpg",
+        "title": "Linnéas Trilogi 3",
         "id": 250,
         "size": "60 * 73 cm",
         "material": "Spackel",
         "year": "Juli 2024",
-        "description": "SkÃ¤nkt till LinnÃ©a"
+        "description": "Skänkt till Linnéa"
     },
     {
         "filename": "251 BRIGHT LIGHTS.jpg",
         "title": "Bright Lights",
         "id": 251,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, glitter, resin",
+        "material": "Akrylfärg, glitter, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2245,7 +2266,7 @@ const GALLERY_IMAGES = [
         "title": "Help Me Lose My Mind",
         "id": 252,
         "size": "100 * 40 cm",
-        "material": "AkruylfÃ¤rg, resin",
+        "material": "Akruylfärg, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2254,7 +2275,7 @@ const GALLERY_IMAGES = [
         "title": "Bungalow",
         "id": 253,
         "size": "27 * 35 cm",
-        "material": "AkrylfÃ¤rg, resin, glitter",
+        "material": "Akrylfärg, resin, glitter",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2263,7 +2284,7 @@ const GALLERY_IMAGES = [
         "title": "Love Is Magic",
         "id": 254,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2272,7 +2293,7 @@ const GALLERY_IMAGES = [
         "title": "Waking Light",
         "id": 255,
         "size": "40 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin, glitter",
+        "material": "Akrylfärg, resin, glitter",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2281,7 +2302,7 @@ const GALLERY_IMAGES = [
         "title": "Unreal",
         "id": 256,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, glitterspray, glitter, resin",
+        "material": "Akrylfärg, glitterspray, glitter, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2290,7 +2311,7 @@ const GALLERY_IMAGES = [
         "title": "Junior B",
         "id": 257,
         "size": "40 * 40 cm",
-        "material": "AkrylfÃ¤rg, paljetter, glitter, resin",
+        "material": "Akrylfärg, paljetter, glitter, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2299,7 +2320,7 @@ const GALLERY_IMAGES = [
         "title": "Daylight",
         "id": 258,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2308,7 +2329,7 @@ const GALLERY_IMAGES = [
         "title": "Red Rain",
         "id": 259,
         "size": "70 * 50 cm",
-        "material": "AkrylfÃ¤rg",
+        "material": "Akrylfärg",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2317,7 +2338,7 @@ const GALLERY_IMAGES = [
         "title": "Who Knew",
         "id": 260,
         "size": "50 * 50 cm",
-        "material": "AkrylfÃ¤rg",
+        "material": "Akrylfärg",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2326,16 +2347,16 @@ const GALLERY_IMAGES = [
         "title": "Pearls",
         "id": 261,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Juli 2024",
         "description": ""
     },
     {
         "filename": "262 LOVE IN LO-FI.jpg",
-        "title": "Love In Lo-Fi",
+        "title": "Love In Lo-fi",
         "id": 262,
         "size": "40 * 40 cm",
-        "material": "AkrylfÃ¤rg, sprayfÃ¤rg, glitterspray, glitter, resin",
+        "material": "Akrylfärg, sprayfärg, glitterspray, glitter, resin",
         "year": "Juli 2024",
         "description": ""
     },
@@ -2344,7 +2365,7 @@ const GALLERY_IMAGES = [
         "title": "Grapefruit",
         "id": 263,
         "size": "100 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Augusti 2024",
         "description": ""
     },
@@ -2353,7 +2374,7 @@ const GALLERY_IMAGES = [
         "title": "Warmpop",
         "id": 264,
         "size": "40 * 40 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Augusti 2024",
         "description": ""
     },
@@ -2362,7 +2383,7 @@ const GALLERY_IMAGES = [
         "title": "My Heart Has Teeth",
         "id": 265,
         "size": "160 * 100 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "2024",
         "description": ""
     },
@@ -2371,7 +2392,7 @@ const GALLERY_IMAGES = [
         "title": "Black Mirror",
         "id": 266,
         "size": "160 * 100 cm",
-        "material": "AkrylfÃ¤rg, resin",
+        "material": "Akrylfärg, resin",
         "year": "Septemner 2024",
         "description": ""
     },
@@ -2380,8 +2401,8 @@ const GALLERY_IMAGES = [
         "title": "Pink Dress",
         "id": 267,
         "size": "100 * 120 cm",
-        "material": "AkrylfÃ¤rg, resin",
-        "year": "December 2025",
+        "material": "Akrylfärg, resin",
+        "year": "Deceber 2025",
         "description": ""
     },
     {
@@ -2389,7 +2410,7 @@ const GALLERY_IMAGES = [
         "title": "Raspberry Beret",
         "id": 268,
         "size": "40 * 100 cm",
-        "material": "AkrylfÃ¤rg, lim, glitter, smycken",
+        "material": "Akrylfärg, lim, glitter, smycken",
         "year": "Januari 2026",
         "description": ""
     },
@@ -2398,7 +2419,7 @@ const GALLERY_IMAGES = [
         "title": "Vertigo",
         "id": 269,
         "size": "40 * 100 cm",
-        "material": "AkrylfÃ¤rg, glitter",
+        "material": "Akrylfärg, glitter",
         "year": "April 2026",
         "description": ""
     },
@@ -2407,7 +2428,7 @@ const GALLERY_IMAGES = [
         "title": "Origami",
         "id": 270,
         "size": "100 * 120 cm",
-        "material": "AkrylfÃ¤rg, glitter",
+        "material": "Akrylfärg, glitter",
         "year": "April 2026",
         "description": ""
     },
@@ -2416,44 +2437,8 @@ const GALLERY_IMAGES = [
         "title": "Golden Ticket",
         "id": 271,
         "size": "40 * 100 cm",
-        "material": "AkrylfÃ¤rg, glitter",
+        "material": "Akrylfärg, glitter",
         "year": "April 2026",
         "description": ""
-    },
-    {
-        "filename":  "240 RAGE IN EDEN.jpg",
-        "title":  "Rage In Eden",
-        "id":  240,
-        "size":  "",
-        "material":  "",
-        "year":  "",
-        "description":  ""
-    },
-    {
-        "filename":  "241 PROTECTED FROM THE SUN 1.0.jpg",
-        "title":  "Protected From The Sun 1.0",
-        "id":  241,
-        "size":  "",
-        "material":  "",
-        "year":  "",
-        "description":  ""
-    },
-    {
-        "filename":  "242 ATOMIC #79.jpg",
-        "title":  "Atomic #79",
-        "id":  242,
-        "size":  "30 * 30 cm",
-        "material":  "Spackel, sprayfÃ¤rg, akrylfÃ¤rg, glitterspray, glitter, resin",
-        "year":  "Maj 2024",
-        "description":  ""
-    },
-    {
-        "filename":  "243 FROZEN 1.0.jpg",
-        "title":  "Frozen 1.0",
-        "id":  243,
-        "size":  "",
-        "material":  "",
-        "year":  "",
-        "description":  ""
     },
 ];

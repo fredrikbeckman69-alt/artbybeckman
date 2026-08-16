@@ -44,9 +44,11 @@ function Robust-FtpUpload($localPath, $remotePath) {
         $request.GetResponse().Close()
     } catch { } # Standard for directory already exists
 
-    # Sort files so HTML/JS/CSS go first
+    # Sort files so HTML/JS/CSS and css/js folders go first
     $sortedFiles = $files | Sort-Object { 
-        if ($_.Attributes -band [System.IO.FileAttributes]::Directory) { 1 }
+        if ($_.Attributes -band [System.IO.FileAttributes]::Directory) { 
+            if ($_.Name -in @("css", "js")) { 1 } else { 3 }
+        }
         elseif ($_.Extension -match "\.(html|js|css)$") { 0 }
         else { 2 }
     }

@@ -29,8 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const materialInfo = img.material ? `<p class="meta">${img.material}</p>` : '';
             const yearInfo = img.year ? `<span class="year">${img.year}</span>` : '';
 
+            const safeSrc = encodeURI(`assets/images/${img.filename}`);
+
             item.innerHTML = `
-                <img src="assets/images/${img.filename}" alt="${img.title}" loading="lazy">
+                <img src="${safeSrc}" alt="${img.title}" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="gallery-info">
                         <div class="gallery-title">${img.title} ${yearInfo}</div>
@@ -45,9 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 openLightbox(img);
             });
 
-            // Fade in on load
+            // Fade in on load or handle error gracefully
             const imageElement = item.querySelector('img');
             imageElement.onload = () => imageElement.classList.add('loaded');
+            imageElement.onerror = () => {
+                console.warn(`Could not load image: ${safeSrc}`);
+                imageElement.style.opacity = '0.3';
+            };
 
             grid.appendChild(item);
 
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Lightbox Logic
     function openLightbox(img) {
-        lightboxImg.src = `assets/images/${img.filename}`;
+        lightboxImg.src = encodeURI(`assets/images/${img.filename}`);
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent scrolling
     }
