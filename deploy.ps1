@@ -24,8 +24,8 @@ if (Test-Path "js") { Copy-Item "js" -Destination "$dist" -Recurse }
 # but let's try to copy them all while excluding problematic docs
 if (Test-Path "assets") {
     New-Item -ItemType Directory -Force -Path "$dist\assets" | Out-Null
-    # Exclude 'documents' and optionally 'Movies' to speed up the main redesign deploy
-    Get-ChildItem -Path "assets" -Exclude "documents", "Movies" | Copy-Item -Destination "$dist\assets" -Recurse
+    # Exclude 'documents' from dist assets copy
+    Get-ChildItem -Path "assets" -Exclude "documents" | Copy-Item -Destination "$dist\assets" -Recurse
 }
 
 Write-Host "Build complete." -ForegroundColor Green
