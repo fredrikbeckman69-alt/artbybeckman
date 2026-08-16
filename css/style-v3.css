@@ -139,16 +139,44 @@ nav a.active::after, nav a:hover::after { width: 100%; }
 .menu-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
   gap: 5px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1100;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 4px;
 }
 
 .menu-toggle span {
+  display: block;
   width: 24px;
-  height: 2px;
+  height: 2.5px;
   background: var(--ink-primary);
-  transition: all var(--t-base);
+  border-radius: 2px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, background 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1),
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+  background: var(--magenta);
+}
+
+.menu-toggle.active span:nth-child(2),
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menu-toggle.active span:nth-child(3),
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+  background: var(--magenta);
 }
 
 /* ===== HERO ===== */
@@ -1292,21 +1320,50 @@ footer {
 }
 
 @media (max-width: 768px) {
-  header { padding: 16px 24px; }
+  header {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   nav {
     display: none;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background: rgba(255, 255, 255, 0.98) !important;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 36px;
+    z-index: 1050;
   }
-  nav.open { display: flex; }
-  nav a { font-size: 1.15rem; color: var(--ink-primary); }
-  .menu-toggle { display: flex; }
+  nav.active,
+  nav.open {
+    display: flex !important;
+  }
+  nav a {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-primary);
+    padding: 10px 20px;
+    transition: color var(--t-base), transform var(--t-base);
+  }
+  nav a:hover,
+  nav a.active {
+    color: var(--magenta);
+    transform: scale(1.05);
+  }
+  .menu-toggle {
+    display: flex !important;
+  }
   .works-strip { grid-template-columns: repeat(2, 1fr); }
   .photos-strip { grid-template-columns: repeat(3, 1fr); }
   footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
