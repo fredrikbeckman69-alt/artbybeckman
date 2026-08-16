@@ -1,18 +1,11 @@
 // Instagram Feed Data — Art by Beckman
 const INSTAGRAM_FEED = [
     {
-        "shortcode": "DXhbMKMCAyn",
+        "shortcode": "CcASFR3Nvy_",
         "is_video": false,
-        "caption": "My muse just became hugely more realistic. #september\".",
-        "url": "assets/instagram/DXhbMKMCAyn.jpg",
-        "thumbnail": "assets/instagram/DXhbMKMCAyn.jpg"
-    },
-    {
-        "shortcode": "C-0cSF7Ir0t",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/C-0cSF7Ir0t.mp4",
-        "thumbnail": "assets/instagram/C-0cSF7Ir0t_thumb.jpg"
+        "caption": "Fredrik Beckman Artwork",
+        "url": "assets/instagram/CcASFR3Nvy_.jpg",
+        "thumbnail": "assets/instagram/CcASFR3Nvy_.jpg"
     },
     {
         "shortcode": "C-9jmvmoAsk",
@@ -22,11 +15,102 @@ const INSTAGRAM_FEED = [
         "thumbnail": "assets/instagram/C-9jmvmoAsk_thumb.jpg"
     },
     {
-        "shortcode": "C-KBLdBoOaf",
+        "shortcode": "C-wrpKhIglg",
         "is_video": true,
         "caption": "Instagram Video",
-        "url": "assets/instagram/C-KBLdBoOaf.mp4",
-        "thumbnail": "assets/instagram/C-KBLdBoOaf_thumb.jpg"
+        "url": "assets/instagram/C-wrpKhIglg.mp4",
+        "thumbnail": "assets/instagram/C-wrpKhIglg_thumb.jpg"
+    },
+    {
+        "shortcode": "CvQDFruozfv",
+        "is_video": false,
+        "caption": "Fredrik Beckman Artwork",
+        "url": "assets/instagram/CvQDFruozfv.jpg",
+        "thumbnail": "assets/instagram/CvQDFruozfv.jpg"
+    },
+    {
+        "shortcode": "C60YCr9N8oi",
+        "is_video": false,
+        "caption": "ATOMIC #79  30*30 cm\n\n#acrylicpainting #acryl #acrylic #painting #paint #artist #arts #artgallery #art #resin \n\n@tina71joon\".",
+        "url": "assets/instagram/C60YCr9N8oi.jpg",
+        "thumbnail": "assets/instagram/C60YCr9N8oi.jpg"
+    },
+    {
+        "shortcode": "Cb9VfnYtx-P",
+        "is_video": false,
+        "caption": "WHALE 1.1\".",
+        "url": "assets/instagram/Cb9VfnYtx-P.jpg",
+        "thumbnail": "assets/instagram/Cb9VfnYtx-P.jpg"
+    },
+    {
+        "shortcode": "Cndu5eLN0kS",
+        "is_video": false,
+        "caption": "ETHNICOLOR 1.1 100*70 cm\n@noagalleryse #noagalleryse #art #artist #painting #spraypaint #glitter #sprayart #acrylicpainting #acrylic\".",
+        "url": "assets/instagram/Cndu5eLN0kS.jpg",
+        "thumbnail": "assets/instagram/Cndu5eLN0kS.jpg"
+    },
+    {
+        "shortcode": "Clc-WQ2N1nY",
+        "is_video": false,
+        "caption": "SPLASH 1.5 @noagalleryse #noagalleryse #artist #art #paint #painting #painter #acrylicpainting #spraypaint #sprayart #glitter\".",
+        "url": "assets/instagram/Clc-WQ2N1nY.jpg",
+        "thumbnail": "assets/instagram/Clc-WQ2N1nY.jpg"
+    },
+    {
+        "shortcode": "CcASU9et9xZ",
+        "is_video": false,
+        "caption": "NON GRID 1.4\".",
+        "url": "assets/instagram/CcASU9et9xZ.jpg",
+        "thumbnail": "assets/instagram/CcASU9et9xZ.jpg"
+    },
+    {
+        "shortcode": "CcAY_IKNoQR",
+        "is_video": false,
+        "caption": "SHE 1.1\".",
+        "url": "assets/instagram/CcAY_IKNoQR.jpg",
+        "thumbnail": "assets/instagram/CcAY_IKNoQR.jpg"
+    },
+    {
+        "shortcode": "C5ux19Zozzy",
+        "is_video": false,
+        "caption": "PROTECTED FROM THE SUN 1.0 89*80 cm\n\n#art #artist #artgallery #artcollector #artoftheday #artlover #paintings #painting #paint #acrylicpainting #acrylic #poscaart #poscapens\".",
+        "url": "assets/instagram/C5ux19Zozzy.jpg",
+        "thumbnail": "assets/instagram/C5ux19Zozzy.jpg"
+    },
+    {
+        "shortcode": "Cgokxnls9uq",
+        "is_video": false,
+        "caption": "WATCHING 1.0\n\n@noagalleryse \n\n#abstractart #art #acrylicpainting #spraypaint #acrylic #artist #paint #paintings #painter\".",
+        "url": "assets/instagram/Cgokxnls9uq.jpg",
+        "thumbnail": "assets/instagram/Cgokxnls9uq.jpg"
+    },
+    {
+        "shortcode": "CcAQFNWtrv1",
+        "is_video": false,
+        "caption": "BROWN SESSIONS (CHAIR)\".",
+        "url": "assets/instagram/CcAQFNWtrv1.jpg",
+        "thumbnail": "assets/instagram/CcAQFNWtrv1.jpg"
+    },
+    {
+        "shortcode": "CwvULnuNiEX",
+        "is_video": false,
+        "caption": "BURN BABY BURN 50 * 50 cm sprayfärg & akrylfärg \n\n#art #artist #artgallery #artoftheday #artlover #abstractart #abstract #abstractpainting #abstractpainter #spray #spraypaint #spraypaintart #acrylic #acrylicpainting #noagalleryse #noagallery\".",
+        "url": "assets/instagram/CwvULnuNiEX.jpg",
+        "thumbnail": "assets/instagram/CwvULnuNiEX.jpg"
+    },
+    {
+        "shortcode": "C-0cSF7Ir0t",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/C-0cSF7Ir0t.mp4",
+        "thumbnail": "assets/instagram/C-0cSF7Ir0t_thumb.jpg"
+    },
+    {
+        "shortcode": "CqfH9c6tBMC",
+        "is_video": false,
+        "caption": "BROWN SESSIONS 1.1 56,5*56,5 cm\n\n#yarn #copper #art #artist #artistic #painting #paint #acrylic #spraypaint #sprayart\".",
+        "url": "assets/instagram/CqfH9c6tBMC.jpg",
+        "thumbnail": "assets/instagram/CqfH9c6tBMC.jpg"
     },
     {
         "shortcode": "C-aLji_IqGY",
@@ -36,46 +120,25 @@ const INSTAGRAM_FEED = [
         "thumbnail": "assets/instagram/C-aLji_IqGY_thumb.jpg"
     },
     {
-        "shortcode": "C-ejF5wIo4k",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/C-ejF5wIo4k.mp4",
-        "thumbnail": "assets/instagram/C-ejF5wIo4k_thumb.jpg"
+        "shortcode": "CoKKyK8N9ms",
+        "is_video": false,
+        "caption": "OUT OF NOTHING: EVERYTHING\n\nartbybeckman.se\n\n@noagalleryse #noagalleryse  #art #artist #spray #spraypaint #acrylic #acrylicpainting #painting #paint\".",
+        "url": "assets/instagram/CoKKyK8N9ms.jpg",
+        "thumbnail": "assets/instagram/CoKKyK8N9ms.jpg"
     },
     {
-        "shortcode": "C-mT5N_Iy3v",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/C-mT5N_Iy3v.mp4",
-        "thumbnail": "assets/instagram/C-mT5N_Iy3v_thumb.jpg"
+        "shortcode": "CdYoOWFtV8o",
+        "is_video": false,
+        "caption": "WOOLOOMOOLOOKIE 1.4\n\n@noagalleryse \n\n#noagalleryse #art #artwork #painter #painting #spraypaint #abstractart #acrylicpainting #glitter\".",
+        "url": "assets/instagram/CdYoOWFtV8o.jpg",
+        "thumbnail": "assets/instagram/CdYoOWFtV8o.jpg"
     },
     {
-        "shortcode": "C-wrpKhIglg",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/C-wrpKhIglg.mp4",
-        "thumbnail": "assets/instagram/C-wrpKhIglg_thumb.jpg"
-    },
-    {
-        "shortcode": "C_hiXffoWZK",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/C_hiXffoWZK.mp4",
-        "thumbnail": "assets/instagram/C_hiXffoWZK_thumb.jpg"
-    },
-    {
-        "shortcode": "DA5Ynv-OUzu",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/DA5Ynv-OUzu.mp4",
-        "thumbnail": "assets/instagram/DA5Ynv-OUzu_thumb.jpg"
-    },
-    {
-        "shortcode": "DCzXZ2EuOGL",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/DCzXZ2EuOGL.mp4",
-        "thumbnail": "assets/instagram/DCzXZ2EuOGL_thumb.jpg"
+        "shortcode": "C5sfNrItDom",
+        "is_video": false,
+        "caption": "Work in progress\n#arr #artist #artwork #artgallery #painting #paintings #acrylic #acrylicpainting\".",
+        "url": "assets/instagram/C5sfNrItDom.jpg",
+        "thumbnail": "assets/instagram/C5sfNrItDom.jpg"
     },
     {
         "shortcode": "DQfG73xCGWT",
@@ -85,11 +148,319 @@ const INSTAGRAM_FEED = [
         "thumbnail": "assets/instagram/DQfG73xCGWT_thumb.jpg"
     },
     {
+        "shortcode": "CcZlp-DtHNZ",
+        "is_video": false,
+        "caption": "ENDLESS BOTTLES 1.2 ICE BLUE\n\n@designmarknadskovde @noagalleryse \n\n#designmarknadskovde #noagalleryse #glass #spraypaint #acrylicpainting\".",
+        "url": "assets/instagram/CcZlp-DtHNZ.jpg",
+        "thumbnail": "assets/instagram/CcZlp-DtHNZ.jpg"
+    },
+    {
+        "shortcode": "Cc5vbRJNgFW",
+        "is_video": false,
+        "caption": "OMNIBUS 1.1 skapas. Som så ofta så målar jag färdigt tavlan på en massa olika sätt i huvudet innan jag målar på duken. Det är kontemplativt att skapa! @designmarknadskovde @noagalleryse \n\n#art #painter ##painting #yarn #spraypaint #copper #acrylicpainting #artist\".",
+        "url": "assets/instagram/Cc5vbRJNgFW.jpg",
+        "thumbnail": "assets/instagram/Cc5vbRJNgFW.jpg"
+    },
+    {
+        "shortcode": "CveOnYetEzM",
+        "is_video": false,
+        "caption": "PEACE.OOOO 61 * 50 cm\nAkryl & sprayfärg \n\n#art #artist #artwork #artgallery #artoftheday #acrylic #acrylicpainting #avryliconcanvas #abstractart #abstract #abstractpainting #abstractpaintings #abstractpainter #spraypaint #sprayart #spray #spraypaintart\".",
+        "url": "assets/instagram/CveOnYetEzM.jpg",
+        "thumbnail": "assets/instagram/CveOnYetEzM.jpg"
+    },
+    {
+        "shortcode": "CvWbYm6tf0b",
+        "is_video": false,
+        "caption": "MOVEMENT 1.0 40 * 50 cm\nAkryl & sprayfärg\n\n#art #artist #artgallery #artlover #acryl #acrylicpainting #acrylic #acrylicart #spraypaint #sprayart #spraypaintart\".",
+        "url": "assets/instagram/CvWbYm6tf0b.jpg",
+        "thumbnail": "assets/instagram/CvWbYm6tf0b.jpg"
+    },
+    {
+        "shortcode": "CqxOD2TNHgc",
+        "is_video": false,
+        "caption": "Part of EQUINOXE 1.1 100 * 40 cm\n\n#att #artist #artwork #painting #paint #plaster #painter #acrylic #acrylicpainting #spray #spraypaint #sprayart\".",
+        "url": "assets/instagram/CqxOD2TNHgc.jpg",
+        "thumbnail": "assets/instagram/CqxOD2TNHgc.jpg"
+    },
+    {
+        "shortcode": "CcAx79fNpIU",
+        "is_video": false,
+        "caption": "VELVET LAVENDER\".",
+        "url": "assets/instagram/CcAx79fNpIU.jpg",
+        "thumbnail": "assets/instagram/CcAx79fNpIU.jpg"
+    },
+    {
+        "shortcode": "CoEnxVxNRpy",
+        "is_video": false,
+        "caption": "Welcome!\n\n@noagalleryse #noagalleryse #art #artist #yarn #copper #glass #glitter #paint #painting #paintings #acryl #acrylicpainting #acrylic #spraypaint #sprayart #sprayartist\".",
+        "url": "assets/instagram/CoEnxVxNRpy.jpg",
+        "thumbnail": "assets/instagram/CoEnxVxNRpy.jpg"
+    },
+    {
+        "shortcode": "CjszFgWtwva",
+        "is_video": false,
+        "caption": "SPLASH 1.2\n@noagalleryse #noagalleryse #noagallery #art #artist #painter #acrylicpainting #spraypaint #sprayart #glitter #runningpaint\".",
+        "url": "assets/instagram/CjszFgWtwva.jpg",
+        "thumbnail": "assets/instagram/CjszFgWtwva.jpg"
+    },
+    {
+        "shortcode": "DWwCOnxiJ13",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/DWwCOnxiJ13.mp4",
+        "thumbnail": "assets/instagram/DWwCOnxiJ13_thumb.jpg"
+    },
+    {
+        "shortcode": "CcAY8FXtUks",
+        "is_video": false,
+        "caption": "NON GRID 1.2\".",
+        "url": "assets/instagram/CcAY8FXtUks.jpg",
+        "thumbnail": "assets/instagram/CcAY8FXtUks.jpg"
+    },
+    {
+        "shortcode": "Cna-9dHot4e",
+        "is_video": false,
+        "caption": "SPLASH 2.3 100*70 cm\n@noagalleryse #noagalleryse #art #artist #painting #paint #acrylicpainting #acrylic #spraypaint #sprayart #glitter\".",
+        "url": "assets/instagram/Cna-9dHot4e.jpg",
+        "thumbnail": "assets/instagram/Cna-9dHot4e.jpg"
+    },
+    {
+        "shortcode": "CvhHIZZNr1E",
+        "is_video": false,
+        "caption": "JUNGLE 2.0 61 * 50 cn\nAkryl & sprayfärg \n\n#artist #art #artgallery #artoftheday #abstractart #abstract #acrylic #acrylicpainting #spraypaint #sprayart\".",
+        "url": "assets/instagram/CvhHIZZNr1E.jpg",
+        "thumbnail": "assets/instagram/CvhHIZZNr1E.jpg"
+    },
+    {
+        "shortcode": "C-eyINWIaRr",
+        "is_video": false,
+        "caption": "Instagram Artwork",
+        "url": "assets/instagram/C-eyINWIaRr.webp",
+        "thumbnail": "assets/instagram/C-eyINWIaRr.webp"
+    },
+    {
+        "shortcode": "CoToj1jIfLV",
+        "is_video": false,
+        "caption": "ETHNICOLOR 1.5\n\nartbybeckman.se\n\n#art #artist #painting #paint #acrylicpainting #acrylic #acryl #spray #spray #sprayart #spraypaint\".",
+        "url": "assets/instagram/CoToj1jIfLV.jpg",
+        "thumbnail": "assets/instagram/CoToj1jIfLV.jpg"
+    },
+    {
+        "shortcode": "Cd8c8IhtoT6",
+        "is_video": false,
+        "caption": "SKEW 1.0\n\n@noagalleryse #noagalleryse #spraypaint #art #painting #painter\".",
+        "url": "assets/instagram/Cd8c8IhtoT6.jpg",
+        "thumbnail": "assets/instagram/Cd8c8IhtoT6.jpg"
+    },
+    {
+        "shortcode": "Cq-PNkwt0EI",
+        "is_video": false,
+        "caption": "A DREAM WITHIN A DREAM 1.0 80 * 80 cm\n\n#art #artist #artwork #painting #paint #acrylic #acrylicpainting #spray #spraypaint #sprayart\".",
+        "url": "assets/instagram/Cq-PNkwt0EI.jpg",
+        "thumbnail": "assets/instagram/Cq-PNkwt0EI.jpg"
+    },
+    {
+        "shortcode": "Ccf7AT5M-xs",
+        "is_video": false,
+        "caption": "Långgatan är hängd.\n\n@designmarknadskovde @noagalleryse \n\n#designmarknadskovde #noagalleryse \n\n#spraypaint #acrylicpainting #glass #painter #paintings #abstractart\".",
+        "url": "assets/instagram/Ccf7AT5M-xs.jpg",
+        "thumbnail": "assets/instagram/Ccf7AT5M-xs.jpg"
+    },
+    {
+        "shortcode": "CjXe_7iMB8n",
+        "is_video": false,
+        "caption": "SPLASH 1.1\n\n@noagalleryse #noagalleryse #art #artist #acryl #acrylicpainting #spraypaint #sprayart #glitter #poscapens\".",
+        "url": "assets/instagram/CjXe_7iMB8n.jpg",
+        "thumbnail": "assets/instagram/CjXe_7iMB8n.jpg"
+    },
+    {
+        "shortcode": "Cb9jOl0NWVt",
+        "is_video": false,
+        "caption": "REDSILVERYELLOW\".",
+        "url": "assets/instagram/Cb9jOl0NWVt.jpg",
+        "thumbnail": "assets/instagram/Cb9jOl0NWVt.jpg"
+    },
+    {
+        "shortcode": "CfLlbxbNzWM",
+        "is_video": false,
+        "caption": "Tekniksport\".",
+        "url": "assets/instagram/CfLlbxbNzWM.jpg",
+        "thumbnail": "assets/instagram/CfLlbxbNzWM.jpg"
+    },
+    {
+        "shortcode": "Cka78mztffX",
+        "is_video": false,
+        "caption": "Såld. Häftigt\".",
+        "url": "assets/instagram/Cka78mztffX.jpg",
+        "thumbnail": "assets/instagram/Cka78mztffX.jpg"
+    },
+    {
+        "shortcode": "Ce8DYylt6R_",
+        "is_video": false,
+        "caption": "NON GRID 1.0 \nSOLD!\n@noagalleryse @designmarknadskovde \n\n#noagalleryse #art #spraypaint #acrylicpainting #painting #paintings #painter\".",
+        "url": "assets/instagram/Ce8DYylt6R_.jpg",
+        "thumbnail": "assets/instagram/Ce8DYylt6R_.jpg"
+    },
+    {
+        "shortcode": "CcDcFL3tcDF",
+        "is_video": false,
+        "caption": "FREDENHAM 1.0\".",
+        "url": "assets/instagram/CcDcFL3tcDF.jpg",
+        "thumbnail": "assets/instagram/CcDcFL3tcDF.jpg"
+    },
+    {
+        "shortcode": "CcAZLCeNAiY",
+        "is_video": false,
+        "caption": "THE FREAK 1.0\".",
+        "url": "assets/instagram/CcAZLCeNAiY.jpg",
+        "thumbnail": "assets/instagram/CcAZLCeNAiY.jpg"
+    },
+    {
+        "shortcode": "Cq14XfUNQGk",
+        "is_video": false,
+        "caption": "FREDENHAM 1.1 73 * 63 cm\n\n#art #artist #artwork #painting #paint #painter #acrylic #acrylicpainting #spraypaint #sprayart #plaster\".",
+        "url": "assets/instagram/Cq14XfUNQGk.jpg",
+        "thumbnail": "assets/instagram/Cq14XfUNQGk.jpg"
+    },
+    {
+        "shortcode": "CcAP_TqNmtQ",
+        "is_video": false,
+        "caption": "BROWN SESSIONS (COPPER)\".",
+        "url": "assets/instagram/CcAP_TqNmtQ.jpg",
+        "thumbnail": "assets/instagram/CcAP_TqNmtQ.jpg"
+    },
+    {
+        "shortcode": "CqvYnxytQ_j",
+        "is_video": false,
+        "caption": "1000 FACES 50 * 50 cm\n\n#art #artwork #artist #paint #painting #spray #spraypaint #sprayart #acrylic #acrylicpainting\".",
+        "url": "assets/instagram/CqvYnxytQ_j.jpg",
+        "thumbnail": "assets/instagram/CqvYnxytQ_j.jpg"
+    },
+    {
+        "shortcode": "C9fLdMnNdHY",
+        "is_video": false,
+        "caption": "Ateljén hemma\n\n#art #artwall #artist #artwork #artlover #artlove #artgallery #artofinstagram #abstractart #abstractartist #abstractartwork #spraypaint #spraypaintart #glitterspray #glitter #yarn #glass #painter #painting #paintings #resin #resinart #konst #konstnär #konstverk #abstrakt #ateljé\".",
+        "url": "assets/instagram/C9fLdMnNdHY.jpg",
+        "thumbnail": "assets/instagram/C9fLdMnNdHY.jpg"
+    },
+    {
+        "shortcode": "Cquygr6NA9Z",
+        "is_video": false,
+        "caption": "THE BLOB 1.0 50*50 cm\n\n#art #artist #artwork #spraypaint #sprayart #spraypaintart #spraypaintartist #acrylic #acrylicpainting #painting #painter\".",
+        "url": "assets/instagram/Cquygr6NA9Z.jpg",
+        "thumbnail": "assets/instagram/Cquygr6NA9Z.jpg"
+    },
+    {
+        "shortcode": "CcFIp4zNi_V",
+        "is_video": false,
+        "caption": "NON GRID 1.2.1\".",
+        "url": "assets/instagram/CcFIp4zNi_V.jpg",
+        "thumbnail": "assets/instagram/CcFIp4zNi_V.jpg"
+    },
+    {
+        "shortcode": "C-mT5N_Iy3v",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/C-mT5N_Iy3v.mp4",
+        "thumbnail": "assets/instagram/C-mT5N_Iy3v_thumb.jpg"
+    },
+    {
+        "shortcode": "CqkH6QfNYpM",
+        "is_video": false,
+        "caption": "SPIRAL 1.0\n\n#art #artist #paint #painting #acryl #acrylic #acrylicpainting #breakwire #metal #glitterspray #spray #sprayart\".",
+        "url": "assets/instagram/CqkH6QfNYpM.jpg",
+        "thumbnail": "assets/instagram/CqkH6QfNYpM.jpg"
+    },
+    {
+        "shortcode": "CcSdAIxsdm6",
+        "is_video": false,
+        "caption": "ENDLESS BOTTLES Mycket som skall fixas innan vernissage och direkt påföljande utställning.\n\n@designmarknadskovde #designmarknadskovde\".",
+        "url": "assets/instagram/CcSdAIxsdm6.jpg",
+        "thumbnail": "assets/instagram/CcSdAIxsdm6.jpg"
+    },
+    {
         "shortcode": "DTA3ZBXiFCG",
         "is_video": true,
         "caption": "Instagram Video",
         "url": "assets/instagram/DTA3ZBXiFCG.mp4",
         "thumbnail": "assets/instagram/DTA3ZBXiFCG_thumb.jpg"
+    },
+    {
+        "shortcode": "CcASQCiNIrT",
+        "is_video": false,
+        "caption": "FLOWER 1.1\".",
+        "url": "assets/instagram/CcASQCiNIrT.jpg",
+        "thumbnail": "assets/instagram/CcASQCiNIrT.jpg"
+    },
+    {
+        "shortcode": "C-KBLdBoOaf",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/C-KBLdBoOaf.mp4",
+        "thumbnail": "assets/instagram/C-KBLdBoOaf_thumb.jpg"
+    },
+    {
+        "shortcode": "DA5Ynv-OUzu",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/DA5Ynv-OUzu.mp4",
+        "thumbnail": "assets/instagram/DA5Ynv-OUzu_thumb.jpg"
+    },
+    {
+        "shortcode": "Cb-KQNRtyhS",
+        "is_video": false,
+        "caption": "ART\".",
+        "url": "assets/instagram/Cb-KQNRtyhS.jpg",
+        "thumbnail": "assets/instagram/Cb-KQNRtyhS.jpg"
+    },
+    {
+        "shortcode": "Cb9jdartcrh",
+        "is_video": false,
+        "caption": "BLACKLIGHT\".",
+        "url": "assets/instagram/Cb9jdartcrh.jpg",
+        "thumbnail": "assets/instagram/Cb9jdartcrh.jpg"
+    },
+    {
+        "shortcode": "CcAP0SRNPw2",
+        "is_video": false,
+        "caption": "PAINTING POURED ON CHAIR. BEAST FOUNDATION\".",
+        "url": "assets/instagram/CcAP0SRNPw2.jpg",
+        "thumbnail": "assets/instagram/CcAP0SRNPw2.jpg"
+    },
+    {
+        "shortcode": "CvE1Mw7t12o",
+        "is_video": false,
+        "caption": "EQUINOXE 1.1 80*80 cm \n\n#art #artist #artgallery #painting #paint #sprayart #acrylicpainting #acryl\".",
+        "url": "assets/instagram/CvE1Mw7t12o.jpg",
+        "thumbnail": "assets/instagram/CvE1Mw7t12o.jpg"
+    },
+    {
+        "shortcode": "CmRncnnNI2a",
+        "is_video": false,
+        "caption": "SPLASH 1.7\n@noagalleryse #noagalleryse #art #artist #paintings #painting #paint #spraypaint #sprayart #acrylic #acrylicpainting #gliter #handpaint\".",
+        "url": "assets/instagram/CmRncnnNI2a.jpg",
+        "thumbnail": "assets/instagram/CmRncnnNI2a.jpg"
+    },
+    {
+        "shortcode": "C5qAwivtE1E",
+        "is_video": false,
+        "caption": "DEATH IS EVERYWHERE 1.0\n#art #artist #artgallery #paintings #paint #painting #spray #spraypaint #sprayart #acrylic #acrylicpainting #glitter #resin\".",
+        "url": "assets/instagram/C5qAwivtE1E.jpg",
+        "thumbnail": "assets/instagram/C5qAwivtE1E.jpg"
+    },
+    {
+        "shortcode": "CobWTbSII6X",
+        "is_video": false,
+        "caption": "ETHNICOLOR 1.6 40*40 cm\nartbybeckman.se\n#art #artist #painting #painter #acrylicpainting #acrylic #spraypaint #sprayart #spray\".",
+        "url": "assets/instagram/CobWTbSII6X.jpg",
+        "thumbnail": "assets/instagram/CobWTbSII6X.jpg"
+    },
+    {
+        "shortcode": "CcvUmS0t7Nb",
+        "is_video": false,
+        "caption": "WOOLOOMOOLOOKIE 1.3\n\n@designmarknadskovde @noagalleryse \n\n#designmarknadskovde #noagalleryse #art #painter #painting #spraypaint #acrylicpainting #glitter #yarn #stickers\".",
+        "url": "assets/instagram/CcvUmS0t7Nb.jpg",
+        "thumbnail": "assets/instagram/CcvUmS0t7Nb.jpg"
     },
     {
         "shortcode": "DWvkktqiA3T",
@@ -99,6 +470,580 @@ const INSTAGRAM_FEED = [
         "thumbnail": "assets/instagram/DWvkktqiA3T_thumb.jpg"
     },
     {
+        "shortcode": "CjtArMTtuiS",
+        "is_video": false,
+        "caption": "Out for sale @noagalleryse\".",
+        "url": "assets/instagram/CjtArMTtuiS.jpg",
+        "thumbnail": "assets/instagram/CjtArMTtuiS.jpg"
+    },
+    {
+        "shortcode": "CnSKyIttOVL",
+        "is_video": false,
+        "caption": "FLOWER 1.2 100*70 cm\n@noagalleryse #noagalleryse #art #artist #painting #paint #spraypaint #stones #glitter #acrylicpainting #acrylic\".",
+        "url": "assets/instagram/CnSKyIttOVL.jpg",
+        "thumbnail": "assets/instagram/CnSKyIttOVL.jpg"
+    },
+    {
+        "shortcode": "C7Wm07Yt2mc",
+        "is_video": false,
+        "caption": "FLUTE 1.0\".",
+        "url": "assets/instagram/C7Wm07Yt2mc.jpg",
+        "thumbnail": "assets/instagram/C7Wm07Yt2mc.jpg"
+    },
+    {
+        "shortcode": "CvrvWMVtzZb",
+        "is_video": false,
+        "caption": "SIGNS 73 * 60 cm\nAkrylfärg & sprayfärg \n\n#art #artist #artgallery #artoftheday #artlover #abstractart #abstract #abstractpainting #abstractartist #abstractartwork #acrylic #acrylicpainting #spray #spraypaint #sprayart #sprayartist\".",
+        "url": "assets/instagram/CvrvWMVtzZb.jpg",
+        "thumbnail": "assets/instagram/CvrvWMVtzZb.jpg"
+    },
+    {
+        "shortcode": "CcSkjSuMXQY",
+        "is_video": false,
+        "caption": "ENDLESS BOTTLES Sista tre torkar.\n\n@designmarknadskovde #designmarknadskovde\".",
+        "url": "assets/instagram/CcSkjSuMXQY.jpg",
+        "thumbnail": "assets/instagram/CcSkjSuMXQY.jpg"
+    },
+    {
+        "shortcode": "Cb9hmE-tqiP",
+        "is_video": false,
+        "caption": "WHERE IS ALBERT?\".",
+        "url": "assets/instagram/Cb9hmE-tqiP.jpg",
+        "thumbnail": "assets/instagram/Cb9hmE-tqiP.jpg"
+    },
+    {
+        "shortcode": "C-iBkmSoAWU",
+        "is_video": false,
+        "caption": "Instagram Artwork",
+        "url": "assets/instagram/C-iBkmSoAWU.webp",
+        "thumbnail": "assets/instagram/C-iBkmSoAWU.webp"
+    },
+    {
+        "shortcode": "Cqze-CItWpb",
+        "is_video": false,
+        "caption": "MAGNETIC FIELDS 1.0 70 * 63 cm\n\n#art #artist #artistic #painting #paint #acrylic #acrylicpainting #spray #spraypaint #sprayart\".",
+        "url": "assets/instagram/Cqze-CItWpb.jpg",
+        "thumbnail": "assets/instagram/Cqze-CItWpb.jpg"
+    },
+    {
+        "shortcode": "Ccf7RbcsjSI",
+        "is_video": false,
+        "caption": "Mer från Långgatan\n\n@designmarknadskovde @noagalleryse \n\n#designmarknadskovde \n#noagalleryse\".",
+        "url": "assets/instagram/Ccf7RbcsjSI.jpg",
+        "thumbnail": "assets/instagram/Ccf7RbcsjSI.jpg"
+    },
+    {
+        "shortcode": "Ccfc5kQsbhj",
+        "is_video": false,
+        "caption": "Restaurang Hållbar\n\n@noagalleryse #noagalleryse \n@designmarknadskovde #designmarknadskovde \n#art #painting\".",
+        "url": "assets/instagram/Ccfc5kQsbhj.jpg",
+        "thumbnail": "assets/instagram/Ccfc5kQsbhj.jpg"
+    },
+    {
+        "shortcode": "Cothu6wIALN",
+        "is_video": false,
+        "caption": "OUTOF EVERYTHING: SOMETHING 56,5*56,5 cm Sprayfärg, akrylfärg, garn\n\n#art #artist #painting #paint #acrylicpainting #acrylic #painter #spraypaint #sprayart #spraypaintart #yarn\".",
+        "url": "assets/instagram/Cothu6wIALN.jpg",
+        "thumbnail": "assets/instagram/Cothu6wIALN.jpg"
+    },
+    {
+        "shortcode": "CgKVLvUtPui",
+        "is_video": false,
+        "caption": "FOUR 1.0\n\n@noagalleryse \n\n#noagalleryse #abstractart #yarn #acrylicpainting #poscapens #spraypaint #artist #painting #art\".",
+        "url": "assets/instagram/CgKVLvUtPui.jpg",
+        "thumbnail": "assets/instagram/CgKVLvUtPui.jpg"
+    },
+    {
+        "shortcode": "CmTl0ErNbgA",
+        "is_video": false,
+        "caption": "SPLASH 1.8\n@noagalleryse #noagalleryse #art #artist #greyscale #acrylic #paintings #painting #paint #glitter #spraypaint #sprayart #sprayartist\".",
+        "url": "assets/instagram/CmTl0ErNbgA.jpg",
+        "thumbnail": "assets/instagram/CmTl0ErNbgA.jpg"
+    },
+    {
+        "shortcode": "CcYRyRYMukH",
+        "is_video": false,
+        "caption": "ENDLESS BOTTLES 1.7 PURE METALLIC\n\n@designmarknadskovde @noagalleryse #designmarknadskovde #noagalleryse \n\n#glass #spraypaint #acrylicpainting\".",
+        "url": "assets/instagram/CcYRyRYMukH.jpg",
+        "thumbnail": "assets/instagram/CcYRyRYMukH.jpg"
+    },
+    {
+        "shortcode": "CcASKcotTdS",
+        "is_video": false,
+        "caption": "BLUE VOID 1.0\".",
+        "url": "assets/instagram/CcASKcotTdS.jpg",
+        "thumbnail": "assets/instagram/CcASKcotTdS.jpg"
+    },
+    {
+        "shortcode": "CcvUDIhNHTV",
+        "is_video": false,
+        "caption": "WOOLOOMOOLOOKIE 1.2\n\n@designmarknadskovde @noagalleryse\n\n#designmarknadskovde #noagalleryse  #art #painter #painting #spraypaint #acrylicpainting #poscapens\".",
+        "url": "assets/instagram/CcvUDIhNHTV.jpg",
+        "thumbnail": "assets/instagram/CcvUDIhNHTV.jpg"
+    },
+    {
+        "shortcode": "C-ejF5wIo4k",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/C-ejF5wIo4k.mp4",
+        "thumbnail": "assets/instagram/C-ejF5wIo4k_thumb.jpg"
+    },
+    {
+        "shortcode": "C5sNcciNh4D",
+        "is_video": false,
+        "caption": "Working with resin is SO satisfying!\n#art #artist #artgallery #paintings #painting #paint #spraypaint #sprayart #spray #glitter #acrylic #acrylicpainting #acrylicpaint #resin #resinart\".",
+        "url": "assets/instagram/C5sNcciNh4D.jpg",
+        "thumbnail": "assets/instagram/C5sNcciNh4D.jpg"
+    },
+    {
+        "shortcode": "CfwMHPLNeYQ",
+        "is_video": false,
+        "caption": "HALO 1.0\n\n@noagalleryse #noagalleryse #art #artwork #artist #spraypaint #glitter #poscapens #abstractart \n\n100*100 cm\".",
+        "url": "assets/instagram/CfwMHPLNeYQ.jpg",
+        "thumbnail": "assets/instagram/CfwMHPLNeYQ.jpg"
+    },
+    {
+        "shortcode": "CcBHi_HN7vy",
+        "is_video": false,
+        "caption": "UKRAINIAN SUNFLOWER 1.1\n\nFOR AUCTION\".",
+        "url": "assets/instagram/CcBHi_HN7vy.jpg",
+        "thumbnail": "assets/instagram/CcBHi_HN7vy.jpg"
+    },
+    {
+        "shortcode": "Cb9exeat15Q",
+        "is_video": false,
+        "caption": "NON GRID 1.1\".",
+        "url": "assets/instagram/Cb9exeat15Q.jpg",
+        "thumbnail": "assets/instagram/Cb9exeat15Q.jpg"
+    },
+    {
+        "shortcode": "CcAR2QJtWi1",
+        "is_video": false,
+        "caption": "PAINTING POURED OVER TABLE. BEAST FOUNDATION 3.0\".",
+        "url": "assets/instagram/CcAR2QJtWi1.jpg",
+        "thumbnail": "assets/instagram/CcAR2QJtWi1.jpg"
+    },
+    {
+        "shortcode": "CcsEx59s8Pr",
+        "is_video": false,
+        "caption": "Långgatan i Skövde. @designmarknadskovde @noagalleryse #designmarknadskovde #noagalleryse \n\n#art #paintings #glass #acrylicpainting #spraypaint #poscapens #copper\".",
+        "url": "assets/instagram/CcsEx59s8Pr.jpg",
+        "thumbnail": "assets/instagram/CcsEx59s8Pr.jpg"
+    },
+    {
+        "shortcode": "ClY3CKlNOgw",
+        "is_video": false,
+        "caption": "SPLASH 1.4 @noagalleryse #noagalleryse #art #artist #acrylicpainting #spraypaint #glitter #poscaart #paintings #painting #painting\".",
+        "url": "assets/instagram/ClY3CKlNOgw.jpg",
+        "thumbnail": "assets/instagram/ClY3CKlNOgw.jpg"
+    },
+    {
+        "shortcode": "C9ueirkoK0g",
+        "is_video": false,
+        "caption": "Got tired of the black helmet. \n\n#art #helmet #abstract #expressionism #acrylicpainting #poscapens #painter #konstnär #resin #glitterspray #glitter #wiiiieeeeoooo #whathesaid\".",
+        "url": "assets/instagram/C9ueirkoK0g.jpg",
+        "thumbnail": "assets/instagram/C9ueirkoK0g.jpg"
+    },
+    {
+        "shortcode": "CjYOlh2tHad",
+        "is_video": false,
+        "caption": "NON GRID 1.0 hos sin ägare. Vackert! @noagalleryse #noagalleryse #artist #art #acrylic #spraypaint\".",
+        "url": "assets/instagram/CjYOlh2tHad.jpg",
+        "thumbnail": "assets/instagram/CjYOlh2tHad.jpg"
+    },
+    {
+        "shortcode": "CcAYz8ytGP2",
+        "is_video": false,
+        "caption": "MONEY 1.1\".",
+        "url": "assets/instagram/CcAYz8ytGP2.jpg",
+        "thumbnail": "assets/instagram/CcAYz8ytGP2.jpg"
+    },
+    {
+        "shortcode": "CkDxtxYtvuM",
+        "is_video": false,
+        "caption": "THE LADDER 1.0 120*100cm\n\n@noagalleryse #noagalleryse #spray #spraypaint #art #artist #painting #yarn #glitter #poscapens\".",
+        "url": "assets/instagram/CkDxtxYtvuM.jpg",
+        "thumbnail": "assets/instagram/CkDxtxYtvuM.jpg"
+    },
+    {
+        "shortcode": "Cfv1vKkthiX",
+        "is_video": false,
+        "caption": "Allt kan bli konst\".",
+        "url": "assets/instagram/Cfv1vKkthiX.jpg",
+        "thumbnail": "assets/instagram/Cfv1vKkthiX.jpg"
+    },
+    {
+        "shortcode": "CcfC5tTMPaN",
+        "is_video": false,
+        "caption": "Dags att frakta och hänga utställningen\n\n@designmarknadskovde #designmarknadskovde \n@noagalleryse\n\n#glass #acrylicpainting #spraypaint #yarn #wood #metal #painting #paintings #artist #painter #abstractart #glitter #exibition #vernissage #excited #noagalleryse\".",
+        "url": "assets/instagram/CcfC5tTMPaN.jpg",
+        "thumbnail": "assets/instagram/CcfC5tTMPaN.jpg"
+    },
+    {
+        "shortcode": "CvkFPSnNXJf",
+        "is_video": false,
+        "caption": "WIRE 61 * 50 cm\nAkryl & sprayfärg \n\n#art #artist #artgallery #artoftheday #artlover #acrylic #acrylicpainting #acrylicart #acrylicpaint #abstractart #abstract #spray #spraypaint #spraypaintartist #spraypainter #spraypainting\".",
+        "url": "assets/instagram/CvkFPSnNXJf.jpg",
+        "thumbnail": "assets/instagram/CvkFPSnNXJf.jpg"
+    },
+    {
+        "shortcode": "DXhbMKMCAyn",
+        "is_video": false,
+        "caption": "My muse just became hugely more realistic. #september\".",
+        "url": "assets/instagram/DXhbMKMCAyn.jpg",
+        "thumbnail": "assets/instagram/DXhbMKMCAyn.jpg"
+    },
+    {
+        "shortcode": "Cx550gRtfm4",
+        "is_video": false,
+        "caption": "BOWS 80 * 80 cm Akrylfärg sprayfärg och glitter.\n\n#art #artist #artwork #artgallery #artoftheday #painting #paint #painter #acrylic #acrylicpainting #acrylicart #spray #spraypaint #spraypaintart #spraypainting #spraypaintartist #glitter\".",
+        "url": "assets/instagram/Cx550gRtfm4.jpg",
+        "thumbnail": "assets/instagram/Cx550gRtfm4.jpg"
+    },
+    {
+        "shortcode": "ClbnfW2t0yq",
+        "is_video": false,
+        "caption": "Dokumenterat första stegen i att grunda i den teknik jag använder nu.\n\n@noagalleryse #noagalleryse #art #artist #spraypaint #painting\".",
+        "url": "assets/instagram/ClbnfW2t0yq.jpg",
+        "thumbnail": "assets/instagram/ClbnfW2t0yq.jpg"
+    },
+    {
+        "shortcode": "Cb9jq6htbuf",
+        "is_video": false,
+        "caption": "WATCH 1.0\".",
+        "url": "assets/instagram/Cb9jq6htbuf.jpg",
+        "thumbnail": "assets/instagram/Cb9jq6htbuf.jpg"
+    },
+    {
+        "shortcode": "Cnr3DhTNOSn",
+        "is_video": false,
+        "caption": "SPLASH 2.2 Födelsedagspresent till @lantzemelie 100*70. Spray och akryl.\".",
+        "url": "assets/instagram/Cnr3DhTNOSn.jpg",
+        "thumbnail": "assets/instagram/Cnr3DhTNOSn.jpg"
+    },
+    {
+        "shortcode": "CcFNPbYtiZn",
+        "is_video": false,
+        "caption": "ORANGE IS THE NEW BLUESASTER\".",
+        "url": "assets/instagram/CcFNPbYtiZn.jpg",
+        "thumbnail": "assets/instagram/CcFNPbYtiZn.jpg"
+    },
+    {
+        "shortcode": "CvMgiqiN_yG",
+        "is_video": false,
+        "caption": "HALO 1.1 30*90 cm\n\n#art #artist #artwork #artgallery #metal #glass #acrylic #acrylicpainting #spraypaint #sprayart\".",
+        "url": "assets/instagram/CvMgiqiN_yG.jpg",
+        "thumbnail": "assets/instagram/CvMgiqiN_yG.jpg"
+    },
+    {
+        "shortcode": "CvVMs6ztRjt",
+        "is_video": false,
+        "caption": "HUMAN 1.0 50 * 61 cm\nAkryl och sprayfärg.\n#art #artist #artoftheday #artgallery #artlover #acryl #acrylicpainting #acrylicart #acrylicabstract #spraypaint #sprayart #spraypaintart #spraypaintartist #abstractart #abstractpainting\".",
+        "url": "assets/instagram/CvVMs6ztRjt.jpg",
+        "thumbnail": "assets/instagram/CvVMs6ztRjt.jpg"
+    },
+    {
+        "shortcode": "CjyC6m_t3xd",
+        "is_video": false,
+        "caption": "Ateljéfix\n\n#art #artist #artwork #painter #paintings\".",
+        "url": "assets/instagram/CjyC6m_t3xd.jpg",
+        "thumbnail": "assets/instagram/CjyC6m_t3xd.jpg"
+    },
+    {
+        "shortcode": "CnWJ3p7NvlH",
+        "is_video": false,
+        "caption": "SPLASH 2.1\n@noagalleryse #noagalleryse #art #artist #painting #paint #acrylicpainting #acrylic #spraypaint #spraypaintart #glitter\".",
+        "url": "assets/instagram/CnWJ3p7NvlH.jpg",
+        "thumbnail": "assets/instagram/CnWJ3p7NvlH.jpg"
+    },
+    {
+        "shortcode": "CcTGgtZtk4j",
+        "is_video": false,
+        "caption": "TABLE 1.0 @designmarknadskovde #designmarknadskovde\".",
+        "url": "assets/instagram/CcTGgtZtk4j.jpg",
+        "thumbnail": "assets/instagram/CcTGgtZtk4j.jpg"
+    },
+    {
+        "shortcode": "CcvTpvYNkT8",
+        "is_video": false,
+        "caption": "Furniture\n\n#blacklight #ultraviolet #art\".",
+        "url": "assets/instagram/CcvTpvYNkT8.jpg",
+        "thumbnail": "assets/instagram/CcvTpvYNkT8.jpg"
+    },
+    {
+        "shortcode": "CpFKdQytprf",
+        "is_video": false,
+        "caption": "APOCALYPSE 1.0 150*50 cm\n\n#att #artist #paint #painting #painter #artgallery #acrylic #acrylicpainting #spraypaint #sprayart #spraypaintart #glitter\".",
+        "url": "assets/instagram/CpFKdQytprf.jpg",
+        "thumbnail": "assets/instagram/CpFKdQytprf.jpg"
+    },
+    {
+        "shortcode": "CcAZFDytcKd",
+        "is_video": false,
+        "caption": "ALONE 1.0\".",
+        "url": "assets/instagram/CcAZFDytcKd.jpg",
+        "thumbnail": "assets/instagram/CcAZFDytcKd.jpg"
+    },
+    {
+        "shortcode": "CnUHeceNZi6",
+        "is_video": false,
+        "caption": "SPLASH 2.0 70*100 cm\n\n@noagalleryse #noagalleryse #art #artist #painting #acrylicpainting #acrylic #spraypaint #glitter\".",
+        "url": "assets/instagram/CnUHeceNZi6.jpg",
+        "thumbnail": "assets/instagram/CnUHeceNZi6.jpg"
+    },
+    {
+        "shortcode": "C9uBNfLotWy",
+        "is_video": false,
+        "caption": "Up 4 sale \n\nhttps://www.noagallery.se/sv/frozen-10\n\n#art #painting #noagallery #acrylicpainting #resinart #glitter #artist #artofinstagram🌿 #painter #acrylicart #painter\".",
+        "url": "assets/instagram/C9uBNfLotWy.jpg",
+        "thumbnail": "assets/instagram/C9uBNfLotWy.jpg"
+    },
+    {
+        "shortcode": "Cb9ecG8NnDB",
+        "is_video": false,
+        "caption": "WOOLOOMOOLOOKIE 1.3\".",
+        "url": "assets/instagram/Cb9ecG8NnDB.jpg",
+        "thumbnail": "assets/instagram/Cb9ecG8NnDB.jpg"
+    },
+    {
+        "shortcode": "Cb9VpfWtpqx",
+        "is_video": false,
+        "caption": "WARM HARMONY 1.0\".",
+        "url": "assets/instagram/Cb9VpfWtpqx.jpg",
+        "thumbnail": "assets/instagram/Cb9VpfWtpqx.jpg"
+    },
+    {
+        "shortcode": "CcZuA6xNf4y",
+        "is_video": false,
+        "caption": "ENDLESS BOTTLES 1.3 RUNNING RED\n\n@designmarknadskovde @noagalleryse \n\n#designmarknadskovde #noagalleryse #glass #spraypaint #acrylicpainting\".",
+        "url": "assets/instagram/CcZuA6xNf4y.jpg",
+        "thumbnail": "assets/instagram/CcZuA6xNf4y.jpg"
+    },
+    {
+        "shortcode": "CnPtm8xt5JB",
+        "is_video": false,
+        "caption": "SPLASH 1.11\n\n@noagalleryse #noagalleryse #art #artist #painting #paint #painter #spraypaint #acrylic #acrylicpainting #glitter #\".",
+        "url": "assets/instagram/CnPtm8xt5JB.jpg",
+        "thumbnail": "assets/instagram/CnPtm8xt5JB.jpg"
+    },
+    {
+        "shortcode": "C9QG1jpN0-M",
+        "is_video": false,
+        "caption": "Mina två favoritmärken när det gäller akryl.\".",
+        "url": "assets/instagram/C9QG1jpN0-M.jpg",
+        "thumbnail": "assets/instagram/C9QG1jpN0-M.jpg"
+    },
+    {
+        "shortcode": "Cn05G2VNjzB",
+        "is_video": false,
+        "caption": "ETHNICOLOR 1.3\n\n@noagalleryse #noagalleryse #art #artgallery #artist #painting #paint #acrylicpainting #acrylic #spraypaint #spraypaintart #sprayart\".",
+        "url": "assets/instagram/Cn05G2VNjzB.jpg",
+        "thumbnail": "assets/instagram/Cn05G2VNjzB.jpg"
+    },
+    {
+        "shortcode": "CvYwRqFo0fy",
+        "is_video": false,
+        "caption": "LIMELIGHT 50 * 50 cm\nAkryl & sprayfärg \n\n#art #artist #artgallery #artoftheday #artlover #abstractart #abstract #abstractpainting #abstractartist #abstractpainter #acrylic #acrylicpainting #acrylicart #spraypaint #sprayart #spraypaintart\".",
+        "url": "assets/instagram/CvYwRqFo0fy.jpg",
+        "thumbnail": "assets/instagram/CvYwRqFo0fy.jpg"
+    },
+    {
+        "shortcode": "Cnjmm60t39Z",
+        "is_video": false,
+        "caption": "EQUINOXE 1.0 100*70 cm. Spray, akryl, glitter\n\n@noagalleryse #noagalleryse #art #artist #painting #paint #acrylicpainting #acryl  #glitter #spraypaint #sprayart\".",
+        "url": "assets/instagram/Cnjmm60t39Z.jpg",
+        "thumbnail": "assets/instagram/Cnjmm60t39Z.jpg"
+    },
+    {
+        "shortcode": "Cd7rQdhNr-t",
+        "is_video": false,
+        "caption": "Paintingday\n\n@noagalleryse \n\n#noagalleryse #acrylicpainting #spraypaint #painter #painting #spraypaint #atelier\".",
+        "url": "assets/instagram/Cd7rQdhNr-t.jpg",
+        "thumbnail": "assets/instagram/Cd7rQdhNr-t.jpg"
+    },
+    {
+        "shortcode": "DSwvedwiAhW",
+        "is_video": false,
+        "caption": "Instagram Artwork",
+        "url": "assets/instagram/DSwvedwiAhW.jpg",
+        "thumbnail": "assets/instagram/DSwvedwiAhW.jpg"
+    },
+    {
+        "shortcode": "CcAR9l4tm8_",
+        "is_video": false,
+        "caption": "BLUE VOID 1.1\".",
+        "url": "assets/instagram/CcAR9l4tm8_.jpg",
+        "thumbnail": "assets/instagram/CcAR9l4tm8_.jpg"
+    },
+    {
+        "shortcode": "CnbZ1YJNNEK",
+        "is_video": false,
+        "caption": "ETHNICOLOR 1.0\n@noagalleryse #noagalleryse #art#artist #painting #paint #spraypaint #sprayart #acrylicpainting #acrylic #spraypaint #sprayart #glitter\".",
+        "url": "assets/instagram/CnbZ1YJNNEK.jpg",
+        "thumbnail": "assets/instagram/CnbZ1YJNNEK.jpg"
+    },
+    {
+        "shortcode": "CjFXU3_N93P",
+        "is_video": false,
+        "caption": "COLLABORATION 1.0\n\n@noagalleryse #noagalleryse #abstractart #spraypaint #art #artist #acrylicpainting #glitter\".",
+        "url": "assets/instagram/CjFXU3_N93P.jpg",
+        "thumbnail": "assets/instagram/CjFXU3_N93P.jpg"
+    },
+    {
+        "shortcode": "CjSDQhiMYd5",
+        "is_video": false,
+        "caption": "SPLASH 1.0\n\n@noagalleryse #noagalleryse #art #artist #artwork #acryl #acrylicpainting #spraypaint #sprayart #yarn\".",
+        "url": "assets/instagram/CjSDQhiMYd5.jpg",
+        "thumbnail": "assets/instagram/CjSDQhiMYd5.jpg"
+    },
+    {
+        "shortcode": "CdNxjJns0pg",
+        "is_video": false,
+        "caption": "OMNIBUS 1.1\n\n@noagalleryse \n#noagalleryse #art #painter #painting #spraypaint #acrylicpainting #copper #yarn\".",
+        "url": "assets/instagram/CdNxjJns0pg.jpg",
+        "thumbnail": "assets/instagram/CdNxjJns0pg.jpg"
+    },
+    {
+        "shortcode": "CcFNKMpt4b2",
+        "is_video": false,
+        "caption": "HUMORAL PATHOLOGY 1.0\".",
+        "url": "assets/instagram/CcFNKMpt4b2.jpg",
+        "thumbnail": "assets/instagram/CcFNKMpt4b2.jpg"
+    },
+    {
+        "shortcode": "CvXpkL4t0wF",
+        "is_video": false,
+        "caption": "THE BIG CHAIR 50 * 61 cm\nAkryl & sprayfärg \n\n#art #artist #artgallery #artoftheday #artlover #painting #paint #painter #paintings #acrylic #acrylicpainting #acrylicartwork #acrylicart #acrylicabstract #abstractart #abstract #spraypaint #sprayart #spraypaintart\".",
+        "url": "assets/instagram/CvXpkL4t0wF.jpg",
+        "thumbnail": "assets/instagram/CvXpkL4t0wF.jpg"
+    },
+    {
+        "shortcode": "CcAxx3vtemd",
+        "is_video": false,
+        "caption": "WOOLOOMOOLOOKIE 1.2\".",
+        "url": "assets/instagram/CcAxx3vtemd.jpg",
+        "thumbnail": "assets/instagram/CcAxx3vtemd.jpg"
+    },
+    {
+        "shortcode": "CvbxsEyogVt",
+        "is_video": false,
+        "caption": "THE EVIL EYE 50 * 61 cm\nAkryl & sprayfärg \n\n#acrylicpainting #avrylic #art #artist #artwork #artgallery #artoftheday #abstractart #abstract #spraypaint #spraypaintart #spraypaintartist\".",
+        "url": "assets/instagram/CvbxsEyogVt.jpg",
+        "thumbnail": "assets/instagram/CvbxsEyogVt.jpg"
+    },
+    {
+        "shortcode": "Cv4neu5NL4H",
+        "is_video": false,
+        "caption": "THE WORLD IS MY OYSTER 139,5 * 56,5 cm Akrylfärg & sprayfärg \n\n#art #artist #artgallery #artoftheday #artlover #artistsoninstagram #abstractart #abstract #abstractpainting #abstractartist #abstractartwork #acrylic #acrylicpainting #spray #spraypaint #sprayart #spraypaintart #spraypainting #montana #94\".",
+        "url": "assets/instagram/Cv4neu5NL4H.jpg",
+        "thumbnail": "assets/instagram/Cv4neu5NL4H.jpg"
+    },
+    {
+        "shortcode": "CmV28UxtinP",
+        "is_video": false,
+        "caption": "SPLASH 1.9\n@noagalleryse #noagalleryse #artist #art #paintings #painting #paint #acrylicpainting #acrylic #glitter #spraypaint #sprayart\".",
+        "url": "assets/instagram/CmV28UxtinP.jpg",
+        "thumbnail": "assets/instagram/CmV28UxtinP.jpg"
+    },
+    {
+        "shortcode": "DCzXZ2EuOGL",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/DCzXZ2EuOGL.mp4",
+        "thumbnail": "assets/instagram/DCzXZ2EuOGL_thumb.jpg"
+    },
+    {
+        "shortcode": "CcAQL6NNi28",
+        "is_video": false,
+        "caption": "BROWN SESSIONS 1.4 (OMNIBUS)\".",
+        "url": "assets/instagram/CcAQL6NNi28.jpg",
+        "thumbnail": "assets/instagram/CcAQL6NNi28.jpg"
+    },
+    {
+        "shortcode": "CcruGN5tdec",
+        "is_video": false,
+        "caption": "Ateljé @designmarknadskovde @noagalleryse #designmarknadskovde #noagalleryse\".",
+        "url": "assets/instagram/CcruGN5tdec.jpg",
+        "thumbnail": "assets/instagram/CcruGN5tdec.jpg"
+    },
+    {
+        "shortcode": "Cb9fM3TtEor",
+        "is_video": false,
+        "caption": "BLUE VOID 1.0\".",
+        "url": "assets/instagram/Cb9fM3TtEor.jpg",
+        "thumbnail": "assets/instagram/Cb9fM3TtEor.jpg"
+    },
+    {
+        "shortcode": "CcxzRS6NyYb",
+        "is_video": false,
+        "caption": "NON GRID 1.5\n\n@designmarknadskovde @noagalleryse \n\n#designmarknadskovde #noagalleryse #art #painting #painter #sprayart #acrylicpainting\".",
+        "url": "assets/instagram/CcxzRS6NyYb.jpg",
+        "thumbnail": "assets/instagram/CcxzRS6NyYb.jpg"
+    },
+    {
+        "shortcode": "CmboLzeNnH3",
+        "is_video": false,
+        "caption": "SPLASH 1.10 @noagalleryse #noagalleryse #art #artist #paintings #painting #paint #glitter #spraypaint #spray #acrylic #acrylicpainting\".",
+        "url": "assets/instagram/CmboLzeNnH3.jpg",
+        "thumbnail": "assets/instagram/CmboLzeNnH3.jpg"
+    },
+    {
+        "shortcode": "Cc7V_ViMZ-t",
+        "is_video": false,
+        "caption": "LAVENDER VELVET hittar du på @designmarknadskovde i helgen på Långgatan i Skövde.\n\nLördag 10-17\nSöndag 11-17\n\nVälkomna!\n\n#art #painting #yarn #spraypaint #keys #acrylicpainting #painter\".",
+        "url": "assets/instagram/Cc7V_ViMZ-t.jpg",
+        "thumbnail": "assets/instagram/Cc7V_ViMZ-t.jpg"
+    },
+    {
+        "shortcode": "C_hiXffoWZK",
+        "is_video": true,
+        "caption": "Instagram Video",
+        "url": "assets/instagram/C_hiXffoWZK.mp4",
+        "thumbnail": "assets/instagram/C_hiXffoWZK_thumb.jpg"
+    },
+    {
+        "shortcode": "Cb9zYvatl3K",
+        "is_video": false,
+        "caption": "SLYNKIS 1.0\".",
+        "url": "assets/instagram/Cb9zYvatl3K.jpg",
+        "thumbnail": "assets/instagram/Cb9zYvatl3K.jpg"
+    },
+    {
+        "shortcode": "CnoN3kpNGCA",
+        "is_video": false,
+        "caption": "ETHNICOLOR 1.2\n@noagalleryse \n\n#noagalleryse #art #artist #paintings #paint #painter #spraypaint #spraypaintart #acrylicpainting #acrylic #glitter #abstractart #abstractpainting #abstract\".",
+        "url": "assets/instagram/CnoN3kpNGCA.jpg",
+        "thumbnail": "assets/instagram/CnoN3kpNGCA.jpg"
+    },
+    {
+        "shortcode": "Cv10pettq-x",
+        "is_video": false,
+        "caption": "CONNECTED DOTS 1.0 50 * 50 cm Akrylfärg & sprayfärg \n\n#art #artist #artgallery #artoftheday #artcollector #artlover #abstractart #abstract #abstractpainting #abstractartist #acrylic #acrylicpainting #acrylicart #acrylicpaint #acrylicpaintings #spraypaint #sprayart #spraypaintart #sprayfärg #spraycanart #spraycan #spraycans #montana #94\".",
+        "url": "assets/instagram/Cv10pettq-x.jpg",
+        "thumbnail": "assets/instagram/Cv10pettq-x.jpg"
+    },
+    {
+        "shortcode": "Cb9j4mFNNBk",
+        "is_video": false,
+        "caption": "BROWN SESSIONS (WARNING)\".",
+        "url": "assets/instagram/Cb9j4mFNNBk.jpg",
+        "thumbnail": "assets/instagram/Cb9j4mFNNBk.jpg"
+    },
+    {
+        "shortcode": "Cb9fCVHth82",
+        "is_video": false,
+        "caption": "WHALE 1.0\".",
+        "url": "assets/instagram/Cb9fCVHth82.jpg",
+        "thumbnail": "assets/instagram/Cb9fCVHth82.jpg"
+    },
+    {
+        "shortcode": "CcAxnJ2tGdj",
+        "is_video": false,
+        "caption": "HUMORAL PATHOLOGY 1.0\".",
+        "url": "assets/instagram/CcAxnJ2tGdj.jpg",
+        "thumbnail": "assets/instagram/CcAxnJ2tGdj.jpg"
+    },
+    {
         "shortcode": "DWwBXg9CKjz",
         "is_video": true,
         "caption": "Instagram Video",
@@ -106,11 +1051,32 @@ const INSTAGRAM_FEED = [
         "thumbnail": "assets/instagram/DWwBXg9CKjz_thumb.jpg"
     },
     {
-        "shortcode": "DWwCOnxiJ13",
-        "is_video": true,
-        "caption": "Instagram Video",
-        "url": "assets/instagram/DWwCOnxiJ13.mp4",
-        "thumbnail": "assets/instagram/DWwCOnxiJ13_thumb.jpg"
+        "shortcode": "CkQgdHHtczk",
+        "is_video": false,
+        "caption": "https://www.noagallery.se/alla-konstnarer/fredrik-beckman\n\n@noagalleryse #noagalleryse #art #artist #acryl #spray #yarn #glitter #poscapens\".",
+        "url": "assets/instagram/CkQgdHHtczk.jpg",
+        "thumbnail": "assets/instagram/CkQgdHHtczk.jpg"
+    },
+    {
+        "shortcode": "C9byXQKNn0w",
+        "is_video": false,
+        "caption": "Artwall\n\n#artwall #art #painter #abstractart #resinart\".",
+        "url": "assets/instagram/C9byXQKNn0w.jpg",
+        "thumbnail": "assets/instagram/C9byXQKNn0w.jpg"
+    },
+    {
+        "shortcode": "Cb9eTMnNs1d",
+        "is_video": false,
+        "caption": "LAVENDER VELVET\".",
+        "url": "assets/instagram/Cb9eTMnNs1d.jpg",
+        "thumbnail": "assets/instagram/Cb9eTMnNs1d.jpg"
+    },
+    {
+        "shortcode": "CcCgG3KtnMu",
+        "is_video": false,
+        "caption": "SILVER TAPESTRY 1.0\".",
+        "url": "assets/instagram/CcCgG3KtnMu.jpg",
+        "thumbnail": "assets/instagram/CcCgG3KtnMu.jpg"
     },
     {
         "shortcode": "08d93f4bd3",
@@ -183,20 +1149,6 @@ const INSTAGRAM_FEED = [
         "thumbnail": "assets/instagram/af8d04a998.jpg"
     },
     {
-        "shortcode": "C-eyINWIaRr",
-        "is_video": false,
-        "caption": "Instagram Artwork",
-        "url": "assets/instagram/C-eyINWIaRr.webp",
-        "thumbnail": "assets/instagram/C-eyINWIaRr.webp"
-    },
-    {
-        "shortcode": "C-iBkmSoAWU",
-        "is_video": false,
-        "caption": "Instagram Artwork",
-        "url": "assets/instagram/C-iBkmSoAWU.webp",
-        "thumbnail": "assets/instagram/C-iBkmSoAWU.webp"
-    },
-    {
         "shortcode": "cc12da7a46",
         "is_video": false,
         "caption": "Instagram Artwork",
@@ -209,13 +1161,6 @@ const INSTAGRAM_FEED = [
         "caption": "Instagram Artwork",
         "url": "assets/instagram/d9c666e537.jpg",
         "thumbnail": "assets/instagram/d9c666e537.jpg"
-    },
-    {
-        "shortcode": "DSwvedwiAhW",
-        "is_video": false,
-        "caption": "Instagram Artwork",
-        "url": "assets/instagram/DSwvedwiAhW.jpg",
-        "thumbnail": "assets/instagram/DSwvedwiAhW.jpg"
     },
     {
         "shortcode": "e9e1a07870",
