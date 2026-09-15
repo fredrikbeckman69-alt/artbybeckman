@@ -1673,7 +1673,8 @@ footer {
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s;
 }
 
-.art-modal.open {
+.art-modal.open,
+.art-modal.active {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -1693,7 +1694,8 @@ footer {
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.art-modal.open .art-modal-card {
+.art-modal.open .art-modal-card,
+.art-modal.active .art-modal-card {
   transform: scale(1);
 }
 
@@ -1836,6 +1838,259 @@ footer {
   box-shadow: 0 6px 20px rgba(230, 0, 126, 0.45);
 }
 
+.modal-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #f1f2f4;
+  color: var(--ink-primary);
+  border: 1px solid #dcdfe4;
+  font-size: 0.90rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.modal-secondary-btn:hover {
+  background: #e2e4e8;
+  border-color: #c8cdd5;
+}
+
+/* Header Enhancements */
+.header-center-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exhibition-tag {
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink-primary);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.hud-action-btn:hover {
+  background: #ffffff;
+  border-color: var(--magenta);
+  color: var(--magenta);
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.15);
+}
+
+.hud-exit-btn {
+  background: rgba(255, 240, 245, 0.85);
+  color: #c2185b;
+  border-color: rgba(216, 27, 96, 0.2);
+}
+
+.hud-exit-btn:hover {
+  background: #c2185b;
+  color: #ffffff;
+}
+
+/* ===== 2D OVERVIEW MODAL ===== */
+.overview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 14, 0.82);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overview-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overview-modal-card {
+  background: #ffffff;
+  border-radius: 18px;
+  max-width: 1080px;
+  width: 100%;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 32px 18px;
+  border-bottom: 1px solid #ebebeb;
+  position: relative;
+}
+
+.overview-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--ink-primary);
+  margin: 0 0 6px 0;
+}
+
+.overview-header p {
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+
+.overview-card {
+  background: #fafafc;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.overview-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--magenta);
+  box-shadow: 0 10px 24px rgba(216, 27, 96, 0.15);
+}
+
+.overview-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: #f0f1f4;
+  padding: 10px;
+}
+
+.overview-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.overview-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-primary);
+  margin: 0 0 4px 0;
+}
+
+.overview-card-meta {
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+  margin-bottom: 12px;
+}
+
+.overview-card-btn {
+  margin-top: auto;
+  padding: 8px 14px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.80rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.overview-card-btn:hover {
+  background: var(--magenta);
+}
+
+/* ===== WEBGL FALLBACK ===== */
+.webgl-fallback {
+  position: fixed;
+  inset: 0;
+  background: #111215;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.fallback-card {
+  background: #1e2026;
+  border: 1px solid #333;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 540px;
+  text-align: center;
+}
+
+.fallback-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.fallback-card p {
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 /* Responsive Overrides for Walk Around */
 @media (max-width: 900px) {
   .modal-body {
@@ -1851,6 +2106,9 @@ footer {
     right: 16px;
     transform: scale(0.85);
     transform-origin: top right;
+  }
+  .exhibition-tag {
+    display: none;
   }
 }
 
@@ -1874,7 +2132,16 @@ footer {
     bottom: 16px;
   }
   .minimap-container {
-    display: none; /* Hide minimap on small mobile for clean view */
+    display: none;
+  }
+  .hud-action-btn span {
+    display: none;
+  }
+  .hud-action-btn svg {
+    margin: 0;
+  }
+  .hud-exit-btn span {
+    display: inline;
   }
 }
 

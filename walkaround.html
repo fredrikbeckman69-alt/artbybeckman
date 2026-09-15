@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Walk Around — Art by Beckman</title>
-    <meta name="description" content="Step inside a modern Philippe Starck-inspired luxury penthouse apartment and experience Fredrik Beckman's latest 50 abstract paintings in full interactive 3D with true physical dimensions.">
+    <title>Walk Around — Virtuell Konstupplevelse — Art by Beckman</title>
+    <meta name="description" content="Upplev Fredrik Beckmans konst i ett modernt Philippe Starck-inspirerat hem med verklig fysisk skala och kurerade verk.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -12,17 +12,34 @@
 </head>
 <body class="walkaround-body">
 
-    <!-- ===== SITE HEADER ===== -->
+    <!-- ===== TOP HEADER ===== -->
     <header class="walkaround-header">
-        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Art by Beckman</a></div>
-        <div class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="logo">
+            <a href="index.html" style="text-decoration:none; color:inherit;">Art by Beckman</a>
         </div>
+        
+        <div class="header-center-nav">
+            <span class="exhibition-tag">3D Utställning • Skala 1:1</span>
+        </div>
+
+        <div class="header-right-actions">
+            <button id="btn-2d-overview" class="hud-action-btn" title="Visa 2D-bildöversikt">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>2D Bildöversikt</span>
+            </button>
+            <a href="index.html" class="hud-action-btn hud-exit-btn" title="Lämna 3D och återvänd till startsidan">
+                <span>✕ Lämna</span>
+            </a>
+            <div class="menu-toggle" id="menu-toggle" aria-label="Öppna meny" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
         <nav id="nav">
-            <a href="index.html">Home</a>
-            <a href="gallery.html">Gallery</a>
+            <a href="index.html">Hem</a>
+            <a href="gallery.html">Galleri</a>
             <a href="walkaround.html" class="active">Walk Around</a>
             <a href="videos.html">Videos</a>
             <a href="instagram.html">Instagram</a>
@@ -33,12 +50,22 @@
     <div id="walkaround-loader" class="walkaround-loader">
         <div class="loader-content">
             <div class="loader-brand">ART BY BECKMAN</div>
-            <h1 class="loader-title">Walk Around Exhibition</h1>
-            <p class="loader-subtitle">Loading 50 Masterworks in 3D Penthouse...</p>
+            <h1 class="loader-title">Walk Around</h1>
+            <p class="loader-subtitle">Laddar lägenheten och verken i verklig fysisk skala...</p>
             <div class="loader-bar-container">
                 <div class="loader-bar-fill"></div>
             </div>
-            <p class="loader-hint">Philippe Starck Minimalist Interior • Real Physical Dimensions</p>
+            <p class="loader-hint">Philippe Starck-arkitektur • 1 scenenhet = 1 meter • Ögonhöjd 1,65 m</p>
+        </div>
+    </div>
+
+    <!-- ===== WEBGL FALLBACK BANNER (Hidden by default) ===== -->
+    <div id="webgl-fallback" class="webgl-fallback" style="display: none;">
+        <div class="fallback-card">
+            <h2>3D stöds inte på denna enhet</h2>
+            <p>Din webbläsare stöder inte WebGL eller hårdvaruacceleration. Du kan fortfarande utforska hela den kurerade utställningen i vår vanliga 2D-bildöversikt.</p>
+            <button id="fallback-open-2d" class="modal-link-btn">Öppna 2D Bildöversikt</button>
+            <a href="gallery.html" class="modal-link-btn" style="background:#444; margin-top:10px;">Gå till Galleriet</a>
         </div>
     </div>
 
@@ -46,29 +73,31 @@
     <div id="walkaround-canvas-container"></div>
 
     <!-- ===== HOVER / INTERACTION PROMPT ===== -->
-    <div id="walkaround-hover-prompt" class="walkaround-hover-prompt">Click to inspect artwork</div>
+    <div id="walkaround-hover-prompt" class="walkaround-hover-prompt">Klicka för att inspektera verket</div>
 
     <!-- ===== FLOATING NAVIGATION HUD ===== -->
     <div class="walkaround-hud">
-        <!-- Room Teleport Buttons -->
-        <div class="room-nav-bar">
-            <button class="room-nav-btn active" data-room="salon">Grand Salon</button>
-            <button class="room-nav-btn" data-room="kitchen">Kitchen Studio</button>
-            <button class="room-nav-btn" data-room="linnea">Linnéa Gallery</button>
-            <button class="room-nav-btn" data-room="master">Master Suite</button>
-            <button class="room-nav-btn" data-room="terrace">Sky Terrace</button>
+        <!-- Hotspot Viewpoint Buttons -->
+        <div class="room-nav-bar" id="hotspot-buttons-bar">
+            <!-- Dynamically populated by walkaround-engine.js or static fallback -->
+            <button class="room-nav-btn active" data-hotspot="entry">Entré</button>
+            <button class="room-nav-btn" data-hotspot="salon-overview">Vardagsrum</button>
+            <button class="room-nav-btn" data-hotspot="art-my-heart">Lounge</button>
+            <button class="room-nav-btn" data-hotspot="art-origami">Gallerivägg</button>
+            <button class="room-nav-btn" data-hotspot="dining">Matplats</button>
+            <button class="room-nav-btn" data-hotspot="nook">Läshörna</button>
         </div>
 
         <!-- Controls Guide Badge -->
         <div class="controls-guide">
-            <span class="guide-desktop"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or Arrows to Walk • Drag to Look • Click art to inspect</span>
-            <span class="guide-mobile">Joystick to Move • Swipe to Look • Tap art to inspect</span>
+            <span class="guide-desktop"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / Pilar för att gå • Dra med musen för att se dig om • Klicka på tavla eller golvcirkel för att gå dit</span>
+            <span class="guide-mobile">Dra för att se dig om • Tryck på golvcirklarna eller tavlor för att gå fram</span>
         </div>
     </div>
 
     <!-- ===== 2D ARCHITECTURAL MINIMAP ===== -->
     <div class="minimap-container">
-        <div class="minimap-label">PENTHOUSE RADAR</div>
+        <div class="minimap-label">ORIENTERINGSKARTA</div>
         <canvas id="walkaround-minimap" width="180" height="140"></canvas>
     </div>
 
@@ -78,35 +107,56 @@
     </div>
 
     <!-- ===== ARTWORK DETAIL INSPECTION MODAL ===== -->
-    <div id="art-modal" class="art-modal">
+    <div id="art-modal" class="art-modal" aria-hidden="true" role="dialog">
         <div class="art-modal-card">
-            <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+            <button id="modal-close-btn" class="modal-close-btn" aria-label="Stäng modal">&times;</button>
             <div class="modal-body">
                 <div class="modal-img-container">
-                    <img id="modal-img" src="" alt="Artwork Preview">
+                    <img id="modal-img" src="" alt="Konstverk">
                 </div>
                 <div class="modal-info">
-                    <p class="modal-badge">3D EXHIBITION PIECE</p>
-                    <h2 id="modal-title" class="modal-title">Origami</h2>
+                    <p class="modal-badge">FYSISK SKALA 1:1 • KURERAT VERK</p>
+                    <h2 id="modal-title" class="modal-title">Titel</h2>
                     <div class="modal-meta-grid">
                         <div class="meta-item">
-                            <span class="meta-label">Dimensions</span>
+                            <span class="meta-label">Verkliga Mått</span>
                             <span id="modal-size" class="meta-value">100 × 120 cm</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">Year</span>
+                            <span class="meta-label">Skapad</span>
                             <span id="modal-year" class="meta-value">April 2026</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">Medium</span>
-                            <span id="modal-material" class="meta-value">Acrylic & glitter on canvas</span>
+                            <span class="meta-label">Teknik & Material</span>
+                            <span id="modal-material" class="meta-value">Akrylfärg, glitter</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Placering</span>
+                            <span id="modal-zone" class="meta-value">Grand Salon</span>
                         </div>
                     </div>
-                    <p id="modal-desc" class="modal-desc">Abstract expressionist work.</p>
+                    <p id="modal-desc" class="modal-desc"></p>
                     <div class="modal-actions">
-                        <a href="gallery.html" class="modal-link-btn">View in Full Gallery &rarr;</a>
+                        <a id="modal-gallery-link" href="gallery.html" class="modal-link-btn">🔗 Se i Galleriet &rarr;</a>
+                        <button id="modal-inspect-close" class="modal-secondary-btn">Tillbaka till rummet</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 2D GALLERY OVERVIEW MODAL ===== -->
+    <div id="overview-modal" class="overview-modal" aria-hidden="true" role="dialog">
+        <div class="overview-modal-card">
+            <div class="overview-header">
+                <div>
+                    <h2>Kurerade Verk i Utställningen</h2>
+                    <p>Översikt över samtliga verk med deras verkliga fysiska mått och teknik.</p>
+                </div>
+                <button id="overview-close-btn" class="modal-close-btn" aria-label="Stäng översikt">&times;</button>
+            </div>
+            <div id="overview-grid" class="overview-grid">
+                <!-- Populated dynamically via JS -->
             </div>
         </div>
     </div>

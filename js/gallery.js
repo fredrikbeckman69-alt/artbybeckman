@@ -186,4 +186,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial render
     renderGallery();
+
+    // Deep link support: ?id=270 or #270 or #painting-270
+    function checkUrlDeepLink() {
+        const params = new URLSearchParams(window.location.search);
+        let targetId = params.get('id');
+        if (!targetId && window.location.hash) {
+            const hashMatch = window.location.hash.match(/\d+/);
+            if (hashMatch) targetId = hashMatch[0];
+        }
+        if (targetId) {
+            const parsedId = parseInt(targetId, 10);
+            const foundIndex = currentFiltered.findIndex(img => img.id === parsedId);
+            if (foundIndex !== -1) {
+                setTimeout(() => openLightbox(foundIndex), 150);
+            }
+        }
+    }
+    checkUrlDeepLink();
 });
