@@ -734,6 +734,7 @@ footer {
   gap: 12px;
   background: var(--bg-secondary) !important;
   padding: 24px 56px 80px;
+  min-height: 100vh;
 }
 
 .gallery-item {
