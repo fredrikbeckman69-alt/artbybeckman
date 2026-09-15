@@ -192,7 +192,7 @@ const GALLERY_IMAGES = [
         "description": "Övermålad IKEA-duk"
     },
     {
-        "filename": "22. CHROMEYELLOWRED 1.0.jpg",
+        "filename": "22. CHROMEYELLOWRED 1.0.JPG",
         "title": "Chromeyellowred 1.0",
         "id": 22,
         "size": "56 * 56 cm",
@@ -363,7 +363,7 @@ const GALLERY_IMAGES = [
         "description": ""
     },
     {
-        "filename": "40 CHROMED GIFT.jpg",
+        "filename": "40 CHROMED GIFT.JPG",
         "title": "Chromed Gift",
         "id": 40,
         "size": "30 * 90 cm",
@@ -1686,7 +1686,7 @@ const GALLERY_IMAGES = [
         "description": ""
     },
     {
-        "filename": "188 SPLASH 1.2.jpg",
+        "filename": "188 SPLASH 1.2.JPG",
         "title": "Splash 1.2",
         "id": 188,
         "size": "80 * 80 cm",
@@ -2379,7 +2379,7 @@ const GALLERY_IMAGES = [
         "description": ""
     },
     {
-        "filename": "265 MY HEART HAS TEETH.jpg",
+        "filename": "265 MY HEART HAS TEETH.JPG",
         "title": "My Heart Has Teeth",
         "id": 265,
         "size": "160 * 100 cm",

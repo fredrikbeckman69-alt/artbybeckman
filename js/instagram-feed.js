@@ -92,18 +92,30 @@ document.addEventListener("DOMContentLoaded", () => {
         element.className = "instagram-item";
         element.setAttribute("title", item.is_video ? "Click to play video" : "Click to view painting");
 
+        const originalSrc = item.is_video ? item.thumbnail : item.url;
+        const webpSrc = originalSrc.replace(/\.(jpe?g|png)$/i, '.webp');
+
+        const picture = document.createElement("picture");
+        const source = document.createElement("source");
+        source.srcset = webpSrc;
+        source.type = "image/webp";
+        picture.appendChild(source);
+
         const img = document.createElement("img");
-        img.src = item.is_video ? item.thumbnail : item.url;
+        img.src = originalSrc;
         img.alt = item.caption || "Instagram Artwork";
         img.loading = "lazy";
         img.decoding = "async";
+        img.width = 300;
+        img.height = 300;
 
         // Hide completely if image fails to load
         img.onerror = () => {
             element.style.display = 'none';
         };
 
-        element.appendChild(img);
+        picture.appendChild(img);
+        element.appendChild(picture);
 
         // Hover overlay
         const overlay = document.createElement("div");

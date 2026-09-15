@@ -59,46 +59,85 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const fragment = document.createDocumentFragment();
+        let renderedCount = 0;
+        const BATCH_SIZE = 24;
 
-        currentFiltered.forEach((img, index) => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
+        function renderBatch() {
+            if (renderedCount >= currentFiltered.length) return;
+            const end = Math.min(renderedCount + BATCH_SIZE, currentFiltered.length);
+            const fragment = document.createDocumentFragment();
 
-            const sizeInfo = img.size ? `<p class="meta">${img.size}</p>` : '';
-            const materialInfo = img.material ? `<p class="meta">${img.material}</p>` : '';
-            const yearInfo = img.year ? `<span class="year">${img.year}</span>` : '';
-            const safeSrc = encodeURI(`assets/images/${img.filename}`);
+            for (let i = renderedCount; i < end; i++) {
+                const img = currentFiltered[i];
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
 
-            item.innerHTML = `
-                <img src="${safeSrc}" alt="${img.title}" loading="lazy" decoding="async">
-                <div class="gallery-overlay">
-                    <div class="gallery-info">
-                        <div class="gallery-title">${img.title} ${yearInfo}</div>
-                        ${sizeInfo}
-                        ${materialInfo}
+                const sizeInfo = img.size ? `<p class="meta">${img.size}</p>` : '';
+                const materialInfo = img.material ? `<p class="meta">${img.material}</p>` : '';
+                const yearInfo = img.year ? `<span class="year">${img.year}</span>` : '';
+                const webpFilename = img.filename.replace(/\.(jpe?g|png)$/i, '.webp');
+                const safeWebp = encodeURI(`assets/images/${webpFilename}`);
+                const safeSrc = encodeURI(`assets/images/${img.filename}`);
+
+                item.innerHTML = `
+                    <picture>
+                        <source srcset="${safeWebp}" type="image/webp">
+                        <img src="${safeSrc}" alt="${img.title}" width="400" height="400" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-title">${img.title} ${yearInfo}</div>
+                            ${sizeInfo}
+                            ${materialInfo}
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
-            // Lightbox trigger
-            item.addEventListener('click', () => {
-                openLightbox(index);
-            });
+                const index = i;
+                item.addEventListener('click', () => {
+                    openLightbox(index);
+                });
 
-            // Smooth image load handling
-            const imgEl = item.querySelector('img');
-            imgEl.onload = () => imgEl.classList.add('loaded');
-            imgEl.onerror = () => {
-                console.warn(`Could not load image: ${safeSrc}`);
-                imgEl.style.opacity = '0.4';
-            };
+                const imgEl = item.querySelector('img');
+                imgEl.onload = () => imgEl.classList.add('loaded');
+                imgEl.onerror = () => {
+                    console.warn(`Could not load image: ${safeSrc}`);
+                    imgEl.style.opacity = '0.4';
+                };
 
-            fragment.appendChild(item);
-            observer.observe(item);
-        });
+                fragment.appendChild(item);
+                observer.observe(item);
+            }
 
-        grid.appendChild(fragment);
+            // Insert before sentinel if exists
+            const sentinel = document.getElementById('gallery-sentinel');
+            if (sentinel) {
+                grid.insertBefore(fragment, sentinel);
+            } else {
+                grid.appendChild(fragment);
+            }
+            renderedCount = end;
+
+            if (renderedCount < currentFiltered.length && !document.getElementById('gallery-sentinel')) {
+                const sentinelEl = document.createElement('div');
+                sentinelEl.id = 'gallery-sentinel';
+                sentinelEl.style.cssText = 'height: 40px; grid-column: 1 / -1; width: 100%;';
+                grid.appendChild(sentinelEl);
+
+                const scrollObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        renderBatch();
+                        if (renderedCount >= currentFiltered.length && sentinelEl.parentNode) {
+                            sentinelEl.remove();
+                            scrollObserver.disconnect();
+                        }
+                    }
+                }, { rootMargin: '300px' });
+                scrollObserver.observe(sentinelEl);
+            }
+        }
+
+        renderBatch();
     }
 
     // 2. Debounced Search (120ms)
@@ -186,4 +225,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial render
     renderGallery();
+
+    // Deep link support: ?id=270 or #270 or #painting-270
+    function checkUrlDeepLink() {
+        const params = new URLSearchParams(window.location.search);
+        let targetId = params.get('id');
+        if (!targetId && window.location.hash) {
+            const hashMatch = window.location.hash.match(/\d+/);
+            if (hashMatch) targetId = hashMatch[0];
+        }
+        if (targetId) {
+            const parsedId = parseInt(targetId, 10);
+            const foundIndex = currentFiltered.findIndex(img => img.id === parsedId);
+            if (foundIndex !== -1) {
+                setTimeout(() => openLightbox(foundIndex), 150);
+            }
+        }
+    }
+    checkUrlDeepLink();
 });

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fredrikbeckman69-alt.github.io/artbybeckman/sitemap.xml

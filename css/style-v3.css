@@ -7,9 +7,9 @@
 
 :root {
   /* Core Accents: Magenta, Rosa (Pink), Lila (Purple) */
-  --magenta:       #D81B60;
-  --magenta-light: #E91E63;
-  --magenta-dark:  #AD1457;
+  --magenta:       #BA1655;
+  --magenta-light: #D81B60;
+  --magenta-dark:  #880E4F;
   --pink:          #FF4081;
   --pink-light:    #FF80AB;
   --pink-soft:     #F8BBD0;
@@ -28,7 +28,7 @@
   /* Text & Ink */
   --ink-primary:   #1A0C1E;
   --ink-secondary: #5A4560;
-  --ink-muted:     #8C7594;
+  --ink-muted:     #6E5875;
   --cream:         #FDFAF7;
 
   /* Gradients */
@@ -150,6 +150,15 @@ nav a.active::after, nav a:hover::after { width: 100%; }
   background: transparent;
   border: none;
   padding: 4px;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--magenta);
+  outline-offset: 2px;
 }
 
 .menu-toggle span {
@@ -519,12 +528,16 @@ nav a.active::after, nav a:hover::after { width: 100%; }
   font-family: var(--font-display);
   font-size: clamp(10rem, 22vw, 24rem);
   letter-spacing: 0.02em;
-  color: rgba(216, 27, 96, 0.04);
+  color: rgba(186, 22, 85, 0.05);
   text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
   line-height: 1;
+}
+
+.statement-bg-text::before {
+  content: 'PAINT';
 }
 
 .statement-inner {
@@ -662,7 +675,7 @@ footer {
 .footer-copy {
   font-size: 0.78rem;
   letter-spacing: 0.1em;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   text-transform: uppercase;
 }
 
@@ -1199,15 +1212,21 @@ footer {
   box-shadow: 0 16px 36px rgba(123, 31, 162, 0.22);
 }
 
-.instagram-item img, .instagram-item video {
+.instagram-item picture,
+.instagram-item picture img,
+.instagram-item img,
+.instagram-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  display: block;
   transition: transform var(--t-slow);
 }
 
-.instagram-item:hover img, .instagram-item:hover video {
+.instagram-item:hover img,
+.instagram-item:hover picture img,
+.instagram-item:hover video {
   transform: scale(1.05);
 }
 
