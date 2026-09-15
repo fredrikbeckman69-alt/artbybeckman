@@ -5,41 +5,60 @@
  */
 
 const WALKAROUND_CURATED_ROOM = [
-    // --- 1. ENTRÉ & VESTIBUL ---
+    // --- 1. GRAND SALON / VARDAGSRUM (KVALITETSREFERENS) ---
     {
-        id: 271,
-        title: "Golden Ticket",
+        id: 265,
+        title: "My Heart Has Teeth",
+        year: "2024",
+        size: "160 * 100 cm",
+        widthM: 1.60,
+        heightM: 1.00,
+        material: "Akrylfärg, resin",
+        description: "Storskaligt horisontellt blickfång med djup svärta, organiska former och intensiv röd energi under glasklar resin. Centrerat ovanför den skräddarsydda loungemodulsoffan.",
+        filename: "265 MY HEART HAS TEETH.jpg",
+        wallPlacement: {
+            position: [0.60, 1.65, 3.12],
+            rotationY: Math.PI, // Facing North (-Z)
+            viewpoint: [0.60, 1.62, 0.90]
+        },
+        zone: "Vardagsrum — Huvudvägg över Loungesoffa"
+    },
+    {
+        id: 270,
+        title: "Origami",
+        year: "April 2026",
+        size: "100 * 120 cm",
+        widthM: 1.00,
+        heightM: 1.20,
+        material: "Akrylfärg, glitter",
+        description: "Monumentalt vertikalt verk med fasetterade geometriska plan i skimrande glitter och akryl. Hängt i perfekt ögonhöjd på vardagsrummets västra gallerivägg.",
+        filename: "270 ORIGAMI.jpg",
+        wallPlacement: {
+            position: [-3.72, 1.55, -0.80],
+            rotationY: Math.PI / 2, // Facing East (+X)
+            viewpoint: [-1.80, 1.62, -0.80]
+        },
+        zone: "Vardagsrum — Västra Galleriväggen"
+    },
+    {
+        id: 269,
+        title: "Vertigo",
         year: "April 2026",
         size: "40 * 100 cm",
         widthM: 0.40,
         heightM: 1.00,
         material: "Akrylfärg, glitter",
-        description: "Slankt vertikalt verk i guld- och koppartoner med dramatisk textur.",
-        filename: "271 GOLDEN TICKET.jpg",
+        description: "Dramatiskt slankt verk i djupt skimrande glitter och akryl med stark vertikal rörelse vid passagen mot vestibulen.",
+        filename: "269 VERTIGO.jpg",
         wallPlacement: {
-            position: [-0.05, 1.50, 6.80],
-            rotationY: -Math.PI / 2, // Facing West (-X)
-            viewpoint: [-1.80, 1.65, 6.80]
-        },
-        zone: "Entré — Östra Vestibulväggen"
-    },
-    {
-        id: 256,
-        title: "Unreal",
-        year: "Juli 2024",
-        size: "100 * 40 cm",
-        widthM: 1.00,
-        heightM: 0.40,
-        material: "Akrylfärg, glitterspray, glitter, resin",
-        description: "Drömsk panoramisk rymd i lila och guld med glitterspray och djupt resinlager.",
-        filename: "256 UNREAL.jpg",
-        wallPlacement: {
-            position: [-3.95, 1.50, 6.80],
+            position: [-3.72, 1.55, 1.40],
             rotationY: Math.PI / 2, // Facing East (+X)
-            viewpoint: [-2.20, 1.65, 6.80]
+            viewpoint: [-1.80, 1.62, 1.40]
         },
-        zone: "Entré — Västra Vestibulväggen"
+        zone: "Vardagsrum — Västra Väggen / Passage"
     },
+
+    // --- 2. ENTRÉ & VESTIBUL ---
     {
         id: 264,
         title: "Warmpop",
@@ -51,64 +70,28 @@ const WALKAROUND_CURATED_ROOM = [
         description: "Intim kvadratisk färgstudie med varma pop-konstiga kontraster.",
         filename: "264 WARMPOP.jpg",
         wallPlacement: {
-            position: [-3.95, 1.50, 4.80],
-            rotationY: Math.PI / 2, // Facing East (+X)
-            viewpoint: [-2.40, 1.65, 4.80]
+            position: [-1.48, 1.55, 4.40],
+            rotationY: -Math.PI / 2, // Facing West (-X)
+            viewpoint: [-2.40, 1.62, 4.40]
         },
-        zone: "Entré / Läshörna — Västra Väggen"
-    },
-
-    // --- 2. GRAND SALON (VARDAGSRUM & LOUNGE) ---
-    {
-        id: 270,
-        title: "Origami",
-        year: "April 2026",
-        size: "100 * 120 cm",
-        widthM: 1.00,
-        heightM: 1.20,
-        material: "Akrylfärg, glitter",
-        description: "Monumentalt vertikalt verk med fasetterade geometriska plan i skimrande glitter och akryl.",
-        filename: "270 ORIGAMI.jpg",
-        wallPlacement: {
-            position: [-4.95, 1.50, 1.20],
-            rotationY: Math.PI / 2, // Facing East (+X)
-            viewpoint: [-2.60, 1.65, 1.20]
-        },
-        zone: "Grand Salon — Västra Galleriväggen"
+        zone: "Vestibul & Entré — Nisch"
     },
     {
-        id: 269,
-        title: "Vertigo",
+        id: 271,
+        title: "Golden Ticket",
         year: "April 2026",
         size: "40 * 100 cm",
         widthM: 0.40,
         heightM: 1.00,
         material: "Akrylfärg, glitter",
-        description: "Dramatiskt slankt verk i djupt skimrande glitter och akryl med stark vertikal rörelse.",
-        filename: "269 VERTIGO.jpg",
+        description: "Slankt vertikalt verk i guld- och koppartoner med dramatisk textur vid entrédörren.",
+        filename: "271 GOLDEN TICKET.jpg",
         wallPlacement: {
-            position: [-4.95, 1.50, -1.60],
-            rotationY: Math.PI / 2, // Facing East (+X)
-            viewpoint: [-2.60, 1.65, -1.60]
-        },
-        zone: "Grand Salon — Västra Galleriväggen"
-    },
-    {
-        id: 265,
-        title: "My Heart Has Teeth",
-        year: "2024",
-        size: "160 * 100 cm",
-        widthM: 1.60,
-        heightM: 1.00,
-        material: "Akrylfärg, resin",
-        description: "Storskaligt horisontellt blickfång med djup svärta, organiska former och intensiv röd energi under glasklar resin.",
-        filename: "265 MY HEART HAS TEETH.jpg",
-        wallPlacement: {
-            position: [2.50, 1.50, 3.95],
+            position: [-2.40, 1.55, 6.42],
             rotationY: Math.PI, // Facing North (-Z)
-            viewpoint: [2.50, 1.65, 1.10]
+            viewpoint: [-2.40, 1.62, 5.00]
         },
-        zone: "Grand Salon — Södra Loungeväggen"
+        zone: "Vestibul & Entré — Fondvägg"
     },
 
     // --- 3. MATPLATS / DINING ---
@@ -379,65 +362,37 @@ const WALKAROUND_HOTSPOTS = [
     {
         id: "entry",
         label: "1. Entré & Vestibul",
-        pos: [-2.0, 1.65, 7.8],
-        target: [-2.0, 1.65, 0.0],
-        description: "Välkommen in. Siktlinjer framåt mot vardagsrummet."
+        pos: [-2.40, 1.62, 4.80],
+        target: [-2.40, 1.62, 1.00],
+        description: "Välkommen in via vestibulen med fri siktlinje in mot vardagsrummet."
     },
     {
         id: "salon-overview",
-        label: "2. Grand Salon",
-        pos: [-0.5, 1.65, 0.5],
-        target: [-3.5, 1.65, -0.5],
-        description: "Rymligt vardagsrum med fönsternischer och Starck-inredning."
+        label: "2. Vardagsrum (Översikt)",
+        pos: [-2.20, 1.62, 1.90],
+        target: [0.60, 1.10, 1.40],
+        description: "Överblick över vardagsrummet, den platsbyggda soffgruppen, Starck-fåtöljen och fönsternischerna."
     },
     {
         id: "art-my-heart",
-        label: "3. Lounge (My Heart Has Teeth)",
-        pos: [2.5, 1.65, 1.1],
-        target: [2.5, 1.50, 3.95],
-        description: "Fokusvy framför det storskaliga verket (160 × 100 cm)."
+        label: "3. Loungesoffa (My Heart Has Teeth)",
+        pos: [0.60, 1.62, -0.60],
+        target: [0.60, 1.55, 3.12],
+        description: "Fokusvy framför sittgruppen med My Heart Has Teeth (160 × 100 cm) centrerat över soffan."
     },
     {
         id: "art-origami",
         label: "4. Gallerivägg (Origami & Vertigo)",
-        pos: [-2.4, 1.65, -0.2],
-        target: [-4.95, 1.50, -0.2],
-        description: "Betrakta Origami (100 × 120 cm) och Vertigo (40 × 100 cm)."
+        pos: [-1.40, 1.62, 0.20],
+        target: [-3.72, 1.55, 0.20],
+        description: "Betrakta Origami (100 × 120 cm) och Vertigo (40 × 100 cm) på den västra galleriväggen."
     },
     {
-        id: "dining",
-        label: "5. Matplats (Daylight)",
-        pos: [3.8, 1.65, -1.5],
-        target: [5.95, 1.50, -1.5],
-        description: "Matplats med Starck-matgrupp och Daylight över skänken."
-    },
-    {
-        id: "kitchen",
-        label: "6. Kök & Bar (Grapefruit & Pearls)",
-        pos: [3.8, 1.65, 6.0],
-        target: [3.8, 1.50, 8.45],
-        description: "Modern köksö i borstat rostfritt stål med kurerade verk."
-    },
-    {
-        id: "linnea-corridor",
-        label: "7. Linnéa Gallerigång (Black Mirror)",
-        pos: [-7.8, 1.65, -1.5],
-        target: [-10.45, 1.50, -1.5],
-        description: "Ateljégång med Black Mirror (160 × 100 cm) och färgstudier."
-    },
-    {
-        id: "master-suite",
-        label: "8. Master Suite (Linnéas Trilogi)",
-        pos: [-7.8, 1.65, 5.5],
-        target: [-7.8, 1.50, 8.45],
-        description: "Privat sovrum med Starck-plattformssäng och triptyk."
-    },
-    {
-        id: "terrace",
-        label: "9. Sky Terrace (Panoramautsikt)",
-        pos: [0.0, 1.65, -7.0],
-        target: [0.0, 1.65, -12.0],
-        description: "Takvåningens panoramaterrass med utsikt mot horisonten."
+        id: "window-niche",
+        label: "5. Fönsternisch & Utsikt",
+        pos: [0.00, 1.62, 0.60],
+        target: [0.00, 1.55, -3.20],
+        description: "Djup fönsternisch i borstat stål med panoramautsikt mot staden och takterrassen."
     }
 ];
 

@@ -23,8 +23,16 @@
         </div>
 
         <div class="header-right-actions">
+            <button id="btn-toggle-minimap" class="hud-action-btn active" title="Visa / Dölj orienteringskarta">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                <span>Karta</span>
+            </button>
+            <button id="btn-help" class="hud-action-btn" title="Visa rörelseinstruktioner">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Hjälp</span>
+            </button>
             <button id="btn-2d-overview" class="hud-action-btn" title="Visa 2D-bildöversikt">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 <span>2D Bildöversikt</span>
             </button>
             <a href="index.html" class="hud-action-btn hud-exit-btn" title="Lämna 3D och återvänd till startsidan">
@@ -55,7 +63,7 @@
             <div class="loader-bar-container">
                 <div class="loader-bar-fill"></div>
             </div>
-            <p class="loader-hint">Philippe Starck-arkitektur • 1 scenenhet = 1 meter • Ögonhöjd 1,65 m</p>
+            <p class="loader-hint">Philippe Starck-arkitektur • 1 scenenhet = 1 meter • Ögonhöjd 1,62 m</p>
         </div>
     </div>
 
@@ -79,20 +87,16 @@
     <div class="walkaround-hud">
         <!-- Hotspot Viewpoint Buttons -->
         <div class="room-nav-bar" id="hotspot-buttons-bar">
-            <button class="room-nav-btn active" data-hotspot="entry">Entré</button>
-            <button class="room-nav-btn" data-hotspot="salon-overview">Grand Salon</button>
-            <button class="room-nav-btn" data-hotspot="art-my-heart">Lounge</button>
+            <button class="room-nav-btn" data-hotspot="entry">Entré</button>
+            <button class="room-nav-btn active" data-hotspot="salon-overview">Vardagsrum</button>
+            <button class="room-nav-btn" data-hotspot="art-my-heart">Loungesoffa</button>
             <button class="room-nav-btn" data-hotspot="art-origami">Gallerivägg</button>
-            <button class="room-nav-btn" data-hotspot="dining">Matplats</button>
-            <button class="room-nav-btn" data-hotspot="kitchen">Kök & Bar</button>
-            <button class="room-nav-btn" data-hotspot="linnea-corridor">Linnéa Galleri</button>
-            <button class="room-nav-btn" data-hotspot="master-suite">Master Suite</button>
-            <button class="room-nav-btn" data-hotspot="terrace">Sky Terrace</button>
+            <button class="room-nav-btn" data-hotspot="window-niche">Fönsternisch</button>
         </div>
 
-        <!-- Controls Guide Badge -->
+        <!-- Controls Guide Badge (Auto-fades after 4s) -->
         <div class="controls-guide">
-            <span class="guide-desktop"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / Pilar för att gå • Dra med musen för att se dig om • Klicka på tavla eller golvcirkel för att gå dit</span>
+            <span class="guide-desktop"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / Pilar för att gå • Dra med musen för att se dig om • Klicka på tavla eller golvcirkel</span>
             <span class="guide-mobile">Dra för att se dig om • Tryck på golvcirklarna eller tavlor för att gå fram</span>
         </div>
     </div>
