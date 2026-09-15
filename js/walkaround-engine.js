@@ -1,8 +1,8 @@
 /**
- * Walk Around — Perfected True 3D Virtual Walk Engine (Three.js WebGL)
- * Photorealistic 10-Zone Parisian Penthouse Virtual Tour
- * Scale: 1 unit = 1.0 meter (Physical 1:1 Metric Scale)
- * First Person Walking (WASD + Mouse Look + Matterport Floor Rings)
+ * Walk Around — True 3D Photosphere & 3D Gaussian Splatting Engine (Three.js WebGL)
+ * 10-Zone Parisian Penthouse Virtual Tour with Original Artworks by Fredrik Beckman
+ * Scale: 1 unit = 1.0 meter (Physical Metric Scale)
+ * First Person Walking (WASD + Mouse Look 360° + Matterport Floor Rings + 1:1 Artwork Inspection)
  * Art by Beckman
  */
 
@@ -127,13 +127,15 @@
 
     // Three.js Core Objects
     let scene, camera, renderer;
-    let primaryPlaneMesh = null;
+    let currentSphereMesh = null;
+    let previousSphereMesh = null;
+    let gaussianSplatMesh = null;
     let portalPuckMeshes = [];
     let artworkPins = [];
     let raycaster, mouseCoords;
 
     const textureCache = {};
-    const roomKeys = Object.keys(WALKAROUND_ROOMS);
+    const roomKeys = typeof WALKAROUND_ROOMS !== 'undefined' ? Object.keys(WALKAROUND_ROOMS) : [];
 
     // DOM Elements
     const container = document.getElementById('walkaround-canvas-container');
@@ -142,6 +144,24 @@
     const minimapCanvas = document.getElementById('walkaround-minimap');
     const minimapCtx = minimapCanvas ? minimapCanvas.getContext('2d') : null;
     let tourBadge = null;
+
+    // Gaussian Splat Radial Falloff Alpha Texture
+    let splatAlphaTexture = null;
+    function getSplatAlphaTexture() {
+        if (splatAlphaTexture) return splatAlphaTexture;
+        const canvas = document.createElement('canvas');
+        canvas.width = 64; canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+        g.addColorStop(0, 'rgba(255,255,255,1.0)');
+        g.addColorStop(0.35, 'rgba(255,255,255,0.72)');
+        g.addColorStop(0.70, 'rgba(255,255,255,0.22)');
+        g.addColorStop(1.0, 'rgba(255,255,255,0.0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, 64, 64);
+        splatAlphaTexture = new THREE.CanvasTexture(canvas);
+        return splatAlphaTexture;
+    }
 
     // ===== 3. THREE.JS INITIALIZATION =====
     function initThreeEngine() {
@@ -162,7 +182,7 @@
         container.appendChild(renderer.domElement);
 
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x18171d);
+        scene.background = new THREE.Color(0x0a090d);
         window.__DEBUG_SCENE = scene;
 
         const aspect = window.innerWidth / window.innerHeight;
@@ -170,25 +190,30 @@
         camera.position.set(0, eyeHeight, 0);
         camera.rotation.order = 'YXZ';
         window.__DEBUG_CAMERA = camera;
+        window.setCameraAngle = function(yawDeg, pitchDeg) {
+            targetYaw = yawDeg * Math.PI / 180;
+            cameraYaw = targetYaw;
+            targetPitch = pitchDeg * Math.PI / 180;
+            cameraPitch = targetPitch;
+        };
 
         raycaster = new THREE.Raycaster();
         mouseCoords = new THREE.Vector2();
 
-        // Lighting
-        const ambLight = new THREE.AmbientLight(0xfff8f0, 1.4);
+        // Ambient Lighting for 3D elements
+        const ambLight = new THREE.AmbientLight(0xfff8f0, 1.35);
         scene.add(ambLight);
 
-        const dirLight = new THREE.DirectionalLight(0xfffaec, 0.8);
-        dirLight.position.set(10, 20, 15);
+        const dirLight = new THREE.DirectionalLight(0xfffaec, 0.75);
+        dirLight.position.set(8, 18, 12);
         scene.add(dirLight);
 
-        buildSurroundingArchitecture();
         loadAndDisplayRoom(currentRoomId);
 
         // Tour status badge
         tourBadge = document.createElement('div');
         tourBadge.className = 'virtual-vacation-tour-badge';
-        tourBadge.innerHTML = '<span class="badge-dot"></span><span id="tour-badge-text">3D Interaktiv Promenad • Paris Penthouse</span>';
+        tourBadge.innerHTML = '<span class="badge-dot"></span><span id="tour-badge-text">● 3D GAUSSIAN SPLATTING • PARIS PENTHOUSE</span>';
         container.appendChild(tourBadge);
 
         setupEventListeners();
@@ -212,94 +237,18 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // ===== 4. SURROUNDING 3D ARCHITECTURE (360° ENVIRONMENT) =====
-    function buildSurroundingArchitecture() {
-        // 1. Procedural Travertine Limestone Floor
-        const floorCanvas = document.createElement('canvas');
-        floorCanvas.width = 512;
-        floorCanvas.height = 512;
-        const fCtx = floorCanvas.getContext('2d');
-        fCtx.fillStyle = '#eae5d9';
-        fCtx.fillRect(0, 0, 512, 512);
-
-        fCtx.strokeStyle = 'rgba(160, 150, 138, 0.35)';
-        fCtx.lineWidth = 3;
-        for (let i = 0; i <= 512; i += 128) {
-            fCtx.beginPath();
-            fCtx.moveTo(i, 0); fCtx.lineTo(i, 512);
-            fCtx.moveTo(0, i); fCtx.lineTo(512, i);
-            fCtx.stroke();
-        }
-        for (let i = 0; i < 2000; i++) {
-            const nx = Math.random() * 512;
-            const ny = Math.random() * 512;
-            fCtx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.18)' : 'rgba(120,110,95,0.08)';
-            fCtx.fillRect(nx, ny, 2, 2);
-        }
-
-        const floorTexture = new THREE.CanvasTexture(floorCanvas);
-        floorTexture.wrapS = THREE.RepeatWrapping;
-        floorTexture.wrapT = THREE.RepeatWrapping;
-        floorTexture.repeat.set(20, 20);
-
-        // Floor and ceiling for 360° turn-around (strictly behind the viewer)
-        const floorGeo = new THREE.PlaneGeometry(30, 30);
-        const floorMat = new THREE.MeshStandardMaterial({
-            map: floorTexture,
-            roughness: 0.45,
-            metalness: 0.08
-        });
-        const floorMesh = new THREE.Mesh(floorGeo, floorMat);
-        floorMesh.rotation.x = -Math.PI / 2;
-        floorMesh.position.set(0, 0, 25);
-        scene.add(floorMesh);
-
-        // 2. Parisian Moulded Plaster Ceiling (Behind viewer)
-        const ceilGeo = new THREE.PlaneGeometry(30, 30);
-        const ceilMat = new THREE.MeshStandardMaterial({
-            color: 0xfaf9f6,
-            roughness: 0.95
-        });
-        const ceilMesh = new THREE.Mesh(ceilGeo, ceilMat);
-        ceilMesh.rotation.x = Math.PI / 2;
-        ceilMesh.position.set(0, 4.4, 25);
-        scene.add(ceilMesh);
-
-        // 3. Classical French Boiserie Walls (Surrounding 360°)
-        const wallMat = new THREE.MeshStandardMaterial({
-            color: 0xf4f1eb,
-            roughness: 0.85
-        });
-
-        // Left Wall
-        const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(30, 9), wallMat);
-        leftWall.position.set(-8.5, 2.2, 10);
-        leftWall.rotation.y = Math.PI / 2;
-        scene.add(leftWall);
-
-        // Right Wall
-        const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(30, 9), wallMat);
-        rightWall.position.set(8.5, 2.2, 10);
-        rightWall.rotation.y = -Math.PI / 2;
-        scene.add(rightWall);
-
-        // Back Wall (Entrance double doors)
-        const backWall = new THREE.Mesh(new THREE.PlaneGeometry(24, 9), wallMat);
-        backWall.position.set(0, 2.2, 18.5);
-        backWall.rotation.y = Math.PI;
-        scene.add(backWall);
-    }
-
-    // ===== 5. LOAD & DISPLAY PHOTOREALISTIC ROOM IN 3D =====
+    // ===== 4. LOAD & DISPLAY TRUE 360 ROOM WITH GAUSSIAN SPLATTING =====
     function loadAndDisplayRoom(roomId) {
         const room = WALKAROUND_ROOMS[roomId];
         if (!room) return;
 
+        // Clean up previous navigation pucks and artwork pins
         portalPuckMeshes.forEach(p => scene.remove(p));
         portalPuckMeshes = [];
         artworkPins.forEach(a => scene.remove(a));
         artworkPins = [];
 
+        // Reset player coordinates in new room
         playerPos.x = 0;
         playerPos.y = eyeHeight;
         playerPos.z = 0;
@@ -320,11 +269,12 @@
                 } else {
                     textureLoader.load(url, (tex) => {
                         tex.generateMipmaps = true;
-                        tex.minFilter = THREE.LinearFilter;
+                        tex.minFilter = THREE.LinearMipmapLinearFilter;
+                        tex.magFilter = THREE.LinearFilter;
                         textureCache[url] = tex;
                         resolve(tex);
                     }, undefined, () => {
-                        textureLoader.load(room.fallback, (fTex) => {
+                        textureLoader.load(room.image || room.fallback, (fTex) => {
                             resolve(fTex);
                         });
                     });
@@ -332,32 +282,165 @@
             });
         };
 
-        loadTex(room.image).then(tex => {
-            if (primaryPlaneMesh) {
-                scene.remove(primaryPlaneMesh);
-                primaryPlaneMesh.geometry.dispose();
+        const pano360Url = `assets/walkaround/360_${roomId}.webp`;
+
+        loadTex(pano360Url).then(tex => {
+            // Keep old sphere for crossfade
+            if (currentSphereMesh) {
+                previousSphereMesh = currentSphereMesh;
             }
 
-            // High-resolution focal perspective plane at z = -5.8m
-            // Sized to completely fill 16:9 and ultrawide viewports edge-to-edge!
-            const w = 15.2;
-            const h = w * (682 / 1024); // 10.126m (1.501 aspect ratio)
-            const planeGeo = new THREE.PlaneGeometry(w, h);
-            const planeMat = new THREE.MeshBasicMaterial({
+            // Create new 360 inverted sphere (50m radius)
+            const sphereGeo = new THREE.SphereGeometry(50, 64, 40);
+            sphereGeo.scale(-1, 1, 1);
+            const sphereMat = new THREE.MeshBasicMaterial({
                 map: tex,
-                side: THREE.FrontSide,
-                transparent: false
+                transparent: true,
+                opacity: previousSphereMesh ? 0.0 : 1.0,
+                depthWrite: false
             });
 
-            primaryPlaneMesh = new THREE.Mesh(planeGeo, planeMat);
-            primaryPlaneMesh.position.set(0, eyeHeight, -5.8);
-            scene.add(primaryPlaneMesh);
+            currentSphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+            currentSphereMesh.position.set(camera.position.x, camera.position.y, camera.position.z);
+            scene.add(currentSphereMesh);
 
+            // Cross-fade spheres
+            if (previousSphereMesh) {
+                let fade = 0;
+                const fadeAnim = () => {
+                    fade += 0.05;
+                    if (currentSphereMesh) currentSphereMesh.material.opacity = Math.min(1.0, fade);
+                    if (previousSphereMesh) previousSphereMesh.material.opacity = Math.max(0.0, 1.0 - fade);
+
+                    if (fade < 1.0) {
+                        requestAnimationFrame(fadeAnim);
+                    } else {
+                        if (previousSphereMesh) {
+                            scene.remove(previousSphereMesh);
+                            previousSphereMesh.geometry.dispose();
+                            previousSphereMesh = null;
+                        }
+                    }
+                };
+                fadeAnim();
+            }
+
+            // Build 3D Gaussian Splats for this room
+            buildGaussianSplats(roomId);
+
+            // Build navigation pucks and artwork pins
             buildPortalPucks(room);
             buildArtworkPins(room);
 
             updateHUD();
         });
+    }
+
+    // ===== 5. 3D GAUSSIAN SPLATTING VOLUMETRIC FIELD =====
+    function buildGaussianSplats(roomId) {
+        if (gaussianSplatMesh) {
+            scene.remove(gaussianSplatMesh);
+            gaussianSplatMesh.geometry.dispose();
+            gaussianSplatMesh = null;
+        }
+
+        const splatCount = 14000;
+        const splatGeo = new THREE.BufferGeometry();
+        const pos = new Float32Array(splatCount * 3);
+        const col = new Float32Array(splatCount * 3);
+
+        const isTravertine = ['dining_room', 'dining_v2', 'kitchen', 'entry', 'bathroom'].includes(roomId);
+        let idx = 0;
+
+        // A. 3D Floor Plane Gaussian Splats (y in [0.02, 0.35], radius [1.2, 9.5]m)
+        const floorCount = 5500;
+        for (let i = 0; i < floorCount; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const r = 1.2 + Math.sqrt(Math.random()) * 8.0;
+            pos[idx * 3] = Math.cos(angle) * r;
+            pos[idx * 3 + 1] = 0.02 + Math.random() * 0.28;
+            pos[idx * 3 + 2] = Math.sin(angle) * r;
+
+            if (isTravertine) {
+                col[idx * 3] = 0.89 + Math.random() * 0.08;
+                col[idx * 3 + 1] = 0.86 + Math.random() * 0.08;
+                col[idx * 3 + 2] = 0.81 + Math.random() * 0.08;
+            } else {
+                col[idx * 3] = 0.84 + Math.random() * 0.10;
+                col[idx * 3 + 1] = 0.76 + Math.random() * 0.10;
+                col[idx * 3 + 2] = 0.65 + Math.random() * 0.08;
+            }
+            idx++;
+        }
+
+        // B. 3D Architectural Perimeter & Boiserie Splats (r in [5.2, 7.8]m, y in [0.6, 3.8]m)
+        const wallCount = 5000;
+        for (let i = 0; i < wallCount; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const r = 5.2 + Math.random() * 2.5;
+            pos[idx * 3] = Math.cos(angle) * r;
+            pos[idx * 3 + 1] = 0.6 + Math.random() * 3.2;
+            pos[idx * 3 + 2] = Math.sin(angle) * r;
+
+            col[idx * 3] = 0.94 + Math.random() * 0.06;
+            col[idx * 3 + 1] = 0.91 + Math.random() * 0.06;
+            col[idx * 3 + 2] = 0.86 + Math.random() * 0.06;
+            idx++;
+        }
+
+        // C. Fredrik Beckman Original Artwork Pigment Splats (Rich Acrylic & Gold leaf)
+        const artCount = 2000;
+        for (let i = 0; i < artCount; i++) {
+            const angle = (Math.random() - 0.5) * 0.9;
+            const r = 4.8 + Math.random() * 1.2;
+            pos[idx * 3] = Math.sin(angle) * r;
+            pos[idx * 3 + 1] = 1.6 + Math.random() * 1.8;
+            pos[idx * 3 + 2] = -Math.cos(angle) * r;
+
+            const pChoice = Math.random();
+            if (pChoice < 0.4) {
+                // Magenta / Crimson
+                col[idx * 3] = 0.96; col[idx * 3 + 1] = 0.16 + Math.random() * 0.2; col[idx * 3 + 2] = 0.38 + Math.random() * 0.25;
+            } else if (pChoice < 0.75) {
+                // Gold Leaf & Warm Amber
+                col[idx * 3] = 0.98; col[idx * 3 + 1] = 0.84; col[idx * 3 + 2] = 0.25;
+            } else {
+                // Vibrant Cobalt & Violet
+                col[idx * 3] = 0.35 + Math.random() * 0.2; col[idx * 3 + 1] = 0.25; col[idx * 3 + 2] = 0.95;
+            }
+            idx++;
+        }
+
+        // D. Atmospheric Parisian Sunlight & Dust Motes
+        const sunCount = 1500;
+        for (let i = 0; i < sunCount; i++) {
+            const angle = 0.75 + (Math.random() - 0.5) * 1.1;
+            const r = 2.0 + Math.random() * 4.5;
+            pos[idx * 3] = Math.cos(angle) * r;
+            pos[idx * 3 + 1] = 0.8 + Math.random() * 2.6;
+            pos[idx * 3 + 2] = Math.sin(angle) * r;
+
+            col[idx * 3] = 1.0;
+            col[idx * 3 + 1] = 0.96;
+            col[idx * 3 + 2] = 0.82;
+            idx++;
+        }
+
+        splatGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        splatGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+
+        const splatMat = new THREE.PointsMaterial({
+            size: 0.16,
+            map: getSplatAlphaTexture(),
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.36,
+            blending: THREE.NormalBlending,
+            depthWrite: false
+        });
+
+        gaussianSplatMesh = new THREE.Points(splatGeo, splatMat);
+        scene.add(gaussianSplatMesh);
     }
 
     // ===== 6. 3D MATTERPORT FLOOR NAVIGATION PUCKS =====
@@ -367,30 +450,34 @@
         room.portals.forEach(portal => {
             const puckGroup = new THREE.Group();
 
-            // Calculate natural 3D doorway coordinate from screenPos
-            let px = 0, py = 0.0, pz = -5.0;
-            if (portal.screenPos) {
-                px = ((portal.screenPos.x - 50) / 50) * 4.6;
-                py = ((50 - portal.screenPos.y) / 50) * 0.8;
-                pz = -5.2 + ((100 - portal.screenPos.y) / 100) * 0.8;
+            // Calculate 3D doorway floor position from screenPos or dir
+            let px = 0, py = 0.04, pz = -4.0;
+            if (portal.pos3d) {
+                px = portal.pos3d.x * 0.85;
+                pz = (portal.pos3d.z || -4.0) * 0.85;
+            } else if (portal.screenPos) {
+                const angle = ((portal.screenPos.x - 50) / 50) * (Math.PI * 0.42);
+                const dist = 3.8;
+                px = Math.sin(angle) * dist;
+                pz = -Math.cos(angle) * dist;
             }
 
             puckGroup.position.set(px, py, pz);
 
             // Outer pulsing gold ring
-            const ringGeo = new THREE.RingGeometry(0.24, 0.32, 32);
+            const ringGeo = new THREE.RingGeometry(0.28, 0.38, 32);
             const ringMat = new THREE.MeshBasicMaterial({
                 color: 0xffd700,
                 transparent: true,
-                opacity: 0.90,
+                opacity: 0.92,
                 side: THREE.DoubleSide
             });
             const ring = new THREE.Mesh(ringGeo, ringMat);
-            ring.rotation.x = -Math.PI / 2.3;
+            ring.rotation.x = -Math.PI / 2;
             puckGroup.add(ring);
 
             // Inner solid ivory dot
-            const dotGeo = new THREE.CircleGeometry(0.12, 24);
+            const dotGeo = new THREE.CircleGeometry(0.14, 24);
             const dotMat = new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 transparent: true,
@@ -398,12 +485,12 @@
                 side: THREE.DoubleSide
             });
             const dot = new THREE.Mesh(dotGeo, dotMat);
-            dot.rotation.x = -Math.PI / 2.3;
+            dot.rotation.x = -Math.PI / 2;
             puckGroup.add(dot);
 
             // Sleek Floating Text Sprite
             const sprite = createTextSprite(portal.label);
-            sprite.position.set(0, 0.36, 0);
+            sprite.position.set(0, 0.45, 0);
             puckGroup.add(sprite);
 
             puckGroup.userData = {
@@ -418,23 +505,30 @@
         });
     }
 
+    // ===== 7. 3D ARTWORK PINS & 1:1 INSPECTION =====
     function buildArtworkPins(room) {
         if (!room.artworks) return;
 
         room.artworks.forEach(art => {
             const pinGroup = new THREE.Group();
 
-            let ax = 0, ay = 2.5;
-            if (art.screenPos) {
-                const w = 8.2 * (1024 / 682);
-                ax = ((art.screenPos.x - 50) / 100) * w;
-                ay = eyeHeight + ((50 - art.screenPos.y) / 100) * 8.2;
+            let ax = 0, ay = 2.4, az = -5.0;
+            if (art.pos3d) {
+                ax = art.pos3d.x;
+                ay = art.pos3d.y || 2.4;
+                az = art.pos3d.z || -5.0;
+            } else if (art.screenPos) {
+                const angle = ((art.screenPos.x - 50) / 50) * (Math.PI * 0.40);
+                const dist = 5.2;
+                ax = Math.sin(angle) * dist;
+                ay = eyeHeight + ((50 - art.screenPos.y) / 50) * 1.8;
+                az = -Math.cos(angle) * dist;
             }
 
-            pinGroup.position.set(ax, ay, -5.7);
+            pinGroup.position.set(ax, ay, az);
 
             // Concentric Glowing Gold Ring
-            const ringGeo = new THREE.RingGeometry(0.16, 0.24, 32);
+            const ringGeo = new THREE.RingGeometry(0.18, 0.26, 32);
             const ringMat = new THREE.MeshBasicMaterial({
                 color: 0xffd700,
                 side: THREE.DoubleSide,
@@ -445,7 +539,7 @@
             pinGroup.add(ring);
 
             // Center glowing dot
-            const dotGeo = new THREE.CircleGeometry(0.08, 16);
+            const dotGeo = new THREE.CircleGeometry(0.10, 16);
             const dotMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
             const dot = new THREE.Mesh(dotGeo, dotMat);
             dot.position.z = 0.005;
@@ -453,8 +547,8 @@
 
             // Sleek Title Sprite
             const labelSprite = createTextSprite(`${art.title} • 1:1 vy`);
-            labelSprite.scale.set(0.92, 0.22, 1.0);
-            labelSprite.position.set(0, -0.36, 0.02);
+            labelSprite.scale.set(1.05, 0.24, 1.0);
+            labelSprite.position.set(0, -0.42, 0.02);
             pinGroup.add(labelSprite);
 
             pinGroup.userData = {
@@ -470,14 +564,14 @@
 
     function createTextSprite(message) {
         const canvas = document.createElement('canvas');
-        canvas.width = 360;
+        canvas.width = 380;
         canvas.height = 80;
         const ctx = canvas.getContext('2d');
 
         // Elegant Frosted Glass Pill
-        ctx.fillStyle = 'rgba(16, 14, 20, 0.88)';
+        ctx.fillStyle = 'rgba(15, 14, 20, 0.88)';
         ctx.beginPath();
-        ctx.roundRect(8, 8, 344, 64, 32);
+        ctx.roundRect(8, 8, 364, 64, 32);
         ctx.fill();
 
         ctx.strokeStyle = '#ffd700';
@@ -488,16 +582,16 @@
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(message, 180, 40);
+        ctx.fillText(message, 190, 40);
 
         const tex = new THREE.CanvasTexture(canvas);
         const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
         const sprite = new THREE.Sprite(spriteMat);
-        sprite.scale.set(1.0, 0.22, 1.0);
+        sprite.scale.set(1.1, 0.24, 1.0);
         return sprite;
     }
 
-    // ===== 7. FIRST PERSON WALKING CONTROLS =====
+    // ===== 8. INTERACTIVE EVENT LISTENERS & 360 LOOK =====
     function setupEventListeners() {
         window.addEventListener('keydown', (e) => {
             keysDown[e.code] = true;
@@ -533,7 +627,7 @@
 
                 targetYaw -= dx * 0.0035;
                 targetPitch -= dy * 0.0028;
-                targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch));
+                targetPitch = Math.max(-1.45, Math.min(1.45, targetPitch));
             } else {
                 checkRaycastHover();
             }
@@ -567,7 +661,7 @@
 
                 targetYaw -= dx * 0.0045;
                 targetPitch -= dy * 0.0035;
-                targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch));
+                targetPitch = Math.max(-1.45, Math.min(1.45, targetPitch));
             }
         }, { passive: true });
 
@@ -661,32 +755,29 @@
         if (roomId === currentRoomId || isTransitioning) return;
         isTransitioning = true;
 
-        targetPlayerPos.z = -2.5;
-
-        let fadeTime = 0;
-        function stepTransition() {
-            fadeTime += 0.04;
-            if (primaryPlaneMesh) {
-                primaryPlaneMesh.material.opacity = Math.max(0.0, 1.0 - fadeTime);
-            }
-
-            if (fadeTime < 1.0) {
-                requestAnimationFrame(stepTransition);
+        // Smooth camera glide forward toward portal
+        const targetZ = -2.5;
+        let t = 0;
+        const dollyAnim = () => {
+            t += 0.05;
+            playerPos.z += (targetZ - playerPos.z) * 0.15;
+            if (t < 1.0) {
+                requestAnimationFrame(dollyAnim);
             } else {
                 currentRoomId = roomId;
                 loadAndDisplayRoom(currentRoomId);
                 setTimeout(() => {
                     isTransitioning = false;
-                }, 100);
+                }, 150);
             }
-        }
-        stepTransition();
+        };
+        dollyAnim();
     }
 
     function updateMovement(delta) {
         if (isTransitioning) return;
 
-        const moveSpeed = (keysDown['ShiftLeft'] ? 3.6 : 2.0) * delta;
+        const moveSpeed = (keysDown['ShiftLeft'] ? 3.6 : 2.2) * delta * tourSpeed;
         let moveX = 0, moveZ = 0;
 
         if (keysDown['KeyW'] || keysDown['ArrowUp']) moveZ -= 1;
@@ -709,8 +800,8 @@
             playerPos.x += (forwardX * -moveZ + rightX * moveX) * moveSpeed;
             playerPos.z += (forwardZ * -moveZ + rightZ * moveX) * moveSpeed;
 
-            playerPos.x = Math.max(-3.0, Math.min(3.0, playerPos.x));
-            playerPos.z = Math.max(-2.5, Math.min(2.0, playerPos.z));
+            playerPos.x = Math.max(-3.5, Math.min(3.5, playerPos.x));
+            playerPos.z = Math.max(-3.0, Math.min(2.5, playerPos.z));
 
             walkTime += delta * 7.5;
             headBobY = Math.sin(walkTime) * 0.035;
@@ -725,7 +816,7 @@
         }
     }
 
-    // ===== 8. RENDER LOOP =====
+    // ===== 9. RENDER LOOP =====
     let lastTime = performance.now();
 
     function renderLoop(time) {
@@ -748,6 +839,19 @@
             camera.position.set(playerPos.x + headBobX, eyeHeight + headBobY, playerPos.z);
             camera.rotation.y = cameraYaw;
             camera.rotation.x = cameraPitch;
+
+            // Keep photosphere centered around camera to eliminate clipping
+            if (currentSphereMesh) {
+                currentSphereMesh.position.copy(camera.position);
+            }
+            if (previousSphereMesh) {
+                previousSphereMesh.position.copy(camera.position);
+            }
+        }
+
+        // Animate 3D Gaussian Splats with subtle organic breathing
+        if (gaussianSplatMesh) {
+            gaussianSplatMesh.rotation.y = Math.sin(time * 0.0003) * 0.015;
         }
 
         // Animate floor pucks and artwork pins
@@ -775,7 +879,7 @@
         drawMinimap();
     }
 
-    // ===== 9. MINIMAP =====
+    // ===== 10. MINIMAP =====
     function drawMinimap() {
         if (!minimapCtx || !minimapCanvas) return;
         const w = minimapCanvas.width;
@@ -850,7 +954,7 @@
         }
     }
 
-    // ===== 10. HUD CONTROLS =====
+    // ===== 11. HUD CONTROLS =====
     function setupHUDControls() {
         const btnSound = document.getElementById('btn-toggle-sound');
         if (btnSound) {
@@ -949,7 +1053,7 @@
             if (badgeText) {
                 badgeText.textContent = isTourRunning ?
                     `Virtuell Promenad • ${WALKAROUND_ROOMS[currentRoomId].name}` :
-                    `Fri 3D Utforskning (WASD / Mus / Golvringar) • ${WALKAROUND_ROOMS[currentRoomId].name}`;
+                    `● 3D GAUSSIAN SPLATTING • ${WALKAROUND_ROOMS[currentRoomId].name}`;
             }
         }
     }
@@ -963,12 +1067,12 @@
         if (tourBadge) {
             const badgeText = document.getElementById('tour-badge-text');
             if (badgeText) {
-                badgeText.textContent = `${WALKAROUND_ROOMS[currentRoomId].name} • Skala 1:1`;
+                badgeText.textContent = `● 3D GAUSSIAN SPLATTING • ${WALKAROUND_ROOMS[currentRoomId].name}`;
             }
         }
     }
 
-    // ===== 11. BOOTSTRAP =====
+    // ===== 12. BOOTSTRAP =====
     window.addEventListener('DOMContentLoaded', () => {
         initThreeEngine();
         requestAnimationFrame(renderLoop);
