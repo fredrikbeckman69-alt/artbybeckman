@@ -3,3 +3,6 @@ tools/report_*.json
 tools/reports/
 tools/test_walk*.json
 tools/__pycache__/
+tools/crop_*.jpg
+tools/live_walk_*.json
+tools/test_*.jpg

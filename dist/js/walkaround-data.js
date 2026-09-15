@@ -4,7 +4,7 @@ const WALKAROUND_ROOMS = {
         "name": "Entré & Vestibul",
         "roomNumber": "01",
         "tagline": "Skulptural spegel och flytande krom i kalkstensvestibul",
-        "description": "En arkitektonisk entré med golv i slipad fransk kalksten, en flytande organisk konsol i borstat stål och en djup vinröd skulpturstol. På galleriväggen hänger två kurerade verk i guld och magenta.",
+        "description": "En arkitektonisk entré med golv i slipad fransk kalksten, en flytande organisk konsol i borstat stål och en djup vinröd skulpturstol. På galleriväggen hänger Fredrik Beckmans originalverk Golden Ticket och Warmpop.",
         "image": "assets/walkaround/entry.webp",
         "fallback": "assets/walkaround/entry.jpg",
         "thumb": "assets/walkaround/entry_thumb.webp",
@@ -49,10 +49,10 @@ const WALKAROUND_ROOMS = {
                 "zone": "Entré — Högra galleriväggen (Övre)",
                 "filename": "271 GOLDEN TICKET.webp",
                 "originalFilename": "271 GOLDEN TICKET.jpg",
-                "description": "Slankt vertikalt verk i guld-, magenta- och koppartoner med dramatisk textur och guldglans i entréns galleribelysning.",
+                "description": "Slankt vertikalt originalverk av Fredrik Beckman i guld-, magenta- och koppartoner med dramatisk textur och guldglans i entréns galleribelysning.",
                 "screenPos": {
-                    "x": 73.2,
-                    "y": 23.5,
+                    "x": 72.4,
+                    "y": 21.8,
                     "radius": 65
                 }
             },
@@ -65,10 +65,26 @@ const WALKAROUND_ROOMS = {
                 "zone": "Entré — Högra galleriväggen (Nedre)",
                 "filename": "264 WARMPOP.webp",
                 "originalFilename": "264 WARMPOP.jpg",
-                "description": "Intim kvadratisk färgstudie med varma pop-konstiga kontraster under högblank resin, hängd strax under Golden Ticket.",
+                "description": "Intim kvadratisk färgstudie under högblank resin, hängd strax under Golden Ticket.",
                 "screenPos": {
-                    "x": 78.0,
-                    "y": 48.5,
+                    "x": 77.7,
+                    "y": 47.7,
+                    "radius": 50
+                }
+            },
+            {
+                "id": 270,
+                "title": "Origami",
+                "size": "100 × 120 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter",
+                "zone": "Vardagsrum via dörrportal",
+                "filename": "270 ORIGAMI.webp",
+                "originalFilename": "270 ORIGAMI.jpg",
+                "description": "Monumentalt verk av Fredrik Beckman synligt genom den stora portalen in till vardagsrummet.",
+                "screenPos": {
+                    "x": 28.4,
+                    "y": 40.9,
                     "radius": 50
                 }
             }
@@ -99,7 +115,7 @@ const WALKAROUND_ROOMS = {
         "name": "Grand Living Room",
         "roomNumber": "02",
         "tagline": "Svängd bouclésoffa, flytande krom och utsikt mot Paris",
-        "description": "Salongens hjärta i Haussmann-stil med högt till tak, stuckatur, generösa spröjsade fönster och smidesbalkonger. En svängd modulsoffa i benvit bouclé ramar in ett skulpturalt soffbord i flytande krom under Fredrik Beckmans monumentala verk.",
+        "description": "Salongens hjärta i Haussmann-stil med högt till tak, stuckatur och smidesbalkonger. Över den vita skänken tronar Fredrik Beckmans mästerverk My Heart Has Teeth.",
         "image": "assets/walkaround/living_room.webp",
         "fallback": "assets/walkaround/living_room.jpg",
         "thumb": "assets/walkaround/living_room_thumb.webp",
@@ -114,7 +130,7 @@ const WALKAROUND_ROOMS = {
                 "yaw": -0.05,
                 "pitch": -0.02,
                 "zoom": 1.0,
-                "duration": 3.5,
+                "duration:": 3.5,
                 "label": "Salongsöversikt mot bouclésoffan"
             },
             {
@@ -144,10 +160,10 @@ const WALKAROUND_ROOMS = {
                 "zone": "Vardagsrum — Fondvägg över skänk",
                 "filename": "265 MY HEART HAS TEETH.webp",
                 "originalFilename": "265 MY HEART HAS TEETH.JPG",
-                "description": "Monumentalt horisontellt blickfång med djup svärta, organiska färgfält i intensiv magenta och guld under glasklar resin. Kurerat som salongens centrala konstupplevelse.",
+                "description": "Fredrik Beckmans monumentala verk med djup svärta, organiska färgfält i intensiv magenta och guld under glasklar resin.",
                 "screenPos": {
                     "x": 53.8,
-                    "y": 30.2,
+                    "y": 30.9,
                     "radius": 95
                 }
             }
@@ -178,7 +194,7 @@ const WALKAROUND_ROOMS = {
         "name": "Grand Dining Room",
         "roomNumber": "03",
         "tagline": "Runt marmorbord, Louis Ghost-stolar och skulptural skänk",
-        "description": "En ljus och öppen matsal med ett runt bord i vit Carraramarmor, transparenta Louis Ghost-stolar och en dramatisk pendelarmatur i borstat stål. På fondväggen hänger ett storskaligt färgsprakande verk ovanför en stålskänk.",
+        "description": "En ljus och öppen matsal med bord i Carraramarmor och skulptural skänk i stål. På fondväggen hänger Fredrik Beckmans verk Daylight.",
         "image": "assets/walkaround/dining_room.webp",
         "fallback": "assets/walkaround/dining_room.jpg",
         "thumb": "assets/walkaround/dining_room_thumb.webp",
@@ -223,27 +239,11 @@ const WALKAROUND_ROOMS = {
                 "zone": "Matsal — Fondvägg över rostfri skänk",
                 "filename": "258 DAYLIGHT.webp",
                 "originalFilename": "258 DAYLIGHT.jpg",
-                "description": "Kraftfull färgexplosion i magenta, koboltblått och skimrande guld som fångar det naturliga eftermiddagsljuset från de parisiska fönstren.",
+                "description": "Fredrik Beckmans kraftfulla färgexplosion i magenta, koboltblått och skimrande guld monterad över den rostfria skänken.",
                 "screenPos": {
-                    "x": 17.5,
-                    "y": 25.5,
+                    "x": 17.1,
+                    "y": 27.0,
                     "radius": 90
-                }
-            },
-            {
-                "id": 270,
-                "title": "Origami",
-                "size": "100 × 120 cm",
-                "year": "April 2026",
-                "material": "Akrylfärg, glitter",
-                "zone": "Salongen via dörrportal",
-                "filename": "270 ORIGAMI.webp",
-                "originalFilename": "270 ORIGAMI.jpg",
-                "description": "Fasetterade geometriska plan synliga genom dubbeldörrarna mot salongen.",
-                "screenPos": {
-                    "x": 87.5,
-                    "y": 38.0,
-                    "radius": 55
                 }
             }
         ],
@@ -273,7 +273,7 @@ const WALKAROUND_ROOMS = {
         "name": "Minimalistiskt Kök",
         "roomNumber": "04",
         "tagline": "Köksö i massivt rostfritt stål, Philippe Starck-barstolar",
-        "description": "Monolitisk minimalism med en skulptural köksö i borstat rostfritt stål, integrerade vitvaror, koniska pendellampor och barstolar. På den ljusa fönsterväggen kontrasterar ett intensivt färgverk i akryl.",
+        "description": "Monolitisk minimalism i borstat rostfritt stål. På den ljusa fönsterväggen hänger Fredrik Beckmans färgstarka pop-art verk Chromeyellowred 1.0.",
         "image": "assets/walkaround/kitchen.webp",
         "fallback": "assets/walkaround/kitchen.jpg",
         "thumb": "assets/walkaround/kitchen_thumb.webp",
@@ -318,10 +318,10 @@ const WALKAROUND_ROOMS = {
                 "zone": "Kök — Vänster fönstervägg",
                 "filename": "22. CHROMEYELLOWRED 1.0.webp",
                 "originalFilename": "22. CHROMEYELLOWRED 1.0.JPG",
-                "description": "Intensiv pop-art färgstudie med rå energi som bryter av kökets strama stålytor.",
+                "description": "Intensiv pop-art färgstudie av Fredrik Beckman som bryter av kökets strama stålytor.",
                 "screenPos": {
-                    "x": 7.8,
-                    "y": 32.5,
+                    "x": 7.5,
+                    "y": 35.2,
                     "radius": 70
                 }
             }
@@ -352,7 +352,7 @@ const WALKAROUND_ROOMS = {
         "name": "Master Bedroom",
         "roomNumber": "05",
         "tagline": "Bouclésäng, skulptural metallbänk och balkong mot Paris",
-        "description": "En rofylld och lyxig sovrumssvit med skräddarsydd säng i krämfärgad bouclé, cylindriska sängbord i polerat stål och en organisk metallbänk vid fotändan. Över sängen tronar ett monumentalt färgverk i akryl och guld.",
+        "description": "En rofylld och lyxig sovrumssvit med säng i krämfärgad bouclé och metallbänk. Över sänggaveln hänger Fredrik Beckmans monumentala mästerverk Origami.",
         "image": "assets/walkaround/bedroom.webp",
         "fallback": "assets/walkaround/bedroom.jpg",
         "thumb": "assets/walkaround/bedroom_thumb.webp",
@@ -391,16 +391,16 @@ const WALKAROUND_ROOMS = {
             {
                 "id": 270,
                 "title": "Origami (Monumental Suite)",
-                "size": "160 × 110 cm",
+                "size": "100 × 120 cm",
                 "year": "April 2026",
                 "material": "Akrylfärg, glitter, guldstoff",
                 "zone": "Sovrum — Huvudvägg över sänggavel",
                 "filename": "270 ORIGAMI.webp",
                 "originalFilename": "270 ORIGAMI.jpg",
-                "description": "Monumentalt verk med skimrande fasetter i magenta, guld och djupblått som reflekterar morgonljuset från den parisiska avenyn.",
+                "description": "Fredrik Beckmans mästerverk med fasetterade plan i skimrande glitter, magenta och guld monterat över sänggaveln.",
                 "screenPos": {
-                    "x": 21.8,
-                    "y": 21.5,
+                    "x": 21.9,
+                    "y": 23.0,
                     "radius": 95
                 }
             }
@@ -438,10 +438,10 @@ const WALKAROUND_CURATED_ROOM = [
         "zone": "Vardagsrum — Fondvägg över skänk",
         "filename": "265 MY HEART HAS TEETH.webp",
         "originalFilename": "265 MY HEART HAS TEETH.JPG",
-        "description": "Monumentalt horisontellt blickfång med djup svärta, organiska färgfält i intensiv magenta och guld under glasklar resin. Kurerat som salongens centrala konstupplevelse.",
+        "description": "Fredrik Beckmans monumentala verk med djup svärta, organiska färgfält i intensiv magenta och guld under glasklar resin.",
         "screenPos": {
             "x": 53.8,
-            "y": 30.2,
+            "y": 30.9,
             "radius": 95
         }
     },
@@ -454,26 +454,26 @@ const WALKAROUND_CURATED_ROOM = [
         "zone": "Matsal — Fondvägg över rostfri skänk",
         "filename": "258 DAYLIGHT.webp",
         "originalFilename": "258 DAYLIGHT.jpg",
-        "description": "Kraftfull färgexplosion i magenta, koboltblått och skimrande guld som fångar det naturliga eftermiddagsljuset från de parisiska fönstren.",
+        "description": "Fredrik Beckmans kraftfulla färgexplosion i magenta, koboltblått och skimrande guld monterad över den rostfria skänken.",
         "screenPos": {
-            "x": 17.5,
-            "y": 25.5,
+            "x": 17.1,
+            "y": 27.0,
             "radius": 90
         }
     },
     {
         "id": 270,
         "title": "Origami (Monumental Suite)",
-        "size": "160 × 110 cm",
+        "size": "100 × 120 cm",
         "year": "April 2026",
         "material": "Akrylfärg, glitter, guldstoff",
         "zone": "Sovrum — Huvudvägg över sänggavel",
         "filename": "270 ORIGAMI.webp",
         "originalFilename": "270 ORIGAMI.jpg",
-        "description": "Monumentalt verk med skimrande fasetter i magenta, guld och djupblått som reflekterar morgonljuset från den parisiska avenyn.",
+        "description": "Fredrik Beckmans mästerverk med fasetterade plan i skimrande glitter, magenta och guld monterat över sänggaveln.",
         "screenPos": {
-            "x": 21.8,
-            "y": 21.5,
+            "x": 21.9,
+            "y": 23.0,
             "radius": 95
         }
     },
@@ -486,10 +486,10 @@ const WALKAROUND_CURATED_ROOM = [
         "zone": "Entré — Högra galleriväggen (Övre)",
         "filename": "271 GOLDEN TICKET.webp",
         "originalFilename": "271 GOLDEN TICKET.jpg",
-        "description": "Slankt vertikalt verk i guld-, magenta- och koppartoner med dramatisk textur och guldglans i entréns galleribelysning.",
+        "description": "Slankt vertikalt originalverk av Fredrik Beckman i guld-, magenta- och koppartoner med dramatisk textur och guldglans i entréns galleribelysning.",
         "screenPos": {
-            "x": 73.2,
-            "y": 23.5,
+            "x": 72.4,
+            "y": 21.8,
             "radius": 65
         }
     },
@@ -502,10 +502,10 @@ const WALKAROUND_CURATED_ROOM = [
         "zone": "Entré — Högra galleriväggen (Nedre)",
         "filename": "264 WARMPOP.webp",
         "originalFilename": "264 WARMPOP.jpg",
-        "description": "Intim kvadratisk färgstudie med varma pop-konstiga kontraster under högblank resin, hängd strax under Golden Ticket.",
+        "description": "Intim kvadratisk färgstudie under högblank resin, hängd strax under Golden Ticket.",
         "screenPos": {
-            "x": 78.0,
-            "y": 48.5,
+            "x": 77.7,
+            "y": 47.7,
             "radius": 50
         }
     },
@@ -518,10 +518,10 @@ const WALKAROUND_CURATED_ROOM = [
         "zone": "Kök — Vänster fönstervägg",
         "filename": "22. CHROMEYELLOWRED 1.0.webp",
         "originalFilename": "22. CHROMEYELLOWRED 1.0.JPG",
-        "description": "Intensiv pop-art färgstudie med rå energi som bryter av kökets strama stålytor.",
+        "description": "Intensiv pop-art färgstudie av Fredrik Beckman som bryter av kökets strama stålytor.",
         "screenPos": {
-            "x": 7.8,
-            "y": 32.5,
+            "x": 7.5,
+            "y": 35.2,
             "radius": 70
         }
     }
