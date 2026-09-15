@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walk Around — Virtuell Konstupplevelse — Art by Beckman</title>
-    <meta name="description" content="Upplev Fredrik Beckmans konst i ett modernt Philippe Starck-inspirerat hem med verklig fysisk skala och kurerade verk.">
+    <meta name="description" content="Upplev Fredrik Beckmans konst i en fotorealistisk virtuell promenad genom en modern Philippe Starck-inspirerad lyxvåning i Paris.">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style-v3.css">
+    <link rel="stylesheet" href="css/style-v3.min.css">
 </head>
 <body class="walkaround-body">
 
@@ -21,23 +21,27 @@
         </div>
         
         <div class="header-center-nav">
-            <span class="exhibition-tag">3D Utställning • Skala 1:1</span>
+            <span class="exhibition-tag">PARIS PENTHOUSE • VIRTUELL PROMENAD</span>
         </div>
 
         <div class="header-right-actions">
-            <button id="btn-toggle-minimap" class="hud-action-btn active" title="Visa / Dölj orienteringskarta">
+            <button id="btn-toggle-sound" class="hud-action-btn" type="button" title="Ljudkuliss och stegljud (Web Audio)">
+                <span id="sound-icon">🔇</span>
+                <span id="sound-text">Ljud</span>
+            </button>
+            <button id="btn-toggle-minimap" class="hud-action-btn active" type="button" title="Visa / Dölj orienteringskarta">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
                 <span>Karta</span>
             </button>
-            <button id="btn-help" class="hud-action-btn" title="Visa rörelseinstruktioner">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span>Hjälp</span>
-            </button>
-            <button id="btn-2d-overview" class="hud-action-btn" title="Visa 2D-bildöversikt">
+            <button id="btn-2d-overview" class="hud-action-btn" type="button" title="Visa 2D-bildöversikt">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                <span>2D Bildöversikt</span>
+                <span>2D Översikt</span>
             </button>
-            <a href="index.html" class="hud-action-btn hud-exit-btn" title="Lämna 3D och återvänd till startsidan">
+            <button id="btn-toggle-fullscreen" class="hud-action-btn" type="button" title="Växla helskärmsläge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                <span>Helskärm</span>
+            </button>
+            <a href="index.html" class="hud-action-btn hud-exit-btn" title="Lämna och återvänd till startsidan">
                 <span>✕ Lämna</span>
             </a>
             <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Öppna meny" aria-expanded="false">
@@ -61,57 +65,45 @@
         <div class="loader-content">
             <div class="loader-brand">ART BY BECKMAN</div>
             <h1 class="loader-title">Walk Around</h1>
-            <p class="loader-subtitle">Laddar lägenheten och verken i verklig fysisk skala...</p>
+            <p class="loader-subtitle">Laddar den parisiska lyxvåningen och verken i verklig skala...</p>
             <div class="loader-bar-container">
                 <div class="loader-bar-fill"></div>
             </div>
-            <p class="loader-hint">Philippe Starck-arkitektur • 1 scenenhet = 1 meter • Ögonhöjd 1,62 m</p>
-        </div>
-    </div>
-
-    <!-- ===== WEBGL FALLBACK BANNER (Hidden by default) ===== -->
-    <div id="webgl-fallback" class="webgl-fallback" style="display: none;">
-        <div class="fallback-card">
-            <h2>3D stöds inte på denna enhet</h2>
-            <p>Din webbläsare stöder inte WebGL eller hårdvaruacceleration. Du kan fortfarande utforska hela den kurerade utställningen i vår vanliga 2D-bildöversikt.</p>
-            <button id="fallback-open-2d" class="modal-link-btn">Öppna 2D Bildöversikt</button>
-            <a href="gallery.html" class="modal-link-btn" style="background:#444; margin-top:10px;">Gå till Galleriet</a>
+            <p class="loader-hint">Philippe Starck-arkitektur • Fotorealistisk miljö • Skala 1:1</p>
         </div>
     </div>
 
     <!-- ===== 3D CANVAS CONTAINER ===== -->
-    <div id="walkaround-canvas-container"></div>
+    <div id="walkaround-canvas-container" tabindex="0" aria-label="Interaktiv virtuell promenadvy"></div>
 
-    <!-- ===== HOVER / INTERACTION PROMPT ===== -->
-    <div id="walkaround-hover-prompt" class="walkaround-hover-prompt">Klicka för att inspektera verket</div>
-
-    <!-- ===== FLOATING NAVIGATION HUD ===== -->
+    <!-- ===== FLOATING NAVIGATION HUD (VIRTUAL VACATION PLAYER) ===== -->
     <div class="walkaround-hud">
-        <!-- Hotspot Viewpoint Buttons -->
-        <div class="room-nav-bar" id="hotspot-buttons-bar">
-            <button class="room-nav-btn" data-hotspot="entry">Entré</button>
-            <button class="room-nav-btn active" data-hotspot="salon-overview">Vardagsrum</button>
-            <button class="room-nav-btn" data-hotspot="art-my-heart">Loungesoffa</button>
-            <button class="room-nav-btn" data-hotspot="art-origami">Gallerivägg</button>
-            <button class="room-nav-btn" data-hotspot="window-niche">Fönsternisch</button>
+        <div class="virtual-vacation-player-bar">
+            <button id="btn-toggle-tour" class="tour-play-btn" type="button" aria-label="Starta eller pausa rundtur">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <span>Pausa Rundtur</span>
+            </button>
+            <div class="mode-pill-group">
+                <button class="mode-pill active" id="mode-walk" type="button">🚶‍♂️ Promenad</button>
+                <button class="mode-pill" id="mode-explore" type="button">🧭 Fri Utforskning</button>
+            </div>
+            <div class="room-nav-bar" id="room-nav-bar">
+                <!-- Dynamically filled by JS -->
+            </div>
+            <button id="btn-speed" class="speed-pill" type="button" title="Växla promenadhastighet">1.0x</button>
         </div>
 
         <!-- Controls Guide Badge (Auto-fades after 4s) -->
         <div class="controls-guide">
-            <span class="guide-desktop"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / Pilar för att gå • Dra med musen för att se dig om • Klicka på tavla eller golvcirkel</span>
-            <span class="guide-mobile">Dra för att se dig om • Tryck på golvcirklarna eller tavlor för att gå fram</span>
+            <span class="guide-desktop"><kbd>Mellanslag</kbd> Pausa/Starta • Dra med musen för att se dig om • Klicka på tavlor eller portaler</span>
+            <span class="guide-mobile">Dra för att se dig om • Tryck på tavlor eller portaler för att gå in i rum</span>
         </div>
     </div>
 
     <!-- ===== 2D ARCHITECTURAL MINIMAP ===== -->
     <div class="minimap-container">
         <div class="minimap-label">ORIENTERINGSKARTA</div>
-        <canvas id="walkaround-minimap" width="180" height="140"></canvas>
-    </div>
-
-    <!-- ===== MOBILE TOUCH JOYSTICK ===== -->
-    <div id="touch-joystick" class="touch-joystick">
-        <div id="touch-stick" class="touch-stick"></div>
+        <canvas id="walkaround-minimap" width="180" height="140" title="Klicka på ett rum på kartan för att gå dit"></canvas>
     </div>
 
     <!-- ===== ARTWORK DETAIL INSPECTION MODAL ===== -->
@@ -170,8 +162,6 @@
     </div>
 
     <!-- ===== SCRIPTS ===== -->
-    <!-- Three.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/mobile-menu.js"></script>
     <script src="js/walkaround-data.js"></script>
     <script src="js/walkaround-engine.js"></script>

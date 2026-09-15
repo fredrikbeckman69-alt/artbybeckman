@@ -1,3 +1,5 @@
 # Lighthouse audit reports
 tools/report_*.json
 tools/reports/
+tools/test_walk*.json
+tools/__pycache__/
