@@ -1,6 +1,7 @@
 /**
  * Walk Around — 3D Virtual Exhibition Engine
  * Scale: 1 unit = 1.0 meter (Physical 1:1 Scale)
+ * Complete Penthouse Exhibition
  * Art by Beckman
  */
 
@@ -28,7 +29,6 @@
     // ===== 2. STATE & CONFIGURATION =====
     const container = document.getElementById('walkaround-canvas-container');
     const loader = document.getElementById('walkaround-loader');
-    const loaderBar = document.querySelector('.loader-bar-fill');
     const hoverPrompt = document.getElementById('walkaround-hover-prompt');
     const artModal = document.getElementById('art-modal');
     const overviewModal = document.getElementById('overview-modal');
@@ -37,22 +37,21 @@
 
     let scene, camera, renderer;
     let clock = new THREE.Clock();
-    let isLocked = false;
     let activeArtwork = null;
     let isTransitioning = false;
     let transitionProgress = 0;
-    let transitionStartPos = new THREE.Vector3();
-    let transitionTargetPos = new THREE.Vector3();
+    const transitionStartPos = new THREE.Vector3();
+    const transitionTargetPos = new THREE.Vector3();
     let transitionStartRot = { yaw: 0, pitch: 0 };
     let transitionTargetRot = { yaw: 0, pitch: 0 };
     let transitionDuration = 1.2;
 
-    // Movement state
+    // Movement configuration (Exact Physical Scale)
     const EYE_HEIGHT = 1.65; // Standard human standing eye level (1.65m)
     const PLAYER_RADIUS = 0.35; // Collision radius (35cm)
-    const WALK_SPEED = 3.2; // meters per second
+    const WALK_SPEED = 3.4; // meters per second
     const keys = { forward: false, backward: false, left: false, right: false };
-    let moveVelocity = new THREE.Vector3();
+    const moveVelocity = new THREE.Vector3();
     let cameraYaw = 0;
     let cameraPitch = 0;
     let isDragging = false;
@@ -68,22 +67,18 @@
     const raycaster = new THREE.Raycaster();
     const mouseCoord = new THREE.Vector2();
 
-    // Check reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ===== 3. INITIALIZATION =====
     function init() {
-        // Scene setup
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0xefede8);
-        scene.fog = new THREE.FogExp2(0xefede8, 0.022);
+        scene.fog = new THREE.FogExp2(0xefede8, 0.018);
 
-        // Camera setup (65 FOV for natural architectural perspective)
-        camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.05, 60);
+        camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.05, 70);
         camera.position.set(-2.0, EYE_HEIGHT, 7.8);
         camera.rotation.order = 'YXZ';
 
-        // Renderer setup
         renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -94,19 +89,18 @@
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         container.appendChild(renderer.domElement);
 
-        // Build Architectural Environment
-        buildArchitecture();
+        // Build Complete Penthouse Environment
+        buildPenthouseArchitecture();
         buildStarckFurniture();
         setupLighting();
         spawnCuratedArtworks();
         spawnFloorHotspots();
 
-        // Setup Controls & Event Listeners
+        // Controls & UI Setup
         setupControls();
         setupUI();
         setup2DOverview();
 
-        // Responsive resize
         window.addEventListener('resize', onWindowResize);
 
         // Hide loader smoothly
@@ -117,19 +111,18 @@
             }
         }, 1200);
 
-        // Start render loop
         animate();
     }
 
-    // ===== 4. ARCHITECTURAL ENVIRONMENT (1 unit = 1.0m) =====
-    function buildArchitecture() {
+    // ===== 4. PENTHOUSE ARCHITECTURE (1 unit = 1.0m) =====
+    function buildPenthouseArchitecture() {
         const wallMat = new THREE.MeshStandardMaterial({
             color: 0xf5f3ee,
             roughness: 0.90,
             metalness: 0.02
         });
 
-        const accentWallMat = new THREE.MeshStandardMaterial({
+        const galleryAccentMat = new THREE.MeshStandardMaterial({
             color: 0xedeae3,
             roughness: 0.88,
             metalness: 0.02
@@ -140,8 +133,8 @@
             roughness: 0.95
         });
 
-        // Terrazzo / Pale Microcement Floor
-        const floorGeo = new THREE.PlaneGeometry(30, 30);
+        // Honed Terrazzo / Pale Microcement Floor
+        const floorGeo = new THREE.PlaneGeometry(36, 36);
         const floorMat = new THREE.MeshStandardMaterial({
             color: 0xe2ded7,
             roughness: 0.38,
@@ -153,21 +146,33 @@
         floor.receiveShadow = true;
         scene.add(floor);
 
-        // Ceiling at 3.00m height
-        const ceilingGeo = new THREE.PlaneGeometry(30, 30);
+        // Terrace Wood Decking (Outside North glass doors)
+        const deckGeo = new THREE.PlaneGeometry(16, 6);
+        const deckMat = new THREE.MeshStandardMaterial({
+            color: 0x8a7b6c,
+            roughness: 0.7,
+            metalness: 0.05
+        });
+        const deck = new THREE.Mesh(deckGeo, deckMat);
+        deck.rotation.x = -Math.PI / 2;
+        deck.position.set(0, 0.01, -7.5);
+        scene.add(deck);
+
+        // Interior Ceilings at 3.00m height
+        const ceilingGeo = new THREE.PlaneGeometry(32, 24);
         const ceiling = new THREE.Mesh(ceilingGeo, ceilingMat);
         ceiling.rotation.x = Math.PI / 2;
-        ceiling.position.y = 3.00;
+        ceiling.position.set(-2, 3.00, 2);
         scene.add(ceiling);
 
-        // Brushed Stainless Steel Baseboards (0.10m high)
+        // Brushed Stainless Steel Material
         const steelMat = new THREE.MeshStandardMaterial({
             color: 0xd8dadf,
             metalness: 0.92,
-            roughness: 0.24
+            roughness: 0.22
         });
 
-        // Helper function to create a solid wall with collision
+        // Helper: Create Wall with Baseboards & Collision
         function createWall(x, z, width, depth, height = 3.0, mat = wallMat) {
             const wallGeo = new THREE.BoxGeometry(width, height, depth);
             const wall = new THREE.Mesh(wallGeo, mat);
@@ -176,16 +181,16 @@
             wall.receiveShadow = true;
             scene.add(wall);
 
-            // Add stainless steel baseboard strip at base (0.08m height)
-            const trimHeight = 0.08;
-            const trimDepth = depth > width ? depth : depth + 0.02;
-            const trimWidth = width > depth ? width : width + 0.02;
-            const trimGeo = new THREE.BoxGeometry(trimWidth, trimHeight, trimDepth);
+            // Stainless Steel Baseboards (0.08m height)
+            const trimH = 0.08;
+            const trimD = depth > width ? depth : depth + 0.02;
+            const trimW = width > depth ? width : width + 0.02;
+            const trimGeo = new THREE.BoxGeometry(trimW, trimH, trimD);
             const trim = new THREE.Mesh(trimGeo, steelMat);
-            trim.position.set(x, trimHeight / 2, z);
+            trim.position.set(x, trimH / 2, z);
             scene.add(trim);
 
-            // Collision boundary
+            // Collision Bounding Box
             collisionBoxes.push({
                 minX: x - width / 2 - PLAYER_RADIUS,
                 maxX: x + width / 2 + PLAYER_RADIUS,
@@ -195,76 +200,88 @@
             return wall;
         }
 
-        // --- ENTRANCE VESTIBULE WALLS ---
-        // South boundary wall of Entrance
-        createWall(-2.0, 8.6, 4.2, 0.2);
-        // West boundary wall of Entrance
-        createWall(-4.1, 6.3, 0.2, 4.8);
-        // East wall separating Entrance from service area
-        createWall(0.1, 6.5, 0.2, 4.4);
+        // --- 1. ENTRÉ & VESTIBUL ---
+        createWall(-2.0, 8.6, 4.2, 0.2); // South entrance entry wall
+        createWall(-4.1, 6.3, 0.2, 4.8); // West entry wall
+        createWall(0.1, 6.5, 0.2, 4.4);  // East entry wall
 
-        // --- GRAND SALON WALLS ---
-        // West main gallery wall (housing Origami & Pink Dress)
-        createWall(-5.1, -0.2, 0.2, 8.4, 3.0, accentWallMat);
-        // South salon wall (housing My Heart Has Teeth)
-        createWall(2.5, 4.1, 5.0, 0.2, 3.0, accentWallMat);
-        // South corner return
-        createWall(-4.5, 4.1, 1.4, 0.2);
+        // --- 2. GRAND SALON (VARDAGSRUM) ---
+        createWall(-5.1, -0.2, 0.2, 8.4, 3.0, galleryAccentMat); // West main gallery wall (Origami & Vertigo)
+        createWall(2.5, 4.1, 5.0, 0.2, 3.0, galleryAccentMat);  // South salon wall (My Heart Has Teeth)
+        createWall(-4.5, 4.1, 1.4, 0.2);                       // Salon south return
 
-        // --- NORTH PANORAMIC WINDOW WALL (Deep recessed bays) ---
-        // North solid structural pillars
+        // --- 3. MATPLATS / DINING ---
+        createWall(6.1, -1.5, 0.2, 6.0, 3.0, galleryAccentMat); // East wall (Daylight)
+        createWall(1.5, 1.5, 0.2, 2.4);                        // Salon/Dining divider
+
+        // --- 4. KITCHEN STUDIO (KÖK & BAR) ---
+        createWall(4.0, 8.6, 4.2, 0.2, 3.0, galleryAccentMat); // South kitchen wall (Grapefruit & Pearls)
+        createWall(6.1, 6.5, 0.2, 4.4, 3.0, galleryAccentMat); // East kitchen wall (Junior B)
+
+        // --- 5. LINNÉA GALLERY CORRIDOR ---
+        createWall(-10.6, -1.5, 0.2, 6.2, 3.0, galleryAccentMat); // West corridor wall (Black Mirror, Graines, Love Is Magic)
+        createWall(-5.4, -1.5, 0.2, 6.0, 3.0, galleryAccentMat);  // East corridor wall (Love In Lo-fi, Waking Light, Help Me Lose My Mind)
+        createWall(-8.0, -4.6, 5.4, 0.2);                         // North corridor return
+
+        // --- 6. MASTER SUITE ---
+        createWall(-7.8, 8.6, 5.6, 0.2, 3.0, galleryAccentMat); // South bedroom wall (Linnéas Trilogi 1 & 3, Protected)
+        createWall(-10.6, 5.5, 0.2, 6.2, 3.0, galleryAccentMat); // West bedroom wall (Bungalow, Chaos)
+        createWall(-4.9, 6.5, 0.2, 4.4);                        // East bedroom corridor wall
+
+        // --- 7. NORTH PANORAMIC WINDOW WALL & SKY TERRACE ---
         createWall(-5.0, -4.6, 0.4, 0.4);
         createWall(0.0, -4.6, 0.4, 0.4);
         createWall(6.5, -4.6, 0.4, 0.4);
-        // North wall top lintel over windows
-        const lintelGeo = new THREE.BoxGeometry(12.0, 0.4, 0.4);
-        const lintel = new THREE.Mesh(lintelGeo, wallMat);
+
+        // Lintel over windows
+        const lintel = new THREE.Mesh(new THREE.BoxGeometry(12.0, 0.4, 0.4), wallMat);
         lintel.position.set(0.75, 2.8, -4.6);
         scene.add(lintel);
 
-        // North window glass with horizon light
+        // Glass window sliding panes
         const glassMat = new THREE.MeshPhysicalMaterial({
             color: 0xebf2fa,
             transparent: true,
-            opacity: 0.35,
-            roughness: 0.1,
+            opacity: 0.28,
+            roughness: 0.08,
             metalness: 0.1,
-            transmission: 0.7
+            transmission: 0.75
         });
-        const glassGeo = new THREE.PlaneGeometry(11.6, 2.6);
-        const windowPane = new THREE.Mesh(glassGeo, glassMat);
+        const windowPane = new THREE.Mesh(new THREE.PlaneGeometry(11.6, 2.6), glassMat);
         windowPane.position.set(0.75, 1.3, -4.58);
         scene.add(windowPane);
 
-        // Soft sky backdrop behind windows
-        const backdropGeo = new THREE.PlaneGeometry(24, 10);
-        const backdropMat = new THREE.MeshBasicMaterial({ color: 0xcedae8 });
+        // Terrace Glass Balustrade (1.1m height)
+        const railGlassMat = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.4,
+            roughness: 0.05
+        });
+        const railGeo = new THREE.BoxGeometry(16.0, 1.1, 0.04);
+        const rail = new THREE.Mesh(railGeo, railGlassMat);
+        rail.position.set(0, 0.55, -10.5);
+        scene.add(rail);
+
+        // Steel rail cap
+        const railCap = new THREE.Mesh(new THREE.BoxGeometry(16.0, 0.04, 0.08), steelMat);
+        railCap.position.set(0, 1.1, -10.5);
+        scene.add(railCap);
+
+        // Terrace boundary collision
+        collisionBoxes.push({ minX: -8.5, maxX: 8.5, minZ: -10.8, maxZ: -10.3 });
+        collisionBoxes.push({ minX: -8.5, maxX: -7.8, minZ: -10.5, maxZ: -4.8 });
+        collisionBoxes.push({ minX: 7.8, maxX: 8.5, minZ: -10.5, maxZ: -4.8 });
+
+        // Distant City Horizon Backdrop
+        const backdropGeo = new THREE.PlaneGeometry(40, 16);
+        const backdropMat = new THREE.MeshBasicMaterial({ color: 0xc8d7e6 });
         const backdrop = new THREE.Mesh(backdropGeo, backdropMat);
-        backdrop.position.set(0.75, 3.0, -8.0);
+        backdrop.position.set(0, 4.0, -18.0);
         scene.add(backdrop);
-
-        // North boundary collision
-        collisionBoxes.push({ minX: -6.0, maxX: 7.0, minZ: -4.8, maxZ: -4.4 });
-
-        // --- MATPLATS / DINING WALLS ---
-        // East wall of Dining (housing Daylight)
-        createWall(6.1, -1.5, 0.2, 6.0, 3.0, accentWallMat);
-        // Architectural partition between Salon and Dining with stainless opening
-        createWall(1.5, 1.5, 0.2, 2.4);
-
-        // Sculptural brushed stainless column (Starck architectural touch)
-        const colGeo = new THREE.CylinderGeometry(0.18, 0.18, 3.0, 32);
-        const column = new THREE.Mesh(colGeo, steelMat);
-        column.position.set(1.5, 1.5, 0.2);
-        column.castShadow = true;
-        scene.add(column);
-        collisionBoxes.push({ minX: 1.1, maxX: 1.9, minZ: -0.2, maxZ: 0.6 });
-
-        // Outer bounds failsafe collision
-        collisionBoxes.push({ minX: -8.0, maxX: 8.0, minZ: 8.7, maxZ: 10.0 });
     }
 
-    // ===== 5. STARCK-INSPIRED FURNITURE (Carefully Curated & Scaled) =====
+    // ===== 5. STARCK-INSPIRED FURNITURE =====
     function buildStarckFurniture() {
         const chromeMat = new THREE.MeshStandardMaterial({
             color: 0xcccccc,
@@ -291,13 +308,11 @@
             roughness: 0.6
         });
 
-        // 1. Lounge Sofa (Modern, low architectural profile in front of South wall)
-        // Position: x = 2.5, z = -0.2 (leaves 3.8m open distance to My Heart Has Teeth)
+        // 1. Salon Lounge Sofa
         const sofaGroup = new THREE.Group();
         const sofaBase = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.38, 1.0), darkCharcoalMat);
         sofaBase.position.y = 0.19;
         sofaBase.castShadow = true;
-        sofaBase.receiveShadow = true;
         sofaGroup.add(sofaBase);
 
         const sofaBack = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.35, 0.25), darkCharcoalMat);
@@ -309,27 +324,31 @@
         scene.add(sofaGroup);
         collisionBoxes.push({ minX: 1.0, maxX: 4.0, minZ: -1.0, maxZ: 0.4 });
 
-        // 2. Starck Louis Ghost Armchair (Translucent polycarbonate)
-        const chairGroup = new THREE.Group();
-        const seat = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.04, 0.5), ghostChairMat);
-        seat.position.y = 0.44;
-        chairGroup.add(seat);
+        // 2. Starck Ghost Armchairs (Salon & Nook)
+        function createGhostChair(x, z, rotY) {
+            const chairGroup = new THREE.Group();
+            const seat = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.04, 0.5), ghostChairMat);
+            seat.position.y = 0.44;
+            chairGroup.add(seat);
 
-        const back = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.03, 24), ghostChairMat);
-        back.rotation.x = Math.PI / 2;
-        back.position.set(0, 0.76, -0.22);
-        chairGroup.add(back);
+            const back = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.03, 24), ghostChairMat);
+            back.rotation.x = Math.PI / 2;
+            back.position.set(0, 0.76, -0.22);
+            chairGroup.add(back);
 
-        // Legs (Chrome thin legs)
-        const legGeo = new THREE.CylinderGeometry(0.015, 0.012, 0.44);
-        [[-0.22, -0.2], [0.22, -0.2], [-0.22, 0.2], [0.22, 0.2]].forEach(([lx, lz]) => {
-            const leg = new THREE.Mesh(legGeo, chromeMat);
-            leg.position.set(lx, 0.22, lz);
-            chairGroup.add(leg);
-        });
-        chairGroup.position.set(0.6, 0, 0.6);
-        chairGroup.rotation.y = Math.PI / 4;
-        scene.add(chairGroup);
+            const legGeo = new THREE.CylinderGeometry(0.015, 0.012, 0.44);
+            [[-0.22, -0.2], [0.22, -0.2], [-0.22, 0.2], [0.22, 0.2]].forEach(([lx, lz]) => {
+                const leg = new THREE.Mesh(legGeo, chromeMat);
+                leg.position.set(lx, 0.22, lz);
+                chairGroup.add(leg);
+            });
+            chairGroup.position.set(x, 0, z);
+            chairGroup.rotation.y = rotY;
+            scene.add(chairGroup);
+        }
+
+        createGhostChair(0.6, 0.6, Math.PI / 4);
+        createGhostChair(4.2, 0.6, -Math.PI / 4);
 
         // 3. Low Minimalist Coffee Table
         const tableTop = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.04, 0.6), chromeMat);
@@ -337,7 +356,7 @@
         tableTop.castShadow = true;
         scene.add(tableTop);
 
-        // 4. Dining Table & Chairs in Matplats (x = 3.8, z = -1.5)
+        // 4. Dining Table & Chairs (Matplats)
         const diningGroup = new THREE.Group();
         const diningTop = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.06, 0.9), oakMat);
         diningTop.position.y = 0.74;
@@ -356,37 +375,61 @@
         scene.add(diningGroup);
         collisionBoxes.push({ minX: 2.6, maxX: 5.0, minZ: -2.2, maxZ: -0.8 });
 
-        // 5. Brushed Stainless Steel Credenza below Daylight (x = 5.85, z = -1.5)
+        // 5. Stainless Credenza below Daylight
         const credenzaGeo = new THREE.BoxGeometry(0.40, 0.60, 1.8);
         const credenza = new THREE.Mesh(credenzaGeo, chromeMat);
         credenza.position.set(5.75, 0.30, -1.5);
         credenza.castShadow = true;
         scene.add(credenza);
         collisionBoxes.push({ minX: 5.4, maxX: 6.1, minZ: -2.6, maxZ: -0.4 });
+
+        // 6. Modern Stainless Kitchen Island (Kök & Bar)
+        const islandGeo = new THREE.BoxGeometry(1.0, 0.90, 2.4);
+        const island = new THREE.Mesh(islandGeo, chromeMat);
+        island.position.set(3.8, 0.45, 6.0);
+        island.castShadow = true;
+        island.receiveShadow = true;
+        scene.add(island);
+        collisionBoxes.push({ minX: 3.1, maxX: 4.5, minZ: 4.6, maxZ: 7.4 });
+
+        // 7. Master Suite Platform Bed with Stainless Plinth
+        const bedGroup = new THREE.Group();
+        const bedPlinth = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.20, 2.2), chromeMat);
+        bedPlinth.position.y = 0.10;
+        bedGroup.add(bedPlinth);
+
+        const mattress = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.30, 2.0), darkCharcoalMat);
+        mattress.position.y = 0.35;
+        bedGroup.add(mattress);
+
+        const headboard = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.80, 0.15), darkCharcoalMat);
+        headboard.position.set(0, 0.50, 1.05);
+        bedGroup.add(headboard);
+
+        bedGroup.position.set(-7.8, 0, 7.3);
+        scene.add(bedGroup);
+        collisionBoxes.push({ minX: -9.1, maxX: -6.5, minZ: 6.0, maxZ: 8.5 });
     }
 
-    // ===== 6. LIGHTING DESIGN (sRGB, Neutral 5000K Gallery Lighting) =====
+    // ===== 6. LIGHTING DESIGN =====
     function setupLighting() {
-        // Soft ambient fill
-        const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+        const ambient = new THREE.AmbientLight(0xffffff, 0.58);
         scene.add(ambient);
 
-        // Hemisphere sky/floor bounce
         const hemi = new THREE.HemisphereLight(0xf4f6ff, 0xdfdad2, 0.65);
         scene.add(hemi);
 
-        // Directional soft daylight from North windows
         const sun = new THREE.DirectionalLight(0xfffdfa, 0.75);
-        sun.position.set(1.0, 4.5, -6.0);
+        sun.position.set(1.0, 5.0, -8.0);
         sun.castShadow = true;
         sun.shadow.mapSize.width = 1024;
         sun.shadow.mapSize.height = 1024;
         sun.shadow.camera.near = 0.5;
-        sun.shadow.camera.far = 20;
-        sun.shadow.camera.left = -8;
-        sun.shadow.camera.right = 8;
-        sun.shadow.camera.top = 6;
-        sun.shadow.camera.bottom = -4;
+        sun.shadow.camera.far = 28;
+        sun.shadow.camera.left = -12;
+        sun.shadow.camera.right = 12;
+        sun.shadow.camera.top = 8;
+        sun.shadow.camera.bottom = -8;
         sun.shadow.bias = -0.0005;
         scene.add(sun);
     }
@@ -403,13 +446,10 @@
         WALKAROUND_CURATED_ROOM.forEach((art) => {
             const artGroup = new THREE.Group();
 
-            // 1. Artwork Canvas Mesh (Vibrant true-color rendering)
+            // 1. Artwork Canvas Mesh
             const canvasGeo = new THREE.PlaneGeometry(art.widthM, art.heightM);
-            const canvasMat = new THREE.MeshBasicMaterial({
-                color: 0xffffff
-            });
+            const canvasMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-            // Load high quality artwork texture
             const imagePath = encodeURI(`assets/images/${art.filename}`);
             textureLoader.load(imagePath, (tex) => {
                 tex.encoding = THREE.sRGBEncoding;
@@ -424,7 +464,7 @@
             canvasMesh.position.set(0, 0, 0.022);
             artGroup.add(canvasMesh);
 
-            // 2. Stretched Canvas Frame (0.035m / 3.5cm deep dark charcoal edges)
+            // 2. Stretched Canvas Frame (3.5cm deep dark charcoal edges)
             const frameGeo = new THREE.BoxGeometry(art.widthM + 0.008, art.heightM + 0.008, 0.035);
             const frameMat = new THREE.MeshStandardMaterial({ color: 0x18181a, roughness: 0.8 });
             const frameMesh = new THREE.Mesh(frameGeo, frameMat);
@@ -438,17 +478,7 @@
             plaque.position.set(0, plaqueY, 0.015);
             artGroup.add(plaque);
 
-            // 4. Directional Neutral Museum Spotlight
-            const spot = new THREE.SpotLight(0xfffaee, 1.4);
-            spot.position.set(0, 1.1, 1.6);
-            spot.angle = Math.PI / 4;
-            spot.penumbra = 0.6;
-            spot.distance = 4.5;
-            spot.decay = 1.2;
-            spot.target = artGroup;
-            artGroup.add(spot);
-
-            // 5. Invisible Hitbox for reliable raycast click & hover
+            // 4. Hitbox for clicking
             const hitGeo = new THREE.BoxGeometry(art.widthM * 1.1, art.heightM * 1.1, 0.4);
             const hitMat = new THREE.MeshBasicMaterial({ visible: false });
             const hitMesh = new THREE.Mesh(hitGeo, hitMat);
@@ -456,7 +486,7 @@
             artGroup.add(hitMesh);
             interactiveArtworks.push(hitMesh);
 
-            // Spatial Placement on Wall
+            // Placement
             artGroup.position.set(
                 art.wallPlacement.position[0],
                 art.wallPlacement.position[1],
@@ -499,8 +529,7 @@
 
             spotGroup.position.set(spot.pos[0], 0.015, spot.pos[2]);
 
-            // Hitbox for clicking
-            const hitGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.4, 16);
+            const hitGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.4, 16);
             const hitMat = new THREE.MeshBasicMaterial({ visible: false });
             const hit = new THREE.Mesh(hitGeo, hitMat);
             hit.position.y = 0.2;
@@ -518,7 +547,6 @@
         const spot = WALKAROUND_HOTSPOTS.find(h => h.id === hotspotId);
         if (!spot) return;
 
-        // Calculate target camera rotation
         const dx = spot.target[0] - spot.pos[0];
         const dz = spot.target[2] - spot.pos[2];
         const targetYaw = Math.atan2(-dx, -dz);
@@ -532,7 +560,6 @@
             targetPitch
         );
 
-        // Update active button state
         document.querySelectorAll('.room-nav-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.hotspot === hotspotId);
         });
@@ -543,7 +570,6 @@
         const wp = art.wallPlacement;
         const targetPos = new THREE.Vector3(wp.viewpoint[0], EYE_HEIGHT, wp.viewpoint[2]);
 
-        // Look directly at center of painting
         const dx = wp.position[0] - wp.viewpoint[0];
         const dz = wp.position[2] - wp.viewpoint[2];
         const targetYaw = Math.atan2(-dx, -dz);
@@ -569,7 +595,6 @@
         transitionTargetPos.copy(targetPos);
         transitionStartRot = { yaw: cameraYaw, pitch: cameraPitch };
 
-        // Normalize yaw angle delta
         let deltaYaw = targetYaw - cameraYaw;
         while (deltaYaw > Math.PI) deltaYaw -= Math.PI * 2;
         while (deltaYaw < -Math.PI) deltaYaw += Math.PI * 2;
@@ -582,9 +607,8 @@
 
     // ===== 10. CONTROLS & EVENT LISTENERS =====
     function setupControls() {
-        // Keyboard inputs
         window.addEventListener('keydown', (e) => {
-            if (artModal && artModal.classList.contains('active')) {
+            if (artModal && (artModal.classList.contains('active') || artModal.classList.contains('open'))) {
                 if (e.key === 'Escape') closeArtworkModal();
                 return;
             }
@@ -626,10 +650,9 @@
             }
         });
 
-        // Mouse Drag to look around
         const domEl = renderer.domElement;
         domEl.addEventListener('mousedown', (e) => {
-            if (e.button === 0) { // Left click
+            if (e.button === 0) {
                 isDragging = true;
                 prevMousePos = { x: e.clientX, y: e.clientY };
             }
@@ -637,7 +660,6 @@
 
         window.addEventListener('mouseup', (e) => {
             if (isDragging) {
-                // If it was a short click without significant drag, perform raycast inspection
                 const moveDist = Math.hypot(e.clientX - prevMousePos.x, e.clientY - prevMousePos.y);
                 if (moveDist < 6) {
                     performClickRaycast(e.clientX, e.clientY);
@@ -658,13 +680,12 @@
                 cameraPitch = Math.max(-Math.PI / 2.5, Math.min(Math.PI / 2.5, cameraPitch));
             }
 
-            // Update mouse coordinates for hover raycast
             mouseCoord.x = (e.clientX / window.innerWidth) * 2 - 1;
             mouseCoord.y = -(e.clientY / window.innerHeight) * 2 + 1;
             updateHoverRaycast();
         });
 
-        // Touch support for mobile / tablet
+        // Touch support
         let touchStartPos = { x: 0, y: 0 };
         let touchHasMoved = false;
 
@@ -739,7 +760,6 @@
         mouseCoord.y = -(clientY / window.innerHeight) * 2 + 1;
         raycaster.setFromCamera(mouseCoord, camera);
 
-        // Check artwork hit first
         const artHits = raycaster.intersectObjects(interactiveArtworks);
         if (artHits.length > 0) {
             const artData = artHits[0].object.userData.artworkData;
@@ -747,7 +767,6 @@
             return;
         }
 
-        // Check hotspot hit
         const spotHits = raycaster.intersectObjects(interactiveHotspots);
         if (spotHits.length > 0) {
             const spotData = spotHits[0].object.userData.hotspotData;
@@ -758,7 +777,6 @@
 
     // ===== 12. UI & MODAL MANAGEMENT =====
     function setupUI() {
-        // Hotspot buttons in HUD
         document.querySelectorAll('.room-nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const hotspotId = btn.dataset.hotspot;
@@ -766,7 +784,6 @@
             });
         });
 
-        // Artwork Modal Close Buttons
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalSecondaryClose = document.getElementById('modal-inspect-close');
         if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeArtworkModal);
@@ -789,23 +806,24 @@
         document.getElementById('modal-zone').textContent = art.zone;
         document.getElementById('modal-desc').textContent = art.description;
 
-        // Deep link to gallery.html?id=...
         const galleryLink = document.getElementById('modal-gallery-link');
         if (galleryLink) {
             galleryLink.href = `gallery.html?id=${art.id}`;
         }
 
         artModal.classList.add('active');
+        artModal.classList.add('open');
         artModal.setAttribute('aria-hidden', 'false');
     }
 
     function closeArtworkModal() {
         if (!artModal) return;
         artModal.classList.remove('active');
+        artModal.classList.remove('open');
         artModal.setAttribute('aria-hidden', 'true');
     }
 
-    // ===== 13. 2D GALLERY OVERVIEW (Fallback & Accessibility) =====
+    // ===== 13. 2D GALLERY OVERVIEW =====
     function setup2DOverview() {
         const btn2D = document.getElementById('btn-2d-overview');
         const fallbackBtn = document.getElementById('fallback-open-2d');
@@ -828,7 +846,6 @@
             });
         }
 
-        // Populate 2D grid with curated artworks
         if (grid) {
             grid.innerHTML = WALKAROUND_CURATED_ROOM.map(art => `
                 <div class="overview-card">
@@ -860,14 +877,14 @@
         const h = minimapCanvas.height;
 
         minimapCtx.clearRect(0, 0, w, h);
-        minimapCtx.fillStyle = 'rgba(24, 25, 30, 0.88)';
+        minimapCtx.fillStyle = 'rgba(22, 24, 28, 0.90)';
         minimapCtx.fillRect(0, 0, w, h);
 
-        // Map coordinate space (-6 to +7 X, -5 to +9 Z) to canvas
-        const scaleX = w / 14;
-        const scaleZ = h / 15;
-        const offsetX = 6.5 * scaleX;
-        const offsetZ = 5.2 * scaleZ;
+        // Coordinate transformation (-12 to +8 X, -11 to +10 Z)
+        const scaleX = w / 20;
+        const scaleZ = h / 21;
+        const offsetX = 12.0 * scaleX;
+        const offsetZ = 11.0 * scaleZ;
 
         function toScreen(x, z) {
             return {
@@ -876,47 +893,58 @@
             };
         }
 
-        // Draw Room Boundaries
-        minimapCtx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-        minimapCtx.lineWidth = 1.5;
+        minimapCtx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+        minimapCtx.lineWidth = 1.2;
 
-        // Entrance
+        // Entré
         const e1 = toScreen(-4.0, 8.5);
-        const e2 = toScreen(0.0, 4.0);
-        minimapCtx.strokeRect(e1.x, e2.y, (0.0 - (-4.0)) * scaleX, (8.5 - 4.0) * scaleZ);
+        minimapCtx.strokeRect(e1.x, toScreen(0, 4.0).y, 4.0 * scaleX, 4.5 * scaleZ);
 
-        // Salon
+        // Grand Salon
         const s1 = toScreen(-5.0, 4.0);
-        minimapCtx.strokeRect(s1.x, toScreen(0, -4.5).y, 11.5 * scaleX, 8.5 * scaleZ);
+        minimapCtx.strokeRect(s1.x, toScreen(0, -4.5).y, 11.0 * scaleX, 8.5 * scaleZ);
+
+        // Linnéa Gallery Corridor
+        const l1 = toScreen(-10.5, 1.5);
+        minimapCtx.strokeRect(l1.x, toScreen(0, -4.5).y, 5.5 * scaleX, 6.0 * scaleZ);
+
+        // Master Suite
+        const m1 = toScreen(-10.5, 8.5);
+        minimapCtx.strokeRect(m1.x, toScreen(0, 2.5).y, 5.5 * scaleX, 6.0 * scaleZ);
+
+        // Kitchen Studio
+        const k1 = toScreen(1.5, 8.5);
+        minimapCtx.strokeRect(k1.x, toScreen(0, 4.5).y, 4.5 * scaleX, 4.0 * scaleZ);
+
+        // Sky Terrace
+        const t1 = toScreen(-4.0, -4.8);
+        minimapCtx.strokeRect(t1.x, toScreen(0, -10.5).y, 8.0 * scaleX, 5.7 * scaleZ);
 
         // Draw Artworks on Minimap
         WALKAROUND_CURATED_ROOM.forEach(art => {
             const p = toScreen(art.wallPlacement.position[0], art.wallPlacement.position[2]);
             minimapCtx.fillStyle = '#d81b60';
-            minimapCtx.fillRect(p.x - 2.5, p.y - 2.5, 5, 5);
+            minimapCtx.fillRect(p.x - 2, p.y - 2, 4, 4);
         });
 
-        // Draw Player Marker & View Cone
+        // Player marker & View cone
         const playerScreen = toScreen(camera.position.x, camera.position.z);
-
-        // View cone
-        minimapCtx.fillStyle = 'rgba(216, 27, 96, 0.22)';
+        minimapCtx.fillStyle = 'rgba(216, 27, 96, 0.25)';
         minimapCtx.beginPath();
         minimapCtx.moveTo(playerScreen.x, playerScreen.y);
         const coneAngle = 0.55;
-        const coneDist = 26;
+        const coneDist = 24;
         const angle = cameraYaw + Math.PI;
         minimapCtx.arc(playerScreen.x, playerScreen.y, coneDist, angle - coneAngle, angle + coneAngle);
         minimapCtx.closePath();
         minimapCtx.fill();
 
-        // Player dot
         minimapCtx.fillStyle = '#ffffff';
         minimapCtx.beginPath();
-        minimapCtx.arc(playerScreen.x, playerScreen.y, 4, 0, Math.PI * 2);
+        minimapCtx.arc(playerScreen.x, playerScreen.y, 3.5, 0, Math.PI * 2);
         minimapCtx.fill();
         minimapCtx.strokeStyle = '#d81b60';
-        minimapCtx.lineWidth = 2;
+        minimapCtx.lineWidth = 1.5;
         minimapCtx.stroke();
     }
 
@@ -926,7 +954,7 @@
 
         const delta = Math.min(clock.getDelta(), 0.08);
 
-        // 1. Camera Transition (Smooth Gliding to Hotspot or Artwork)
+        // 1. Camera Transition
         if (isTransitioning) {
             transitionProgress += delta / transitionDuration;
             if (transitionProgress >= 1) {
@@ -940,7 +968,6 @@
                     window._transitionCallback = null;
                 }
             } else {
-                // Smooth Quadratic Easing
                 const t = transitionProgress;
                 const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
                 camera.position.lerpVectors(transitionStartPos, transitionTargetPos, ease);
@@ -949,7 +976,7 @@
             }
         }
 
-        // 2. Free Movement (WASD / Arrow Keys)
+        // 2. Free Movement
         if (!isTransitioning && (keys.forward || keys.backward || keys.left || keys.right)) {
             const moveDir = new THREE.Vector3();
             if (keys.forward) moveDir.z -= 1;
@@ -958,7 +985,6 @@
             if (keys.right) moveDir.x += 1;
             moveDir.normalize();
 
-            // Rotate move direction with camera yaw
             const moveAngle = cameraYaw;
             const targetVX = (moveDir.x * Math.cos(moveAngle) - moveDir.z * Math.sin(moveAngle)) * WALK_SPEED;
             const targetVZ = (moveDir.x * Math.sin(moveAngle) + moveDir.z * Math.cos(moveAngle)) * WALK_SPEED;
@@ -966,11 +992,9 @@
             moveVelocity.x = THREE.MathUtils.lerp(moveVelocity.x, targetVX, 0.2);
             moveVelocity.z = THREE.MathUtils.lerp(moveVelocity.z, targetVZ, 0.2);
 
-            // Compute candidate next position
             const nextX = camera.position.x + moveVelocity.x * delta;
             const nextZ = camera.position.z + moveVelocity.z * delta;
 
-            // Collision check against bounding boxes
             let collideX = false;
             let collideZ = false;
 
@@ -986,25 +1010,20 @@
 
             if (!collideX) camera.position.x = nextX;
             if (!collideZ) camera.position.z = nextZ;
-            camera.position.y = EYE_HEIGHT; // Always maintain exact eye height
+            camera.position.y = EYE_HEIGHT;
         } else if (!isTransitioning) {
             moveVelocity.set(0, 0, 0);
         }
 
-        // Apply Camera Rotation
         camera.rotation.set(cameraPitch, cameraYaw, 0);
 
-        // Pulse floor hotspots gently
         const time = clock.getElapsedTime();
         hotspotMeshes.forEach(mesh => {
             const scale = 1.0 + Math.sin(time * 2.5) * 0.05;
             mesh.scale.set(scale, scale, 1);
         });
 
-        // Render 3D scene
         renderer.render(scene, camera);
-
-        // Update 2D Minimap
         drawMinimap();
     }
 
@@ -1015,7 +1034,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // Initialize once DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
