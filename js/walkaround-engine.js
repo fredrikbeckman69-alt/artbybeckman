@@ -136,58 +136,88 @@
         // Hide loader smoothly
         setTimeout(() => {
             if (loader) {
+                loader.classList.add('loaded');
                 loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 600);
+                loader.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 600);
             }
-        }, 1000);
+        }, 800);
 
         // Force initial minimap draw
         minimapDirty = true;
         animate();
     }
 
-    // ===== 4. LIVING ROOM ARCHITECTURE (7.6m x 6.4m x 2.85m) =====
+    // ===== 4. PARISIAN LUXURY ARCHITECTURE & MATERIAL PALETTE =====
     function buildLivingRoomArchitecture() {
-        // High-end residential wall material (Soft off-white with matte finish)
+        // Procedural Honed French Limestone Floor Texture
+        function createLimestoneTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024;
+            canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+            
+            // Warm limestone base
+            ctx.fillStyle = '#dfd6c8';
+            ctx.fillRect(0, 0, 1024, 1024);
+            
+            // 4x4 stone tiles
+            const tileSize = 256;
+            const groutW = 3;
+            
+            for (let r = 0; r < 4; r++) {
+                for (let c = 0; c < 4; c++) {
+                    const tx = c * tileSize;
+                    const ty = r * tileSize;
+                    
+                    const tileHueVar = ((r * 7 + c * 13) % 11) - 5;
+                    const rVal = 223 + tileHueVar;
+                    const gVal = 214 + tileHueVar;
+                    const bVal = 200 + tileHueVar;
+                    ctx.fillStyle = `rgb(${rVal}, ${gVal}, ${bVal})`;
+                    ctx.fillRect(tx + groutW, ty + groutW, tileSize - groutW * 2, tileSize - groutW * 2);
+                    
+                    // Subtle stone grain
+                    ctx.fillStyle = 'rgba(170, 155, 138, 0.08)';
+                    for (let i = 0; i < 30; i++) {
+                        const fx = tx + 8 + (Math.sin(i * 99 + r) * 0.5 + 0.5) * (tileSize - 20);
+                        const fy = ty + 8 + (Math.cos(i * 77 + c) * 0.5 + 0.5) * (tileSize - 20);
+                        ctx.fillRect(fx, fy, 5, 3);
+                    }
+                }
+            }
+            
+            // Grout lines
+            ctx.fillStyle = '#b8ad9c';
+            for (let i = 0; i <= 4; i++) {
+                ctx.fillRect(0, i * tileSize - groutW / 2, 1024, groutW);
+                ctx.fillRect(i * tileSize - groutW / 2, 0, groutW, 1024);
+            }
+            
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(6, 6);
+            return tex;
+        }
+
+        const limestoneTex = createLimestoneTexture();
+
+        // 1. Parisian Warm Ivory Wall Material
         const wallMat = new THREE.MeshStandardMaterial({
-            color: 0xf5f4ee,
+            color: 0xf2eee6,
             roughness: 0.88,
             metalness: 0.01
         });
 
-        // Feature Wall Material (Subtle warm stone tint behind art)
-        const featureWallMat = new THREE.MeshStandardMaterial({
-            color: 0xf0ede5,
-            roughness: 0.85,
-            metalness: 0.01
-        });
-
-        // Ceiling (Matte pure white)
-        const ceilingMat = new THREE.MeshStandardMaterial({
-            color: 0xfbfbfa,
-            roughness: 0.95
-        });
-
-        // Brushed Stainless Steel Material (Starck signature)
-        const steelMat = new THREE.MeshStandardMaterial({
-            color: 0xd2d4d8,
-            metalness: 0.88,
-            roughness: 0.24
-        });
-
-        // Dark Anthracite Metal Material (Window frames)
-        const darkFrameMat = new THREE.MeshStandardMaterial({
-            color: 0x222428,
-            metalness: 0.7,
-            roughness: 0.35
-        });
-
-        // Scandinavian Pale Oak Parquet Floor (Warm satin finish)
-        const floorGeo = new THREE.PlaneGeometry(24, 24);
+        // 2. Honed French Limestone Floor (Warm stone with satin sheen)
+        const floorGeo = new THREE.PlaneGeometry(28, 28);
         const floorMat = new THREE.MeshStandardMaterial({
-            color: 0xded7ca,
-            roughness: 0.36,
-            metalness: 0.06
+            map: limestoneTex,
+            roughness: 0.38,
+            metalness: 0.04
         });
         const floor = new THREE.Mesh(floorGeo, floorMat);
         floor.rotation.x = -Math.PI / 2;
@@ -195,14 +225,41 @@
         floor.receiveShadow = true;
         scene.add(floor);
 
-        // Ceiling at 2.85m height
-        const ceilingGeo = new THREE.PlaneGeometry(20, 20);
+        // 3. Ceiling with Pure White Plaster Finish
+        const ceilingGeo = new THREE.PlaneGeometry(24, 24);
+        const ceilingMat = new THREE.MeshStandardMaterial({
+            color: 0xfaf8f4,
+            roughness: 0.94
+        });
         const ceiling = new THREE.Mesh(ceilingGeo, ceilingMat);
         ceiling.rotation.x = Math.PI / 2;
-        ceiling.position.set(0, 2.85, 1.0);
+        ceiling.position.set(0, 2.85, 0.5);
         scene.add(ceiling);
 
-        // Helper: Create Wall with Baseboards & Collision Box
+        // 4. Brushed & Polished Stainless Steel Materials
+        const brushedSteelMat = new THREE.MeshStandardMaterial({
+            color: 0xcdcfd4,
+            metalness: 0.88,
+            roughness: 0.26
+        });
+
+        const darkIronMat = new THREE.MeshStandardMaterial({
+            color: 0x24262a,
+            metalness: 0.75,
+            roughness: 0.35
+        });
+
+        const stuccoMat = new THREE.MeshStandardMaterial({
+            color: 0xf8f6f0,
+            roughness: 0.90
+        });
+
+        const baseboardMat = new THREE.MeshStandardMaterial({
+            color: 0xe0dad0,
+            roughness: 0.65
+        });
+
+        // Helper: Create Wall with Baseboards, Stucco Cornice & Collision
         function createWall(x, z, width, depth, height = 2.85, mat = wallMat) {
             const wallGeo = new THREE.BoxGeometry(width, height, depth);
             const wall = new THREE.Mesh(wallGeo, mat);
@@ -211,14 +268,22 @@
             wall.receiveShadow = true;
             scene.add(wall);
 
-            // Stainless Steel Baseboards (0.08m height)
-            const trimH = 0.08;
-            const trimD = depth > width ? depth : depth + 0.02;
-            const trimW = width > depth ? width : width + 0.02;
+            // Painted Baseboard (0.07m height)
+            const trimH = 0.07;
+            const trimD = depth > width ? depth : depth + 0.015;
+            const trimW = width > depth ? width : width + 0.015;
             const trimGeo = new THREE.BoxGeometry(trimW, trimH, trimD);
-            const trim = new THREE.Mesh(trimGeo, steelMat);
+            const trim = new THREE.Mesh(trimGeo, baseboardMat);
             trim.position.set(x, trimH / 2, z);
             scene.add(trim);
+
+            // Classic Parisian Ceiling Stucco Cornice (0.10m stepped plaster molding)
+            const corniceH = 0.10;
+            const corniceD = depth > width ? depth + 0.08 : depth + 0.04;
+            const corniceW = width > depth ? width + 0.04 : width + 0.08;
+            const cornice = new THREE.Mesh(new THREE.BoxGeometry(corniceW, corniceH, corniceD), stuccoMat);
+            cornice.position.set(x, height - corniceH / 2, z);
+            scene.add(cornice);
 
             // Collision Bounding Box
             collisionBoxes.push({
@@ -231,442 +296,496 @@
         }
 
         // --- 1. WEST WALL (GALLERY WALL: Origami & Vertigo) ---
-        createWall(-3.8, 0.0, 0.2, 6.4, 2.85, featureWallMat);
+        createWall(-4.0, 0.0, 0.2, 7.0, 2.85, wallMat);
 
-        // --- 2. EAST WALL (LIVING ROOM CREDENZA WALL) ---
-        createWall(3.8, 0.0, 0.2, 6.4, 2.85, wallMat);
+        // --- 2. EAST WALL (GRAND PORTAL TO DINING ROOM) ---
+        // South segment of East wall
+        createWall(4.0, 2.2, 0.2, 2.6, 2.85, wallMat);
+        // North segment of East wall
+        createWall(4.0, -2.2, 0.2, 2.6, 2.85, wallMat);
+        // Lintel over Dining Portal (Portal width 2.2m, height 2.45m)
+        const portalLintel = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.40, 2.2), wallMat);
+        portalLintel.position.set(4.0, 2.65, 0.0);
+        scene.add(portalLintel);
 
-        // --- 3. SOUTH WALL (MAIN SOFA WALL with Doorway to Vestibule) ---
-        // Left section of south wall (Behind Sofa: My Heart Has Teeth)
-        createWall(1.0, 3.2, 5.6, 0.2, 2.85, featureWallMat);
-        // Right section of south wall (West of doorway)
-        createWall(-3.5, 3.2, 0.6, 0.2, 2.85, wallMat);
-        // Header lintel over doorway (Doorway: width 1.2m, height 2.15m)
-        const doorLintelGeo = new THREE.BoxGeometry(1.2, 0.70, 0.2);
-        const doorLintel = new THREE.Mesh(doorLintelGeo, wallMat);
-        doorLintel.position.set(-2.4, 2.50, 3.2);
+        // Stucco portal casing frame
+        const portalCasingTop = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.06, 2.26), stuccoMat);
+        portalCasingTop.position.set(4.0, 2.45, 0.0);
+        scene.add(portalCasingTop);
+
+        const portalCasingL = new THREE.Mesh(new THREE.BoxGeometry(0.24, 2.45, 0.06), stuccoMat);
+        portalCasingL.position.set(4.0, 1.225, -1.1);
+        scene.add(portalCasingL);
+
+        const portalCasingR = new THREE.Mesh(new THREE.BoxGeometry(0.24, 2.45, 0.06), stuccoMat);
+        portalCasingR.position.set(4.0, 1.225, 1.1);
+        scene.add(portalCasingR);
+
+        // --- 3. DINING ROOM & TULIP TABLE (Visible through Portal) ---
+        // Back wall of dining room
+        createWall(7.5, 0.0, 0.2, 6.0, 2.85, wallMat);
+        createWall(5.75, -3.0, 3.5, 0.2, 2.85, wallMat);
+        createWall(5.75, 3.0, 3.5, 0.2, 2.85, wallMat);
+
+        // Oval Tulip Dining Table in Dining Room (Saarinen / Starck style)
+        const diningTableGroup = new THREE.Group();
+        const diningPedestal = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.38, 0.72, 32), wallMat);
+        diningPedestal.position.set(0, 0.36, 0);
+        diningPedestal.castShadow = true;
+        diningTableGroup.add(diningPedestal);
+
+        const diningTop = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.0, 0.04, 36), wallMat);
+        diningTop.scale.set(1.4, 1.0, 0.9); // Oval shape
+        diningTop.position.set(0, 0.74, 0);
+        diningTop.castShadow = true;
+        diningTableGroup.add(diningTop);
+
+        // Brushed Stainless Disc Pendant over dining table
+        const discPendant = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.04, 32), brushedSteelMat);
+        discPendant.position.set(0, 2.10, 0);
+        diningTableGroup.add(discPendant);
+
+        const discStem = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.75), brushedSteelMat);
+        discStem.position.set(0, 2.475, 0);
+        diningTableGroup.add(discStem);
+
+        // Brushed Stainless Steel Sideboard in Dining Room (Bild 2)
+        const diningSideboard = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.65, 2.40), brushedSteelMat);
+        diningSideboard.position.set(7.25, 0.325, 0.0);
+        diningSideboard.castShadow = true;
+        scene.add(diningSideboard);
+
+        // Sculptural Liquid Chrome Art on Dining Sideboard
+        const sculptArt = new THREE.Mesh(new THREE.TorusKnotGeometry(0.15, 0.05, 64, 16), brushedSteelMat);
+        sculptArt.position.set(7.20, 0.85, -0.40);
+        sculptArt.castShadow = true;
+        scene.add(sculptArt);
+
+        diningTableGroup.position.set(5.8, 0, 0.0);
+        scene.add(diningTableGroup);
+        collisionBoxes.push({ minX: 4.8, maxX: 6.8, minZ: -1.2, maxZ: 1.2 });
+
+        // --- 4. SOUTH WALL (MAIN CREDENZA & ARTWORK WALL + DOORWAY TO ENTRANCE) ---
+        // Left main section of south wall (Behind Credenza & My Heart Has Teeth)
+        createWall(0.8, 3.4, 6.2, 0.2, 2.85, wallMat);
+        // Right section of south wall (West of entrance doorway)
+        createWall(-3.7, 3.4, 0.6, 0.2, 2.85, wallMat);
+        // Doorway Lintel over Entrance
+        const doorLintel = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.55, 0.2), wallMat);
+        doorLintel.position.set(-2.6, 2.575, 3.4);
         scene.add(doorLintel);
 
-        // Stainless steel casing frame around doorway
-        const casingTopGeo = new THREE.BoxGeometry(1.24, 0.04, 0.22);
-        const casingTop = new THREE.Mesh(casingTopGeo, steelMat);
-        casingTop.position.set(-2.4, 2.15, 3.2);
+        // Stucco casing around entrance doorway
+        const casingTop = new THREE.Mesh(new THREE.BoxGeometry(1.26, 0.06, 0.24), stuccoMat);
+        casingTop.position.set(-2.6, 2.30, 3.4);
         scene.add(casingTop);
 
-        const casingSideGeo = new THREE.BoxGeometry(0.04, 2.15, 0.22);
-        const casingL = new THREE.Mesh(casingSideGeo, steelMat);
-        casingL.position.set(-3.0, 1.075, 3.2);
+        const casingL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.30, 0.24), stuccoMat);
+        casingL.position.set(-3.2, 1.15, 3.4);
         scene.add(casingL);
-        const casingR = new THREE.Mesh(casingSideGeo, steelMat);
-        casingR.position.set(-1.8, 1.075, 3.2);
+
+        const casingR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.30, 0.24), stuccoMat);
+        casingR.position.set(-2.0, 1.15, 3.4);
         scene.add(casingR);
 
-        // --- 4. ENTRANCE VESTIBULE CORRIDOR ---
-        createWall(-3.3, 4.9, 0.2, 3.4, 2.85, wallMat); // West vestibule wall
-        createWall(-1.5, 4.9, 0.2, 3.4, 2.85, wallMat); // East vestibule wall
-        createWall(-2.4, 6.5, 1.8, 0.2, 2.85, wallMat); // South entrance entry wall (Golden Ticket)
+        // Entrance Vestibule Walls
+        createWall(-3.5, 5.0, 0.2, 3.2, 2.85, wallMat);
+        createWall(-1.7, 5.0, 0.2, 3.2, 2.85, wallMat);
+        createWall(-2.6, 6.5, 1.8, 0.2, 2.85, wallMat); // Entrance wall (Golden Ticket)
 
-        // --- 5. NORTH WALL (DEEP WINDOW NICHE & SKYLINE PANORAMA) ---
-        // Left & right wall returns framing the window niche
-        createWall(-3.0, -3.2, 1.6, 0.2, 2.85, wallMat);
-        createWall(3.0, -3.2, 1.6, 0.2, 2.85, wallMat);
+        // --- 5. NORTH WALL (TALL FRENCH WINDOWS & PARISIAN BALCONY) ---
+        createWall(-3.2, -3.4, 1.6, 0.2, 2.85, wallMat);
+        createWall(3.2, -3.4, 1.6, 0.2, 2.85, wallMat);
 
-        // Niche lintel above window (Height 2.60m to 2.85m)
-        const winLintelGeo = new THREE.BoxGeometry(4.4, 0.25, 0.45);
-        const winLintel = new THREE.Mesh(winLintelGeo, wallMat);
-        winLintel.position.set(0, 2.725, -3.2);
+        // Window Niche Lintel
+        const winLintel = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.35, 0.45), wallMat);
+        winLintel.position.set(0, 2.675, -3.4);
         scene.add(winLintel);
 
-        // Window sill / nischbänk (Height 0.55m, depth 0.45m)
-        const sillGeo = new THREE.BoxGeometry(4.4, 0.55, 0.45);
-        const sill = new THREE.Mesh(sillGeo, wallMat);
-        sill.position.set(0, 0.275, -3.2);
+        // Stone Window Sill (Height 0.50m)
+        const sill = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.50, 0.45), wallMat);
+        sill.position.set(0, 0.25, -3.4);
         sill.receiveShadow = true;
         scene.add(sill);
-        collisionBoxes.push({ minX: -2.3, maxX: 2.3, minZ: -3.5, maxZ: -2.9 });
+        collisionBoxes.push({ minX: -2.5, maxX: 2.5, minZ: -3.7, maxZ: -3.1 });
 
-        // Stainless steel window sill top plate
-        const sillTopGeo = new THREE.BoxGeometry(4.42, 0.03, 0.47);
-        const sillTop = new THREE.Mesh(sillTopGeo, steelMat);
-        sillTop.position.set(0, 0.565, -3.2);
-        scene.add(sillTop);
+        // French Window Frames (2 tall double-hung French windows)
+        const frameW = 4.76;
+        const frameH = 2.15;
+        const frameZ = -3.62;
 
-        // Window Frame & Mullions (Dark anthracite steel & brushed stainless)
-        const frameW = 4.36;
-        const frameH = 2.05;
-        const frameZ = -3.42;
-
-        // Top & bottom window frame profiles
-        const frameHorizGeo = new THREE.BoxGeometry(frameW, 0.05, 0.06);
-        const frameTop = new THREE.Mesh(frameHorizGeo, darkFrameMat);
-        frameTop.position.set(0, 2.58, frameZ);
+        // Outer frames & mullions
+        const frameTop = new THREE.Mesh(new THREE.BoxGeometry(frameW, 0.05, 0.06), darkIronMat);
+        frameTop.position.set(0, 2.62, frameZ);
         scene.add(frameTop);
 
-        const frameBottom = new THREE.Mesh(frameHorizGeo, darkFrameMat);
-        frameBottom.position.set(0, 0.60, frameZ);
+        const frameBottom = new THREE.Mesh(new THREE.BoxGeometry(frameW, 0.05, 0.06), darkIronMat);
+        frameBottom.position.set(0, 0.52, frameZ);
         scene.add(frameBottom);
 
-        // Left & right window frame profiles
-        const frameVertGeo = new THREE.BoxGeometry(0.05, frameH, 0.06);
-        const frameL = new THREE.Mesh(frameVertGeo, darkFrameMat);
-        frameL.position.set(-frameW / 2 + 0.025, 1.60, frameZ);
-        scene.add(frameL);
+        [-2.35, -0.80, 0.0, 0.80, 2.35].forEach((fx) => {
+            const fv = new THREE.Mesh(new THREE.BoxGeometry(0.05, frameH, 0.06), darkIronMat);
+            fv.position.set(fx, 1.57, frameZ);
+            scene.add(fv);
+        });
 
-        const frameR = new THREE.Mesh(frameVertGeo, darkFrameMat);
-        frameR.position.set(frameW / 2 - 0.025, 1.60, frameZ);
-        scene.add(frameR);
+        // Horizontal transom bar
+        const transom = new THREE.Mesh(new THREE.BoxGeometry(frameW, 0.04, 0.05), darkIronMat);
+        transom.position.set(0, 2.05, frameZ);
+        scene.add(transom);
 
-        // Center vertical mullion
-        const mullionGeo = new THREE.BoxGeometry(0.06, frameH, 0.07);
-        const mullion = new THREE.Mesh(mullionGeo, steelMat);
-        mullion.position.set(0, 1.60, frameZ);
-        scene.add(mullion);
-
-        // Double Glass Window Panes
+        // Glass Panes
         const glassMat = new THREE.MeshStandardMaterial({
-            color: 0xebf4fa,
+            color: 0xecf4fa,
             transparent: true,
-            opacity: 0.22,
-            roughness: 0.08,
-            metalness: 0.7
+            opacity: 0.20,
+            roughness: 0.06,
+            metalness: 0.8
         });
         const glassPane = new THREE.Mesh(new THREE.PlaneGeometry(frameW - 0.10, frameH - 0.10), glassMat);
-        glassPane.position.set(0, 1.60, frameZ + 0.01);
+        glassPane.position.set(0, 1.57, frameZ + 0.01);
         scene.add(glassPane);
 
-        // Drapery / Linen Curtains on sides of window niche
+        // Parisian Iron Balcony Railing outside window (Classic decorative balustrade)
+        const railTop = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.04, 0.06), darkIronMat);
+        railTop.position.set(0, 1.15, frameZ - 0.15);
+        scene.add(railTop);
+
+        const railBottom = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.03, 0.04), darkIronMat);
+        railBottom.position.set(0, 0.52, frameZ - 0.15);
+        scene.add(railBottom);
+
+        for (let bx = -2.3; bx <= 2.3; bx += 0.18) {
+            const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.010, 0.010, 0.63), darkIronMat);
+            bar.position.set(bx, 0.835, frameZ - 0.15);
+            scene.add(bar);
+        }
+
+        // Sheer White French Window Drapery
         const drapeMat = new THREE.MeshStandardMaterial({
-            color: 0xedeae3,
+            color: 0xf5f3ee,
             roughness: 0.95,
             side: THREE.DoubleSide
         });
-        const drapeGeoL = new THREE.BoxGeometry(0.38, 2.15, 0.16);
-        const drapeL = new THREE.Mesh(drapeGeoL, drapeMat);
-        drapeL.position.set(-2.05, 1.65, -3.15);
+        const drapeL = new THREE.Mesh(new THREE.BoxGeometry(0.35, 2.25, 0.14), drapeMat);
+        drapeL.position.set(-2.25, 1.65, -3.35);
         drapeL.castShadow = true;
         scene.add(drapeL);
 
-        const drapeR = new THREE.Mesh(drapeGeoL, drapeMat);
-        drapeR.position.set(2.05, 1.65, -3.15);
+        const drapeR = new THREE.Mesh(new THREE.BoxGeometry(0.35, 2.25, 0.14), drapeMat);
+        drapeR.position.set(2.25, 1.65, -3.35);
         drapeR.castShadow = true;
         scene.add(drapeR);
 
-        // Ceiling Recessed Downlights (Stainless rings)
-        const spotRingGeo = new THREE.RingGeometry(0.04, 0.07, 24);
-        const spotLensGeo = new THREE.CircleGeometry(0.04, 24);
-        const spotLensMat = new THREE.MeshBasicMaterial({ color: 0xfffcf2 });
-        [[-1.8, -1.2], [1.8, -1.2], [-1.8, 1.4], [1.8, 1.4], [0.0, 0.0]].forEach(([sx, sz]) => {
-            const ring = new THREE.Mesh(spotRingGeo, steelMat);
-            ring.rotation.x = Math.PI / 2;
-            ring.position.set(sx, 2.848, sz);
-            scene.add(ring);
-
-            const lens = new THREE.Mesh(spotLensGeo, spotLensMat);
-            lens.rotation.x = Math.PI / 2;
-            lens.position.set(sx, 2.847, sz);
-            scene.add(lens);
-        });
-
-        // Terrace Wood Decking outside window
-        const deckGeo = new THREE.PlaneGeometry(12, 6);
-        const deckMat = new THREE.MeshStandardMaterial({
-            color: 0x7c7062,
-            roughness: 0.75,
-            metalness: 0.05
-        });
-        const deck = new THREE.Mesh(deckGeo, deckMat);
-        deck.rotation.x = -Math.PI / 2;
-        deck.position.set(0, 0.01, -6.5);
-        scene.add(deck);
-
-        // Balustrade outside on terrace
-        const railCap = new THREE.Mesh(new THREE.BoxGeometry(10.0, 0.04, 0.08), steelMat);
-        railCap.position.set(0, 1.10, -9.2);
-        scene.add(railCap);
-
-        // Distant City Skyline Horizon
+        // Parisian Skyline Backdrop (Distant Haussmann rooflines & dome)
         const backdropGeo = new THREE.PlaneGeometry(36, 14);
-        const backdropMat = new THREE.MeshBasicMaterial({ color: 0xc4d4e3 });
+        const backdropMat = new THREE.MeshBasicMaterial({ color: 0xc8d8e8 });
         const backdrop = new THREE.Mesh(backdropGeo, backdropMat);
         backdrop.position.set(0, 3.5, -16.0);
         scene.add(backdrop);
     }
 
-    // ===== 5. STARCK-INSPIRED HOME FURNISHINGS =====
+    // ===== 5. SCULPTURAL STARCK HOME FURNISHINGS (INSPIRATION MATCH) =====
     function buildStarckFurniture() {
-        const chromeMat = new THREE.MeshStandardMaterial({
-            color: 0xdadce0,
-            metalness: 0.95,
-            roughness: 0.16
+        // High-end Material Palette
+        const liquidChromeMat = new THREE.MeshStandardMaterial({
+            color: 0xdde0e6,
+            metalness: 0.96,
+            roughness: 0.14
         });
 
-        const darkUpholsteryMat = new THREE.MeshStandardMaterial({
-            color: 0x2e3035,
-            roughness: 0.85
+        const brushedSteelMat = new THREE.MeshStandardMaterial({
+            color: 0xcdcfd4,
+            metalness: 0.88,
+            roughness: 0.26
         });
 
-        const cushionAccentMat = new THREE.MeshStandardMaterial({
-            color: 0xc8b29b,
-            roughness: 0.90
+        const creamBoucleMat = new THREE.MeshStandardMaterial({
+            color: 0xeee7dd,
+            roughness: 0.92
         });
 
-        const woolRugMat = new THREE.MeshStandardMaterial({
-            color: 0xe6e2da,
-            roughness: 0.96
+        const burgundyVelvetMat = new THREE.MeshStandardMaterial({
+            color: 0x4a0e1b,
+            roughness: 0.80
         });
 
-        const glassTableMat = new THREE.MeshStandardMaterial({
-            color: 0x8291a0,
-            transparent: true,
-            opacity: 0.48,
-            roughness: 0.12,
-            metalness: 0.6
-        });
-
-        const ghostChairMat = new THREE.MeshStandardMaterial({
-            color: 0x98a5b5,
-            transparent: true,
-            opacity: 0.38,
-            roughness: 0.12,
-            metalness: 0.2
+        const oatmealRugMat = new THREE.MeshStandardMaterial({
+            color: 0xe5dfd4,
+            roughness: 0.98
         });
 
         const whiteLacquerMat = new THREE.MeshStandardMaterial({
-            color: 0xfcfbfa,
+            color: 0xf8f6f2,
             roughness: 0.35,
-            metalness: 0.05
+            metalness: 0.04
         });
 
-        // 1. Large Luxury Wool Area Rug (3.8m x 2.7m)
-        const rugGeo = new THREE.BoxGeometry(3.8, 0.012, 2.7);
-        const rug = new THREE.Mesh(rugGeo, woolRugMat);
-        rug.position.set(0.5, 0.006, 1.2);
+        const smokeGlassMat = new THREE.MeshStandardMaterial({
+            color: 0x222428,
+            transparent: true,
+            opacity: 0.75,
+            roughness: 0.1
+        });
+
+        const darkIronMat = new THREE.MeshStandardMaterial({
+            color: 0x24262a,
+            metalness: 0.75,
+            roughness: 0.35
+        });
+
+        // 1. Large Plush Oatmeal Wool Area Rug (4.2m x 3.2m)
+        const rug = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.014, 3.2), oatmealRugMat);
+        rug.position.set(-0.20, 0.007, 0.20);
         rug.receiveShadow = true;
         scene.add(rug);
 
-        // 2. Modern Sectional Lounge Sofa (Centered under "My Heart Has Teeth")
+        // 2. Curved Organic Bouclé Modular Sofa (Sweeping C-shape from Bild 1)
         const sofaGroup = new THREE.Group();
 
-        // Plinth base in brushed stainless steel
-        const plinth = new THREE.Mesh(new THREE.BoxGeometry(2.70, 0.06, 0.95), chromeMat);
-        plinth.position.set(0, 0.03, 0);
-        plinth.castShadow = true;
-        sofaGroup.add(plinth);
+        // 4 articulated curved sofa segments creating a gentle, organic crescent
+        const segments = [
+            { x: -1.40, z: -0.50, rotY: 0.30, len: 1.05 },
+            { x: -0.80, z: 0.30, rotY: 0.12, len: 1.10 },
+            { x: 0.25, z: 0.70, rotY: -0.15, len: 1.10 },
+            { x: 1.30, z: 0.65, rotY: -0.45, len: 0.95 }
+        ];
 
-        // Main seat deck
-        const seatBase = new THREE.Mesh(new THREE.BoxGeometry(2.68, 0.20, 0.93), darkUpholsteryMat);
-        seatBase.position.set(0, 0.16, 0);
-        seatBase.castShadow = true;
-        sofaGroup.add(seatBase);
+        segments.forEach(seg => {
+            const segGroup = new THREE.Group();
 
-        // 3 Plump Seat Cushions
-        for (let i = 0; i < 3; i++) {
-            const sc = new THREE.Mesh(new THREE.BoxGeometry(0.86, 0.16, 0.78), darkUpholsteryMat);
-            sc.position.set(-0.88 + i * 0.88, 0.34, 0.04);
-            sc.castShadow = true;
-            sofaGroup.add(sc);
-        }
+            // Plump low rounded seat cushion
+            const seat = new THREE.Mesh(new THREE.BoxGeometry(seg.len, 0.38, 0.95), creamBoucleMat);
+            seat.position.set(0, 0.20, 0);
+            seat.castShadow = true;
+            segGroup.add(seat);
 
-        // Low Horizontal Backrest
-        const backrest = new THREE.Mesh(new THREE.BoxGeometry(2.70, 0.40, 0.22), darkUpholsteryMat);
-        backrest.position.set(0, 0.46, 0.36);
-        backrest.castShadow = true;
-        sofaGroup.add(backrest);
+            // Rounded low backrest
+            const back = new THREE.Mesh(new THREE.BoxGeometry(seg.len, 0.35, 0.28), creamBoucleMat);
+            back.position.set(0, 0.50, -0.34);
+            back.castShadow = true;
+            segGroup.add(back);
 
-        // 3 Plush Back Pillows
-        for (let i = 0; i < 3; i++) {
-            const bp = new THREE.Mesh(new THREE.BoxGeometry(0.82, 0.32, 0.15), darkUpholsteryMat);
-            bp.position.set(-0.88 + i * 0.88, 0.54, 0.25);
-            bp.rotation.x = -0.10;
-            bp.castShadow = true;
-            sofaGroup.add(bp);
-        }
+            // Back pillows
+            const pillow = new THREE.Mesh(new THREE.BoxGeometry(seg.len * 0.85, 0.28, 0.14), creamBoucleMat);
+            pillow.position.set(0, 0.52, -0.22);
+            pillow.rotation.x = -0.12;
+            pillow.castShadow = true;
+            segGroup.add(pillow);
 
-        // Side Armrests
-        const armL = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.28, 0.92), darkUpholsteryMat);
-        armL.position.set(-1.26, 0.36, 0);
-        armL.castShadow = true;
-        sofaGroup.add(armL);
-
-        const armR = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.28, 0.92), darkUpholsteryMat);
-        armR.position.set(1.26, 0.36, 0);
-        armR.castShadow = true;
-        sofaGroup.add(armR);
-
-        // Decorative Accent Throw Pillow
-        const throwPillow = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.38, 0.12), cushionAccentMat);
-        throwPillow.position.set(-0.95, 0.48, 0.18);
-        throwPillow.rotation.set(-0.15, 0.20, 0.10);
-        throwPillow.castShadow = true;
-        sofaGroup.add(throwPillow);
-
-        // Place sofa in front of south wall
-        sofaGroup.position.set(0.60, 0, 2.45);
-        scene.add(sofaGroup);
-        collisionBoxes.push({ minX: -0.9, maxX: 2.1, minZ: 1.8, maxZ: 3.1 });
-
-        // 3. Philippe Starck Louis Ghost Armchair
-        const chairGroup = new THREE.Group();
-
-        // Molded translucent seat
-        const chairSeat = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.04, 0.50), ghostChairMat);
-        chairSeat.position.set(0, 0.42, 0);
-        chairSeat.castShadow = true;
-        chairGroup.add(chairSeat);
-
-        // Iconic Medallion Oval Backrest
-        const medallionGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.03, 32);
-        const medallion = new THREE.Mesh(medallionGeo, ghostChairMat);
-        medallion.rotation.x = Math.PI / 2;
-        medallion.position.set(0, 0.74, 0.22);
-        medallion.castShadow = true;
-        chairGroup.add(medallion);
-
-        // Armrests
-        const armGeo = new THREE.BoxGeometry(0.04, 0.18, 0.36);
-        const chArmL = new THREE.Mesh(armGeo, ghostChairMat);
-        chArmL.position.set(-0.25, 0.52, 0.04);
-        chairGroup.add(chArmL);
-
-        const chArmR = new THREE.Mesh(armGeo, ghostChairMat);
-        chArmR.position.set(0.25, 0.52, 0.04);
-        chairGroup.add(chArmR);
-
-        // 4 Chrome Legs
-        const legGeo = new THREE.CylinderGeometry(0.014, 0.010, 0.42, 16);
-        [[-0.22, -0.20], [0.22, -0.20], [-0.22, 0.20], [0.22, 0.20]].forEach(([lx, lz]) => {
-            const leg = new THREE.Mesh(legGeo, chromeMat);
-            leg.position.set(lx, 0.21, lz);
-            chairGroup.add(leg);
+            segGroup.position.set(seg.x, 0, seg.z);
+            segGroup.rotation.y = seg.rotY;
+            sofaGroup.add(segGroup);
         });
 
-        // Place chair angled towards sofa group
-        chairGroup.position.set(-1.40, 0, 1.10);
-        chairGroup.rotation.y = Math.PI * 0.35;
-        scene.add(chairGroup);
-        collisionBoxes.push({ minX: -1.8, maxX: -1.0, minZ: 0.7, maxZ: 1.5 });
+        // Contrasting Deep Burgundy Velvet Accent Pillow on Sofa (Bild 1)
+        const accentPillow = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.36, 0.14), burgundyVelvetMat);
+        accentPillow.position.set(-0.55, 0.50, 0.30);
+        accentPillow.rotation.set(-0.10, 0.25, 0.15);
+        accentPillow.castShadow = true;
+        sofaGroup.add(accentPillow);
 
-        // 4. Architectural Starck Coffee Table with Styling
+        // Cream throw pillow
+        const creamPillow = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.32, 0.12), creamBoucleMat);
+        creamPillow.position.set(-1.10, 0.46, -0.20);
+        creamPillow.rotation.set(-0.12, 0.40, 0.10);
+        creamPillow.castShadow = true;
+        sofaGroup.add(creamPillow);
+
+        sofaGroup.position.set(-0.40, 0, 0.50);
+        scene.add(sofaGroup);
+        collisionBoxes.push({ minX: -2.3, maxX: 1.4, minZ: -0.4, maxZ: 1.6 });
+
+        // 3. Sculptural "Liquid Metal" Polished Stainless Steel Coffee Table (Bild 1)
         const tableGroup = new THREE.Group();
 
-        // Smoked Glass Table Top
-        const glassTop = new THREE.Mesh(new THREE.BoxGeometry(1.20, 0.02, 0.65), glassTableMat);
-        glassTop.position.set(0, 0.33, 0);
-        glassTop.castShadow = true;
-        tableGroup.add(glassTop);
+        // Faceted organic liquid metal table body
+        const tableBase = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.65, 0.32, 7), liquidChromeMat);
+        tableBase.scale.set(1.45, 1.0, 0.95);
+        tableBase.position.y = 0.16;
+        tableBase.castShadow = true;
+        tableBase.receiveShadow = true;
+        tableGroup.add(tableBase);
 
-        // Stainless Steel Trestle Legs
-        const trestleGeo = new THREE.BoxGeometry(0.04, 0.32, 0.60);
-        const trestle1 = new THREE.Mesh(trestleGeo, chromeMat);
-        trestle1.position.set(-0.48, 0.16, 0);
-        trestle1.castShadow = true;
-        tableGroup.add(trestle1);
+        // Top polished plane
+        const tableTop = new THREE.Mesh(new THREE.CylinderGeometry(0.56, 0.56, 0.02, 7), liquidChromeMat);
+        tableTop.scale.set(1.45, 1.0, 0.95);
+        tableTop.position.y = 0.33;
+        tableTop.castShadow = true;
+        tableGroup.add(tableTop);
 
-        const trestle2 = new THREE.Mesh(trestleGeo, chromeMat);
-        trestle2.position.set(0.48, 0.16, 0);
-        trestle2.castShadow = true;
-        tableGroup.add(trestle2);
-
-        // Styling: Art Monograph Book on Table
-        const bookCoverMat = new THREE.MeshStandardMaterial({ color: 0x1c1d21, roughness: 0.5 });
-        const bookPagesMat = new THREE.MeshStandardMaterial({ color: 0xf4f2ea, roughness: 0.9 });
-        const bookCover = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.035, 0.22), bookCoverMat);
-        bookCover.position.set(-0.20, 0.355, 0.02);
-        bookCover.rotation.y = 0.15;
+        // Styling on Coffee Table:
+        // Art Monograph Book ("Art by Beckman")
+        const bookCover = new THREE.Mesh(new THREE.BoxGeometry(0.30, 0.04, 0.22), darkIronMat);
+        bookCover.position.set(-0.25, 0.36, 0.05);
+        bookCover.rotation.y = 0.12;
         tableGroup.add(bookCover);
 
-        // Styling: Stainless Steel Decorative Tray
-        const tray = new THREE.Mesh(new THREE.BoxGeometry(0.30, 0.015, 0.20), chromeMat);
-        tray.position.set(0.24, 0.345, -0.04);
-        tableGroup.add(tray);
+        // Second smaller art catalog
+        const book2 = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.025, 0.18), whiteLacquerMat);
+        book2.position.set(-0.25, 0.39, 0.05);
+        book2.rotation.y = 0.18;
+        tableGroup.add(book2);
 
-        tableGroup.position.set(0.60, 0, 1.10);
+        // Polished Chrome Sphere
+        const chromeSphere = new THREE.Mesh(new THREE.SphereGeometry(0.06, 24, 24), liquidChromeMat);
+        chromeSphere.position.set(-0.02, 0.40, 0.08);
+        tableGroup.add(chromeSphere);
+
+        // Dark Glass Vase with Burgundy Flowers (Bild 1)
+        const vase = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 0.22, 24), smokeGlassMat);
+        vase.position.set(0.22, 0.45, -0.05);
+        tableGroup.add(vase);
+
+        const flowers = new THREE.Mesh(new THREE.SphereGeometry(0.10, 16, 16), burgundyVelvetMat);
+        flowers.position.set(0.22, 0.60, -0.05);
+        flowers.scale.set(1.2, 0.8, 1.2);
+        tableGroup.add(flowers);
+
+        tableGroup.position.set(-0.20, 0, -0.30);
         scene.add(tableGroup);
-        collisionBoxes.push({ minX: -0.1, maxX: 1.3, minZ: 0.7, maxZ: 1.5 });
+        collisionBoxes.push({ minX: -0.9, maxX: 0.6, minZ: -0.8, maxZ: 0.2 });
 
-        // 5. Architectural Arc Floor Lamp (Flos Arco / Starck Style)
+        // 4. Polished Stainless Steel Cylinder Side Table (Bild 1)
+        const sideTable = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.46, 32), liquidChromeMat);
+        sideTable.position.set(-2.30, 0.23, 0.10);
+        sideTable.castShadow = true;
+        scene.add(sideTable);
+
+        const bronzeDish = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.06, 0.03, 24), darkIronMat);
+        bronzeDish.position.set(-2.30, 0.475, 0.10);
+        scene.add(bronzeDish);
+        collisionBoxes.push({ minX: -2.6, maxX: -2.0, minZ: -0.2, maxZ: 0.4 });
+
+        // 5. Sculptural Burgundy Wool Armchair (Bild 1)
+        const armChairGroup = new THREE.Group();
+
+        // Deep bucket seat in wine-red wool
+        const chairSeat = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.36, 0.68), burgundyVelvetMat);
+        chairSeat.position.set(0, 0.34, 0);
+        chairSeat.castShadow = true;
+        armChairGroup.add(chairSeat);
+
+        // Sculptural curved high wrap-around back
+        const chairBack = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.42, 0.48, 24, 1, false, 0, Math.PI), burgundyVelvetMat);
+        chairBack.rotation.y = -Math.PI / 2;
+        chairBack.position.set(0, 0.62, -0.15);
+        chairBack.castShadow = true;
+        armChairGroup.add(chairBack);
+
+        // 4 Thick Sculptural Cylindrical Legs
+        const thickLegGeo = new THREE.CylinderGeometry(0.065, 0.085, 0.32, 24);
+        [[-0.26, -0.22], [0.26, -0.22], [-0.26, 0.22], [0.26, 0.22]].forEach(([lx, lz]) => {
+            const leg = new THREE.Mesh(thickLegGeo, burgundyVelvetMat);
+            leg.position.set(lx, 0.16, lz);
+            leg.castShadow = true;
+            armChairGroup.add(leg);
+        });
+
+        armChairGroup.position.set(1.45, 0, -0.50);
+        armChairGroup.rotation.y = -Math.PI * 0.35; // Angled towards sofa & table
+        scene.add(armChairGroup);
+        collisionBoxes.push({ minX: 1.0, maxX: 1.9, minZ: -0.9, maxZ: -0.1 });
+
+        // 6. Flos Arco Polished Chrome Floor Lamp (Bild 1)
         const lampGroup = new THREE.Group();
 
-        // Heavy Base Block (White Carrara finish)
-        const lampBase = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.45, 0.24), whiteLacquerMat);
-        lampBase.position.set(0, 0.225, 0);
-        lampBase.castShadow = true;
-        lampGroup.add(lampBase);
+        // White Carrara Marble Base Block
+        const marbleBase = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.48, 0.24), whiteLacquerMat);
+        marbleBase.position.set(0, 0.24, 0);
+        marbleBase.castShadow = true;
+        lampGroup.add(marbleBase);
 
-        // Stainless base trim
-        const lampBaseTrim = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.04, 0.25), chromeMat);
-        lampBaseTrim.position.set(0, 0.02, 0);
-        lampGroup.add(lampBaseTrim);
-
-        // Sweeping Arc Tube
+        // Sweeping Polished Chrome Arch Tube
         const arcCurve = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(0, 0.45, 0),
-            new THREE.Vector3(0, 1.80, 0),
-            new THREE.Vector3(-0.20, 2.45, -0.30),
-            new THREE.Vector3(-0.80, 2.35, -0.70),
-            new THREE.Vector3(-1.10, 2.10, -0.90)
+            new THREE.Vector3(0, 0.48, 0),
+            new THREE.Vector3(0, 1.90, 0),
+            new THREE.Vector3(0.30, 2.55, -0.40),
+            new THREE.Vector3(0.90, 2.45, -0.90),
+            new THREE.Vector3(1.35, 2.15, -1.25)
         ]);
         const arcGeo = new THREE.TubeGeometry(arcCurve, 32, 0.016, 12, false);
-        const arcMesh = new THREE.Mesh(arcGeo, chromeMat);
+        const arcMesh = new THREE.Mesh(arcGeo, liquidChromeMat);
         lampGroup.add(arcMesh);
 
         // Polished Chrome Hemispherical Dome Shade
-        const shadeGeo = new THREE.SphereGeometry(0.18, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2);
-        const shade = new THREE.Mesh(shadeGeo, chromeMat);
+        const shade = new THREE.Mesh(new THREE.SphereGeometry(0.19, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), liquidChromeMat);
         shade.rotation.x = Math.PI;
-        shade.position.set(-1.10, 2.10, -0.90);
+        shade.position.set(1.35, 2.15, -1.25);
         shade.castShadow = true;
         lampGroup.add(shade);
 
-        lampGroup.position.set(2.40, 0, 2.30);
+        lampGroup.position.set(-2.70, 0, 1.20);
         scene.add(lampGroup);
-        collisionBoxes.push({ minX: 2.1, maxX: 2.7, minZ: 2.0, maxZ: 2.6 });
+        collisionBoxes.push({ minX: -2.9, maxX: -2.4, minZ: 1.0, maxZ: 1.5 });
 
-        // 6. Low Minimalist Sideboard / Credenza (East Wall)
+        // 7. Low White & Brushed Steel Sideboard / Credenza under "My Heart Has Teeth" (Bild 1)
         const credenzaGroup = new THREE.Group();
 
-        // Plinth
-        const credenzaPlinth = new THREE.Mesh(new THREE.BoxGeometry(0.40, 0.06, 2.00), chromeMat);
-        credenzaPlinth.position.set(0, 0.03, 0);
-        credenzaGroup.add(credenzaPlinth);
-
-        // Cabinet Body
-        const credenzaBody = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.48, 2.02), whiteLacquerMat);
-        credenzaBody.position.set(0, 0.30, 0);
+        // Low Satin White Credenza Body ($2.60m long x 0.45m deep x 0.52m high)
+        const credenzaBody = new THREE.Mesh(new THREE.BoxGeometry(2.60, 0.48, 0.45), whiteLacquerMat);
+        credenzaBody.position.set(0, 0.28, 0);
         credenzaBody.castShadow = true;
+        credenzaBody.receiveShadow = true;
         credenzaGroup.add(credenzaBody);
 
-        // Recessed shadow gap in stainless steel
-        const credenzaGap = new THREE.Mesh(new THREE.BoxGeometry(0.43, 0.015, 2.03), chromeMat);
-        credenzaGap.position.set(0, 0.53, 0);
-        credenzaGroup.add(credenzaGap);
+        // Brushed Steel Shadow Gap & Plinth Legs
+        const credenzaPlinth = new THREE.Mesh(new THREE.BoxGeometry(2.56, 0.04, 0.42), brushedSteelMat);
+        credenzaPlinth.position.set(0, 0.02, 0);
+        credenzaGroup.add(credenzaPlinth);
 
-        // Minimalist Sculptural Vase on Sideboard
-        const vaseGeo = new THREE.CylinderGeometry(0.06, 0.09, 0.36, 24);
-        const vase = new THREE.Mesh(vaseGeo, darkUpholsteryMat);
-        vase.position.set(0, 0.72, 0.50);
-        vase.castShadow = true;
-        credenzaGroup.add(vase);
+        // Styling on Credenza:
+        // Oluce Atollo Style Chrome Mushroom Table Lamp (Bild 1)
+        const atolloGroup = new THREE.Group();
+        const atolloBase = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.07, 0.28, 24), liquidChromeMat);
+        atolloBase.position.y = 0.14;
+        atolloGroup.add(atolloBase);
 
-        credenzaGroup.position.set(3.55, 0, -0.20);
+        const atolloDome = new THREE.Mesh(new THREE.SphereGeometry(0.14, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), liquidChromeMat);
+        atolloDome.rotation.x = Math.PI;
+        atolloDome.position.y = 0.32;
+        atolloGroup.add(atolloDome);
+
+        atolloGroup.position.set(1.05, 0.52, 0);
+        credenzaGroup.add(atolloGroup);
+
+        // Tall Branch Vase with Green Twigs (Bild 1)
+        const branchVase = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.07, 0.32, 24), smokeGlassMat);
+        branchVase.position.set(-0.95, 0.68, 0);
+        credenzaGroup.add(branchVase);
+
+        const branches = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.45, 8), darkIronMat);
+        branches.position.set(-0.95, 0.98, 0);
+        credenzaGroup.add(branches);
+
+        // Stacks of Art Books & Bronze Bowl on Credenza
+        const credenzaBook = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.03, 0.20), darkIronMat);
+        credenzaBook.position.set(0.65, 0.535, 0);
+        credenzaGroup.add(credenzaBook);
+
+        const bronzeBowl = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.05, 0.035, 24), darkIronMat);
+        bronzeBowl.position.set(-0.05, 0.54, 0);
+        credenzaGroup.add(bronzeBowl);
+
+        credenzaGroup.position.set(0.80, 0, 3.15);
         scene.add(credenzaGroup);
-        collisionBoxes.push({ minX: 3.2, maxX: 3.8, minZ: -1.3, maxZ: 0.9 });
+        collisionBoxes.push({ minX: -0.6, maxX: 2.2, minZ: 2.8, maxZ: 3.4 });
     }
 
     // ===== 6. LIGHTING DESIGN =====
     function setupLighting() {
         // Soft ambient daylight fill
-        const ambient = new THREE.AmbientLight(0xffffff, 0.52);
+        const ambient = new THREE.AmbientLight(0xfff5ea, 0.28);
         scene.add(ambient);
 
         // Hemisphere sky/floor bounce
-        const hemi = new THREE.HemisphereLight(0xf4f7ff, 0xe4dfd7, 0.62);
+        const hemi = new THREE.HemisphereLight(0xecf3fb, 0xdcd1c2, 0.42);
         scene.add(hemi);
 
-        // Natural Directional Daylight from the North Window
-        const sun = new THREE.DirectionalLight(0xfffaf0, 0.85);
-        sun.position.set(1.5, 4.5, -6.5);
-        sun.target.position.set(0, 1.0, 1.0);
+        // Natural Directional Daylight from the North French Window
+        const sun = new THREE.DirectionalLight(0xfff8ee, 1.25);
+        sun.position.set(1.5, 4.2, -6.0);
+        sun.target.position.set(0, 0.8, 0.8);
         scene.add(sun.target);
 
         sun.castShadow = true;
@@ -681,10 +800,15 @@
         sun.shadow.bias = -0.0004;
         scene.add(sun);
 
-        // Subtle warm glow over the seating lounge
-        const lampLight = new THREE.PointLight(0xffecd0, 0.45, 4.5);
-        lampLight.position.set(1.30, 2.05, 1.40);
-        scene.add(lampLight);
+        // Flos Arc Lamp soft warm glow over the seating lounge
+        const flosLight = new THREE.PointLight(0xffecd0, 0.70, 5.0);
+        flosLight.position.set(-1.35, 2.05, -0.05);
+        scene.add(flosLight);
+
+        // Oluce Atollo Table Lamp warm glow on credenza
+        const atolloLight = new THREE.PointLight(0xffeed6, 0.65, 3.5);
+        atolloLight.position.set(1.85, 0.90, 3.15);
+        scene.add(atolloLight);
     }
 
     // ===== 7. CURATED ARTWORKS (Domestic Placement, No Wall Plaques) =====
