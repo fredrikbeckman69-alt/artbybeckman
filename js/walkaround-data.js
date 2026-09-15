@@ -20,7 +20,7 @@ const WALKAROUND_ROOMS = {
             "x": 70,
             "y": 140
         },
-        "initialYaw": -0.05,
+        "initialYaw": 0.0,
         "initialPitch": 0.0,
         "walkSequence": [
             {
@@ -154,7 +154,7 @@ const WALKAROUND_ROOMS = {
             "x": 130,
             "y": 110
         },
-        "initialYaw": 0.08,
+        "initialYaw": 0.0,
         "initialPitch": -0.02,
         "walkSequence": [
             {
@@ -215,8 +215,8 @@ const WALKAROUND_ROOMS = {
                     "z": 4.5
                 },
                 "screenPos": {
-                    "x": 48.0,
-                    "y": 80.0
+                    "x": 50.0,
+                    "y": 90.0
                 }
             },
             {
@@ -229,8 +229,8 @@ const WALKAROUND_ROOMS = {
                     "z": 2.0
                 },
                 "screenPos": {
-                    "x": 86.0,
-                    "y": 58.0
+                    "x": 88.0,
+                    "y": 74.0
                 }
             },
             {
@@ -243,8 +243,8 @@ const WALKAROUND_ROOMS = {
                     "z": -3.5
                 },
                 "screenPos": {
-                    "x": 18.0,
-                    "y": 52.0
+                    "x": 82.0,
+                    "y": 50.0
                 }
             },
             {
@@ -257,8 +257,8 @@ const WALKAROUND_ROOMS = {
                     "z": 4.0
                 },
                 "screenPos": {
-                    "x": 8.0,
-                    "y": 65.0
+                    "x": 10.0,
+                    "y": 62.0
                 }
             }
         ]
@@ -423,7 +423,7 @@ const WALKAROUND_ROOMS = {
             "x": 190,
             "y": 110
         },
-        "initialYaw": -0.05,
+        "initialYaw": 0.0,
         "initialPitch": -0.02,
         "walkSequence": [
             {
@@ -529,7 +529,7 @@ const WALKAROUND_ROOMS = {
             "x": 130,
             "y": 45
         },
-        "initialYaw": -0.15,
+        "initialYaw": 0.0,
         "initialPitch": 0.0,
         "walkSequence": [
             {
@@ -869,7 +869,7 @@ const WALKAROUND_ROOMS = {
             "x": 70,
             "y": 45
         },
-        "initialYaw": 0.1,
+        "initialYaw": 0.0,
         "initialPitch": -0.02,
         "walkSequence": [
             {
@@ -975,7 +975,7 @@ const WALKAROUND_ROOMS = {
             "x": -10,
             "y": 110
         },
-        "initialYaw": -0.15,
+        "initialYaw": 0.0,
         "initialPitch": -0.02,
         "walkSequence": [
             {
@@ -1081,7 +1081,7 @@ const WALKAROUND_ROOMS = {
             "x": -10,
             "y": 45
         },
-        "initialYaw": -0.1,
+        "initialYaw": 0.0,
         "initialPitch": -0.02,
         "walkSequence": [
             {

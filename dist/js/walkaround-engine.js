@@ -1,8 +1,8 @@
 /**
- * Walk Around — True 3D Virtual Walk Engine (Three.js WebGL)
+ * Walk Around — Perfected True 3D Virtual Walk Engine (Three.js WebGL)
  * Photorealistic 10-Zone Parisian Penthouse Virtual Tour
  * Scale: 1 unit = 1.0 meter (Physical 1:1 Metric Scale)
- * First Person Walking (WASD + Mouse Look + Matterport Floor Pucks)
+ * First Person Walking (WASD + Mouse Look + Matterport Floor Rings)
  * Art by Beckman
  */
 
@@ -15,7 +15,6 @@
             this.ctx = null;
             this.isMuted = true;
             this.masterGain = null;
-            this.ambienceGain = null;
             this.lastStepTime = 0;
         }
 
@@ -29,7 +28,6 @@
             this.masterGain.gain.value = this.isMuted ? 0 : 0.35;
             this.masterGain.connect(this.ctx.destination);
 
-            // Generera realistiskt rumsljud / parisiskt vinddrag i rummet
             const bufferSize = this.ctx.sampleRate * 2;
             const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
             const output = noiseBuffer.getChannelData(0);
@@ -42,7 +40,7 @@
                 b3 = 0.86650 * b3 + white * 0.3104856;
                 b4 = 0.55000 * b4 + white * 0.5329522;
                 b5 = -0.7616 * b5 - white * 0.0168980;
-                output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.035;
+                output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.032;
                 b6 = white * 0.115926;
             }
 
@@ -52,15 +50,15 @@
 
             const filter = this.ctx.createBiquadFilter();
             filter.type = 'lowpass';
-            filter.frequency.value = 380;
+            filter.frequency.value = 360;
             filter.Q.value = 1.0;
 
-            this.ambienceGain = this.ctx.createGain();
-            this.ambienceGain.gain.value = 0.14;
+            const ambienceGain = this.ctx.createGain();
+            ambienceGain.gain.value = 0.12;
 
             whiteNoise.connect(filter);
-            filter.connect(this.ambienceGain);
-            this.ambienceGain.connect(this.masterGain);
+            filter.connect(ambienceGain);
+            ambienceGain.connect(this.masterGain);
             whiteNoise.start(0);
         }
 
@@ -73,10 +71,10 @@
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(130 + Math.random() * 30, now);
-            osc.frequency.exponentialRampToValueAtTime(35, now + 0.075);
+            osc.frequency.setValueAtTime(125 + Math.random() * 25, now);
+            osc.frequency.exponentialRampToValueAtTime(32, now + 0.075);
 
-            gain.gain.setValueAtTime(0.10 + Math.random() * 0.03, now);
+            gain.gain.setValueAtTime(0.09 + Math.random() * 0.02, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
 
             osc.connect(gain);
@@ -100,19 +98,18 @@
 
     const audio = new VirtualVacationAudio();
 
-    // ===== 2. STATE VARIABLES =====
+    // ===== 2. STATE & CONFIGURATION =====
     let currentRoomId = 'living_room';
-    let isTourRunning = false; // Default to free interactive 3D walk
+    let isTourRunning = false;
     let tourSpeed = 1.0;
     let tourSequenceIndex = 0;
     let tourPhaseTime = 0;
 
-    // Movement & Camera State
     const eyeHeight = 1.65; // 1.65m human eye level
-    let cameraYaw = 0.08;
-    let cameraPitch = -0.02;
-    let targetYaw = 0.08;
-    let targetPitch = -0.02;
+    let cameraYaw = 0.0;
+    let cameraPitch = 0.0;
+    let targetYaw = 0.0;
+    let targetPitch = 0.0;
     let targetFov = 65;
     let currentFov = 65;
 
@@ -120,24 +117,23 @@
     let headBobY = 0;
     let headBobX = 0;
 
-    // Physical position interpolation (for walking to pucks)
-    let isWalkingToTarget = false;
-    const playerPos = { x: 8.0, y: eyeHeight, z: 2.0 };
-    const targetPlayerPos = { x: 8.0, y: eyeHeight, z: 2.0 };
-
-    // Keyboard movement state
+    // Movement state
+    let isTransitioning = false;
+    const playerPos = { x: 0.0, y: eyeHeight, z: 0.0 };
+    const targetPlayerPos = { x: 0.0, y: eyeHeight, z: 0.0 };
     const keysDown = {};
-
-    // Mouse / Touch drag state
     let isDragging = false;
     let previousMousePos = { x: 0, y: 0 };
 
     // Three.js Core Objects
     let scene, camera, renderer;
-    let roomMeshes = {};
-    let artworkMeshes = [];
+    let primaryPlaneMesh = null;
     let portalPuckMeshes = [];
+    let artworkPins = [];
     let raycaster, mouseCoords;
+
+    const textureCache = {};
+    const roomKeys = Object.keys(WALKAROUND_ROOMS);
 
     // DOM Elements
     const container = document.getElementById('walkaround-canvas-container');
@@ -147,19 +143,12 @@
     const minimapCtx = minimapCanvas ? minimapCanvas.getContext('2d') : null;
     let tourBadge = null;
 
-    const textureLoader = (typeof THREE !== 'undefined') ? new THREE.TextureLoader() : null;
-    const roomKeys = Object.keys(WALKAROUND_ROOMS);
-
     // ===== 3. THREE.JS INITIALIZATION =====
     function initThreeEngine() {
-        if (typeof THREE === 'undefined') {
-            console.error('Three.js is not loaded! Falling back.');
-            return false;
-        }
+        if (typeof THREE === 'undefined') return false;
 
         container.innerHTML = '';
 
-        // Renderer
         renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -172,32 +161,29 @@
         renderer.toneMappingExposure = 1.05;
         container.appendChild(renderer.domElement);
 
-        // Scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1a1920);
+        scene.background = new THREE.Color(0x18171d);
+        window.__DEBUG_SCENE = scene;
 
-        // Camera
         const aspect = window.innerWidth / window.innerHeight;
         camera = new THREE.PerspectiveCamera(targetFov, aspect, 0.1, 500);
-        camera.position.set(playerPos.x, playerPos.y, playerPos.z);
+        camera.position.set(0, eyeHeight, 0);
         camera.rotation.order = 'YXZ';
+        window.__DEBUG_CAMERA = camera;
 
-        // Raycaster for interactions
         raycaster = new THREE.Raycaster();
         mouseCoords = new THREE.Vector2();
 
         // Lighting
-        const ambLight = new THREE.AmbientLight(0xfff6ee, 1.4);
+        const ambLight = new THREE.AmbientLight(0xfff8f0, 1.4);
         scene.add(ambLight);
 
-        const dirLight = new THREE.DirectionalLight(0xfff2e0, 0.8);
+        const dirLight = new THREE.DirectionalLight(0xfffaec, 0.8);
         dirLight.position.set(10, 20, 15);
         scene.add(dirLight);
 
-        // Build 3D Architectural Base (Travertine floor, ceiling, and all rooms)
-        buildArchitecturalBase();
-        buildAllRooms();
-        buildPucksAndArtworksForRoom(currentRoomId);
+        buildSurroundingArchitecture();
+        loadAndDisplayRoom(currentRoomId);
 
         // Tour status badge
         tourBadge = document.createElement('div');
@@ -208,14 +194,13 @@
         setupEventListeners();
         window.addEventListener('resize', onWindowResize);
 
-        // Hide loader after ready
         setTimeout(() => {
             if (loader) {
                 loader.style.opacity = '0';
                 loader.style.pointerEvents = 'none';
                 setTimeout(() => loader.style.display = 'none', 600);
             }
-        }, 500);
+        }, 400);
 
         return true;
     }
@@ -227,17 +212,16 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // ===== 4. ARCHITECTURAL 3D MESHES & ENVIRONMENT (FILLING GAPS IN 360°) =====
-    function buildArchitecturalBase() {
-        // Procedural French Travertine Floor Canvas Texture
+    // ===== 4. SURROUNDING 3D ARCHITECTURE (360° ENVIRONMENT) =====
+    function buildSurroundingArchitecture() {
+        // 1. Procedural Travertine Limestone Floor
         const floorCanvas = document.createElement('canvas');
         floorCanvas.width = 512;
         floorCanvas.height = 512;
         const fCtx = floorCanvas.getContext('2d');
-        fCtx.fillStyle = '#e8e2d5'; // Warm limestone
+        fCtx.fillStyle = '#eae5d9';
         fCtx.fillRect(0, 0, 512, 512);
 
-        // Subtle tile seams
         fCtx.strokeStyle = 'rgba(160, 150, 138, 0.35)';
         fCtx.lineWidth = 3;
         for (let i = 0; i <= 512; i += 128) {
@@ -246,20 +230,20 @@
             fCtx.moveTo(0, i); fCtx.lineTo(512, i);
             fCtx.stroke();
         }
-        // Surface stone noise
         for (let i = 0; i < 2000; i++) {
             const nx = Math.random() * 512;
             const ny = Math.random() * 512;
-            fCtx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.15)' : 'rgba(120,110,95,0.08)';
+            fCtx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.18)' : 'rgba(120,110,95,0.08)';
             fCtx.fillRect(nx, ny, 2, 2);
         }
 
         const floorTexture = new THREE.CanvasTexture(floorCanvas);
         floorTexture.wrapS = THREE.RepeatWrapping;
         floorTexture.wrapT = THREE.RepeatWrapping;
-        floorTexture.repeat.set(32, 32);
+        floorTexture.repeat.set(20, 20);
 
-        const floorGeo = new THREE.PlaneGeometry(120, 120);
+        // Floor and ceiling for 360° turn-around (strictly behind the viewer)
+        const floorGeo = new THREE.PlaneGeometry(30, 30);
         const floorMat = new THREE.MeshStandardMaterial({
             map: floorTexture,
             roughness: 0.45,
@@ -267,244 +251,257 @@
         });
         const floorMesh = new THREE.Mesh(floorGeo, floorMat);
         floorMesh.rotation.x = -Math.PI / 2;
-        floorMesh.position.y = 0;
-        floorMesh.receiveShadow = true;
+        floorMesh.position.set(0, 0, 25);
         scene.add(floorMesh);
 
-        // Ceiling plane at 3.8m height
-        const ceilGeo = new THREE.PlaneGeometry(120, 120);
+        // 2. Parisian Moulded Plaster Ceiling (Behind viewer)
+        const ceilGeo = new THREE.PlaneGeometry(30, 30);
         const ceilMat = new THREE.MeshStandardMaterial({
-            color: 0xfdfdfd,
+            color: 0xfaf9f6,
             roughness: 0.95
         });
         const ceilMesh = new THREE.Mesh(ceilGeo, ceilMat);
         ceilMesh.rotation.x = Math.PI / 2;
-        ceilMesh.position.y = 3.8;
+        ceilMesh.position.set(0, 4.4, 25);
         scene.add(ceilMesh);
+
+        // 3. Classical French Boiserie Walls (Surrounding 360°)
+        const wallMat = new THREE.MeshStandardMaterial({
+            color: 0xf4f1eb,
+            roughness: 0.85
+        });
+
+        // Left Wall
+        const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(30, 9), wallMat);
+        leftWall.position.set(-8.5, 2.2, 10);
+        leftWall.rotation.y = Math.PI / 2;
+        scene.add(leftWall);
+
+        // Right Wall
+        const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(30, 9), wallMat);
+        rightWall.position.set(8.5, 2.2, 10);
+        rightWall.rotation.y = -Math.PI / 2;
+        scene.add(rightWall);
+
+        // Back Wall (Entrance double doors)
+        const backWall = new THREE.Mesh(new THREE.PlaneGeometry(24, 9), wallMat);
+        backWall.position.set(0, 2.2, 18.5);
+        backWall.rotation.y = Math.PI;
+        scene.add(backWall);
     }
 
-    function buildAllRooms() {
-        roomKeys.forEach(id => {
-            const roomData = WALKAROUND_ROOMS[id];
-            const p = roomData.pos3d || { x: 0, y: 1.65, z: 0 };
+    // ===== 5. LOAD & DISPLAY PHOTOREALISTIC ROOM IN 3D =====
+    function loadAndDisplayRoom(roomId) {
+        const room = WALKAROUND_ROOMS[roomId];
+        if (!room) return;
 
-            // Inverted Environment Sphere for each room
-            // Using 360 geometry with high-resolution image mapped inside
-            const sphereGeo = new THREE.SphereGeometry(14, 48, 32);
-            sphereGeo.scale(-1, 1, 1); // Inside-out
+        portalPuckMeshes.forEach(p => scene.remove(p));
+        portalPuckMeshes = [];
+        artworkPins.forEach(a => scene.remove(a));
+        artworkPins = [];
 
-            const mat = new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                transparent: true,
-                opacity: (id === currentRoomId) ? 1.0 : 0.0
+        playerPos.x = 0;
+        playerPos.y = eyeHeight;
+        playerPos.z = 0;
+        targetPlayerPos.x = 0;
+        targetPlayerPos.y = eyeHeight;
+        targetPlayerPos.z = 0;
+
+        targetYaw = room.initialYaw || 0.0;
+        targetPitch = room.initialPitch || 0.0;
+        cameraYaw = targetYaw;
+        cameraPitch = targetPitch;
+
+        const textureLoader = new THREE.TextureLoader();
+        const loadTex = (url) => {
+            return new Promise((resolve) => {
+                if (textureCache[url]) {
+                    resolve(textureCache[url]);
+                } else {
+                    textureLoader.load(url, (tex) => {
+                        tex.generateMipmaps = true;
+                        tex.minFilter = THREE.LinearFilter;
+                        textureCache[url] = tex;
+                        resolve(tex);
+                    }, undefined, () => {
+                        textureLoader.load(room.fallback, (fTex) => {
+                            resolve(fTex);
+                        });
+                    });
+                }
+            });
+        };
+
+        loadTex(room.image).then(tex => {
+            if (primaryPlaneMesh) {
+                scene.remove(primaryPlaneMesh);
+                primaryPlaneMesh.geometry.dispose();
+            }
+
+            // High-resolution focal perspective plane at z = -5.8m
+            // Sized to completely fill 16:9 and ultrawide viewports edge-to-edge!
+            const w = 15.2;
+            const h = w * (682 / 1024); // 10.126m (1.501 aspect ratio)
+            const planeGeo = new THREE.PlaneGeometry(w, h);
+            const planeMat = new THREE.MeshBasicMaterial({
+                map: tex,
+                side: THREE.FrontSide,
+                transparent: false
             });
 
-            const sphere = new THREE.Mesh(sphereGeo, mat);
-            sphere.position.set(p.x, 1.65, p.z);
-            sphere.rotation.y = roomData.initialYaw || 0;
-            scene.add(sphere);
+            primaryPlaneMesh = new THREE.Mesh(planeGeo, planeMat);
+            primaryPlaneMesh.position.set(0, eyeHeight, -5.8);
+            scene.add(primaryPlaneMesh);
 
-            roomMeshes[id] = {
-                mesh: sphere,
-                material: mat,
-                loaded: false
-            };
+            buildPortalPucks(room);
+            buildArtworkPins(room);
 
-            // Preload room texture
-            textureLoader.load(roomData.image, (tex) => {
-                tex.generateMipmaps = true;
-                tex.minFilter = THREE.LinearMipmapLinearFilter;
-                mat.map = tex;
-                mat.needsUpdate = true;
-                roomMeshes[id].loaded = true;
-            }, undefined, () => {
-                // Fallback to jpg
-                textureLoader.load(roomData.fallback, (fTex) => {
-                    mat.map = fTex;
-                    mat.needsUpdate = true;
-                });
-            });
+            updateHUD();
         });
     }
 
-    // ===== 5. 3D MATTERPORT FLOOR PUCKS & FRAMED ARTWORKS =====
-    function buildPucksAndArtworksForRoom(roomId) {
-        // Clear previous room interactables
-        portalPuckMeshes.forEach(m => scene.remove(m));
-        portalPuckMeshes = [];
+    // ===== 6. 3D MATTERPORT FLOOR NAVIGATION PUCKS =====
+    function buildPortalPucks(room) {
+        if (!room.portals) return;
 
-        artworkMeshes.forEach(m => scene.remove(m));
-        artworkMeshes = [];
+        room.portals.forEach(portal => {
+            const puckGroup = new THREE.Group();
 
-        const roomData = WALKAROUND_ROOMS[roomId];
-        if (!roomData) return;
+            // Calculate natural 3D doorway coordinate from screenPos
+            let px = 0, py = 0.0, pz = -5.0;
+            if (portal.screenPos) {
+                px = ((portal.screenPos.x - 50) / 50) * 4.6;
+                py = ((50 - portal.screenPos.y) / 50) * 0.8;
+                pz = -5.2 + ((100 - portal.screenPos.y) / 100) * 0.8;
+            }
 
-        // 1. Build 3D Matterport Floor Pucks for Portals
-        if (roomData.portals) {
-            roomData.portals.forEach(portal => {
-                const targetRoom = WALKAROUND_ROOMS[portal.targetRoom];
-                if (!targetRoom) return;
+            puckGroup.position.set(px, py, pz);
 
-                const puckGroup = new THREE.Group();
-                const puckPos = portal.pos3d || targetRoom.pos3d || { x: 0, y: 0, z: 0 };
-                puckGroup.position.set(puckPos.x, 0.03, puckPos.z);
-
-                // Outer pulsing ring
-                const outerGeo = new THREE.RingGeometry(0.45, 0.58, 32);
-                const outerMat = new THREE.MeshBasicMaterial({
-                    color: 0xdeb887,
-                    transparent: true,
-                    opacity: 0.85,
-                    side: THREE.DoubleSide
-                });
-                const outerRing = new THREE.Mesh(outerGeo, outerMat);
-                outerRing.rotation.x = -Math.PI / 2;
-                puckGroup.add(outerRing);
-
-                // Inner solid dot
-                const innerGeo = new THREE.CircleGeometry(0.24, 32);
-                const innerMat = new THREE.MeshBasicMaterial({
-                    color: 0xffffff,
-                    transparent: true,
-                    opacity: 0.90,
-                    side: THREE.DoubleSide
-                });
-                const innerDot = new THREE.Mesh(innerGeo, innerMat);
-                innerDot.rotation.x = -Math.PI / 2;
-                puckGroup.add(innerDot);
-
-                // Floating 3D Text Billboard Sprite
-                const sprite = createTextSprite(portal.label || `Gå till ${targetRoom.name}`);
-                sprite.position.set(0, 0.75, 0);
-                puckGroup.add(sprite);
-
-                puckGroup.userData = {
-                    type: 'portal',
-                    targetRoom: portal.targetRoom,
-                    label: portal.label,
-                    outerRing: outerRing,
-                    baseScale: 1.0
-                };
-
-                scene.add(puckGroup);
-                portalPuckMeshes.push(puckGroup);
+            // Outer pulsing gold ring
+            const ringGeo = new THREE.RingGeometry(0.24, 0.32, 32);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: 0xffd700,
+                transparent: true,
+                opacity: 0.90,
+                side: THREE.DoubleSide
             });
-        }
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = -Math.PI / 2.3;
+            puckGroup.add(ring);
 
-        // 2. Build 3D Framed Artworks on the Walls
-        if (roomData.artworks) {
-            roomData.artworks.forEach(art => {
-                const artGroup = new THREE.Group();
-                const aPos = art.pos3d || { x: roomData.pos3d.x, y: 2.0, z: roomData.pos3d.z - 4 };
-                artGroup.position.set(aPos.x, aPos.y, aPos.z);
-
-                // Physical dimensions parsed from size string (e.g. "100 × 120 cm")
-                let w = 1.0, h = 1.2;
-                const sizeMatch = art.size.match(/(\d+)[\s*×x]+(\d+)/);
-                if (sizeMatch) {
-                    w = parseInt(sizeMatch[1], 10) / 100;
-                    h = parseInt(sizeMatch[2], 10) / 100;
-                }
-
-                // 3D Canvas Mesh
-                const frameGeo = new THREE.BoxGeometry(w, h, 0.05);
-                const frameMat = new THREE.MeshStandardMaterial({
-                    color: 0x1f1d1b, // Dark gallery frame
-                    roughness: 0.5,
-                    metalness: 0.3
-                });
-
-                // Front face texture
-                const canvasMat = new THREE.MeshStandardMaterial({
-                    roughness: 0.4,
-                    metalness: 0.05
-                });
-                const artTexPath = `assets/images/${art.filename}`;
-                textureLoader.load(artTexPath, (tex) => {
-                    canvasMat.map = tex;
-                    canvasMat.needsUpdate = true;
-                }, undefined, () => {
-                    textureLoader.load(`assets/images/${art.originalFilename}`, (fTex) => {
-                        canvasMat.map = fTex;
-                        canvasMat.needsUpdate = true;
-                    });
-                });
-
-                // Mesh with multi-materials (front canvas face = index 4)
-                const materials = [frameMat, frameMat, frameMat, frameMat, canvasMat, frameMat];
-                const mesh = new THREE.Mesh(frameGeo, materials);
-                artGroup.add(mesh);
-
-                // 3D Floating Gold Inspection Pin
-                const pinGeo = new THREE.RingGeometry(0.08, 0.12, 24);
-                const pinMat = new THREE.MeshBasicMaterial({
-                    color: 0xffd700,
-                    side: THREE.DoubleSide,
-                    transparent: true,
-                    opacity: 0.9
-                });
-                const pinMesh = new THREE.Mesh(pinGeo, pinMat);
-                pinMesh.position.set(0, 0, 0.04);
-                artGroup.add(pinMesh);
-
-                // Small center glow dot
-                const dotGeo = new THREE.CircleGeometry(0.04, 16);
-                const dotMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-                const dotMesh = new THREE.Mesh(dotGeo, dotMat);
-                dotMesh.position.set(0, 0, 0.041);
-                artGroup.add(dotMesh);
-
-                // Point camera towards room center
-                artGroup.lookAt(roomData.pos3d.x, aPos.y, roomData.pos3d.z);
-
-                artGroup.userData = {
-                    type: 'artwork',
-                    artData: art,
-                    pinMesh: pinMesh
-                };
-
-                scene.add(artGroup);
-                artworkMeshes.push(artGroup);
+            // Inner solid ivory dot
+            const dotGeo = new THREE.CircleGeometry(0.12, 24);
+            const dotMat = new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.98,
+                side: THREE.DoubleSide
             });
-        }
+            const dot = new THREE.Mesh(dotGeo, dotMat);
+            dot.rotation.x = -Math.PI / 2.3;
+            puckGroup.add(dot);
+
+            // Sleek Floating Text Sprite
+            const sprite = createTextSprite(portal.label);
+            sprite.position.set(0, 0.36, 0);
+            puckGroup.add(sprite);
+
+            puckGroup.userData = {
+                type: 'portal',
+                targetRoom: portal.targetRoom,
+                outerRing: ring,
+                label: portal.label
+            };
+
+            scene.add(puckGroup);
+            portalPuckMeshes.push(puckGroup);
+        });
+    }
+
+    function buildArtworkPins(room) {
+        if (!room.artworks) return;
+
+        room.artworks.forEach(art => {
+            const pinGroup = new THREE.Group();
+
+            let ax = 0, ay = 2.5;
+            if (art.screenPos) {
+                const w = 8.2 * (1024 / 682);
+                ax = ((art.screenPos.x - 50) / 100) * w;
+                ay = eyeHeight + ((50 - art.screenPos.y) / 100) * 8.2;
+            }
+
+            pinGroup.position.set(ax, ay, -5.7);
+
+            // Concentric Glowing Gold Ring
+            const ringGeo = new THREE.RingGeometry(0.16, 0.24, 32);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: 0xffd700,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.94
+            });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            pinGroup.add(ring);
+
+            // Center glowing dot
+            const dotGeo = new THREE.CircleGeometry(0.08, 16);
+            const dotMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const dot = new THREE.Mesh(dotGeo, dotMat);
+            dot.position.z = 0.005;
+            pinGroup.add(dot);
+
+            // Sleek Title Sprite
+            const labelSprite = createTextSprite(`${art.title} • 1:1 vy`);
+            labelSprite.scale.set(0.92, 0.22, 1.0);
+            labelSprite.position.set(0, -0.36, 0.02);
+            pinGroup.add(labelSprite);
+
+            pinGroup.userData = {
+                type: 'artwork',
+                artData: art,
+                ring: ring
+            };
+
+            scene.add(pinGroup);
+            artworkPins.push(pinGroup);
+        });
     }
 
     function createTextSprite(message) {
         const canvas = document.createElement('canvas');
-        canvas.width = 380;
-        canvas.height = 96;
+        canvas.width = 360;
+        canvas.height = 80;
         const ctx = canvas.getContext('2d');
 
-        // Pill background
-        ctx.fillStyle = 'rgba(20, 18, 24, 0.85)';
+        // Elegant Frosted Glass Pill
+        ctx.fillStyle = 'rgba(16, 14, 20, 0.88)';
         ctx.beginPath();
-        ctx.roundRect(10, 10, 360, 76, 38);
+        ctx.roundRect(8, 8, 344, 64, 32);
         ctx.fill();
 
-        ctx.strokeStyle = 'rgba(255, 215, 0, 0.6)';
-        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#ffd700';
+        ctx.lineWidth = 2.5;
         ctx.stroke();
 
-        ctx.font = '600 32px Inter, sans-serif';
+        ctx.font = '600 22px Inter, sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(message, 190, 48);
+        ctx.fillText(message, 180, 40);
 
         const tex = new THREE.CanvasTexture(canvas);
         const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
         const sprite = new THREE.Sprite(spriteMat);
-        sprite.scale.set(1.6, 0.4, 1.0);
+        sprite.scale.set(1.0, 0.22, 1.0);
         return sprite;
     }
 
-    // ===== 6. FIRST PERSON WALKING CONTROLS (WASD, ARROWS, TOUCH, CLICK-TO-WALK) =====
+    // ===== 7. FIRST PERSON WALKING CONTROLS =====
     function setupEventListeners() {
-        // Keyboard controls
         window.addEventListener('keydown', (e) => {
             keysDown[e.code] = true;
             if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'].includes(e.code)) {
-                // Instantly switch to interactive free exploration mode
                 if (isTourRunning) setTourMode(false);
             }
             if (e.code === 'Space') {
@@ -517,7 +514,7 @@
             keysDown[e.code] = false;
         });
 
-        // Mouse Drag to Look (360° Panoramic Pan)
+        // Mouse look (Drag to look 360°)
         container.addEventListener('mousedown', (e) => {
             if (e.button !== 0) return;
             isDragging = true;
@@ -535,27 +532,25 @@
                 previousMousePos = { x: e.clientX, y: e.clientY };
 
                 targetYaw -= dx * 0.0035;
-                targetPitch -= dy * 0.0030;
-                targetPitch = Math.max(-1.3, Math.min(1.3, targetPitch));
+                targetPitch -= dy * 0.0028;
+                targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch));
             } else {
                 checkRaycastHover();
             }
         });
 
-        window.addEventListener('mouseup', (e) => {
-            if (isDragging) {
-                isDragging = false;
-            }
+        window.addEventListener('mouseup', () => {
+            if (isDragging) isDragging = false;
         });
 
-        // Click to interact (floor rings or artwork inspection)
+        // Click to walk or inspect
         container.addEventListener('click', (e) => {
             mouseCoords.x = (e.clientX / window.innerWidth) * 2 - 1;
             mouseCoords.y = -(e.clientY / window.innerHeight) * 2 + 1;
             handleSceneClick();
         });
 
-        // Touch drag for Mobile
+        // Touch for Mobile
         container.addEventListener('touchstart', (e) => {
             if (e.touches.length === 1) {
                 isDragging = true;
@@ -572,18 +567,18 @@
 
                 targetYaw -= dx * 0.0045;
                 targetPitch -= dy * 0.0035;
-                targetPitch = Math.max(-1.3, Math.min(1.3, targetPitch));
+                targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch));
             }
         }, { passive: true });
 
-        container.addEventListener('touchend', (e) => {
+        container.addEventListener('touchend', () => {
             if (isDragging) isDragging = false;
-        }, { passive: true });
+        });
 
-        // Mousewheel Zoom (Dolly in/out)
+        // Wheel Zoom
         container.addEventListener('wheel', (e) => {
             targetFov += e.deltaY * 0.035;
-            targetFov = Math.max(40, Math.min(80, targetFov));
+            targetFov = Math.max(45, Math.min(75, targetFov));
         }, { passive: true });
 
         setupHUDControls();
@@ -595,21 +590,17 @@
 
         const interactables = [];
         portalPuckMeshes.forEach(p => interactables.push(p.children[0], p.children[1]));
-        artworkMeshes.forEach(a => interactables.push(a.children[0], a.children[1]));
+        artworkPins.forEach(a => interactables.push(a.children[0], a.children[1]));
 
-        const intersects = raycaster.intersectObjects(interactables, false);
-        if (intersects.length > 0) {
-            container.style.cursor = 'pointer';
-        } else {
-            container.style.cursor = 'grab';
-        }
+        const hits = raycaster.intersectObjects(interactables, false);
+        container.style.cursor = hits.length > 0 ? 'pointer' : 'grab';
     }
 
     function handleSceneClick() {
         if (!camera || !scene) return;
         raycaster.setFromCamera(mouseCoords, camera);
 
-        // Check portals first
+        // 1. Check Portals
         const portalHits = [];
         portalPuckMeshes.forEach(p => {
             const hits = raycaster.intersectObjects(p.children, false);
@@ -617,16 +608,16 @@
         });
 
         if (portalHits.length > 0) {
-            const targetRoomId = portalHits[0].userData.targetRoom;
-            if (targetRoomId) {
-                walkToRoom(targetRoomId);
+            const targetRoom = portalHits[0].userData.targetRoom;
+            if (targetRoom) {
+                walkToRoom(targetRoom);
                 return;
             }
         }
 
-        // Check artworks
+        // 2. Check Artworks
         const artHits = [];
-        artworkMeshes.forEach(a => {
+        artworkPins.forEach(a => {
             const hits = raycaster.intersectObjects(a.children, false);
             if (hits.length > 0) artHits.push(a);
         });
@@ -641,82 +632,62 @@
     }
 
     function inspectArtwork(art) {
-        // Open modal
-        const modalImg = document.getElementById('modal-img');
-        const modalTitle = document.getElementById('modal-title');
-        const modalSize = document.getElementById('modal-size');
-        const modalYear = document.getElementById('modal-year');
-        const modalMaterial = document.getElementById('modal-material');
-        const modalZone = document.getElementById('modal-zone');
-        const modalDesc = document.getElementById('modal-desc');
+        targetFov = 48;
+        setTimeout(() => {
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalSize = document.getElementById('modal-size');
+            const modalYear = document.getElementById('modal-year');
+            const modalMaterial = document.getElementById('modal-material');
+            const modalZone = document.getElementById('modal-zone');
+            const modalDesc = document.getElementById('modal-desc');
 
-        if (modalImg) modalImg.src = `assets/images/${art.filename}`;
-        if (modalTitle) modalTitle.textContent = art.title;
-        if (modalSize) modalSize.textContent = art.size;
-        if (modalYear) modalYear.textContent = art.year || '2026';
-        if (modalMaterial) modalMaterial.textContent = art.material || 'Originalverk';
-        if (modalZone) modalZone.textContent = art.zone || 'Paris Penthouse';
-        if (modalDesc) modalDesc.textContent = art.description || '';
+            if (modalImg) modalImg.src = `assets/images/${art.filename}`;
+            if (modalTitle) modalTitle.textContent = art.title;
+            if (modalSize) modalSize.textContent = art.size;
+            if (modalYear) modalYear.textContent = art.year || '2026';
+            if (modalMaterial) modalMaterial.textContent = art.material || 'Originalverk';
+            if (modalZone) modalZone.textContent = art.zone || 'Paris Penthouse';
+            if (modalDesc) modalDesc.textContent = art.description || '';
 
-        if (artModal) {
-            artModal.classList.add('active');
-            artModal.setAttribute('aria-hidden', 'false');
-        }
+            if (artModal) {
+                artModal.classList.add('active');
+                artModal.setAttribute('aria-hidden', 'false');
+            }
+        }, 250);
     }
 
-    // ===== 7. WALKING & TRANSITIONS =====
     function walkToRoom(roomId) {
-        if (roomId === currentRoomId) return;
-        const targetRoom = WALKAROUND_ROOMS[roomId];
-        if (!targetRoom) return;
+        if (roomId === currentRoomId || isTransitioning) return;
+        isTransitioning = true;
 
-        const startRoom = WALKAROUND_ROOMS[currentRoomId];
-
-        // Smoothly walk player position to destination
-        const destPos = targetRoom.pos3d || { x: 0, y: eyeHeight, z: 0 };
-        targetPlayerPos.x = destPos.x;
-        targetPlayerPos.y = eyeHeight;
-        targetPlayerPos.z = destPos.z;
-        isWalkingToTarget = true;
-
-        // Cross-fade 3D environment spheres
-        const startMesh = roomMeshes[currentRoomId];
-        const destMesh = roomMeshes[roomId];
-
-        if (destMesh) {
-            destMesh.material.opacity = 0.0;
-            destMesh.mesh.visible = true;
-        }
+        targetPlayerPos.z = -2.5;
 
         let fadeTime = 0;
-        const duration = 1.6;
+        function stepTransition() {
+            fadeTime += 0.04;
+            if (primaryPlaneMesh) {
+                primaryPlaneMesh.material.opacity = Math.max(0.0, 1.0 - fadeTime);
+            }
 
-        function animateTransition() {
-            fadeTime += 0.025;
-            const t = Math.min(fadeTime / duration, 1.0);
-
-            if (startMesh) startMesh.material.opacity = 1.0 - t;
-            if (destMesh) destMesh.material.opacity = t;
-
-            if (t < 1.0) {
-                requestAnimationFrame(animateTransition);
+            if (fadeTime < 1.0) {
+                requestAnimationFrame(stepTransition);
             } else {
-                if (startMesh) startMesh.material.opacity = 0.0;
-                if (destMesh) destMesh.material.opacity = 1.0;
                 currentRoomId = roomId;
-                buildPucksAndArtworksForRoom(currentRoomId);
-                updateHUD();
+                loadAndDisplayRoom(currentRoomId);
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 100);
             }
         }
-        animateTransition();
+        stepTransition();
     }
 
-    function updateKeyboardMovement(delta) {
-        if (isWalkingToTarget) return;
+    function updateMovement(delta) {
+        if (isTransitioning) return;
 
-        const moveSpeed = (keysDown['ShiftLeft'] ? 4.2 : 2.4) * delta;
-        let moveX = 0;
-        let moveZ = 0;
+        const moveSpeed = (keysDown['ShiftLeft'] ? 3.6 : 2.0) * delta;
+        let moveX = 0, moveZ = 0;
 
         if (keysDown['KeyW'] || keysDown['ArrowUp']) moveZ -= 1;
         if (keysDown['KeyS'] || keysDown['ArrowDown']) moveZ += 1;
@@ -724,12 +695,10 @@
         if (keysDown['KeyD'] || keysDown['ArrowRight']) moveX += 1;
 
         if (moveX !== 0 || moveZ !== 0) {
-            // Normalize
             const len = Math.sqrt(moveX * moveX + moveZ * moveZ);
             moveX /= len;
             moveZ /= len;
 
-            // Rotate direction according to camera yaw
             const cos = Math.cos(cameraYaw);
             const sin = Math.sin(cameraYaw);
             const forwardX = -sin;
@@ -740,12 +709,13 @@
             playerPos.x += (forwardX * -moveZ + rightX * moveX) * moveSpeed;
             playerPos.z += (forwardZ * -moveZ + rightZ * moveX) * moveSpeed;
 
-            // Walking cadence and head bob
-            walkTime += delta * 7.5;
-            headBobY = Math.sin(walkTime) * 0.045;
-            headBobX = Math.cos(walkTime * 0.5) * 0.025;
+            playerPos.x = Math.max(-3.0, Math.min(3.0, playerPos.x));
+            playerPos.z = Math.max(-2.5, Math.min(2.0, playerPos.z));
 
-            // Step sounds on troughs
+            walkTime += delta * 7.5;
+            headBobY = Math.sin(walkTime) * 0.035;
+            headBobX = Math.cos(walkTime * 0.5) * 0.018;
+
             if (Math.sin(walkTime) < -0.92) {
                 audio.playStep();
             }
@@ -755,33 +725,7 @@
         }
     }
 
-    function updatePhysicalWalkToTarget(delta) {
-        if (!isWalkingToTarget) return;
-
-        const dx = targetPlayerPos.x - playerPos.x;
-        const dz = targetPlayerPos.z - playerPos.z;
-        const dist = Math.sqrt(dx * dx + dz * dz);
-
-        if (dist > 0.15) {
-            const speed = Math.min(dist * 3.5, 4.0) * delta;
-            playerPos.x += (dx / dist) * speed;
-            playerPos.z += (dz / dist) * speed;
-
-            walkTime += delta * 8.0;
-            headBobY = Math.sin(walkTime) * 0.05;
-            headBobX = Math.cos(walkTime * 0.5) * 0.025;
-
-            if (Math.sin(walkTime) < -0.92) {
-                audio.playStep();
-            }
-        } else {
-            playerPos.x = targetPlayerPos.x;
-            playerPos.z = targetPlayerPos.z;
-            isWalkingToTarget = false;
-        }
-    }
-
-    // ===== 8. MAIN RENDER LOOP (60 FPS WEBGL) =====
+    // ===== 8. RENDER LOOP =====
     let lastTime = performance.now();
 
     function renderLoop(time) {
@@ -790,7 +734,6 @@
         const delta = Math.min((time - lastTime) / 1000, 0.1);
         lastTime = time;
 
-        // Camera yaw/pitch damping
         const damp = Math.min(delta * 10.0, 1.0);
         cameraYaw += (targetYaw - cameraYaw) * damp;
         cameraPitch += (targetPitch - cameraPitch) * damp;
@@ -800,31 +743,28 @@
             camera.fov = currentFov;
             camera.updateProjectionMatrix();
 
-            updateKeyboardMovement(delta);
-            updatePhysicalWalkToTarget(delta);
+            updateMovement(delta);
 
-            // Apply camera position with human head bob
             camera.position.set(playerPos.x + headBobX, eyeHeight + headBobY, playerPos.z);
             camera.rotation.y = cameraYaw;
             camera.rotation.x = cameraPitch;
         }
 
-        // Animate pulsing floor pucks
+        // Animate floor pucks and artwork pins
         const animTime = time * 0.003;
-        portalPuckMeshes.forEach(puck => {
-            const outer = puck.userData.outerRing;
+        portalPuckMeshes.forEach(p => {
+            const outer = p.userData.outerRing;
             if (outer) {
-                const scale = 1.0 + Math.sin(animTime * 2) * 0.08;
-                outer.scale.set(scale, scale, 1.0);
+                const s = 1.0 + Math.sin(animTime * 2.5) * 0.08;
+                outer.scale.set(s, s, 1.0);
             }
         });
 
-        // Animate artwork golden pins
-        artworkMeshes.forEach(artGroup => {
-            const pin = artGroup.userData.pinMesh;
-            if (pin) {
-                const pinScale = 1.0 + Math.sin(animTime * 3) * 0.12;
-                pin.scale.set(pinScale, pinScale, 1.0);
+        artworkPins.forEach(a => {
+            const ring = a.userData.ring;
+            if (ring) {
+                const s = 1.0 + Math.sin(animTime * 3.2) * 0.12;
+                ring.scale.set(s, s, 1.0);
             }
         });
 
@@ -835,7 +775,7 @@
         drawMinimap();
     }
 
-    // ===== 9. ARCHITECTURAL ORIENTATION MINIMAP =====
+    // ===== 9. MINIMAP =====
     function drawMinimap() {
         if (!minimapCtx || !minimapCanvas) return;
         const w = minimapCanvas.width;
@@ -843,11 +783,9 @@
 
         minimapCtx.clearRect(0, 0, w, h);
 
-        // Blueprint dark grid background
         minimapCtx.fillStyle = 'rgba(15, 14, 18, 0.95)';
         minimapCtx.fillRect(0, 0, w, h);
 
-        // Grid lines
         minimapCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
         minimapCtx.lineWidth = 1;
         for (let x = 0; x < w; x += 20) {
@@ -857,7 +795,6 @@
             minimapCtx.beginPath(); minimapCtx.moveTo(0, y); minimapCtx.lineTo(w, y); minimapCtx.stroke();
         }
 
-        // Draw penthouse rooms
         roomKeys.forEach(id => {
             const room = WALKAROUND_ROOMS[id];
             const m = room.minimapPos;
@@ -874,23 +811,20 @@
             minimapCtx.fill();
             minimapCtx.stroke();
 
-            // Room number
             minimapCtx.fillStyle = isCurrent ? '#ffffff' : 'rgba(255, 255, 255, 0.6)';
             minimapCtx.font = '600 9px Inter, sans-serif';
             minimapCtx.textAlign = 'center';
             minimapCtx.fillText(room.roomNumber || '01', m.x, m.y + 3);
         });
 
-        // Player Position & Rotating Field-of-View Cone
         const currRoom = WALKAROUND_ROOMS[currentRoomId];
         if (currRoom && currRoom.minimapPos) {
-            const px = currRoom.minimapPos.x;
-            const py = currRoom.minimapPos.y;
+            const px = currRoom.minimapPos.x + (playerPos.x * 2.0);
+            const py = currRoom.minimapPos.y + (playerPos.z * 2.0);
 
-            // FOV cone
             minimapCtx.save();
             minimapCtx.translate(px, py);
-            minimapCtx.rotate(-cameraYaw + Math.PI);
+            minimapCtx.rotate(-cameraYaw);
 
             const coneGrad = minimapCtx.createRadialGradient(0, 0, 2, 0, 0, 26);
             coneGrad.addColorStop(0, 'rgba(255, 215, 0, 0.65)');
@@ -899,13 +833,12 @@
 
             minimapCtx.beginPath();
             minimapCtx.moveTo(0, 0);
-            minimapCtx.arc(0, 0, 26, -0.45, 0.45);
+            minimapCtx.arc(0, 0, 26, -0.45 - Math.PI / 2, 0.45 - Math.PI / 2);
             minimapCtx.closePath();
             minimapCtx.fill();
 
             minimapCtx.restore();
 
-            // Player dot
             minimapCtx.fillStyle = '#ffffff';
             minimapCtx.beginPath();
             minimapCtx.arc(px, py, 4, 0, Math.PI * 2);
@@ -917,9 +850,8 @@
         }
     }
 
-    // ===== 10. HUD CONTROLS & INITIALIZATION =====
+    // ===== 10. HUD CONTROLS =====
     function setupHUDControls() {
-        // Toggle Audio Button
         const btnSound = document.getElementById('btn-toggle-sound');
         if (btnSound) {
             btnSound.addEventListener('click', () => {
@@ -932,7 +864,6 @@
             });
         }
 
-        // Room Navigation Bar Buttons
         const navBar = document.getElementById('room-nav-bar');
         if (navBar) {
             navBar.innerHTML = '';
@@ -949,22 +880,14 @@
             });
         }
 
-        // Mode Toggles (Promenad vs Fri Utforskning)
         const btnModeWalk = document.getElementById('mode-walk');
         const btnModeExplore = document.getElementById('mode-explore');
         const btnToggleTour = document.getElementById('btn-toggle-tour');
 
-        if (btnModeWalk) {
-            btnModeWalk.addEventListener('click', () => setTourMode(true));
-        }
-        if (btnModeExplore) {
-            btnModeExplore.addEventListener('click', () => setTourMode(false));
-        }
-        if (btnToggleTour) {
-            btnToggleTour.addEventListener('click', () => setTourMode(!isTourRunning));
-        }
+        if (btnModeWalk) btnModeWalk.addEventListener('click', () => setTourMode(true));
+        if (btnModeExplore) btnModeExplore.addEventListener('click', () => setTourMode(false));
+        if (btnToggleTour) btnToggleTour.addEventListener('click', () => setTourMode(!isTourRunning));
 
-        // Minimap click to walk
         if (minimapCanvas) {
             minimapCanvas.addEventListener('click', (e) => {
                 const rect = minimapCanvas.getBoundingClientRect();
@@ -983,13 +906,10 @@
                     }
                 });
 
-                if (closestRoom) {
-                    walkToRoom(closestRoom);
-                }
+                if (closestRoom) walkToRoom(closestRoom);
             });
         }
 
-        // Modal Close Buttons
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalInspectClose = document.getElementById('modal-inspect-close');
         if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
@@ -1005,6 +925,7 @@
         if (artModal) {
             artModal.classList.remove('active');
             artModal.setAttribute('aria-hidden', 'true');
+            targetFov = 65;
         }
     }
 
@@ -1034,13 +955,11 @@
     }
 
     function updateHUD() {
-        // Update nav bar active state
         const navBtns = document.querySelectorAll('.room-nav-btn');
         navBtns.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.roomId === currentRoomId);
         });
 
-        // Update badge
         if (tourBadge) {
             const badgeText = document.getElementById('tour-badge-text');
             if (badgeText) {

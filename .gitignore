@@ -6,3 +6,9 @@ tools/__pycache__/
 tools/crop_*.jpg
 tools/live_walk_*.json
 tools/test_*.jpg
+
+# Node & Puppeteer Testing
+node_modules/
+package.json
+package-lock.json
+*.log
