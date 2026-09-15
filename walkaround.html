@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Walk Around — Art by Beckman</title>
+    <meta name="description" content="Step inside a modern Philippe Starck-inspired luxury penthouse apartment and experience Fredrik Beckman's latest 50 abstract paintings in full interactive 3D with true physical dimensions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style-v3.css">
+</head>
+<body class="walkaround-body">
+
+    <!-- ===== SITE HEADER ===== -->
+    <header class="walkaround-header">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Art by Beckman</a></div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="walkaround.html" class="active">Walk Around</a>
+            <a href="videos.html">Videos</a>
+            <a href="instagram.html">Instagram</a>
+        </nav>
+    </header>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="walkaround-loader" class="walkaround-loader">
+        <div class="loader-content">
+            <div class="loader-brand">ART BY BECKMAN</div>
+            <h1 class="loader-title">Walk Around Exhibition</h1>
+            <p class="loader-subtitle">Loading 50 Masterworks in 3D Penthouse...</p>
+            <div class="loader-bar-container">
+                <div class="loader-bar-fill"></div>
+            </div>
+            <p class="loader-hint">Philippe Starck Minimalist Interior • Real Physical Dimensions</p>
+        </div>
+    </div>
+
+    <!-- ===== 3D CANVAS CONTAINER ===== -->
+    <div id="walkaround-canvas-container"></div>
+
+    <!-- ===== HOVER / INTERACTION PROMPT ===== -->
+    <div id="walkaround-hover-prompt" class="walkaround-hover-prompt">Click to inspect artwork</div>
+
+    <!-- ===== FLOATING NAVIGATION HUD ===== -->
+    <div class="walkaround-hud">
+        <!-- Room Teleport Buttons -->
+        <div class="room-nav-bar">
+            <button class="room-nav-btn active" data-room="salon">Grand Salon</button>
+            <button class="room-nav-btn" data-room="kitchen">Kitchen Studio</button>
+            <button class="room-nav-btn" data-room="linnea">Linnéa Gallery</button>
+            <button class="room-nav-btn" data-room="master">Master Suite</button>
+            <button class="room-nav-btn" data-room="terrace">Sky Terrace</button>
+        </div>
+
+        <!-- Controls Guide Badge -->
+        <div class="controls-guide">
+            <span class="guide-desktop"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or Arrows to Walk • Drag to Look • Click art to inspect</span>
+            <span class="guide-mobile">Joystick to Move • Swipe to Look • Tap art to inspect</span>
+        </div>
+    </div>
+
+    <!-- ===== 2D ARCHITECTURAL MINIMAP ===== -->
+    <div class="minimap-container">
+        <div class="minimap-label">PENTHOUSE RADAR</div>
+        <canvas id="walkaround-minimap" width="180" height="140"></canvas>
+    </div>
+
+    <!-- ===== MOBILE TOUCH JOYSTICK ===== -->
+    <div id="touch-joystick" class="touch-joystick">
+        <div id="touch-stick" class="touch-stick"></div>
+    </div>
+
+    <!-- ===== ARTWORK DETAIL INSPECTION MODAL ===== -->
+    <div id="art-modal" class="art-modal">
+        <div class="art-modal-card">
+            <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="Artwork Preview">
+                </div>
+                <div class="modal-info">
+                    <p class="modal-badge">3D EXHIBITION PIECE</p>
+                    <h2 id="modal-title" class="modal-title">Origami</h2>
+                    <div class="modal-meta-grid">
+                        <div class="meta-item">
+                            <span class="meta-label">Dimensions</span>
+                            <span id="modal-size" class="meta-value">100 × 120 cm</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Year</span>
+                            <span id="modal-year" class="meta-value">April 2026</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Medium</span>
+                            <span id="modal-material" class="meta-value">Acrylic & glitter on canvas</span>
+                        </div>
+                    </div>
+                    <p id="modal-desc" class="modal-desc">Abstract expressionist work.</p>
+                    <div class="modal-actions">
+                        <a href="gallery.html" class="modal-link-btn">View in Full Gallery &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/walkaround-data.js"></script>
+    <script src="js/walkaround-engine.js"></script>
+</body>
+</html>
