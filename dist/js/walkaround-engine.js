@@ -9,6 +9,12 @@
 (function() {
     'use strict';
 
+    const ASSET_VERSION = '2.2.0';
+    const withVersion = (url) => {
+        if (!url) return url;
+        return url.includes('?') ? `${url}&v=${ASSET_VERSION}` : `${url}?v=${ASSET_VERSION}`;
+    };
+
     // ===== 1. SYNTHETIC AUDIO ENGINE (WEB AUDIO API) =====
     class VirtualVacationAudio {
         constructor() {
@@ -278,7 +284,7 @@
                         textureCache[url] = tex;
                         resolve(tex);
                     }, undefined, () => {
-                        textureLoader.load(room.image || room.fallback, (fTex) => {
+                        textureLoader.load(withVersion(room.image || room.fallback), (fTex) => {
                             resolve(fTex);
                         });
                     });
@@ -286,7 +292,7 @@
             });
         };
 
-        const pano360Url = `assets/walkaround/360_${roomId}.webp`;
+        const pano360Url = withVersion(`assets/walkaround/360_${roomId}.webp`);
 
         loadTex(pano360Url).then(tex => {
             // Keep old sphere for crossfade
@@ -765,7 +771,7 @@
             const modalZone = document.getElementById('modal-zone');
             const modalDesc = document.getElementById('modal-desc');
 
-            if (modalImg) modalImg.src = `assets/images/${art.filename}`;
+            if (modalImg) modalImg.src = withVersion(`assets/images/${art.filename}`);
             if (modalTitle) modalTitle.textContent = art.title;
             if (modalSize) modalSize.textContent = art.size;
             if (modalYear) modalYear.textContent = art.year || '2026';
@@ -1068,7 +1074,7 @@
                         const card = document.createElement('div');
                         card.className = 'overview-card';
                         card.innerHTML = `
-                            <img class="overview-card-img" src="assets/images/${art.filename}" alt="${art.title}">
+                            <img class="overview-card-img" src="${withVersion('assets/images/' + art.filename)}" alt="${art.title}">
                             <div class="overview-card-body">
                                 <h3 class="overview-card-title">${art.title}</h3>
                                 <p class="overview-card-meta">${r.name} • ${art.size || ''} • ${art.material || ''}</p>
