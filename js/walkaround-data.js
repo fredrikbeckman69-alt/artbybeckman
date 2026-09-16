@@ -64,9 +64,9 @@ const WALKAROUND_ROOMS = {
                     "z": 4.5
                 },
                 "screenPos": {
-                    "x": 72.4,
-                    "y": 21.8,
-                    "radius": 65
+                    "x": 73.2,
+                    "y": 25.4,
+                    "radius": 55
                 }
             },
             {
@@ -199,8 +199,8 @@ const WALKAROUND_ROOMS = {
                 },
                 "screenPos": {
                     "x": 53.8,
-                    "y": 30.9,
-                    "radius": 95
+                    "y": 30.2,
+                    "radius": 65
                 }
             }
         ],
@@ -474,9 +474,9 @@ const WALKAROUND_ROOMS = {
                     "z": -0.5
                 },
                 "screenPos": {
-                    "x": 35.8,
-                    "y": 34.0,
-                    "radius": 75
+                    "x": 34.9,
+                    "y": 35.6,
+                    "radius": 55
                 }
             }
         ],
@@ -516,7 +516,7 @@ const WALKAROUND_ROOMS = {
         "name": "Grand Dining Room",
         "roomNumber": "03",
         "tagline": "Carraramarmor, Philippe Starck Louis Ghost-stolar och svävande stålskänk",
-        "description": "En ljus och sofistikerad matsal med ett runt matbord i vit Carraramarmor, transparenta Louis Ghost-stolar och en flytande skänk i borstat stål. På fondväggen exploderar Fredrik Beckmans Daylight.",
+        "description": "En ljus och sofistikerad matsal med ett runt matbord i vit Carraramarmor, transparenta Louis Ghost-stolar och en flytande skänk i borstat stål. På fondväggen lyser Fredrik Beckmans monumentala verk Origami.",
         "image": "assets/walkaround/dining_room.webp",
         "fallback": "assets/walkaround/dining_room.jpg",
         "thumb": "assets/walkaround/dining_room_thumb.webp",
@@ -544,8 +544,8 @@ const WALKAROUND_ROOMS = {
                 "pitch": 0.05,
                 "zoom": 1.3,
                 "duration": 5.0,
-                "targetArt": 258,
-                "label": "Studerar Daylight (100 × 120 cm)"
+                "targetArt": 270,
+                "label": "Studerar Daylight (60 × 140 cm)"
             },
             {
                 "yaw": 0.25,
@@ -558,24 +558,24 @@ const WALKAROUND_ROOMS = {
         ],
         "artworks": [
             {
-                "id": 258,
-                "title": "Daylight",
+                "id": 270,
+                "title": "Origami",
                 "size": "100 × 120 cm",
                 "year": "April 2026",
-                "material": "Akrylfärg, guldpigment",
+                "material": "Akrylfärg, glitter, guldstoff",
                 "zone": "Matsal — Fondvägg över rostfri skänk",
-                "filename": "258 DAYLIGHT.webp",
-                "originalFilename": "258 DAYLIGHT.jpg",
-                "description": "Fredrik Beckmans kraftfulla färgexplosion i magenta, koboltblått och skimrande guld monterad över den rostfria skänken.",
+                "filename": "270 ORIGAMI.webp",
+                "originalFilename": "270 ORIGAMI.jpg",
+                "description": "Fredrik Beckmans magnifika komposition med fasetterade plan i skimrande glitter, magenta och guld monterad i perfekt harmoni över den rostfria skänken.",
                 "pos3d": {
                     "x": 5.5,
                     "y": 2.1,
                     "z": -6.0
                 },
                 "screenPos": {
-                    "x": 17.1,
-                    "y": 27.0,
-                    "radius": 90
+                    "x": 16.7,
+                    "y": 28.1,
+                    "radius": 85
                 }
             }
         ],
@@ -657,7 +657,7 @@ const WALKAROUND_ROOMS = {
                 "pitch": 0.03,
                 "zoom": 1.25,
                 "duration": 4.5,
-                "targetArt": 258,
+                "targetArt": 270,
                 "label": "Studerar Daylight"
             },
             {
@@ -799,8 +799,8 @@ const WALKAROUND_ROOMS = {
                 "pitch": 0.04,
                 "zoom": 1.3,
                 "duration": 5.0,
-                "targetArt": 22,
-                "label": "Studerar Chromeyellowred 1.0 (56 × 56 cm)"
+                "targetArt": 271,
+                "label": "Studerar Golden Ticket (40 × 100 cm)"
             },
             {
                 "yaw": 0.15,
@@ -813,15 +813,15 @@ const WALKAROUND_ROOMS = {
         ],
         "artworks": [
             {
-                "id": 22,
-                "title": "Chromeyellowred 1.0",
-                "size": "56 × 56 cm",
-                "year": "2021",
-                "material": "Akrylfärg på duk",
+                "id": 271,
+                "title": "Golden Ticket (Kitchen Suite)",
+                "size": "40 × 100 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter, guldstoff",
                 "zone": "Kök — Vänster fönstervägg",
-                "filename": "22. CHROMEYELLOWRED 1.0.webp",
-                "originalFilename": "22. CHROMEYELLOWRED 1.0.JPG",
-                "description": "Intensiv pop-art färgstudie av Fredrik Beckman som bryter av kökets strama stålytor.",
+                "filename": "271 GOLDEN TICKET.webp",
+                "originalFilename": "271 GOLDEN TICKET.jpg",
+                "description": "Guldskimmer och skimrande textur som fångar morgonljuset från fönstret invid köksön.",
                 "pos3d": {
                     "x": 15.5,
                     "y": 1.9,
@@ -829,8 +829,8 @@ const WALKAROUND_ROOMS = {
                 },
                 "screenPos": {
                     "x": 7.5,
-                    "y": 35.2,
-                    "radius": 70
+                    "y": 33.4,
+                    "radius": 65
                 }
             }
         ],
@@ -856,7 +856,7 @@ const WALKAROUND_ROOMS = {
         "name": "Arbetsrum & Bibliotek",
         "roomNumber": "05",
         "tagline": "Skrivbord i borstat stål, platsbyggda bokhyllor och balkong",
-        "description": "Ett exekutivt arbetsrum med ett skulpturalt skrivbord i massivt borstat stål, helväggsbokhylla och balkong mot de parisiska avenyer. I bokhyllans centrala konstnisch visas Fredrik Beckmans Rage In Eden.",
+        "description": "Ett exekutivt arbetsrum med ett skulpturalt skrivbord i massivt borstat stål, helväggsbokhylla och balkong mot de parisiska avenyer. I bokhyllans centrala konstnisch visas Fredrik Beckmans Golden Ticket.",
         "image": "assets/walkaround/office.webp",
         "fallback": "assets/walkaround/office.jpg",
         "thumb": "assets/walkaround/office_thumb.webp",
@@ -884,8 +884,8 @@ const WALKAROUND_ROOMS = {
                 "pitch": 0.05,
                 "zoom": 1.3,
                 "duration": 5.0,
-                "targetArt": 240,
-                "label": "Studerar Rage In Eden (100 × 40 cm)"
+                "targetArt": 271,
+                "label": "Studerar Golden Ticket (40 × 100 cm)"
             },
             {
                 "yaw": -0.25,
@@ -905,24 +905,24 @@ const WALKAROUND_ROOMS = {
         ],
         "artworks": [
             {
-                "id": 240,
-                "title": "Rage In Eden",
-                "size": "100 × 40 cm",
-                "year": "2024",
-                "material": "Akrylfärg på duk",
+                "id": 271,
+                "title": "Golden Ticket",
+                "size": "40 × 100 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter, guldstoff",
                 "zone": "Arbetsrum — Bokhyllans konstnisch",
-                "filename": "240 RAGE IN EDEN.webp",
-                "originalFilename": "240 RAGE IN EDEN.jpg",
-                "description": "Dramatisk vertikal komposition med intensiva kontraster monterad i bokhyllans skräddarsydda gallerinisch.",
+                "filename": "271 GOLDEN TICKET.webp",
+                "originalFilename": "271 GOLDEN TICKET.jpg",
+                "description": "Slank vertikal komposition i guldstoff och skimrande magenta monterad i bokhyllans skräddarsydda gallerinisch bakom stålbordet.",
                 "pos3d": {
                     "x": 2.0,
                     "y": 2.0,
                     "z": -7.5
                 },
                 "screenPos": {
-                    "x": 76.5,
-                    "y": 36.0,
-                    "radius": 85
+                    "x": 77.3,
+                    "y": 29.2,
+                    "radius": 75
                 }
             }
         ],
@@ -962,7 +962,7 @@ const WALKAROUND_ROOMS = {
         "name": "Master Bedroom Suite",
         "roomNumber": "06",
         "tagline": "Bouclésäng, skulptural metallbänk och balkong mot Paris",
-        "description": "En rofylld och lyxig sovrumssvit med säng i krämfärgad bouclé och metallbänk. Över sänggaveln hänger Fredrik Beckmans monumentala mästerverk Origami.",
+        "description": "En rofylld och lyxig sovrumssvit med säng i krämfärgad bouclé och metallbänk. Över sänggaveln hänger Fredrik Beckmans monumentala mästerverk Daylight.",
         "image": "assets/walkaround/bedroom.webp",
         "fallback": "assets/walkaround/bedroom.jpg",
         "thumb": "assets/walkaround/bedroom_thumb.webp",
@@ -991,7 +991,7 @@ const WALKAROUND_ROOMS = {
                 "zoom": 1.3,
                 "duration": 5.0,
                 "targetArt": 270,
-                "label": "Studerar Origami (100 × 120 cm)"
+                "label": "Studerar Daylight (60 × 140 cm)"
             },
             {
                 "yaw": 0.2,
@@ -1011,24 +1011,24 @@ const WALKAROUND_ROOMS = {
         ],
         "artworks": [
             {
-                "id": 270,
-                "title": "Origami (Monumental Suite)",
-                "size": "100 × 120 cm",
+                "id": 258,
+                "title": "Daylight (Master Suite)",
+                "size": "60 × 140 cm",
                 "year": "April 2026",
-                "material": "Akrylfärg, glitter, guldstoff",
+                "material": "Akrylfärg, glitter, guldpigment",
                 "zone": "Sovrum — Huvudvägg över sänggavel",
-                "filename": "270 ORIGAMI.webp",
-                "originalFilename": "270 ORIGAMI.jpg",
-                "description": "Fredrik Beckmans mästerverk med fasetterade plan i skimrande glitter, magenta och guld monterat över sänggaveln.",
+                "filename": "258 DAYLIGHT.webp",
+                "originalFilename": "258 DAYLIGHT.jpg",
+                "description": "Fredrik Beckmans svepande färgexplosion i skimrande guld, magenta och djup koboltblått, skräddarsydd i ram över bouclésänggaveln.",
                 "pos3d": {
                     "x": -9.5,
                     "y": 2.2,
                     "z": -0.5
                 },
                 "screenPos": {
-                    "x": 21.9,
-                    "y": 23.0,
-                    "radius": 95
+                    "x": 21.4,
+                    "y": 26.5,
+                    "radius": 85
                 }
             }
         ],
@@ -1132,9 +1132,9 @@ const WALKAROUND_ROOMS = {
                     "z": -7.0
                 },
                 "screenPos": {
-                    "x": 15.0,
-                    "y": 30.0,
-                    "radius": 85
+                    "x": 14.6,
+                    "y": 32.6,
+                    "radius": 50
                 }
             }
         ],
@@ -1411,3 +1411,8 @@ const WALKAROUND_CURATED_ROOM = [
         }
     }
 ];
+
+if (typeof window !== 'undefined') {
+    window.WALKAROUND_ROOMS = WALKAROUND_ROOMS;
+}
+

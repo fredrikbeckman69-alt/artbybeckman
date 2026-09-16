@@ -190,6 +190,10 @@
         camera.position.set(0, eyeHeight, 0);
         camera.rotation.order = 'YXZ';
         window.__DEBUG_CAMERA = camera;
+        window.__DEBUG_WALK_TO_ROOM = walkToRoom;
+        window.__DEBUG_INSPECT_ARTWORK = inspectArtwork;
+        window.__DEBUG_CLOSE_MODAL = closeModal;
+        window.__DEBUG_GET_CURRENT_ROOM = () => currentRoomId;
         window.setCameraAngle = function(yawDeg, pitchDeg) {
             targetYaw = yawDeg * Math.PI / 180;
             cameraYaw = targetYaw;
@@ -302,6 +306,7 @@
 
             currentSphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
             currentSphereMesh.position.set(camera.position.x, camera.position.y, camera.position.z);
+            currentSphereMesh.rotation.y = -Math.PI / 2;
             scene.add(currentSphereMesh);
 
             // Cross-fade spheres
@@ -344,7 +349,8 @@
             gaussianSplatMesh = null;
         }
 
-        const splatCount = 14000;
+        const room = WALKAROUND_ROOMS[roomId];
+        const splatCount = 6000;
         const splatGeo = new THREE.BufferGeometry();
         const pos = new Float32Array(splatCount * 3);
         const col = new Float32Array(splatCount * 3);
@@ -352,77 +358,102 @@
         const isTravertine = ['dining_room', 'dining_v2', 'kitchen', 'entry', 'bathroom'].includes(roomId);
         let idx = 0;
 
-        // A. 3D Floor Plane Gaussian Splats (y in [0.02, 0.35], radius [1.2, 9.5]m)
-        const floorCount = 5500;
+        // A. 3D Subtle Floor Specular Highlights (y in [0.01, 0.08], radius [1.5, 7.5]m)
+        const floorCount = 2600;
         for (let i = 0; i < floorCount; i++) {
             const angle = Math.random() * Math.PI * 2;
-            const r = 1.2 + Math.sqrt(Math.random()) * 8.0;
+            const r = 1.5 + Math.sqrt(Math.random()) * 6.0;
             pos[idx * 3] = Math.cos(angle) * r;
-            pos[idx * 3 + 1] = 0.02 + Math.random() * 0.28;
+            pos[idx * 3 + 1] = 0.01 + Math.random() * 0.07;
             pos[idx * 3 + 2] = Math.sin(angle) * r;
 
             if (isTravertine) {
-                col[idx * 3] = 0.89 + Math.random() * 0.08;
-                col[idx * 3 + 1] = 0.86 + Math.random() * 0.08;
-                col[idx * 3 + 2] = 0.81 + Math.random() * 0.08;
+                col[idx * 3] = 0.94 + Math.random() * 0.06;
+                col[idx * 3 + 1] = 0.90 + Math.random() * 0.06;
+                col[idx * 3 + 2] = 0.82 + Math.random() * 0.06;
             } else {
-                col[idx * 3] = 0.84 + Math.random() * 0.10;
-                col[idx * 3 + 1] = 0.76 + Math.random() * 0.10;
-                col[idx * 3 + 2] = 0.65 + Math.random() * 0.08;
+                col[idx * 3] = 0.92 + Math.random() * 0.08;
+                col[idx * 3 + 1] = 0.82 + Math.random() * 0.08;
+                col[idx * 3 + 2] = 0.68 + Math.random() * 0.08;
             }
             idx++;
         }
 
-        // B. 3D Architectural Perimeter & Boiserie Splats (r in [5.2, 7.8]m, y in [0.6, 3.8]m)
-        const wallCount = 5000;
-        for (let i = 0; i < wallCount; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const r = 5.2 + Math.random() * 2.5;
-            pos[idx * 3] = Math.cos(angle) * r;
-            pos[idx * 3 + 1] = 0.6 + Math.random() * 3.2;
-            pos[idx * 3 + 2] = Math.sin(angle) * r;
-
-            col[idx * 3] = 0.94 + Math.random() * 0.06;
-            col[idx * 3 + 1] = 0.91 + Math.random() * 0.06;
-            col[idx * 3 + 2] = 0.86 + Math.random() * 0.06;
-            idx++;
-        }
-
-        // C. Fredrik Beckman Original Artwork Pigment Splats (Rich Acrylic & Gold leaf)
-        const artCount = 2000;
-        for (let i = 0; i < artCount; i++) {
-            const angle = (Math.random() - 0.5) * 0.9;
-            const r = 4.8 + Math.random() * 1.2;
-            pos[idx * 3] = Math.sin(angle) * r;
-            pos[idx * 3 + 1] = 1.6 + Math.random() * 1.8;
-            pos[idx * 3 + 2] = -Math.cos(angle) * r;
-
-            const pChoice = Math.random();
-            if (pChoice < 0.4) {
-                // Magenta / Crimson
-                col[idx * 3] = 0.96; col[idx * 3 + 1] = 0.16 + Math.random() * 0.2; col[idx * 3 + 2] = 0.38 + Math.random() * 0.25;
-            } else if (pChoice < 0.75) {
-                // Gold Leaf & Warm Amber
-                col[idx * 3] = 0.98; col[idx * 3 + 1] = 0.84; col[idx * 3 + 2] = 0.25;
-            } else {
-                // Vibrant Cobalt & Violet
-                col[idx * 3] = 0.35 + Math.random() * 0.2; col[idx * 3 + 1] = 0.25; col[idx * 3 + 2] = 0.95;
-            }
-            idx++;
-        }
-
-        // D. Atmospheric Parisian Sunlight & Dust Motes
-        const sunCount = 1500;
+        // B. Volumetric Parisian Balcony Window Sunlight & Light Beams
+        const sunCount = 1800;
         for (let i = 0; i < sunCount; i++) {
-            const angle = 0.75 + (Math.random() - 0.5) * 1.1;
-            const r = 2.0 + Math.random() * 4.5;
+            const angle = 0.85 + (Math.random() - 0.5) * 1.2;
+            const r = 1.6 + Math.random() * 4.5;
             pos[idx * 3] = Math.cos(angle) * r;
-            pos[idx * 3 + 1] = 0.8 + Math.random() * 2.6;
+            pos[idx * 3 + 1] = 0.5 + Math.random() * 2.9;
             pos[idx * 3 + 2] = Math.sin(angle) * r;
 
             col[idx * 3] = 1.0;
-            col[idx * 3 + 1] = 0.96;
-            col[idx * 3 + 2] = 0.82;
+            col[idx * 3 + 1] = 0.96 + Math.random() * 0.04;
+            col[idx * 3 + 2] = 0.86 + Math.random() * 0.10;
+            idx++;
+        }
+
+        // C. Artwork Surface Radiance & Glitter Specular Highlights (Fredrik Beckman Signature Gold & Glitter)
+        const arts = (room && room.artworks) ? room.artworks : [];
+        const artCount = arts.length > 0 ? Math.floor(1600 / arts.length) : 0;
+        arts.forEach(art => {
+            let ax = 0, ay = 2.1, az = -5.0;
+            if (art.screenPos) {
+                const angle = ((art.screenPos.x - 50) / 50) * (Math.PI * 0.38);
+                const dist = 4.9;
+                ax = Math.sin(angle) * dist;
+                ay = eyeHeight + ((50 - art.screenPos.y) / 50) * 1.8;
+                az = -Math.cos(angle) * dist;
+            }
+
+            for (let i = 0; i < artCount && idx < splatCount; i++) {
+                // Spread particles across 3D canvas face
+                const uSpan = (Math.random() - 0.5) * 1.2;
+                const vSpan = (Math.random() - 0.5) * 1.4;
+                const depthVar = (Math.random() - 0.5) * 0.08;
+
+                // Orthogonal vector along wall
+                const normalAngle = Math.atan2(ax, az);
+                const wallX = Math.cos(normalAngle) * uSpan;
+                const wallZ = -Math.sin(normalAngle) * uSpan;
+
+                pos[idx * 3] = ax + wallX + Math.sin(normalAngle) * depthVar;
+                pos[idx * 3 + 1] = ay + vSpan;
+                pos[idx * 3 + 2] = az + wallZ + Math.cos(normalAngle) * depthVar;
+
+                // Gold, magenta, and pure diamond sparkle
+                const randType = Math.random();
+                if (randType < 0.45) {
+                    // 24K Gold shimmer
+                    col[idx * 3] = 1.0;
+                    col[idx * 3 + 1] = 0.85 + Math.random() * 0.12;
+                    col[idx * 3 + 2] = 0.30 + Math.random() * 0.20;
+                } else if (randType < 0.75) {
+                    // Magenta glitter glint
+                    col[idx * 3] = 1.0;
+                    col[idx * 3 + 1] = 0.25 + Math.random() * 0.20;
+                    col[idx * 3 + 2] = 0.65 + Math.random() * 0.25;
+                } else {
+                    // Diamond holographic sparkle
+                    col[idx * 3] = 1.0;
+                    col[idx * 3 + 1] = 1.0;
+                    col[idx * 3 + 2] = 1.0;
+                }
+                idx++;
+            }
+        });
+
+        // Fill remaining with subtle ambient particles
+        while (idx < splatCount) {
+            const angle = Math.random() * Math.PI * 2;
+            const r = 2.0 + Math.random() * 5.0;
+            pos[idx * 3] = Math.cos(angle) * r;
+            pos[idx * 3 + 1] = 0.8 + Math.random() * 2.0;
+            pos[idx * 3 + 2] = Math.sin(angle) * r;
+            col[idx * 3] = 0.95;
+            col[idx * 3 + 1] = 0.92;
+            col[idx * 3 + 2] = 0.85;
             idx++;
         }
 
@@ -430,11 +461,11 @@
         splatGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
 
         const splatMat = new THREE.PointsMaterial({
-            size: 0.16,
+            size: 0.18,
             map: getSplatAlphaTexture(),
             vertexColors: true,
             transparent: true,
-            opacity: 0.36,
+            opacity: 0.42,
             blending: THREE.NormalBlending,
             depthWrite: false
         });
@@ -452,14 +483,14 @@
 
             // Calculate 3D doorway floor position from screenPos or dir
             let px = 0, py = 0.04, pz = -4.0;
-            if (portal.pos3d) {
-                px = portal.pos3d.x * 0.85;
-                pz = (portal.pos3d.z || -4.0) * 0.85;
-            } else if (portal.screenPos) {
+            if (portal.screenPos) {
                 const angle = ((portal.screenPos.x - 50) / 50) * (Math.PI * 0.42);
                 const dist = 3.8;
                 px = Math.sin(angle) * dist;
                 pz = -Math.cos(angle) * dist;
+            } else if (portal.pos3d) {
+                px = portal.pos3d.x * 0.85;
+                pz = (portal.pos3d.z || -4.0) * 0.85;
             }
 
             puckGroup.position.set(px, py, pz);
@@ -476,12 +507,10 @@
             ring.rotation.x = -Math.PI / 2;
             puckGroup.add(ring);
 
-            // Inner solid ivory dot
-            const dotGeo = new THREE.CircleGeometry(0.14, 24);
+            // Center solid gold dot
+            const dotGeo = new THREE.CircleGeometry(0.12, 16);
             const dotMat = new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                transparent: true,
-                opacity: 0.98,
                 side: THREE.DoubleSide
             });
             const dot = new THREE.Mesh(dotGeo, dotMat);
@@ -513,16 +542,16 @@
             const pinGroup = new THREE.Group();
 
             let ax = 0, ay = 2.4, az = -5.0;
-            if (art.pos3d) {
-                ax = art.pos3d.x;
-                ay = art.pos3d.y || 2.4;
-                az = art.pos3d.z || -5.0;
-            } else if (art.screenPos) {
-                const angle = ((art.screenPos.x - 50) / 50) * (Math.PI * 0.40);
-                const dist = 5.2;
+            if (art.screenPos) {
+                const angle = ((art.screenPos.x - 50) / 50) * (Math.PI * 0.38);
+                const dist = 5.0;
                 ax = Math.sin(angle) * dist;
                 ay = eyeHeight + ((50 - art.screenPos.y) / 50) * 1.8;
                 az = -Math.cos(angle) * dist;
+            } else if (art.pos3d) {
+                ax = art.pos3d.x;
+                ay = art.pos3d.y || 2.4;
+                az = art.pos3d.z || -5.0;
             }
 
             pinGroup.position.set(ax, ay, az);
@@ -1023,6 +1052,63 @@
                 if (e.target === artModal) closeModal();
             });
         }
+
+        const btnOverview = document.getElementById('btn-2d-overview');
+        const overviewModal = document.getElementById('overview-modal');
+        const overviewCloseBtn = document.getElementById('overview-close-btn');
+        const overviewGrid = document.getElementById('overview-grid');
+
+        function openOverview() {
+            if (!overviewModal) return;
+            if (overviewGrid && overviewGrid.children.length === 0) {
+                roomKeys.forEach(rid => {
+                    const r = WALKAROUND_ROOMS[rid];
+                    if (!r || !r.artworks) return;
+                    r.artworks.forEach(art => {
+                        const card = document.createElement('div');
+                        card.className = 'overview-card';
+                        card.innerHTML = `
+                            <img class="overview-card-img" src="assets/images/${art.filename}" alt="${art.title}">
+                            <div class="overview-card-body">
+                                <h3 class="overview-card-title">${art.title}</h3>
+                                <p class="overview-card-meta">${r.name} • ${art.size || ''} • ${art.material || ''}</p>
+                                <button class="overview-card-btn" type="button">Besök i 3D</button>
+                            </div>
+                        `;
+                        card.addEventListener('click', () => {
+                            closeOverview();
+                            walkToRoom(rid);
+                            setTimeout(() => inspectArtwork(art), 800);
+                        });
+                        overviewGrid.appendChild(card);
+                    });
+                });
+            }
+            overviewModal.classList.add('active');
+            overviewModal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeOverview() {
+            if (overviewModal) {
+                overviewModal.classList.remove('active');
+                overviewModal.setAttribute('aria-hidden', 'true');
+            }
+        }
+
+        if (btnOverview) btnOverview.addEventListener('click', openOverview);
+        if (overviewCloseBtn) overviewCloseBtn.addEventListener('click', closeOverview);
+        if (overviewModal) {
+            overviewModal.addEventListener('click', (e) => {
+                if (e.target === overviewModal) closeOverview();
+            });
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeOverview();
+            }
+        });
     }
 
     function closeModal() {
