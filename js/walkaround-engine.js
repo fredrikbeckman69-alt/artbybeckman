@@ -9,7 +9,7 @@
 (function() {
     'use strict';
 
-    const ASSET_VERSION = '2.2.0';
+    const ASSET_VERSION = '2.3.0';
     const withVersion = (url) => {
         if (!url) return url;
         return url.includes('?') ? `${url}&v=${ASSET_VERSION}` : `${url}?v=${ASSET_VERSION}`;
@@ -405,7 +405,14 @@
         const artCount = arts.length > 0 ? Math.floor(1600 / arts.length) : 0;
         arts.forEach(art => {
             let ax = 0, ay = 2.1, az = -5.0;
-            if (art.screenPos) {
+            if (art.yaw !== undefined) {
+                const dist = 4.8;
+                const yawRad = (art.yaw * Math.PI) / 180;
+                const pitchRad = ((art.pitch || 0) * Math.PI) / 180;
+                ax = Math.sin(yawRad) * dist * Math.cos(pitchRad);
+                ay = eyeHeight + Math.sin(pitchRad) * dist + (art.yOffset || 0.3);
+                az = -Math.cos(yawRad) * dist * Math.cos(pitchRad);
+            } else if (art.screenPos) {
                 const angle = ((art.screenPos.x - 50) / 50) * (Math.PI * 0.38);
                 const dist = 4.9;
                 ax = Math.sin(angle) * dist;
@@ -548,7 +555,14 @@
             const pinGroup = new THREE.Group();
 
             let ax = 0, ay = 2.4, az = -5.0;
-            if (art.screenPos) {
+            if (art.yaw !== undefined) {
+                const dist = 4.8;
+                const yawRad = (art.yaw * Math.PI) / 180;
+                const pitchRad = ((art.pitch || 0) * Math.PI) / 180;
+                ax = Math.sin(yawRad) * dist * Math.cos(pitchRad);
+                ay = eyeHeight + Math.sin(pitchRad) * dist + (art.yOffset || 0.3);
+                az = -Math.cos(yawRad) * dist * Math.cos(pitchRad);
+            } else if (art.screenPos) {
                 const angle = ((art.screenPos.x - 50) / 50) * (Math.PI * 0.38);
                 const dist = 5.0;
                 ax = Math.sin(angle) * dist;
@@ -561,6 +575,7 @@
             }
 
             pinGroup.position.set(ax, ay, az);
+            pinGroup.lookAt(camera.position);
 
             // Concentric Glowing Gold Ring
             const ringGeo = new THREE.RingGeometry(0.18, 0.26, 32);
@@ -900,6 +915,7 @@
         });
 
         artworkPins.forEach(a => {
+            a.lookAt(camera.position);
             const ring = a.userData.ring;
             if (ring) {
                 const s = 1.0 + Math.sin(animTime * 3.2) * 0.12;

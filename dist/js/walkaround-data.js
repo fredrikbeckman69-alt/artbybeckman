@@ -141,7 +141,7 @@ const WALKAROUND_ROOMS = {
         "name": "Grand Living Room",
         "roomNumber": "02",
         "tagline": "Salongens hjärta med svängd bouclésoffa och Haussmann-balkong",
-        "description": "Salongens centrala sällskapsdel med en organisk bouclésoffa, flytande kromsoffbord och franska dörrar ut mot balkongen. På den stora fondväggen över den svarta skänken trånar Fredrik Beckmans mästerverk My Heart Has Teeth.",
+        "description": "Salongens centrala sällskapsdel med en organisk bouclésoffa, flytande kromsoffbord och franska dörrar ut mot balkongen. Över den svarta skänken trånar monumentala My Heart Has Teeth, genom matsalens portal skymtar guldskimrande Origami, och salongens högra vägg pryds av praktverken Pink Dress och Black Mirror.",
         "image": "assets/walkaround/living_room.webp",
         "fallback": "assets/walkaround/living_room.jpg",
         "thumb": "assets/walkaround/living_room_thumb.webp",
@@ -202,6 +202,83 @@ const WALKAROUND_ROOMS = {
                     "y": 30.2,
                     "radius": 65
                 }
+            },
+            {
+                "id": 270,
+                "title": "Origami",
+                "size": "100 × 120 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter, guldstoff",
+                "zone": "Salongen — Blickfång genom portal mot matsal",
+                "filename": "270 ORIGAMI.webp",
+                "originalFilename": "270 ORIGAMI.jpg",
+                "description": "Fredrik Beckmans magnifika komposition med fasetterade plan i skimrande glitter, magenta och guld sedd genom salongens portal.",
+                "pos3d": {
+                    "x": 12.0,
+                    "y": 2.1,
+                    "z": -3.5
+                },
+                "screenPos": {
+                    "x": 82.5,
+                    "y": 35.8,
+                    "radius": 50
+                },
+                "yaw": 43.0,
+                "pitch": 4.5
+            },
+            {
+                "id": 267,
+                "title": "Pink Dress",
+                "size": "100 × 120 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter, pigment",
+                "zone": "Salongen — Högra väggpanelen (Panel 1)",
+                "filename": "267 PINK DRESS.webp",
+                "originalFilename": "267 PINK DRESS.jpg",
+                "description": "Färgsprakande originalverk med skira lager och glittrande textur i elegant guldram på salongens högra väggpanel.",
+                "pos3d": {
+                    "x": 13.0,
+                    "y": 2.0,
+                    "z": 1.0
+                },
+                "yaw": 78.8,
+                "pitch": 7.2
+            },
+            {
+                "id": 266,
+                "title": "Black Mirror",
+                "size": "160 × 100 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter, pigment",
+                "zone": "Salongen — Högra väggpanelen (Panel 2)",
+                "filename": "266 BLACK MIRROR.webp",
+                "originalFilename": "266 BLACK MIRROR.jpg",
+                "description": "Monumentalt mörkt mästerverk med pulserande djup och högblank finish monterad på salongens högra väggpanel.",
+                "pos3d": {
+                    "x": 13.5,
+                    "y": 2.0,
+                    "z": 3.0
+                },
+                "yaw": 101.3,
+                "pitch": 7.2
+            },
+            {
+                "id": 268,
+                "title": "Raspberry Beret",
+                "size": "40 × 100 cm",
+                "year": "April 2026",
+                "material": "Akrylfärg, glitter",
+                "zone": "Salongen — Högra väggpanelen mot läshörnan (Panel 3)",
+                "filename": "268 RASPBERRY BERET.webp",
+                "originalFilename": "268 RASPBERRY BERET.jpg",
+                "description": "Vertikalt originalverk med djupa hallontoner, skimrande textur och guldglans i elegant guldram på salongens högra väggpanel.",
+                "pos3d": {
+                    "x": 13.8,
+                    "y": 2.0,
+                    "z": 4.5
+                },
+                "yaw": 123.8,
+                "pitch": 7.2
             }
         ],
         "portals": [
