@@ -911,7 +911,9 @@ nav a.active::after, nav a:hover::after { width: 100%; }
   width: 100%;
   display: block;
   background: #000;
-  max-height: 62vh;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  max-height: 68vh;
 }
 
 .video-card-label {
@@ -1048,6 +1050,8 @@ nav a.active::after, nav a:hover::after { width: 100%; }
   width: 100%;
   display: block;
   background: #000;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 /* ===== PHOTOS STRIP ===== */
