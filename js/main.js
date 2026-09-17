@@ -162,10 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoBtn = document.getElementById('hero-video-btn');
     if (videoBtn) {
         videoBtn.addEventListener('click', (e) => {
-            const target = document.getElementById('video-presentation');
+            const target = document.getElementById('featured-film') || document.getElementById('video-presentation');
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const mainVideo = target.querySelector('video');
+                if (mainVideo) {
+                    mainVideo.focus();
+                }
             }
         });
     }
