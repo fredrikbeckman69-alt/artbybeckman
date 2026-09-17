@@ -28,7 +28,13 @@ The project currently adheres to a **High-Impact Colorful Typography** design ph
     *   **Crucial Fix (TLS/SSL):** Loopia's Pure-FTPd requires explicit SSL for data connections. The powershell script uses `$request.EnableSsl = $true` to prevent `(425) Can't open data connection` errors.
     *   **Remote Path:** Do NOT deploy to the FTP root (`/`). You must supply `-RemotePath "/svavel.se/public_html"` to ensure the files land in the correct mapped loopia public directory.
 
-## 5. Repository Size Constraints
+## 5. Network, Rate-Limiting & Anti-Ban Rules (Loopia WAF & Firewall)
+*   **STRIKT REGEL - Inga snabba anrop (Never Burst Requests):** Kör ALDRIG snabba anrop eller loopade HTTP/HTTPS-förfrågningar (t.ex. HEAD/GET-anrop i loop mot webbadresser på `svavel.se`). Loopias applikationsbrandvägg (WAF, mod_evasive, fail2ban) uppfattar skurar av automatiska anrop som DoS/spam och blockerar IP-adressen temporärt (`ERR_CONNECTION_TIMED_OUT`).
+*   **Tvingande fördröjning (Pacing & Throttling):** Vid alla nätverksoperationer (HTTP, API, FTP) MÅSTE anrop ske långsamt med inlagd paus (minst 0.5 till 1.0 sekunders fördröjning / `sleep` mellan varje enskilt anrop eller fil).
+*   **Återanvänd FTP-session (Inga reconnect-loopar):** Öppna aldrig flera parallella FTP-anslutningar och loopa inte anslutning/frånkoppling. Använd alltid en enskild ihållande TLS-session och ladda upp filer sekventiellt med fördröjning.
+*   **Validera lokalt i första hand:** Kontrollera filer och assets lokalt i filsystemet framför att göra upprepade live-anrop mot produktionsservern.
+
+## 6. Repository Size Constraints
 *   **Crucial Rule:** Following the 2026 repository compression (which reduced size from ~769MB to ~200MB), the project footprint must be kept strictly minimal.
 *   **Media Handling:** All images and media must be appropriately compressed before committing. Do not add raw, uncompressed files to the repository. Use available powershell scripts like `compress_images.ps1` or `compress_more.ps1`.
 
@@ -36,7 +42,7 @@ The project currently adheres to a **High-Impact Colorful Typography** design ph
 *   Always verify UI changes locally in the browser.
 *   Leverage existing PowerShell utilities in the repository to format, check sizes, and manage assets before attempting alternative methods.
 
-## 6. Credentials
+## 7. Credentials
 
 ### Loopia (Kundzon & FTP)
 *   **Kundzon Inloggning:** natrium.se
