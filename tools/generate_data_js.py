@@ -3,12 +3,39 @@ import os
 import re
 import json
 import sys
+import datetime
+import shutil
 
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Read Excel file
 wb = openpyxl.load_workbook('Tavlor dokumentation Fredrik Beckman.xlsx', data_only=True)
 sheet = wb.active
+
+month_names_sv = {
+    1: 'Januari', 2: 'Februari', 3: 'Mars', 4: 'April', 5: 'Maj', 6: 'Juni',
+    7: 'Juli', 8: 'Augusti', 9: 'September', 10: 'Oktober', 11: 'November', 12: 'December'
+}
+
+def clean_excel_date(date_val):
+    if not date_val:
+        return ""
+    if isinstance(date_val, (datetime.datetime, datetime.date)):
+        m = month_names_sv.get(date_val.month, "")
+        return f"{m} {date_val.year}".strip() if m else str(date_val.year)
+    
+    s = str(date_val).strip()
+    # Fix known typos in Excel
+    s = re.sub(r'Septem[pn]er', 'September', s, flags=re.IGNORECASE)
+    s = re.sub(r'Dece[mb]ar|Deceber', 'December', s, flags=re.IGNORECASE)
+    s = re.sub(r'Nars', 'Mars', s, flags=re.IGNORECASE)
+    if 'Maj 2002' in s:
+        s = s.replace('Maj 2002', 'Maj 2022')
+    if 'Juni 2002' in s:
+        s = s.replace('Juni 2002', 'Juni 2022')
+    if '4/1/2021' in s:
+        s = 'April 2021'
+    return s
 
 excel_info = {}
 for row_idx, row in enumerate(sheet.iter_rows(values_only=True), start=1):
@@ -21,14 +48,8 @@ for row_idx, row in enumerate(sheet.iter_rows(values_only=True), start=1):
     eid = int(m.group(1))
     title_raw = m.group(2).strip()
     
-    # Format year/date
     date_val = row[4]
-    if hasattr(date_val, 'year'):
-        year_str = str(date_val.year)
-    elif date_val:
-        year_str = str(date_val).strip()
-    else:
-        year_str = ""
+    year_str = clean_excel_date(date_val)
         
     excel_info[eid] = {
         'id': eid,
@@ -143,4 +164,8 @@ js_content += "];\n"
 with open('js/data.js', 'w', encoding='utf-8') as f:
     f.write(js_content)
 
-print(f"Generated {len(gallery_entries)} entries in js/data.js.")
+os.makedirs('dist/js', exist_ok=True)
+with open('dist/js/data.js', 'w', encoding='utf-8') as f:
+    f.write(js_content)
+
+print(f"Generated {len(gallery_entries)} entries in js/data.js and dist/js/data.js.")

@@ -8,7 +8,7 @@ const GALLERY_IMAGES = [
         "id": 1,
         "size": "52,5 * 52,5 cm",
         "material": "Sprayfärg, kopparrör, glas, kork, vatten",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -17,7 +17,7 @@ const GALLERY_IMAGES = [
         "id": 2,
         "size": "15 * 20 cm * 3",
         "material": "Sprayfärg, headsets",
-        "year": "2020",
+        "year": "December 2020",
         "description": "Innefattar 2.1, 2.2 samt 2.3 tre tavlor i ett verk/triptyk"
     },
     {
@@ -26,7 +26,7 @@ const GALLERY_IMAGES = [
         "id": 2,
         "size": "15 * 20 cm * 3",
         "material": "Sprayfärg, headsets",
-        "year": "2020",
+        "year": "December 2020",
         "description": "Innefattar 2.1, 2.2 samt 2.3 tre tavlor i ett verk/triptyk"
     },
     {
@@ -35,7 +35,7 @@ const GALLERY_IMAGES = [
         "id": 3,
         "size": "75,5 * 150 cm",
         "material": "Sprayfärg, akrylfärg, garn, trä, glas, kork, garn (UV)",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -44,7 +44,7 @@ const GALLERY_IMAGES = [
         "id": 3,
         "size": "75,5 * 150 cm",
         "material": "Sprayfärg, akrylfärg, garn, trä, glas, kork, garn (UV)",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -53,7 +53,7 @@ const GALLERY_IMAGES = [
         "id": 4,
         "size": "30 * 40 cm",
         "material": "Sprayfärg, akrylfärg, metall",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -62,7 +62,7 @@ const GALLERY_IMAGES = [
         "id": 5,
         "size": "15 * 20 cm",
         "material": "Sprayfärg, akrylfärg, metall, kopparrör, glas, kork, vatten",
-        "year": "2020",
+        "year": "December 2020",
         "description": "Skänkt till Linda Hermansson 2020-12-24 Tavlan inte märkt/signerad"
     },
     {
@@ -71,7 +71,7 @@ const GALLERY_IMAGES = [
         "id": 6,
         "size": "30 * 40 cm",
         "material": "Spryfärg, akrylfärg, metall",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -80,7 +80,7 @@ const GALLERY_IMAGES = [
         "id": 7,
         "size": "30 * 90 cm",
         "material": "Sprayfärg, kopparrör, glas, kork, vatten, garn (UV)",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -89,7 +89,7 @@ const GALLERY_IMAGES = [
         "id": 8,
         "size": "50 * 61 cm",
         "material": "Sprayfärg, akrylfärg, kopparrör",
-        "year": "2020",
+        "year": "December 2020",
         "description": "Skänkt till Ellen Beckman 2021-01-11"
     },
     {
@@ -98,7 +98,7 @@ const GALLERY_IMAGES = [
         "id": 9,
         "size": "30 * 90 cm",
         "material": "Sprayfärg, akrylfärg, gran",
-        "year": "2020",
+        "year": "December 2020",
         "description": "Övermålad. Se 157"
     },
     {
@@ -107,7 +107,7 @@ const GALLERY_IMAGES = [
         "id": 10,
         "size": "15 * 20 cm",
         "material": "Sprayfärg, kopparrör",
-        "year": "2020",
+        "year": "December 2020",
         "description": "Skänkt till Anna Stjärnlöf 2021-04.02"
     },
     {
@@ -116,7 +116,7 @@ const GALLERY_IMAGES = [
         "id": 12,
         "size": "33 * 41 cm",
         "material": "Sprayfärg, metall, kopparrör",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -125,7 +125,7 @@ const GALLERY_IMAGES = [
         "id": 13,
         "size": "33 * 41 cm",
         "material": "Sprayfärg, akrylfärg, kopparrör",
-        "year": "2020",
+        "year": "December 2020",
         "description": ""
     },
     {
@@ -192,7 +192,7 @@ const GALLERY_IMAGES = [
         "description": "Övermålad IKEA-duk"
     },
     {
-        "filename": "22. CHROMEYELLOWRED 1.0.JPG",
+        "filename": "22. CHROMEYELLOWRED 1.0.jpg",
         "title": "Chromeyellowred 1.0",
         "id": 22,
         "size": "56 * 56 cm",
@@ -363,7 +363,7 @@ const GALLERY_IMAGES = [
         "description": ""
     },
     {
-        "filename": "40 CHROMED GIFT.JPG",
+        "filename": "40 CHROMED GIFT.jpg",
         "title": "Chromed Gift",
         "id": 40,
         "size": "30 * 90 cm",
@@ -638,7 +638,7 @@ const GALLERY_IMAGES = [
         "id": 71,
         "size": "80 * 60 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "Nars/April 2021",
+        "year": "Mars/April 2021",
         "description": "Såld till Lovisa Rydgren 2021-04-01. Duk -> loppisfynd Sned"
     },
     {
@@ -647,7 +647,7 @@ const GALLERY_IMAGES = [
         "id": 72,
         "size": "25,5 * 25,5 cm",
         "material": "Sprayfärg, akrylfärg, garn",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd"
     },
     {
@@ -656,7 +656,7 @@ const GALLERY_IMAGES = [
         "id": 73,
         "size": "25,5 * 25,5 cm",
         "material": "Sprayfärg, akrylfärg, plast",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd"
     },
     {
@@ -665,7 +665,7 @@ const GALLERY_IMAGES = [
         "id": 74,
         "size": "25,5 * 25,5 cm",
         "material": "Sprayfärg, akrylfärg, plast",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd"
     },
     {
@@ -674,7 +674,7 @@ const GALLERY_IMAGES = [
         "id": 75,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd Sned"
     },
     {
@@ -683,7 +683,7 @@ const GALLERY_IMAGES = [
         "id": 76,
         "size": "49 * 100 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd"
     },
     {
@@ -692,7 +692,7 @@ const GALLERY_IMAGES = [
         "id": 77,
         "size": "25,5 * 25,5 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd"
     },
     {
@@ -701,7 +701,7 @@ const GALLERY_IMAGES = [
         "id": 78,
         "size": "30 * 30 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -710,7 +710,7 @@ const GALLERY_IMAGES = [
         "id": 79,
         "size": "25 * 30 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -719,7 +719,7 @@ const GALLERY_IMAGES = [
         "id": 80,
         "size": "30 * 30 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -728,7 +728,7 @@ const GALLERY_IMAGES = [
         "id": 81,
         "size": "38 * 38 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Duk -> loppisfynd Skänkt till Linnëa Beckman 2021-05-13"
     },
     {
@@ -746,7 +746,7 @@ const GALLERY_IMAGES = [
         "id": 83,
         "size": "30 * 90",
         "material": "Sprayfärg, akrylfärg, garn",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -755,7 +755,7 @@ const GALLERY_IMAGES = [
         "id": 84,
         "size": "57 * 68,5 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "OBS! Ramen ommålad till mörkare lila"
     },
     {
@@ -764,7 +764,7 @@ const GALLERY_IMAGES = [
         "id": 85,
         "size": "20 * 40 cm",
         "material": "Sprayfärg, akrylfärg, vatten, gls, kork, kopparrör",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Gåva till Otto Johansson Duk ->Loppisfynd"
     },
     {
@@ -773,7 +773,7 @@ const GALLERY_IMAGES = [
         "id": 86,
         "size": "40 * 60 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Se 226"
     },
     {
@@ -782,7 +782,7 @@ const GALLERY_IMAGES = [
         "id": 87,
         "size": "150 * 50 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "4/1/2021 Övermålad. Se 209",
+        "year": "April 2021",
         "description": "Övermålad MIO-duk."
     },
     {
@@ -791,7 +791,7 @@ const GALLERY_IMAGES = [
         "id": 88,
         "size": "46 * 55 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -800,7 +800,7 @@ const GALLERY_IMAGES = [
         "id": 89,
         "size": "80 * 80 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": "Gåva till Markus Sjöö"
     },
     {
@@ -809,7 +809,7 @@ const GALLERY_IMAGES = [
         "id": 90,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg, poscapennor",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -818,7 +818,7 @@ const GALLERY_IMAGES = [
         "id": 91,
         "size": "46 * 55 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -827,7 +827,7 @@ const GALLERY_IMAGES = [
         "id": 92,
         "size": "55 * 46 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -836,7 +836,7 @@ const GALLERY_IMAGES = [
         "id": 93,
         "size": "100 * 40 cm",
         "material": "Sprayfärg, akrylfärg, plast, lim",
-        "year": "2021",
+        "year": "April 2021",
         "description": ""
     },
     {
@@ -1286,7 +1286,7 @@ const GALLERY_IMAGES = [
         "id": 142,
         "size": "Glasflaska",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2021",
+        "year": "September 2021",
         "description": ""
     },
     {
@@ -1295,7 +1295,7 @@ const GALLERY_IMAGES = [
         "id": 143,
         "size": "56,5 * 56,5 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "Septemper 2021",
+        "year": "September 2021",
         "description": "Övermålad Se 213"
     },
     {
@@ -1304,7 +1304,7 @@ const GALLERY_IMAGES = [
         "id": 144,
         "size": "Glasflaska",
         "material": "Akrylfärg, metall",
-        "year": "Septemper 2021",
+        "year": "September 2021",
         "description": ""
     },
     {
@@ -1313,7 +1313,7 @@ const GALLERY_IMAGES = [
         "id": 145,
         "size": "56,5 * 56,5 cm",
         "material": "Sprayfärg, akrylfärg, garn, metall",
-        "year": "Septemper 2021",
+        "year": "September 2021",
         "description": "Övermålad IKEA-duk"
     },
     {
@@ -1322,7 +1322,7 @@ const GALLERY_IMAGES = [
         "id": 146,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg, poscapennor",
-        "year": "Septemper 2021",
+        "year": "September 2021",
         "description": "SE 235 CONNECTED DOTS"
     },
     {
@@ -1331,7 +1331,7 @@ const GALLERY_IMAGES = [
         "id": 147,
         "size": "46 * 55 CM",
         "material": "Akrylfärg, sprayfärg",
-        "year": "Septemper 2021",
+        "year": "September 2021",
         "description": ""
     },
     {
@@ -1340,7 +1340,7 @@ const GALLERY_IMAGES = [
         "id": 148,
         "size": "Glasflaska",
         "material": "Akrylfärg, metall",
-        "year": "Septemper 2021",
+        "year": "September 2021",
         "description": "Såld 20220423"
     },
     {
@@ -1349,7 +1349,7 @@ const GALLERY_IMAGES = [
         "id": 149,
         "size": "55 * 46 CM",
         "material": "Akrylfärg, sprayfärg, Glas, metall, resin",
-        "year": "Septemper/Oktober 2021",
+        "year": "September/Oktober 2021",
         "description": ""
     },
     {
@@ -1412,7 +1412,7 @@ const GALLERY_IMAGES = [
         "id": 157,
         "size": "30 * 90 cm",
         "material": "Sprayfärg, akrylfärg, metall, garn",
-        "year": "2021",
+        "year": "November 2021",
         "description": "PRIVAT"
     },
     {
@@ -1421,7 +1421,7 @@ const GALLERY_IMAGES = [
         "id": 158,
         "size": "80 * 80 cm",
         "material": "Sprayfärg, akrylfärg, garn, poscapenna, metall",
-        "year": "2021",
+        "year": "November 2021",
         "description": ""
     },
     {
@@ -1430,7 +1430,7 @@ const GALLERY_IMAGES = [
         "id": 159,
         "size": "80 * 80 cm",
         "material": "Sprayfärg, akrylfärg, garn",
-        "year": "2021",
+        "year": "November 2021",
         "description": "Såld till Tomas Weber"
     },
     {
@@ -1439,7 +1439,7 @@ const GALLERY_IMAGES = [
         "id": 160,
         "size": "Glasflaska",
         "material": "Sprayfärg, akrylfärg, metall, garn",
-        "year": "2021",
+        "year": "December 2021",
         "description": ""
     },
     {
@@ -1448,7 +1448,7 @@ const GALLERY_IMAGES = [
         "id": 161,
         "size": "100 * 100 cm",
         "material": "Sprayfärg, akrylfärg, poscapennor",
-        "year": "2021",
+        "year": "December 2021",
         "description": ""
     },
     {
@@ -1601,7 +1601,7 @@ const GALLERY_IMAGES = [
         "id": 178,
         "size": "72,5 * 60 cm",
         "material": "Sprayfärg, glitter",
-        "year": "2022",
+        "year": "April 2022",
         "description": "Skänkt till auktion"
     },
     {
@@ -1610,7 +1610,7 @@ const GALLERY_IMAGES = [
         "id": 179,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2022",
+        "year": "April 2022",
         "description": ""
     },
     {
@@ -1619,7 +1619,7 @@ const GALLERY_IMAGES = [
         "id": 180,
         "size": "80 * 80 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "Maj 2002",
+        "year": "Maj 2022",
         "description": "Övermålad. Se 188 SPLASH 1.2"
     },
     {
@@ -1628,7 +1628,7 @@ const GALLERY_IMAGES = [
         "id": 181,
         "size": "80 * 80 cm",
         "material": "Sprayfärg",
-        "year": "Juni 2002",
+        "year": "Juni 2022",
         "description": ""
     },
     {
@@ -1686,7 +1686,7 @@ const GALLERY_IMAGES = [
         "description": ""
     },
     {
-        "filename": "188 SPLASH 1.2.JPG",
+        "filename": "188 SPLASH 1.2.jpg",
         "title": "Splash 1.2",
         "id": 188,
         "size": "80 * 80 cm",
@@ -1709,7 +1709,7 @@ const GALLERY_IMAGES = [
         "id": 190,
         "size": "90 * 30 cm",
         "material": "Spryfärg, akrylfärg",
-        "year": "2022",
+        "year": "November 2022",
         "description": ""
     },
     {
@@ -1718,7 +1718,7 @@ const GALLERY_IMAGES = [
         "id": 191,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "2022",
+        "year": "November 2022",
         "description": ""
     },
     {
@@ -1727,7 +1727,7 @@ const GALLERY_IMAGES = [
         "id": 192,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "2022",
+        "year": "November 2022",
         "description": ""
     },
     {
@@ -1736,7 +1736,7 @@ const GALLERY_IMAGES = [
         "id": 193,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter. resin",
-        "year": "2022",
+        "year": "November 2022",
         "description": ""
     },
     {
@@ -1745,7 +1745,7 @@ const GALLERY_IMAGES = [
         "id": 194,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "2022",
+        "year": "December 2022",
         "description": ""
     },
     {
@@ -1754,7 +1754,7 @@ const GALLERY_IMAGES = [
         "id": 195,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "2022",
+        "year": "December 2022",
         "description": ""
     },
     {
@@ -1763,7 +1763,7 @@ const GALLERY_IMAGES = [
         "id": 196,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "2022",
+        "year": "December 2022",
         "description": ""
     },
     {
@@ -1772,7 +1772,7 @@ const GALLERY_IMAGES = [
         "id": 197,
         "size": "120 * 100 cm",
         "material": "Sprayfärg, akrylfärg, glitter",
-        "year": "2022",
+        "year": "December 2022",
         "description": ""
     },
     {
@@ -1943,7 +1943,7 @@ const GALLERY_IMAGES = [
         "id": 216,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg, glitterspray, metall",
-        "year": "2023",
+        "year": "April 2023",
         "description": ""
     },
     {
@@ -1952,7 +1952,7 @@ const GALLERY_IMAGES = [
         "id": 217,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2023",
+        "year": "April 2023",
         "description": ""
     },
     {
@@ -1961,7 +1961,7 @@ const GALLERY_IMAGES = [
         "id": 218,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2023",
+        "year": "April 2023",
         "description": ""
     },
     {
@@ -1970,7 +1970,7 @@ const GALLERY_IMAGES = [
         "id": 219,
         "size": "100 * 40 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2023",
+        "year": "April 2023",
         "description": ""
     },
     {
@@ -1979,7 +1979,7 @@ const GALLERY_IMAGES = [
         "id": 220,
         "size": "70 * 63 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2023",
+        "year": "April 2023",
         "description": ""
     },
     {
@@ -1988,7 +1988,7 @@ const GALLERY_IMAGES = [
         "id": 221,
         "size": "70 * 63 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2023",
+        "year": "April 2023",
         "description": ""
     },
     {
@@ -2132,7 +2132,7 @@ const GALLERY_IMAGES = [
         "id": 237,
         "size": "50 * 50 cm",
         "material": "Sprayfärg, akrylfärg",
-        "year": "2023",
+        "year": "September 2023",
         "description": ""
     },
     {
@@ -2159,7 +2159,7 @@ const GALLERY_IMAGES = [
         "id": 239,
         "size": "150 * 50 cm",
         "material": "Sprayfärg, akrylfärg, garn, glitter, resin",
-        "year": "2024",
+        "year": "April 2024",
         "description": ""
     },
     {
@@ -2168,7 +2168,7 @@ const GALLERY_IMAGES = [
         "id": 240,
         "size": "100 * 40 cm",
         "material": "Akrylfärg",
-        "year": "2024",
+        "year": "April 2024",
         "description": ""
     },
     {
@@ -2177,7 +2177,7 @@ const GALLERY_IMAGES = [
         "id": 241,
         "size": "80 * 80 cm",
         "material": "Akrylfärg, poscapennor",
-        "year": "2024",
+        "year": "April 2024",
         "description": ""
     },
     {
@@ -2379,12 +2379,12 @@ const GALLERY_IMAGES = [
         "description": ""
     },
     {
-        "filename": "265 MY HEART HAS TEETH.JPG",
+        "filename": "265 MY HEART HAS TEETH.jpg",
         "title": "My Heart Has Teeth",
         "id": 265,
         "size": "160 * 100 cm",
         "material": "Akrylfärg, resin",
-        "year": "2024",
+        "year": "September 2024",
         "description": ""
     },
     {
@@ -2393,7 +2393,7 @@ const GALLERY_IMAGES = [
         "id": 266,
         "size": "160 * 100 cm",
         "material": "Akrylfärg, resin",
-        "year": "Septemner 2024",
+        "year": "September 2024",
         "description": ""
     },
     {
@@ -2402,7 +2402,7 @@ const GALLERY_IMAGES = [
         "id": 267,
         "size": "100 * 120 cm",
         "material": "Akrylfärg, resin",
-        "year": "Deceber 2025",
+        "year": "December 2025",
         "description": ""
     },
     {
