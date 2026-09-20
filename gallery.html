@@ -50,7 +50,13 @@
         <button class="gallery-modal-close" id="lightbox-close" aria-label="Close modal">&times;</button>
         <button class="gallery-modal-btn gallery-modal-prev" id="lightbox-prev" aria-label="Previous artwork">&#10094;</button>
         <div class="gallery-modal-content">
-            <img id="lightbox-img" src="" alt="Full size artwork">
+            <div class="modal-canvas-frame" id="modal-canvas-frame">
+                <div class="modal-canvas-inner" id="modal-canvas-inner">
+                    <img id="lightbox-img" src="" alt="Full size artwork">
+                    <div class="modal-canvas-shine" id="modal-canvas-shine"></div>
+                    <div id="lightbox-badge" class="gallery-artwork-badge modal-artwork-badge"></div>
+                </div>
+            </div>
             <div id="lightbox-caption" class="gallery-modal-caption"></div>
         </div>
         <button class="gallery-modal-btn gallery-modal-next" id="lightbox-next" aria-label="Next artwork">&#10095;</button>

@@ -11,12 +11,76 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('gallery-search');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxBadge = document.getElementById('lightbox-badge');
     const lightboxCaption = document.getElementById('lightbox-caption');
+    const modalFrame = document.getElementById('modal-canvas-frame');
     const closeBtn = document.getElementById('lightbox-close') || document.querySelector('.gallery-modal-close');
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
 
     if (!grid || typeof GALLERY_IMAGES === 'undefined') return;
+
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches || (window.innerWidth > 768 && !('ontouchstart' in window));
+
+    // Helper: Safe HTML escape
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // Interactive 3D Perspective Tilt with Dynamic Shine
+    function attachTilt(cardEl) {
+        const inner = cardEl.querySelector('.gallery-canvas-inner') || cardEl.querySelector('.modal-canvas-inner');
+        const shine = cardEl.querySelector('.gallery-canvas-shine') || cardEl.querySelector('.modal-canvas-shine');
+        if (!inner) return;
+
+        let isHovered = false;
+        let rafId = null;
+
+        cardEl.addEventListener('mouseenter', () => {
+            isHovered = true;
+            inner.style.transition = 'transform 0.12s ease-out, box-shadow 0.3s ease';
+            if (shine) shine.style.opacity = '0.35';
+        });
+
+        cardEl.addEventListener('mousemove', (e) => {
+            if (!isHovered) return;
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const rect = cardEl.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const normX = (x - centerX) / centerX;
+                const normY = (y - centerY) / centerY;
+
+                const rotY = normX * 8.5;  // max 8.5 deg
+                const rotX = -normY * 7.5; // max 7.5 deg
+
+                inner.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.025, 1.025, 1.025)`;
+
+                if (shine) {
+                    const shineAngle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI) + 90;
+                    shine.style.background = `linear-gradient(${shineAngle}deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.0) 65%)`;
+                }
+            });
+        });
+
+        cardEl.addEventListener('mouseleave', () => {
+            isHovered = false;
+            if (rafId) cancelAnimationFrame(rafId);
+            inner.style.transition = 'transform 0.45s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.45s ease';
+            inner.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            if (shine) shine.style.opacity = '0';
+        });
+    }
 
     // Pre-sort images descending once (newest first)
     const allImages = [...GALLERY_IMAGES].sort((a, b) => b.id - a.id);
@@ -72,23 +136,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
 
-                const sizeInfo = img.size ? `<p class="meta">${img.size}</p>` : '';
-                const materialInfo = img.material ? `<p class="meta">${img.material}</p>` : '';
-                const yearInfo = img.year ? `<span class="year">${img.year}</span>` : '';
+                const formattedSize = img.size ? img.size.replace(/\s*\*\s*/g, ' × ') : '';
+                const dimYear = [formattedSize, img.year].filter(Boolean).join(' · ');
+                const material = img.material ? img.material.trim() : '';
                 const webpFilename = img.filename.replace(/\.(jpe?g|png)$/i, '.webp');
                 const safeWebp = encodeURI(`assets/images/${webpFilename}`);
                 const safeSrc = encodeURI(`assets/images/${img.filename}`);
 
                 item.innerHTML = `
-                    <picture>
-                        <source srcset="${safeWebp}" type="image/webp">
-                        <img src="${safeSrc}" alt="${img.title}" width="400" height="400" loading="lazy" decoding="async">
-                    </picture>
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <div class="gallery-title">${img.title} ${yearInfo}</div>
-                            ${sizeInfo}
-                            ${materialInfo}
+                    <div class="gallery-canvas-inner">
+                        <div class="gallery-canvas-media">
+                            <picture>
+                                <source srcset="${safeWebp}" type="image/webp">
+                                <img src="${safeSrc}" alt="${escapeHtml(img.title)} — Fredrik Beckman" width="400" height="500" loading="lazy" decoding="async">
+                            </picture>
+                        </div>
+                        <div class="gallery-canvas-shine"></div>
+                        <div class="gallery-artwork-badge">
+                            <div class="badge-row-main">
+                                <span class="badge-title">${escapeHtml(img.title)}</span>
+                                ${dimYear ? `<span class="badge-sep">·</span><span class="badge-meta">${escapeHtml(dimYear)}</span>` : ''}
+                            </div>
+                            ${material ? `
+                            <div class="badge-row-material">
+                                <span class="badge-material-tag">${escapeHtml(material)}</span>
+                            </div>` : ''}
                         </div>
                     </div>
                 `;
@@ -97,6 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.addEventListener('click', () => {
                     openLightbox(index);
                 });
+
+                if (hasFinePointer) {
+                    attachTilt(item);
+                }
 
                 const imgEl = item.querySelector('img');
                 imgEl.onload = () => imgEl.classList.add('loaded');
@@ -158,15 +234,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = currentFiltered[index];
 
         lightboxImg.src = encodeURI(`assets/images/${img.filename}`);
-        lightboxImg.alt = img.title;
+        lightboxImg.alt = `${img.title} — Fredrik Beckman`;
+
+        if (lightboxBadge) {
+            const formattedSize = img.size ? img.size.replace(/\s*\*\s*/g, ' × ') : '';
+            const dimYear = [formattedSize, img.year].filter(Boolean).join(' · ');
+            const material = img.material ? img.material.trim() : '';
+
+            lightboxBadge.innerHTML = `
+                <div class="badge-row-main">
+                    <span class="badge-title">${escapeHtml(img.title)}</span>
+                    ${dimYear ? `<span class="badge-sep">·</span><span class="badge-meta">${escapeHtml(dimYear)}</span>` : ''}
+                </div>
+                ${material ? `
+                <div class="badge-row-material">
+                    <span class="badge-material-tag">${escapeHtml(material)}</span>
+                </div>` : ''}
+            `;
+        }
 
         if (lightboxCaption) {
-            const metaParts = [img.year, img.size, img.material].filter(Boolean).join(' · ');
-            lightboxCaption.innerHTML = `
-                <h3>${img.title}</h3>
-                ${metaParts ? `<p>${metaParts}</p>` : ''}
-                ${img.description ? `<p class="desc">${img.description}</p>` : ''}
-            `;
+            lightboxCaption.innerHTML = img.description ? `<p class="desc">${escapeHtml(img.description)}</p>` : '';
+        }
+
+        if (modalFrame && hasFinePointer && !modalFrame._tiltAttached) {
+            attachTilt(modalFrame);
+            modalFrame._tiltAttached = true;
         }
 
         lightbox.classList.add('active');
