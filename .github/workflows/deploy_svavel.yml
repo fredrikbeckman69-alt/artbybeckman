@@ -1,0 +1,36 @@
+name: Deploy to Svavel.se via Loopia FTP
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: "loopia-ftp"
+  cancel-in-progress: false
+
+jobs:
+  web-deploy:
+    name: 🚀 Deploy to Svavel.se
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+        
+      - name: 📂 Sync files to Loopia FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftpcluster.loopia.se
+          username: natriumftp
+          password: ${{ secrets.LOOPIA_FTP_PASSWORD || '6fQ3tjTrJguf' }}
+          server-dir: /svavel.se/public_html/
+          protocol: ftps
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/tools/**
+            **/reports/**
+            **/*.ps1
+            **/*.py
+            **/*.xlsx

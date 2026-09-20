@@ -24,7 +24,15 @@ SYNC_FILES = [
     'css/style-v3.min.css',
 
     # JavaScript
+    'js/data.js',
+    'js/walkaround-data.js',
     'js/main.js',
+    'js/gallery.js',
+    'js/mobile-menu.js',
+    'js/scroll-animations.js',
+    'js/instagram-feed.js',
+    'js/instagram-data.js',
+    'js/walkaround-engine.js',
 
     # Hero WebP Images
     'assets/images/270_ORIGAMI_800.webp',
@@ -47,8 +55,8 @@ SYNC_FILES = [
     'assets/Movies/art_film_poster.webp',
     'assets/Movies/art_film_poster.jpg',
 
-    # Featured Movie (~60.7 MB)
-    'assets/Movies/20260917_Art_fardig_film.mp4',
+    # Featured Movie (~60.7 MB) - already on server
+    # 'assets/Movies/20260917_Art_fardig_film.mp4',
 ]
 
 def ensure_remote_dir(ftp, remote_dir_path):
