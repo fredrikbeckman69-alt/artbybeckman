@@ -9,16 +9,28 @@ FTP_PASS = "6fQ3tjTrJguf"
 REMOTE_ROOT = "/svavel.se/public_html"
 LOCAL_DIR = "dist"
 
-class ReusableFTPTLS(ftplib.FTP_TLS):
+class LoopiaFTPTLS(ftplib.FTP_TLS):
+    def makepasv(self):
+        try:
+            untrusted_host, port = ftplib.parse227(self.sendcmd('PASV'))
+            if self.trust_server_pasv_ipv4_address:
+                host = untrusted_host
+            else:
+                host = self.sock.getpeername()[0]
+            return host, port
+        except Exception:
+            return ftplib.parse229(self.sendcmd('EPSV'), self.sock.getpeername())
+
     def ntransfercmd(self, cmd, rest=None):
         conn, size = ftplib.FTP.ntransfercmd(self, cmd, rest)
-        if self._cnx:
-            conn = self.context.wrap_socket(conn, server_hostname=self.host, session=self.sock.session)
+        if self._prot_p:
+            session = getattr(self.sock, 'session', None)
+            conn = self.context.wrap_socket(conn, server_hostname=self.host, session=session)
         return conn, size
 
 def connect_ftp():
-    print(f"Connecting to {FTP_HOST} (FTPS/Explicit TLS)...")
-    ftps = ftplib.FTP_TLS()
+    print(f"Connecting to {FTP_HOST} (FTPS/Explicit TLS with Session Resumption)...")
+    ftps = LoopiaFTPTLS()
     ftps.connect(FTP_HOST, 21, timeout=30)
     ftps.login(FTP_USER, FTP_PASS)
     ftps.prot_p() # Secure data connection
@@ -96,7 +108,7 @@ def upload_all():
                 
             if not force_upload and remote_size == local_size:
                 skipped_count += 1
-                if idx % 20 == 0 or idx == total:
+                if idx % 50 == 0 or idx == total:
                     print(f"[{idx}/{total}] Skipped identical: {file_name}")
                 continue
                 
