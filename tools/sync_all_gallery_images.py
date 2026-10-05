@@ -85,13 +85,14 @@ def main():
         encoded = urllib.parse.quote(filename)
         url = f"https://svavel.se/assets/images/{encoded}"
         req = urllib.request.Request(url, method="HEAD")
-        req.add_header("User-Agent", "Mozilla/5.0")
+        req.add_header("User-Agent", "ArtByBeckman-VerifyAgent/1.0 (+https://svavel.se; contact: fredrik.beckman69@gmail.com)")
         try:
-            resp = urllib.request.urlopen(req, timeout=5)
+            resp = urllib.request.urlopen(req, timeout=10)
             if resp.status != 200:
                 failed.append((filename, resp.status))
         except Exception as e:
             failed.append((filename, str(e)))
+        time.sleep(0.5)
 
     if not failed:
         print(f"ALL {len(local_files)} PAINTINGS VERIFIED 100% ONLINE AND WORKING (HTTP 200) ON SVAVEL.SE!")

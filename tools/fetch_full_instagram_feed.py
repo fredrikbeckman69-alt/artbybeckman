@@ -15,7 +15,7 @@ def download_file(url, dest_path):
     if os.path.exists(dest_path) and os.path.getsize(dest_path) > 500:
         return True
     try:
-        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=25)
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}, timeout=25)
         if r.status_code == 200 and len(r.content) > 500:
             with open(dest_path, "wb") as f:
                 f.write(r.content)

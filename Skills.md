@@ -29,6 +29,10 @@ The project currently adheres to a **High-Impact Colorful Typography** design ph
     *   **Remote Path:** Do NOT deploy to the FTP root (`/`). You must supply `-RemotePath "/svavel.se/public_html"` to ensure the files land in the correct mapped loopia public directory.
 
 ## 5. Network, Rate-Limiting & Anti-Ban Rules (Loopia WAF & Firewall)
+*   **STRIKT REGEL - Korrekt User-Agent (Identifiera klienten tydligt):** Presentera ALDRIG anrop med bara `"Mozilla/5.0"` utan ytterligare data och använd inte tomma/default biblioteks-headers (t.ex. `Python-urllib`). Loopias WAF/brandvägg spärrar automatiskt IP-adresser vid sådana anrop.
+    *   **För interna underhålls- och deploy-skript:** Presentera agenten ärligt och tydligt med namn och kontakt, t.ex:
+        `User-Agent: ArtByBeckman-Agent/1.0 (+https://svavel.se; contact: fredrik.beckman69@gmail.com)`
+    *   **För scraping/webbläsarsimulering:** Använd en komplett, autentisk och modern webbläsarsträng (inkl. version, OS och renderingsmotor, t.ex. `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`).
 *   **STRIKT REGEL - Inga snabba anrop (Never Burst Requests):** Kör ALDRIG snabba anrop eller loopade HTTP/HTTPS-förfrågningar (t.ex. HEAD/GET-anrop i loop mot webbadresser på `svavel.se`). Loopias applikationsbrandvägg (WAF, mod_evasive, fail2ban) uppfattar skurar av automatiska anrop som DoS/spam och blockerar IP-adressen temporärt (`ERR_CONNECTION_TIMED_OUT`).
 *   **Tvingande fördröjning (Pacing & Throttling):** Vid alla nätverksoperationer (HTTP, API, FTP) MÅSTE anrop ske långsamt med inlagd paus (minst 0.5 till 1.0 sekunders fördröjning / `sleep` mellan varje enskilt anrop eller fil).
 *   **Återanvänd FTP-session (Inga reconnect-loopar):** Öppna aldrig flera parallella FTP-anslutningar och loopa inte anslutning/frånkoppling. Använd alltid en enskild ihållande TLS-session och ladda upp filer sekventiellt med fördröjning.
